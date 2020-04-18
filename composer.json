@@ -15,7 +15,8 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui" : "*",
-        "brackets/craftable" : "*"
+        "brackets/craftable" : "*",
+        "ichtrojan/laravel-location":  "*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
@@ -41,7 +42,10 @@
         },
         "classmap": [
             "database/seeds",
-            "database/factories"
+            "database/factories",
+            "app/Library",
+            "app/Models",
+            "database"
         ]
     },
     "autoload-dev": {
