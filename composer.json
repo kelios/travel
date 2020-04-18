@@ -16,7 +16,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui" : "*",
         "brackets/craftable" : "*",
-        "ichtrojan/laravel-location":  "*"
+        "ichtrojan/laravel-location": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

@@ -112833,6 +112833,240 @@ if (token) {
 
 /***/ }),
 
+/***/ "./resources/js/admin/category-travel/Form.js":
+/*!****************************************************!*\
+  !*** ./resources/js/admin/category-travel/Form.js ***!
+  \****************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Form/AppForm */ "./resources/js/admin/app-components/Form/AppForm.js");
+
+Vue.component('category-travel-form', {
+  mixins: [_app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  data: function data() {
+    return {
+      form: {
+        name: '',
+        status: false
+      }
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/category-travel/Listing.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/admin/category-travel/Listing.js ***!
+  \*******************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Listing/AppListing */ "./resources/js/admin/app-components/Listing/AppListing.js");
+
+Vue.component('category-travel-listing', {
+  mixins: [_app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__["default"]]
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/category-travel/index.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/admin/category-travel/index.js ***!
+  \*****************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Listing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Listing */ "./resources/js/admin/category-travel/Listing.js");
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form */ "./resources/js/admin/category-travel/Form.js");
+
+
+
+/***/ }),
+
+/***/ "./resources/js/admin/city/Form.js":
+/*!*****************************************!*\
+  !*** ./resources/js/admin/city/Form.js ***!
+  \*****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Form/AppForm */ "./resources/js/admin/app-components/Form/AppForm.js");
+
+Vue.component('city-form', {
+  mixins: [_app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  data: function data() {
+    return {
+      form: {
+        name: '',
+        state_id: '',
+        country_id: ''
+      }
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/city/Listing.js":
+/*!********************************************!*\
+  !*** ./resources/js/admin/city/Listing.js ***!
+  \********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Listing/AppListing */ "./resources/js/admin/app-components/Listing/AppListing.js");
+
+Vue.component('city-listing', {
+  mixins: [_app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__["default"]]
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/city/index.js":
+/*!******************************************!*\
+  !*** ./resources/js/admin/city/index.js ***!
+  \******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Listing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Listing */ "./resources/js/admin/city/Listing.js");
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form */ "./resources/js/admin/city/Form.js");
+
+
+
+/***/ }),
+
+/***/ "./resources/js/admin/complexity/Form.js":
+/*!***********************************************!*\
+  !*** ./resources/js/admin/complexity/Form.js ***!
+  \***********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Form/AppForm */ "./resources/js/admin/app-components/Form/AppForm.js");
+
+Vue.component('complexity-form', {
+  mixins: [_app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  data: function data() {
+    return {
+      form: {
+        name: '',
+        status: false
+      }
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/complexity/Listing.js":
+/*!**************************************************!*\
+  !*** ./resources/js/admin/complexity/Listing.js ***!
+  \**************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Listing/AppListing */ "./resources/js/admin/app-components/Listing/AppListing.js");
+
+Vue.component('complexity-listing', {
+  mixins: [_app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__["default"]]
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/complexity/index.js":
+/*!************************************************!*\
+  !*** ./resources/js/admin/complexity/index.js ***!
+  \************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Listing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Listing */ "./resources/js/admin/complexity/Listing.js");
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form */ "./resources/js/admin/complexity/Form.js");
+
+
+
+/***/ }),
+
+/***/ "./resources/js/admin/country/Form.js":
+/*!********************************************!*\
+  !*** ./resources/js/admin/country/Form.js ***!
+  \********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Form/AppForm */ "./resources/js/admin/app-components/Form/AppForm.js");
+
+Vue.component('country-form', {
+  mixins: [_app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  data: function data() {
+    return {
+      form: {
+        code: '',
+        name: '',
+        phonecode: ''
+      }
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/country/Listing.js":
+/*!***********************************************!*\
+  !*** ./resources/js/admin/country/Listing.js ***!
+  \***********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Listing/AppListing */ "./resources/js/admin/app-components/Listing/AppListing.js");
+
+Vue.component('country-listing', {
+  mixins: [_app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__["default"]]
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/country/index.js":
+/*!*********************************************!*\
+  !*** ./resources/js/admin/country/index.js ***!
+  \*********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Listing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Listing */ "./resources/js/admin/country/Listing.js");
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form */ "./resources/js/admin/country/Form.js");
+
+
+
+/***/ }),
+
 /***/ "./resources/js/admin/index.js":
 /*!*************************************!*\
   !*** ./resources/js/admin/index.js ***!
@@ -112846,8 +113080,140 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _profile_edit_profile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./profile-edit-profile */ "./resources/js/admin/profile-edit-profile/index.js");
 /* harmony import */ var _profile_edit_password__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./profile-edit-password */ "./resources/js/admin/profile-edit-password/index.js");
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user */ "./resources/js/admin/user/index.js");
+/* harmony import */ var _category_travel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./category-travel */ "./resources/js/admin/category-travel/index.js");
+/* harmony import */ var _transport__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./transport */ "./resources/js/admin/transport/index.js");
+/* harmony import */ var _complexity__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./complexity */ "./resources/js/admin/complexity/index.js");
+/* harmony import */ var _city__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./city */ "./resources/js/admin/city/index.js");
+/* harmony import */ var _country__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./country */ "./resources/js/admin/country/index.js");
+/* harmony import */ var _month__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./month */ "./resources/js/admin/month/index.js");
+/* harmony import */ var _over_night_stay__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./over-night-stay */ "./resources/js/admin/over-night-stay/index.js");
+/* harmony import */ var _travel__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./travel */ "./resources/js/admin/travel/index.js");
 
 
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./resources/js/admin/month/Form.js":
+/*!******************************************!*\
+  !*** ./resources/js/admin/month/Form.js ***!
+  \******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Form/AppForm */ "./resources/js/admin/app-components/Form/AppForm.js");
+
+Vue.component('month-form', {
+  mixins: [_app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  data: function data() {
+    return {
+      form: {
+        name: '',
+        status: false
+      }
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/month/Listing.js":
+/*!*********************************************!*\
+  !*** ./resources/js/admin/month/Listing.js ***!
+  \*********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Listing/AppListing */ "./resources/js/admin/app-components/Listing/AppListing.js");
+
+Vue.component('month-listing', {
+  mixins: [_app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__["default"]]
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/month/index.js":
+/*!*******************************************!*\
+  !*** ./resources/js/admin/month/index.js ***!
+  \*******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Listing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Listing */ "./resources/js/admin/month/Listing.js");
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form */ "./resources/js/admin/month/Form.js");
+
+
+
+/***/ }),
+
+/***/ "./resources/js/admin/over-night-stay/Form.js":
+/*!****************************************************!*\
+  !*** ./resources/js/admin/over-night-stay/Form.js ***!
+  \****************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Form/AppForm */ "./resources/js/admin/app-components/Form/AppForm.js");
+
+Vue.component('over-night-stay-form', {
+  mixins: [_app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  data: function data() {
+    return {
+      form: {
+        name: '',
+        status: false
+      }
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/over-night-stay/Listing.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/admin/over-night-stay/Listing.js ***!
+  \*******************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Listing/AppListing */ "./resources/js/admin/app-components/Listing/AppListing.js");
+
+Vue.component('over-night-stay-listing', {
+  mixins: [_app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__["default"]]
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/over-night-stay/index.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/admin/over-night-stay/index.js ***!
+  \*****************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Listing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Listing */ "./resources/js/admin/over-night-stay/Listing.js");
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form */ "./resources/js/admin/over-night-stay/Form.js");
 
 
 
@@ -112951,6 +113317,130 @@ Vue.component('profile-edit-profile-form', {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Form */ "./resources/js/admin/profile-edit-profile/Form.js");
+
+
+/***/ }),
+
+/***/ "./resources/js/admin/transport/Form.js":
+/*!**********************************************!*\
+  !*** ./resources/js/admin/transport/Form.js ***!
+  \**********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Form/AppForm */ "./resources/js/admin/app-components/Form/AppForm.js");
+
+Vue.component('transport-form', {
+  mixins: [_app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  data: function data() {
+    return {
+      form: {
+        name: '',
+        status: false
+      }
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/transport/Listing.js":
+/*!*************************************************!*\
+  !*** ./resources/js/admin/transport/Listing.js ***!
+  \*************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Listing/AppListing */ "./resources/js/admin/app-components/Listing/AppListing.js");
+
+Vue.component('transport-listing', {
+  mixins: [_app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__["default"]]
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/transport/index.js":
+/*!***********************************************!*\
+  !*** ./resources/js/admin/transport/index.js ***!
+  \***********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Listing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Listing */ "./resources/js/admin/transport/Listing.js");
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form */ "./resources/js/admin/transport/Form.js");
+
+
+
+/***/ }),
+
+/***/ "./resources/js/admin/travel/Form.js":
+/*!*******************************************!*\
+  !*** ./resources/js/admin/travel/Form.js ***!
+  \*******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Form/AppForm */ "./resources/js/admin/app-components/Form/AppForm.js");
+
+Vue.component('travel-form', {
+  mixins: [_app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  data: function data() {
+    return {
+      form: {
+        name: '',
+        budget: '',
+        number_peoples: '',
+        number_days: '',
+        minus: '',
+        plus: '',
+        recommendation: '',
+        description: '',
+        publish: false,
+        visa: false
+      }
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/travel/Listing.js":
+/*!**********************************************!*\
+  !*** ./resources/js/admin/travel/Listing.js ***!
+  \**********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Listing/AppListing */ "./resources/js/admin/app-components/Listing/AppListing.js");
+
+Vue.component('travel-listing', {
+  mixins: [_app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__["default"]]
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/travel/index.js":
+/*!********************************************!*\
+  !*** ./resources/js/admin/travel/index.js ***!
+  \********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Listing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Listing */ "./resources/js/admin/travel/Listing.js");
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form */ "./resources/js/admin/travel/Form.js");
+
 
 
 /***/ }),

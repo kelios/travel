@@ -106,7 +106,7 @@ class Travels extends Migration
 
             $table->foreign('complexity_id')
                 ->references('id')
-                ->on('transport');
+                ->on('complexity');
         });
 
 
