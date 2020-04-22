@@ -17,16 +17,17 @@ class StoreTravel extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string'],
+            'name' => ['nullable', 'string'],
             'budget' => ['nullable', 'integer'],
+            'year' => ['nullable', 'integer'],
             'number_peoples' => ['nullable', 'integer'],
             'number_days' => ['nullable', 'integer'],
-            'minus' => ['required', 'string'],
-            'plus' => ['required', 'string'],
-            'recommendation' => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'publish' => ['required', 'boolean'],
-            'visa' => ['required', 'boolean'],
+            'minus' => ['nullable', 'string'],
+            'plus' => ['nullable', 'string'],
+            'recommendation' => ['nullable', 'string'],
+            'description' => ['nullable', 'string'],
+            'publish' => ['nullable', 'boolean'],
+            'visa' => ['nullable', 'boolean'],
 
         ];
     }

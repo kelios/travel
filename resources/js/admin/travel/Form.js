@@ -7,6 +7,7 @@ Vue.component('travel-form', {
             form: {
                 name:  '' ,
                 budget:  '' ,
+                year:  '' ,
                 number_peoples:  '' ,
                 number_days:  '' ,
                 minus:  '' ,
@@ -15,7 +16,7 @@ Vue.component('travel-form', {
                 description:  '' ,
                 publish:  false ,
                 visa:  false ,
-                
+
             }
         }
     }

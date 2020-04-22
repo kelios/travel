@@ -10,7 +10,6 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,7 +17,6 @@
 
     <!-- Styles -->
     @include('brackets/admin-ui::admin.partials.main-styles')
-
     @yield('styles')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>

@@ -15,14 +15,15 @@ class Travels extends Migration
     {
         Schema::create('travels', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->unsignedInteger('budget')->nullable()->index();
+            $table->unsignedInteger('year')->nullable()->index();
             $table->unsignedInteger('number_peoples')->nullable()->index();
             $table->unsignedInteger('number_days')->nullable()->index();
-            $table->text('minus');
-            $table->text('plus');
-            $table->text('recommendation');
-            $table->text('description');
+            $table->text('minus')->nullable();
+            $table->text('plus')->nullable();
+            $table->text('recommendation')->nullable();
+            $table->text('description')->nullable();
             $table->boolean('publish')->default(false);
             $table->boolean('visa')->default(false);
             $table->timestamps();
@@ -45,7 +46,7 @@ class Travels extends Migration
 
         Schema::create('category_travel', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });
@@ -67,7 +68,7 @@ class Travels extends Migration
 
         Schema::create('transport', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });
@@ -89,7 +90,7 @@ class Travels extends Migration
 
         Schema::create('complexity', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

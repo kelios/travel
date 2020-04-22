@@ -32,7 +32,6 @@ class TravelsController extends Controller
      * Show the form for creating a new resource.
      *
      * @return Factory|View
-     * @throws AuthorizationException
      */
     public function create()
     {
@@ -47,7 +46,6 @@ class TravelsController extends Controller
      */
     public function store(StoreTravel $request)
     {
-        die('store');
         // Sanitize input
         $sanitized = $request->getSanitized();
         // Store the Travel

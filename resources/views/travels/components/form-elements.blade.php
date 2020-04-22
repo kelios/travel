@@ -1,6 +1,7 @@
-<div class="form-group " :class="{'has-danger': errors.has('name'), 'has-success': fields.name && fields.name.valid }">
+<div class="form-group row align-items-center"
+     :class="{'has-danger': errors.has('name'), 'has-success': fields.name && fields.name.valid }">
     <label for="name" class="col-form-label text-md-right"
-           :class="col-md-4">{{ trans('travels.name') }}</label>
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.name') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <input type="text" v-model="form.name" v-validate="'required'" @input="validate($event)" class="form-control"
                :class="{'form-control-danger': errors.has('name'), 'form-control-success': fields.name && fields.name.valid}"
@@ -9,23 +10,10 @@
     </div>
 </div>
 
-<div class="form-check row"
-     :class="{'has-danger': errors.has('visa'), 'has-success': fields.visa && fields.visa.valid }">
-    <div class="ml-md-auto" :class="col-md-4">
-        <input data-toggle="toggle" class="toggle-class" id="visa" type="checkbox" v-model="form.visa" v-validate="''"
-               data-vv-name="visa" name="visa_fake_element">
-        <label class="form-check-label" for="visa">
-            {{ trans('travels.visa') }}
-        </label>
-        <input type="hidden" name="visa" :value="form.visa">
-        <div v-if="errors.has('visa')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('visa') }}</div>
-    </div>
-</div>
-
-<div class="form-group "
+<div class="form-group row align-items-center"
      :class="{'has-danger': errors.has('budget'), 'has-success': fields.budget && fields.budget.valid }">
     <label for="budget" class="col-form-label text-md-right"
-           :class="col-md-4">{{ trans('travels.budget') }}</label>
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.budget') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <input type="text" v-model="form.budget" v-validate="'integer'" @input="validate($event)" class="form-control"
                :class="{'form-control-danger': errors.has('budget'), 'form-control-success': fields.budget && fields.budget.valid}"
@@ -35,10 +23,23 @@
     </div>
 </div>
 
-<div class="form-group "
+<div class="form-check row"
+     :class="{'has-danger': errors.has('visa'), 'has-success': fields.visa && fields.visa.valid }">
+    <div class="ml-md-auto" :class="isFormLocalized ? 'col-md-8' : 'col-md-10'">
+        <input class="form-check-input" id="visa" type="checkbox" v-model="form.visa" v-validate="''"
+               data-vv-name="visa" name="visa_fake_element">
+        <label class="form-check-label" for="visa">
+            {{ trans('travels.visa') }}
+        </label>
+        <input type="hidden" name="visa" :value="form.visa">
+        <div v-if="errors.has('visa')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('visa') }}</div>
+    </div>
+</div>
+
+<div class="form-group row align-items-center"
      :class="{'has-danger': errors.has('number_peoples'), 'has-success': fields.number_peoples && fields.number_peoples.valid }">
     <label for="number_peoples" class="col-form-label text-md-right"
-           :class="col-md-4">{{ trans('travels.number_peoples') }}</label>
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.number_peoples') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <input type="text" v-model="form.number_peoples" v-validate="'integer'" @input="validate($event)"
                class="form-control"
@@ -51,10 +52,10 @@
     </div>
 </div>
 
-<div class="form-group "
+<div class="form-group row align-items-center"
      :class="{'has-danger': errors.has('number_days'), 'has-success': fields.number_days && fields.number_days.valid }">
     <label for="number_days" class="col-form-label text-md-right"
-           :class="col-md-4">{{ trans('travels.number_days') }}</label>
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.number_days') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <input type="text" v-model="form.number_days" v-validate="'integer'" @input="validate($event)"
                class="form-control"
@@ -66,14 +67,13 @@
     </div>
 </div>
 
-
-<div class="form-group "
+<div class="form-group row align-items-center"
      :class="{'has-danger': errors.has('description'), 'has-success': fields.description && fields.description.valid }">
     <label for="description" class="col-form-label text-md-right"
-           :class="col-md-4">{{ trans('travels.description') }}</label>
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.description') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <div>
-            <wysiwyg v-model="form.description" v-validate="'required'" id="description" name="description"
+            <wysiwyg v-model="form.description" v-validate="''" id="description" name="description"
                      :config="mediaWysiwygConfig"></wysiwyg>
         </div>
         <div v-if="errors.has('description')" class="form-control-feedback form-text" v-cloak>@{{
@@ -82,13 +82,13 @@
     </div>
 </div>
 
-<div class="form-group "
+<div class="form-group row align-items-center"
      :class="{'has-danger': errors.has('minus'), 'has-success': fields.minus && fields.minus.valid }">
     <label for="minus" class="col-form-label text-md-right"
-           :class="col-md-4">{{ trans('travels.minus') }}</label>
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.minus') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <div>
-            <wysiwyg v-model="form.minus" v-validate="'required'" id="minus" name="minus"
+            <wysiwyg v-model="form.minus" v-validate="''" id="minus" name="minus"
                      :config="mediaWysiwygConfig"></wysiwyg>
         </div>
         <div v-if="errors.has('minus')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('minus') }}
@@ -96,25 +96,26 @@
     </div>
 </div>
 
-<div class="form-group" :class="{'has-danger': errors.has('plus'), 'has-success': fields.plus && fields.plus.valid }">
+<div class="form-group row align-items-center"
+     :class="{'has-danger': errors.has('plus'), 'has-success': fields.plus && fields.plus.valid }">
     <label for="plus" class="col-form-label text-md-right"
-           :class="col-md-4">{{ trans('travels.plus') }}</label>
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.plus') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <div>
-            <wysiwyg v-model="form.plus" v-validate="'required'" id="plus" name="plus"
+            <wysiwyg v-model="form.plus" v-validate="''" id="plus" name="plus"
                      :config="mediaWysiwygConfig"></wysiwyg>
         </div>
         <div v-if="errors.has('plus')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('plus') }}</div>
     </div>
 </div>
 
-<div class="form-group"
+<div class="form-group row align-items-center"
      :class="{'has-danger': errors.has('recommendation'), 'has-success': fields.recommendation && fields.recommendation.valid }">
     <label for="recommendation" class="col-form-label text-md-right"
-           :class="col-md-4">{{ trans('travels.recommendation') }}</label>
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.recommendation') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <div>
-            <wysiwyg v-model="form.recommendation" v-validate="'required'" id="recommendation" name="recommendation"
+            <wysiwyg v-model="form.recommendation" v-validate="''" id="recommendation" name="recommendation"
                      :config="mediaWysiwygConfig"></wysiwyg>
         </div>
         <div v-if="errors.has('recommendation')" class="form-control-feedback form-text" v-cloak>@{{
@@ -122,9 +123,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 <div class="form-check row"
      :class="{'has-danger': errors.has('publish'), 'has-success': fields.publish && fields.publish.valid }">
@@ -140,5 +138,6 @@
         </div>
     </div>
 </div>
+
 
 

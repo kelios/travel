@@ -9,6 +9,7 @@ class Travel extends Model
     protected $fillable = [
         'name',
         'budget',
+        'year',
         'number_peoples',
         'number_days',
         'minus',
