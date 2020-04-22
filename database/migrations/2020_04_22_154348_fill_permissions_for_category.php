@@ -5,7 +5,7 @@ use Illuminate\Config\Repository;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class FillPermissionsForCategoryTravel extends Migration
+class FillPermissionsForCategory extends Migration
 {
     /**
      * @var Repository|mixed
@@ -21,20 +21,20 @@ class FillPermissionsForCategoryTravel extends Migration
     protected $roles;
 
     /**
-     * FillPermissionsForCategoryTravel constructor.
+     * FillPermissionsForCategory constructor.
      */
     public function __construct()
     {
         $this->guardName = config('admin-auth.defaults.guard');
 
         $permissions = collect([
-            'admin.category-travel',
-            'admin.category-travel.index',
-            'admin.category-travel.create',
-            'admin.category-travel.show',
-            'admin.category-travel.edit',
-            'admin.category-travel.delete',
-            'admin.category-travel.bulk-delete',
+            'admin.category',
+            'admin.category.index',
+            'admin.category.create',
+            'admin.category.show',
+            'admin.category.edit',
+            'admin.category.delete',
+            'admin.category.bulk-delete',
         ]);
 
         //Add New permissions

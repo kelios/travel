@@ -6,6 +6,7 @@ Vue.component('travel-form', {
         return {
             form: {
                 name:  '' ,
+                categories: '',
                 budget:  '' ,
                 year:  '' ,
                 number_peoples:  '' ,

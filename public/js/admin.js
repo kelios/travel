@@ -112833,61 +112833,6 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/js/admin/category-travel/Form.js":
-/*!****************************************************!*\
-  !*** ./resources/js/admin/category-travel/Form.js ***!
-  \****************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Form/AppForm */ "./resources/js/admin/app-components/Form/AppForm.js");
-
-Vue.component('category-travel-form', {
-  mixins: [_app_components_Form_AppForm__WEBPACK_IMPORTED_MODULE_0__["default"]],
-  data: function data() {
-    return {
-      form: {}
-    };
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/admin/category-travel/Listing.js":
-/*!*******************************************************!*\
-  !*** ./resources/js/admin/category-travel/Listing.js ***!
-  \*******************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-components/Listing/AppListing */ "./resources/js/admin/app-components/Listing/AppListing.js");
-
-Vue.component('category-travel-listing', {
-  mixins: [_app_components_Listing_AppListing__WEBPACK_IMPORTED_MODULE_0__["default"]]
-});
-
-/***/ }),
-
-/***/ "./resources/js/admin/category-travel/index.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/admin/category-travel/index.js ***!
-  \*****************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Listing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Listing */ "./resources/js/admin/category-travel/Listing.js");
-/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form */ "./resources/js/admin/category-travel/Form.js");
-
-
-
-/***/ }),
-
 /***/ "./resources/js/admin/category/Form.js":
 /*!*********************************************!*\
   !*** ./resources/js/admin/category/Form.js ***!
@@ -113135,16 +113080,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _profile_edit_profile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./profile-edit-profile */ "./resources/js/admin/profile-edit-profile/index.js");
 /* harmony import */ var _profile_edit_password__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./profile-edit-password */ "./resources/js/admin/profile-edit-password/index.js");
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user */ "./resources/js/admin/user/index.js");
-/* harmony import */ var _category_travel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./category-travel */ "./resources/js/admin/category-travel/index.js");
-/* harmony import */ var _transport__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./transport */ "./resources/js/admin/transport/index.js");
-/* harmony import */ var _complexity__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./complexity */ "./resources/js/admin/complexity/index.js");
-/* harmony import */ var _city__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./city */ "./resources/js/admin/city/index.js");
-/* harmony import */ var _country__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./country */ "./resources/js/admin/country/index.js");
-/* harmony import */ var _month__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./month */ "./resources/js/admin/month/index.js");
-/* harmony import */ var _over_night_stay__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./over-night-stay */ "./resources/js/admin/over-night-stay/index.js");
-/* harmony import */ var _travel__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./travel */ "./resources/js/admin/travel/index.js");
-/* harmony import */ var _category__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./category */ "./resources/js/admin/category/index.js");
-
+/* harmony import */ var _transport__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./transport */ "./resources/js/admin/transport/index.js");
+/* harmony import */ var _complexity__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./complexity */ "./resources/js/admin/complexity/index.js");
+/* harmony import */ var _city__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./city */ "./resources/js/admin/city/index.js");
+/* harmony import */ var _country__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./country */ "./resources/js/admin/country/index.js");
+/* harmony import */ var _month__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./month */ "./resources/js/admin/month/index.js");
+/* harmony import */ var _over_night_stay__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./over-night-stay */ "./resources/js/admin/over-night-stay/index.js");
+/* harmony import */ var _travel__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./travel */ "./resources/js/admin/travel/index.js");
+/* harmony import */ var _category__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./category */ "./resources/js/admin/category/index.js");
 
 
 
@@ -113453,6 +113396,7 @@ Vue.component('travel-form', {
     return {
       form: {
         name: '',
+        categories: '',
         budget: '',
         year: '',
         number_peoples: '',

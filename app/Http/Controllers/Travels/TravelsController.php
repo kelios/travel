@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Travels;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\CategoryRepository;
 use App\Repositories\TravelRepository;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\Factory;
@@ -21,12 +22,18 @@ class TravelsController extends Controller
     private $travelRepository;
 
     /**
+     * @var CategoryRepository
+     */
+    private $categoryRepository;
+
+    /**
      * TravelsController constructor.
      * @param TravelRepository $travelRepository
      */
-    public function __construct(TravelRepository $travelRepository)
+    public function __construct(TravelRepository $travelRepository, CategoryRepository $categoryRepository)
     {
         $this->travelRepository = $travelRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -55,7 +62,9 @@ class TravelsController extends Controller
      */
     public function create()
     {
-        return view('travels.create');
+        return view('travels.create', [
+            'categories' => $this->categoryRepository->all(),
+        ]);
     }
 
     /**
@@ -68,11 +77,13 @@ class TravelsController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
+        $sanitized['categoriesIds'] = $request->getCategoriesIds();
+       // dd($request->getCategoriesIds());
         // Store the Travel
-
         $this->travelRepository->fill($sanitized);
         $this->travelRepository->save();
         $this->travelRepository->users()->sync(auth()->user()->id);
+        $this->travelRepository->categories()->sync($sanitized['categoriesIds']);
         if ($request->ajax()) {
             return ['redirect' => url('travels'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }

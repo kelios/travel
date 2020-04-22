@@ -22,10 +22,10 @@ return [
             'activated' => 'Activated',
             'forbidden' => 'Forbidden',
             'language' => 'Language',
-                
+
             //Belongs to many relations
             'roles' => 'Roles',
-                
+
         ],
     ],
 
@@ -44,24 +44,7 @@ return [
             'email' => 'Email',
             'email_verified_at' => 'Email verified at',
             'password' => 'Password',
-            
-        ],
-    ],
 
-    'category-travel' => [
-        'title' => 'Category Travel',
-
-        'actions' => [
-            'index' => 'Category Travel',
-            'create' => 'New Category Travel',
-            'edit' => 'Edit :name',
-        ],
-
-        'columns' => [
-            'id' => 'ID',
-            'name' => 'Name',
-            'status' => 'Status',
-            
         ],
     ],
 
@@ -78,7 +61,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'status' => 'Status',
-            
+
         ],
     ],
 
@@ -95,7 +78,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'status' => 'Status',
-            
+
         ],
     ],
 
@@ -110,7 +93,7 @@ return [
 
         'columns' => [
             'id' => 'ID',
-            
+
         ],
     ],
 
@@ -125,24 +108,7 @@ return [
 
         'columns' => [
             'id' => 'ID',
-            
-        ],
-    ],
 
-    'category-travel' => [
-        'title' => 'Category Travel',
-
-        'actions' => [
-            'index' => 'Category Travel',
-            'create' => 'New Category Travel',
-            'edit' => 'Edit :name',
-        ],
-
-        'columns' => [
-            'id' => 'ID',
-            'name' => 'Name',
-            'status' => 'Status',
-            
         ],
     ],
 
@@ -157,7 +123,7 @@ return [
 
         'columns' => [
             'id' => 'ID',
-            
+
         ],
     ],
 
@@ -172,7 +138,7 @@ return [
 
         'columns' => [
             'id' => 'ID',
-            
+
         ],
     ],
 
@@ -189,7 +155,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'status' => 'Status',
-            
+
         ],
     ],
 
@@ -206,7 +172,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'status' => 'Status',
-            
+
         ],
     ],
 
@@ -224,7 +190,7 @@ return [
             'name' => 'Name',
             'state_id' => 'State',
             'country_id' => 'Country',
-            
+
         ],
     ],
 
@@ -239,7 +205,7 @@ return [
 
         'columns' => [
             'id' => 'ID',
-            
+
         ],
     ],
 
@@ -257,7 +223,7 @@ return [
             'name' => 'Name',
             'state_id' => 'State',
             'country_id' => 'Country',
-            
+
         ],
     ],
 
@@ -272,7 +238,7 @@ return [
 
         'columns' => [
             'id' => 'ID',
-            
+
         ],
     ],
 
@@ -290,7 +256,7 @@ return [
             'code' => 'Code',
             'name' => 'Name',
             'phonecode' => 'Phonecode',
-            
+
         ],
     ],
 
@@ -307,7 +273,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'status' => 'Status',
-            
+
         ],
     ],
 
@@ -324,7 +290,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'status' => 'Status',
-            
+
         ],
     ],
 
@@ -349,22 +315,7 @@ return [
             'description' => 'Description',
             'publish' => 'Publish',
             'visa' => 'Visa',
-            
-        ],
-    ],
 
-    'category-travel' => [
-        'title' => 'Category Travel',
-
-        'actions' => [
-            'index' => 'Category Travel',
-            'create' => 'New Category Travel',
-            'edit' => 'Edit :name',
-        ],
-
-        'columns' => [
-            'id' => 'ID',
-            
         ],
     ],
 
@@ -381,7 +332,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'status' => 'Status',
-            
+
         ],
     ],
 

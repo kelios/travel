@@ -1,12 +1,14 @@
 <?php
+
 namespace App\Repositories\Interfaces;
-use App\User;
+
+use App\Models\Travel;
 
 /**
  * Interface TravelRepositoryInterface
  * @package App\Repositories\Interfaces
  */
-interface TravelRepositoryInterface
+interface CategoryRepositoryInterface
 {
     public function all();
 
@@ -14,9 +16,6 @@ interface TravelRepositoryInterface
 
     public function save();
 
-    public function users();
+    public function travels();
 
-    public function categories();
-
-    public function getByUser(User $user);
 }

@@ -17,9 +17,7 @@ class Travel extends Model
         'recommendation',
         'description',
         'publish',
-        'visa',
-        'user_id'
-
+        'visa'
     ];
 
 
@@ -38,8 +36,19 @@ class Travel extends Model
         return url('/admin/travels/' . $this->getKey());
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 }

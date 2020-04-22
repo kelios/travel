@@ -58,6 +58,14 @@ class TravelRepository implements TravelRepositoryInterface
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->travel->categories();
+    }
+
+    /**
      * @param User $user
      * @return mixed
      */

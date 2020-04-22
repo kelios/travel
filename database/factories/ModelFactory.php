@@ -14,7 +14,7 @@ $factory->define(Brackets\AdminAuth\Models\AdminUser::class, function (Faker\Gen
         'deleted_at' => null,
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
-        
+
     ];
 });/** @var  \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\User::class, static function (Faker\Generator $faker) {
@@ -26,21 +26,11 @@ $factory->define(App\Models\User::class, static function (Faker\Generator $faker
         'remember_token' => null,
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
-        
-        
+
+
     ];
 });
-/** @var  \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\CategoryTravel::class, static function (Faker\Generator $faker) {
-    return [
-        'name' => $faker->firstName,
-        'status' => $faker->boolean(),
-        'created_at' => $faker->dateTime,
-        'updated_at' => $faker->dateTime,
-        
-        
-    ];
-});
+
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Transport::class, static function (Faker\Generator $faker) {
     return [
@@ -48,8 +38,8 @@ $factory->define(App\Models\Transport::class, static function (Faker\Generator $
         'status' => $faker->boolean(),
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
-        
-        
+
+
     ];
 });
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
@@ -59,22 +49,22 @@ $factory->define(App\Models\Complexity::class, static function (Faker\Generator 
         'status' => $faker->boolean(),
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
-        
-        
+
+
     ];
 });
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\City::class, static function (Faker\Generator $faker) {
     return [
-        
-        
+
+
     ];
 });
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Country::class, static function (Faker\Generator $faker) {
     return [
-        
-        
+
+
     ];
 });
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
@@ -85,8 +75,8 @@ $factory->define(App\Models\City::class, static function (Faker\Generator $faker
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
         'country_id' => $faker->randomNumber(5),
-        
-        
+
+
     ];
 });
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
@@ -97,8 +87,8 @@ $factory->define(App\Models\Country::class, static function (Faker\Generator $fa
         'phonecode' => $faker->randomNumber(5),
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
-        
-        
+
+
     ];
 });
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
@@ -108,8 +98,8 @@ $factory->define(App\Models\Month::class, static function (Faker\Generator $fake
         'status' => $faker->boolean(),
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
-        
-        
+
+
     ];
 });
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
@@ -119,8 +109,8 @@ $factory->define(App\Models\OverNightStay::class, static function (Faker\Generat
         'status' => $faker->boolean(),
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
-        
-        
+
+
     ];
 });
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
@@ -138,17 +128,11 @@ $factory->define(App\Models\Travel::class, static function (Faker\Generator $fak
         'visa' => $faker->boolean(),
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
-        
-        
+
+
     ];
 });
-/** @var  \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\CategoryTravel::class, static function (Faker\Generator $faker) {
-    return [
-        
-        
-    ];
-});
+
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Models\Category::class, static function (Faker\Generator $faker) {
     return [
@@ -156,7 +140,7 @@ $factory->define(App\Models\Category::class, static function (Faker\Generator $f
         'status' => $faker->boolean(),
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
-        
-        
+
+
     ];
 });

@@ -63,7 +63,7 @@ class Travels extends Migration
 
             $table->foreign('category_id')
                 ->references('id')
-                ->on('category_travel');
+                ->on('categories');
         });
 
         Schema::create('transport', function (Blueprint $table) {

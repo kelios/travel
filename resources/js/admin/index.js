@@ -2,7 +2,6 @@ import './admin-user';
 import './profile-edit-profile';
 import './profile-edit-password';
 import './user';
-import './category-travel';
 import './transport';
 import './complexity';
 import './city';

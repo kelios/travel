@@ -33,10 +33,10 @@ class StoreTravel extends FormRequest
     }
 
     /**
-    * Modify input data
-    *
-    * @return array
-    */
+     * Modify input data
+     *
+     * @return array
+     */
     public function getSanitized(): array
     {
         $sanitized = $this->validated();
@@ -44,5 +44,20 @@ class StoreTravel extends FormRequest
         //Add your code for manipulation with request data here
 
         return $sanitized;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getCategoriesIds()
+    {
+        if ($this->has('categories')) {
+            $data = [];
+            foreach ($this->get('categories') as $category) {
+                $data[] = array_get($category, 'id');
+            }
+            return $data;
+        }
+        return null;
     }
 }

@@ -27,6 +27,11 @@ class Category extends Model
 
     public function getResourceUrlAttribute()
     {
-        return url('/admin/category-travels/'.$this->getKey());
+        return url('/admin/category/'.$this->getKey());
+    }
+
+    public function travels()
+    {
+        return $this->belongsToMany(Travel::class);
     }
 }
