@@ -198,9 +198,6 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-
-
-
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
@@ -245,5 +242,13 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/{travel}',                                    'TravelsController@update')->name('update');
             Route::delete('/{travel}',                                  'TravelsController@destroy')->name('destroy');
         });
+    });
+});
+
+Route::group(['namespace' => 'Travels','prefix' => 'travels', 'as' => 'travels.'], function () {
+    Route::group(['middleware' => ['auth']], function () {
+        Route::get('/', 'TravelsController@index')->name('index');
+        Route::get('/create', 'TravelsController@create')->name('create');
+        Route::post('/', 'TravelsController@store')->name('store');
     });
 });

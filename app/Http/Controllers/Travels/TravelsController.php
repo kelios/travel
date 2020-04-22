@@ -9,6 +9,9 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
+use App\Http\Requests\Travel\IndexTravel;
+use App\Http\Requests\Travel\StoreTravel;
+use App\Http\Requests\Travel\UpdateTravel;
 
 class TravelsController extends Controller
 {
@@ -44,6 +47,16 @@ class TravelsController extends Controller
      */
     public function store(StoreTravel $request)
     {
+        die('store');
+        // Sanitize input
+        $sanitized = $request->getSanitized();
+        // Store the Travel
+        $travel = Travel::create($sanitized);
+
+        if ($request->ajax()) {
+            return ['redirect' => url('travels'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+        }
+
         return redirect('travels');
     }
 

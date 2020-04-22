@@ -17,6 +17,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    @include('brackets/admin-ui::admin.partials.main-styles')
+
+    @yield('styles')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -58,6 +61,9 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url('travels') }}">
+                                    {{ trans('home.meTravels') }} <span class="caret"></span>
+                                </a>
                                 <a class="dropdown-item" href="{{ url('travels/create') }}">
                                     {{ trans('home.addTravels') }} <span class="caret"></span>
                                 </a>
@@ -85,5 +91,9 @@
         @yield('content')
     </main>
 </div>
+@include('brackets/admin-ui::admin.partials.wysiwyg-svgs')
+@include('brackets/admin-ui::admin.partials.main-bottom-scripts')
+@yield('bottom-scripts')
+
 </body>
 </html>

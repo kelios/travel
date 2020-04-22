@@ -22,7 +22,6 @@ return [
     'forgotYourPassword?' => 'Жми сюда если забыл пароль:)',
     'rememberMe' => 'Запомнить меня',
     'Reset Password' => 'Сбросить пароль',
-    'Send Password Reset Link' => 'Отправить ссылку для сброса пароля на почту'
-
-
+    'Send Password Reset Link' => 'Отправить ссылку для сброса пароля на почту',
+    'meTravels' => 'Мои путешествия'
 ];
