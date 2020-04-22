@@ -53,6 +53,22 @@
 </div>
 
 <div class="form-group row align-items-center"
+     :class="{'has-danger': errors.has('year'), 'has-success': fields.year && fields.year.valid }">
+    <label for="year" class="col-form-label text-md-right"
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.year') }}</label>
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+        <input type="text" v-model="form.year" v-validate="'integer'" @input="validate($event)"
+               class="form-control"
+               :class="{'form-control-danger': errors.has('year'), 'form-control-success': fields.year && fields.year.valid}"
+               id="year" name="year"
+               placeholder="{{ trans('travels.year') }}">
+        <div v-if="errors.has('year')" class="form-control-feedback form-text" v-cloak>@{{
+            errors.first('year') }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group row align-items-center"
      :class="{'has-danger': errors.has('number_days'), 'has-success': fields.number_days && fields.number_days.valid }">
     <label for="number_days" class="col-form-label text-md-right"
            :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.number_days') }}</label>
@@ -138,6 +154,5 @@
         </div>
     </div>
 </div>
-
 
 

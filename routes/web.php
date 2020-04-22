@@ -257,3 +257,34 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
+
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
+        Route::prefix('category-travels')->name('category-travels/')->group(static function() {
+            Route::get('/',                                             'CategoryTravelController@index')->name('index');
+            Route::get('/create',                                       'CategoryTravelController@create')->name('create');
+            Route::post('/',                                            'CategoryTravelController@store')->name('store');
+            Route::get('/{categoryTravel}/edit',                        'CategoryTravelController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'CategoryTravelController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{categoryTravel}',                            'CategoryTravelController@update')->name('update');
+            Route::delete('/{categoryTravel}',                          'CategoryTravelController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
+        Route::prefix('categories')->name('categories/')->group(static function() {
+            Route::get('/',                                             'CategoriesController@index')->name('index');
+            Route::get('/create',                                       'CategoriesController@create')->name('create');
+            Route::post('/',                                            'CategoriesController@store')->name('store');
+            Route::get('/{category}/edit',                              'CategoriesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'CategoriesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{category}',                                  'CategoriesController@update')->name('update');
+            Route::delete('/{category}',                                'CategoriesController@destroy')->name('destroy');
+        });
+    });
+});

@@ -1,6 +1,6 @@
 @extends('brackets/admin-ui::admin.layout.default')
 
-@section('title', trans('admin.category-travel.actions.create'))
+@section('title', trans('admin.category.actions.create'))
 
 @section('body')
 
@@ -8,19 +8,19 @@
 
                 <div class="card">
         
-        <category-travel-form
-            :action="'{{ url('admin/category-travels') }}'"
+        <category-form
+            :action="'{{ url('admin/categories') }}'"
             v-cloak
             inline-template>
 
             <form class="form-horizontal form-create" method="post" @submit.prevent="onSubmit" :action="action" novalidate>
                 
                 <div class="card-header">
-                    <i class="fa fa-plus"></i> {{ trans('admin.category-travel.actions.create') }}
+                    <i class="fa fa-plus"></i> {{ trans('admin.category.actions.create') }}
                 </div>
 
                 <div class="card-body">
-                    @include('admin.category-travel.components.form-elements')
+                    @include('admin.category.components.form-elements')
                 </div>
                                 
                 <div class="card-footer">
@@ -32,7 +32,7 @@
                 
             </form>
 
-        </category-travel-form>
+        </category-form>
 
         </div>
 

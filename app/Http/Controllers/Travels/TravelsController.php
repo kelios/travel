@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Travels;
 
 use App\Http\Controllers\Controller;
-use App\Models\Travel;
+use App\Repositories\TravelRepository;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -15,6 +15,19 @@ use App\Http\Requests\Travel\UpdateTravel;
 
 class TravelsController extends Controller
 {
+    /**
+     * @var TravelRepository
+     */
+    private $travelRepository;
+
+    /**
+     * TravelsController constructor.
+     * @param TravelRepository $travelRepository
+     */
+    public function __construct(TravelRepository $travelRepository)
+    {
+        $this->travelRepository = $travelRepository;
+    }
 
     /**
      * Display a listing of the resource.
@@ -24,9 +37,16 @@ class TravelsController extends Controller
      */
     public function index(IndexTravel $request)
     {
-        $data = [];
-        return view('travels.index', ['data' => $data]);
+        $travels = $this->travelRepository->all();
+        return view('travels.index', ['data' => $travels]);
     }
+
+    public function detail($id)
+    {
+        $travels = $this->travelRepository->getByUser(Auth::user()->id);
+        return view('travels.metravel')->withTravels($travels);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -49,8 +69,10 @@ class TravelsController extends Controller
         // Sanitize input
         $sanitized = $request->getSanitized();
         // Store the Travel
-        $travel = Travel::create($sanitized);
 
+        $this->travelRepository->fill($sanitized);
+        $this->travelRepository->save();
+        $this->travelRepository->users()->sync(auth()->user()->id);
         if ($request->ajax()) {
             return ['redirect' => url('travels'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }

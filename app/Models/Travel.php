@@ -18,6 +18,7 @@ class Travel extends Model
         'description',
         'publish',
         'visa',
+        'user_id'
 
     ];
 
@@ -34,6 +35,11 @@ class Travel extends Model
 
     public function getResourceUrlAttribute()
     {
-        return url('/admin/travels/'.$this->getKey());
+        return url('/admin/travels/' . $this->getKey());
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 }

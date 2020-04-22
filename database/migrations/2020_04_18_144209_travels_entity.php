@@ -20,7 +20,7 @@ class TravelsEntity extends Migration
             $table->timestamps();
         });
 
-        Schema::create('month_to_travel', function (Blueprint $table) {
+        Schema::create('travel_month', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('travel_id');
             $table->unsignedBigInteger('month_id');
@@ -42,7 +42,7 @@ class TravelsEntity extends Migration
             $table->timestamps();
         });
 
-        Schema::create('over_night_stay_to_travel', function (Blueprint $table) {
+        Schema::create('travel_over_night_stay', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('travel_id');
             $table->unsignedBigInteger('over_night_stay_id');
@@ -66,8 +66,8 @@ class TravelsEntity extends Migration
     public function down()
     {
         Schema::dropIfExists('month');
-        Schema::dropIfExists('month_to_travel');
+        Schema::dropIfExists('travel_month');
         Schema::dropIfExists('over_night_stay');
-        Schema::dropIfExists('over_night_stay_to_travel');
+        Schema::dropIfExists('travel_over_night_stay');
     }
 }

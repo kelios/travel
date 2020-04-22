@@ -10,3 +10,4 @@ import './country';
 import './month';
 import './over-night-stay';
 import './travel';
+import './category';

@@ -1,15 +1,15 @@
 @extends('brackets/admin-ui::admin.layout.default')
 
-@section('title', trans('admin.category-travel.actions.edit', ['name' => $categoryTravel->name]))
+@section('title', trans('admin.category.actions.edit', ['name' => $category->name]))
 
 @section('body')
 
     <div class="container-xl">
         <div class="card">
 
-            <category-travel-form
-                :action="'{{ $categoryTravel->resource_url }}'"
-                :data="{{ $categoryTravel->toJson() }}"
+            <category-form
+                :action="'{{ $category->resource_url }}'"
+                :data="{{ $category->toJson() }}"
                 v-cloak
                 inline-template>
             
@@ -17,11 +17,11 @@
 
 
                     <div class="card-header">
-                        <i class="fa fa-pencil"></i> {{ trans('admin.category-travel.actions.edit', ['name' => $categoryTravel->name]) }}
+                        <i class="fa fa-pencil"></i> {{ trans('admin.category.actions.edit', ['name' => $category->name]) }}
                     </div>
 
                     <div class="card-body">
-                        @include('admin.category-travel.components.form-elements')
+                        @include('admin.category.components.form-elements')
                     </div>
                     
                     
@@ -34,7 +34,7 @@
                     
                 </form>
 
-        </category-travel-form>
+        </category-form>
 
         </div>
     

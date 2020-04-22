@@ -10,23 +10,22 @@ class User extends Model
         'name',
         'email',
         'email_verified_at',
-        'password',
-    
-    ];
-    
+        'password'
+            ];
+
     protected $hidden = [
         'password',
         'remember_token',
-    
+
     ];
-    
+
     protected $dates = [
         'email_verified_at',
         'created_at',
         'updated_at',
-    
+
     ];
-    
+
     protected $appends = ['resource_url'];
 
     /* ************************ ACCESSOR ************************* */
@@ -34,5 +33,10 @@ class User extends Model
     public function getResourceUrlAttribute()
     {
         return url('/admin/users/'.$this->getKey());
+    }
+
+    public function travels()
+    {
+        return $this->belongsToMany(Travel::class);
     }
 }

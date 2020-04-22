@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CategoryTravel\BulkDestroyCategoryTravel;
-use App\Http\Requests\Admin\CategoryTravel\DestroyCategoryTravel;
-use App\Http\Requests\Admin\CategoryTravel\IndexCategoryTravel;
-use App\Http\Requests\Admin\CategoryTravel\StoreCategoryTravel;
-use App\Http\Requests\Admin\CategoryTravel\UpdateCategoryTravel;
-use App\Models\CategoryTravel;
+use App\Http\Requests\Admin\Category\BulkDestroyCategory;
+use App\Http\Requests\Admin\Category\DestroyCategory;
+use App\Http\Requests\Admin\Category\IndexCategory;
+use App\Http\Requests\Admin\Category\StoreCategory;
+use App\Http\Requests\Admin\Category\UpdateCategory;
+use App\Models\Category;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -20,19 +20,19 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
-class CategoryTravelController extends Controller
+class CategoriesController extends Controller
 {
 
     /**
      * Display a listing of the resource.
      *
-     * @param IndexCategoryTravel $request
+     * @param IndexCategory $request
      * @return array|Factory|View
      */
-    public function index(IndexCategoryTravel $request)
+    public function index(IndexCategory $request)
     {
         // create and AdminListing instance for a specific model and
-        $data = AdminListing::create(CategoryTravel::class)->processRequestAndGet(
+        $data = AdminListing::create(Category::class)->processRequestAndGet(
             // pass the request with params
             $request,
 
@@ -52,7 +52,7 @@ class CategoryTravelController extends Controller
             return ['data' => $data];
         }
 
-        return view('admin.category-travel.index', ['data' => $data]);
+        return view('admin.category.index', ['data' => $data]);
     }
 
     /**
@@ -63,42 +63,42 @@ class CategoryTravelController extends Controller
      */
     public function create()
     {
-        $this->authorize('admin.category-travel.create');
+        $this->authorize('admin.category.create');
 
-        return view('admin.category-travel.create');
+        return view('admin.category.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreCategoryTravel $request
+     * @param StoreCategory $request
      * @return array|RedirectResponse|Redirector
      */
-    public function store(StoreCategoryTravel $request)
+    public function store(StoreCategory $request)
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Store the CategoryTravel
-        $categoryTravel = CategoryTravel::create($sanitized);
+        // Store the Category
+        $category = Category::create($sanitized);
 
         if ($request->ajax()) {
-            return ['redirect' => url('admin/category-travels'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            return ['redirect' => url('admin/categories'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
 
-        return redirect('admin/category-travels');
+        return redirect('admin/categories');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param CategoryTravel $categoryTravel
+     * @param Category $category
      * @throws AuthorizationException
      * @return void
      */
-    public function show(CategoryTravel $categoryTravel)
+    public function show(Category $category)
     {
-        $this->authorize('admin.category-travel.show', $categoryTravel);
+        $this->authorize('admin.category.show', $category);
 
         // TODO your code goes here
     }
@@ -106,56 +106,56 @@ class CategoryTravelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param CategoryTravel $categoryTravel
+     * @param Category $category
      * @throws AuthorizationException
      * @return Factory|View
      */
-    public function edit(CategoryTravel $categoryTravel)
+    public function edit(Category $category)
     {
-        $this->authorize('admin.category-travel.edit', $categoryTravel);
+        $this->authorize('admin.category.edit', $category);
 
 
-        return view('admin.category-travel.edit', [
-            'categoryTravel' => $categoryTravel,
+        return view('admin.category.edit', [
+            'category' => $category,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param UpdateCategoryTravel $request
-     * @param CategoryTravel $categoryTravel
+     * @param UpdateCategory $request
+     * @param Category $category
      * @return array|RedirectResponse|Redirector
      */
-    public function update(UpdateCategoryTravel $request, CategoryTravel $categoryTravel)
+    public function update(UpdateCategory $request, Category $category)
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
 
-        // Update changed values CategoryTravel
-        $categoryTravel->update($sanitized);
+        // Update changed values Category
+        $category->update($sanitized);
 
         if ($request->ajax()) {
             return [
-                'redirect' => url('admin/category-travels'),
+                'redirect' => url('admin/categories'),
                 'message' => trans('brackets/admin-ui::admin.operation.succeeded'),
             ];
         }
 
-        return redirect('admin/category-travels');
+        return redirect('admin/categories');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param DestroyCategoryTravel $request
-     * @param CategoryTravel $categoryTravel
+     * @param DestroyCategory $request
+     * @param Category $category
      * @throws Exception
      * @return ResponseFactory|RedirectResponse|Response
      */
-    public function destroy(DestroyCategoryTravel $request, CategoryTravel $categoryTravel)
+    public function destroy(DestroyCategory $request, Category $category)
     {
-        $categoryTravel->delete();
+        $category->delete();
 
         if ($request->ajax()) {
             return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
@@ -167,17 +167,17 @@ class CategoryTravelController extends Controller
     /**
      * Remove the specified resources from storage.
      *
-     * @param BulkDestroyCategoryTravel $request
+     * @param BulkDestroyCategory $request
      * @throws Exception
      * @return Response|bool
      */
-    public function bulkDestroy(BulkDestroyCategoryTravel $request) : Response
+    public function bulkDestroy(BulkDestroyCategory $request) : Response
     {
         DB::transaction(static function () use ($request) {
             collect($request->data['ids'])
                 ->chunk(1000)
                 ->each(static function ($bulkChunk) {
-                    CategoryTravel::whereIn('id', $bulkChunk)->delete();
+                    Category::whereIn('id', $bulkChunk)->delete();
 
                     // TODO your code goes here
                 });

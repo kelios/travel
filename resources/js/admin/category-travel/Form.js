@@ -5,8 +5,6 @@ Vue.component('category-travel-form', {
     data: function() {
         return {
             form: {
-                name:  '' ,
-                status:  false ,
                 
             }
         }

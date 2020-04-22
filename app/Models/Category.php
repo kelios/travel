@@ -4,23 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CategoryTravel extends Model
+class Category extends Model
 {
-    protected $table = 'category_travel';
+    protected $table = 'categories';
 
     protected $fillable = [
         'name',
         'status',
-    
+
     ];
-    
-    
+
+
     protected $dates = [
         'created_at',
         'updated_at',
-    
+
     ];
-    
+
     protected $appends = ['resource_url'];
 
     /* ************************ ACCESSOR ************************* */

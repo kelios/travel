@@ -1,20 +1,20 @@
 @extends('brackets/admin-ui::admin.layout.default')
 
-@section('title', trans('admin.category-travel.actions.index'))
+@section('title', trans('admin.category.actions.index'))
 
 @section('body')
 
-    <category-travel-listing
+    <category-listing
         :data="{{ $data->toJson() }}"
-        :url="'{{ url('admin/category-travels') }}'"
+        :url="'{{ url('admin/categories') }}'"
         inline-template>
 
         <div class="row">
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> {{ trans('admin.category-travel.actions.index') }}
-                        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/category-travels/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.category-travel.actions.create') }}</a>
+                        <i class="fa fa-align-justify"></i> {{ trans('admin.category.actions.index') }}
+                        <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/categories/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.category.actions.create') }}</a>
                     </div>
                     <div class="card-body" v-cloak>
                         <div class="card-block">
@@ -49,19 +49,19 @@
                                             </label>
                                         </th>
 
-                                        <th is='sortable' :column="'id'">{{ trans('admin.category-travel.columns.id') }}</th>
-                                        <th is='sortable' :column="'name'">{{ trans('admin.category-travel.columns.name') }}</th>
-                                        <th is='sortable' :column="'status'">{{ trans('admin.category-travel.columns.status') }}</th>
+                                        <th is='sortable' :column="'id'">{{ trans('admin.category.columns.id') }}</th>
+                                        <th is='sortable' :column="'name'">{{ trans('admin.category.columns.name') }}</th>
+                                        <th is='sortable' :column="'status'">{{ trans('admin.category.columns.status') }}</th>
 
                                         <th></th>
                                     </tr>
                                     <tr v-show="(clickedBulkItemsCount > 0) || isClickedAll">
                                         <td class="bg-bulk-info d-table-cell text-center" colspan="5">
-                                            <span class="align-middle font-weight-light text-dark">{{ trans('brackets/admin-ui::admin.listing.selected_items') }} @{{ clickedBulkItemsCount }}.  <a href="#" class="text-primary" @click="onBulkItemsClickedAll('/admin/category-travels')" v-if="(clickedBulkItemsCount < pagination.state.total)"> <i class="fa" :class="bulkCheckingAllLoader ? 'fa-spinner' : ''"></i> {{ trans('brackets/admin-ui::admin.listing.check_all_items') }} @{{ pagination.state.total }}</a> <span class="text-primary">|</span> <a
+                                            <span class="align-middle font-weight-light text-dark">{{ trans('brackets/admin-ui::admin.listing.selected_items') }} @{{ clickedBulkItemsCount }}.  <a href="#" class="text-primary" @click="onBulkItemsClickedAll('/admin/categories')" v-if="(clickedBulkItemsCount < pagination.state.total)"> <i class="fa" :class="bulkCheckingAllLoader ? 'fa-spinner' : ''"></i> {{ trans('brackets/admin-ui::admin.listing.check_all_items') }} @{{ pagination.state.total }}</a> <span class="text-primary">|</span> <a
                                                         href="#" class="text-primary" @click="onBulkItemsClickedAllUncheck()">{{ trans('brackets/admin-ui::admin.listing.uncheck_all_items') }}</a>  </span>
 
                                             <span class="pull-right pr-2">
-                                                <button class="btn btn-sm btn-danger pr-3 pl-3" @click="bulkDelete('/admin/category-travels/bulk-destroy')">{{ trans('brackets/admin-ui::admin.btn.delete') }}</button>
+                                                <button class="btn btn-sm btn-danger pr-3 pl-3" @click="bulkDelete('/admin/categories/bulk-destroy')">{{ trans('brackets/admin-ui::admin.btn.delete') }}</button>
                                             </span>
 
                                         </td>
@@ -106,13 +106,13 @@
                                 <i class="icon-magnifier"></i>
                                 <h3>{{ trans('brackets/admin-ui::admin.index.no_items') }}</h3>
                                 <p>{{ trans('brackets/admin-ui::admin.index.try_changing_items') }}</p>
-                                <a class="btn btn-primary btn-spinner" href="{{ url('admin/category-travels/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.category-travel.actions.create') }}</a>
+                                <a class="btn btn-primary btn-spinner" href="{{ url('admin/categories/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.category.actions.create') }}</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </category-travel-listing>
+    </category-listing>
 
 @endsection

@@ -29,7 +29,7 @@ class Travels extends Migration
             $table->timestamps();
         });
 
-        Schema::create('user_to_travel', function (Blueprint $table) {
+        Schema::create('travel_user', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('travel_id');
             $table->unsignedBigInteger('user_id');
@@ -44,14 +44,14 @@ class Travels extends Migration
                 ->on('users');
         });
 
-        Schema::create('category_travel', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });
 
-        Schema::create('category_to_travel', function (Blueprint $table) {
+        Schema::create('travel_category', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('travel_id');
             $table->unsignedBigInteger('category_id');
@@ -73,7 +73,7 @@ class Travels extends Migration
             $table->timestamps();
         });
 
-        Schema::create('transport_to_travel', function (Blueprint $table) {
+        Schema::create('travel_transport', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('travel_id');
             $table->unsignedBigInteger('transport_id');
@@ -95,7 +95,7 @@ class Travels extends Migration
             $table->timestamps();
         });
 
-        Schema::create('complexity_to_travel', function (Blueprint $table) {
+        Schema::create('travel_complexity', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('travel_id');
             $table->unsignedBigInteger('complexity_id');
@@ -122,16 +122,16 @@ class Travels extends Migration
     {
         Schema::dropIfExists('travels');
 
-        Schema::dropIfExists('user_to_travel');
+        Schema::dropIfExists('travel_user');
 
-        Schema::dropIfExists('category_travel');
-        Schema::dropIfExists('category_to_travel');
+        Schema::dropIfExists('categories');
+        Schema::dropIfExists('travel_category');
 
         Schema::dropIfExists('transport');
-        Schema::dropIfExists('transport_to_travel');
+        Schema::dropIfExists('travel_transport');
 
         Schema::dropIfExists('complexity');
-        Schema::dropIfExists('complexity_to_travel');
+        Schema::dropIfExists('travel_complexity');
 
     }
 }
