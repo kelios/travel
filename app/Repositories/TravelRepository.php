@@ -66,6 +66,49 @@ class TravelRepository implements TravelRepositoryInterface
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function month()
+    {
+        return $this->travel->month();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function transports()
+    {
+        return $this->travel->transports();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function complexity()
+    {
+        return $this->travel->complexity();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function overNightStay()
+    {
+        return $this->travel->overNightStay();
+    }
+
+
+    public function cities()
+    {
+        return $this->travel->cities();
+    }
+
+    public function counties()
+    {
+        return $this->travel->counties();
+    }
+
+    /**
      * @param User $user
      * @return mixed
      */

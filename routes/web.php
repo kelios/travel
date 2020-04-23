@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/location/countriesCities', 'CityController@getCitiesByCountries')->name('countriesCities');
+
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
@@ -216,18 +218,6 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 });
 
 
-Route::group(['namespace' => 'travels', 'prefix' => 'travels', 'as' => 'travels.'], function () {
-    Route::group(['middleware' => ['auth']], function () {
-        Route::get('/', 'TravelsController@index')->name('index');
-        Route::get('/create', 'TravelsController@create')->name('create');
-        Route::post('/', 'TravelsController@store')->name('store');
-        Route::get('/{travel}/edit', 'TravelsController@edit')->name('edit');
-        Route::post('/bulk-destroy', 'TravelsController@bulkDestroy')->name('bulk-destroy');
-        Route::post('/{travel}', 'TravelsController@update')->name('update');
-        Route::delete('/{travel}', 'TravelsController@destroy')->name('destroy');
-    });
-});
-
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {
@@ -244,19 +234,32 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 });
 
 
-
-
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
-        Route::prefix('categories')->name('categories/')->group(static function() {
-            Route::get('/',                                             'CategoriesController@index')->name('index');
-            Route::get('/create',                                       'CategoriesController@create')->name('create');
-            Route::post('/',                                            'CategoriesController@store')->name('store');
-            Route::get('/{category}/edit',                              'CategoriesController@edit')->name('edit');
-            Route::post('/bulk-destroy',                                'CategoriesController@bulkDestroy')->name('bulk-destroy');
-            Route::post('/{category}',                                  'CategoriesController@update')->name('update');
-            Route::delete('/{category}',                                'CategoriesController@destroy')->name('destroy');
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {
+        Route::prefix('categories')->name('categories/')->group(static function () {
+            Route::get('/', 'CategoriesController@index')->name('index');
+            Route::get('/create', 'CategoriesController@create')->name('create');
+            Route::post('/', 'CategoriesController@store')->name('store');
+            Route::get('/{category}/edit', 'CategoriesController@edit')->name('edit');
+            Route::post('/bulk-destroy', 'CategoriesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{category}', 'CategoriesController@update')->name('update');
+            Route::delete('/{category}', 'CategoriesController@destroy')->name('destroy');
         });
     });
 });
+
+Route::group(['namespace' => 'travels', 'prefix' => 'travels', 'as' => 'travels.'], function () {
+    Route::group(['middleware' => ['auth']], function () {
+        Route::get('/', 'TravelsController@index')->name('index');
+        Route::get('/create', 'TravelsController@create')->name('create');
+        Route::post('/', 'TravelsController@store')->name('store');
+        Route::get('/{travel}/edit', 'TravelsController@edit')->name('edit');
+        Route::post('/bulk-destroy', 'TravelsController@bulkDestroy')->name('bulk-destroy');
+        Route::post('/{travel}', 'TravelsController@update')->name('update');
+        Route::delete('/{travel}', 'TravelsController@destroy')->name('destroy');
+
+    });
+});
+
+

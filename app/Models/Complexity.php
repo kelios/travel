@@ -11,16 +11,16 @@ class Complexity extends Model
     protected $fillable = [
         'name',
         'status',
-    
+
     ];
-    
-    
+
+
     protected $dates = [
         'created_at',
         'updated_at',
-    
+
     ];
-    
+
     protected $appends = ['resource_url'];
 
     /* ************************ ACCESSOR ************************* */
@@ -28,5 +28,10 @@ class Complexity extends Model
     public function getResourceUrlAttribute()
     {
         return url('/admin/complexities/'.$this->getKey());
+    }
+
+    public function travels()
+    {
+        return $this->belongsToMany(Travel::class);
     }
 }

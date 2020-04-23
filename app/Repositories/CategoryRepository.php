@@ -4,13 +4,13 @@ namespace App\Repositories;
 
 use App\Models\Category;
 use App\Models\Travel;
-use App\Repositories\Interfaces\CategoryRepositoryInterface;
+use App\Repositories\Interfaces\TravelRelationRepositoryInterface;
 
 /**
  * Class CategoryRepository
  * @package App\Repositories
  */
-class CategoryRepository implements CategoryRepositoryInterface
+class CategoryRepository implements TravelRelationRepositoryInterface
 {
     /**
      * @var

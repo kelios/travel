@@ -21,9 +21,15 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             TravelRepositoryInterface::class,
+            TravelRelationRepositoryInterface::class,
+            CategoryRepository::class,
             TravelRepository::class,
-            CategoryRepositoryInterface::class,
-            CategoryRepository::class
+            CountyRepository::class,
+            CityRepository::class,
+            ComplexityRepository::class,
+            MonthRepository::class,
+            OverNightStayRepository::class,
+            TransportRepository::class
         );
     }
 

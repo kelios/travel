@@ -11,16 +11,16 @@ class OverNightStay extends Model
     protected $fillable = [
         'name',
         'status',
-    
+
     ];
-    
-    
+
+
     protected $dates = [
         'created_at',
         'updated_at',
-    
+
     ];
-    
+
     protected $appends = ['resource_url'];
 
     /* ************************ ACCESSOR ************************* */
@@ -28,5 +28,13 @@ class OverNightStay extends Model
     public function getResourceUrlAttribute()
     {
         return url('/admin/over-night-stays/'.$this->getKey());
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function travels()
+    {
+        return $this->belongsToMany(Travel::class);
     }
 }

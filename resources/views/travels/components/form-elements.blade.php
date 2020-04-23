@@ -12,7 +12,7 @@
 
 <div class="form-group row align-items-center"
      :class="{'has-danger': errors.has('categories'), 'has-success': fields.categories && fields.categories.valid }">
-    <label for="categories"
+    <label for="categories" class="col-form-label text-md-right"
            :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.categories') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
 
@@ -28,6 +28,141 @@
 
         <div v-if="errors.has('categories')" class="form-control-feedback form-text" v-cloak>@{{
             errors.first('categories') }}
+        </div>
+    </div>
+</div>
+
+
+<div class="form-group row align-items-center"
+     :class="{'has-danger': errors.has('transports'), 'has-success': fields.transports && fields.transports.valid }">
+    <label for="transports" class="col-form-label text-md-right"
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.transports') }}</label>
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+
+        <multiselect
+            :options="{{$transports->toJson()}}"
+            :multiple="true"
+            v-model="form.transports"
+            track-by="id"
+            label="name"
+            tag-placeholder="{{ trans('travels.Select transports') }}"
+            placeholder="{{ trans('travels.Select transports') }}">
+        </multiselect>
+
+        <div v-if="errors.has('transports')" class="form-control-feedback form-text" v-cloak>@{{
+            errors.first('transports') }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group row align-items-center"
+     :class="{'has-danger': errors.has('month'), 'has-success': fields.month && fields.month.valid }">
+    <label for="month" class="col-form-label text-md-right"
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.month') }}</label>
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+
+        <multiselect
+            :options="{{$month->toJson()}}"
+            :multiple="true"
+            v-model="form.month"
+            track-by="id"
+            label="name"
+            tag-placeholder="{{ trans('travels.Select month') }}"
+            placeholder="{{ trans('travels.Select month') }}">
+        </multiselect>
+
+        <div v-if="errors.has('month')" class="form-control-feedback form-text" v-cloak>@{{
+            errors.first('month') }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group row align-items-center"
+     :class="{'has-danger': errors.has('complexity'), 'has-success': fields.complexity && fields.complexity.valid }">
+    <label for="complexity" class="col-form-label text-md-right"
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.complexity') }}</label>
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+
+        <multiselect
+            :options="{{$complexity->toJson()}}"
+            :multiple="true"
+            v-model="form.complexity"
+            track-by="id"
+            label="name"
+            tag-placeholder="{{ trans('travels.complexity') }}"
+            placeholder="{{ trans('travels.Select complexity') }}">
+        </multiselect>
+
+        <div v-if="errors.has('complexity')" class="form-control-feedback form-text" v-cloak>@{{
+            errors.first('complexity') }}
+        </div>
+    </div>
+</div>
+
+
+<div class="form-group row align-items-center"
+           :class="{'has-danger': errors.has('overNightStay'), 'has-success': fields.overNightStay && fields.overNightStay.valid }">
+    <label for="overNightStay" class="col-form-label text-md-right"
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.overNightStay') }}</label>
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+
+        <multiselect
+            :options="{{$overNightStay->toJson()}}"
+            :multiple="true"
+            v-model="form.overNightStay"
+            track-by="id"
+            label="name"
+            tag-placeholder="{{ trans('travels.overNightStay') }}"
+            placeholder="{{ trans('travels.Select overNightStay') }}">
+        </multiselect>
+
+        <div v-if="errors.has('overNightStay')" class="form-control-feedback form-text" v-cloak>@{{
+            errors.first('overNightStay') }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group row align-items-center"
+     :class="{'has-danger': errors.has('countries'), 'has-success': fields.countries && fields.countries.valid }">
+    <label for="countries" class="col-form-label text-md-right"
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.countries') }}</label>
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+
+        <multiselect
+            @input="getCities"
+            :options="{{$countries->toJson()}}"
+            :multiple="true"
+            v-model="form.countries"
+            track-by="id"
+            label="name"
+            tag-placeholder="{{ trans('travels.countries') }}"
+            placeholder="{{ trans('travels.Select countries') }}">
+        </multiselect>
+
+        <div v-if="errors.has('countries')" class="form-control-feedback form-text" v-cloak>@{{
+            errors.first('countries') }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group row align-items-center"
+     :class="{'has-danger': errors.has('cities'), 'has-success': fields.cities && fields.cities.valid }">
+    <label for="cities" class="col-form-label text-md-right"
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.cities') }}</label>
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+
+        <multiselect
+            :options="{{$cities->toJson()}}"
+            :multiple="true"
+            v-model="form.cities"
+            track-by="id"
+            label="name"
+            tag-placeholder="{{ trans('travels.cities') }}"
+            placeholder="{{ trans('travels.Select cities') }}">
+        </multiselect>
+
+        <div v-if="errors.has('cities')" class="form-control-feedback form-text" v-cloak>@{{
+            errors.first('cities') }}
         </div>
     </div>
 </div>

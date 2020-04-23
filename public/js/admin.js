@@ -113397,6 +113397,12 @@ Vue.component('travel-form', {
       form: {
         name: '',
         categories: '',
+        transports: '',
+        month: '',
+        complexity: '',
+        overNightStay: '',
+        cities: '',
+        countries: '',
         budget: '',
         year: '',
         number_peoples: '',
@@ -113409,6 +113415,30 @@ Vue.component('travel-form', {
         visa: false
       }
     };
+  },
+  methods: {
+    getCountries: function getCountries() {
+      axios.get('/location/countries').then(function (response) {
+        this.countries = response.data;
+      }.bind(this));
+    },
+    getCities: function getCities(items) {
+      var selectedCounties = [];
+      items.forEach(function (item) {
+        selectedCounties.push(item.id);
+      });
+      axios.get('/location/countriesCities', {
+        params: {
+          country_id: selectedCounties
+        }
+      }).then(function (response) {
+        this.cities = response.data;
+        console.log(this.cities);
+      }.bind(this));
+    }
+  },
+  created: function created() {
+    this.getCountries();
   }
 });
 

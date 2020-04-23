@@ -41,7 +41,7 @@ class Travel extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 
     /**
@@ -49,6 +49,54 @@ class Travel extends Model
      */
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'travel_category')->withTimestamps();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function transports()
+    {
+        return $this->belongsToMany(Transport::class, 'travel_transport')->withTimestamps();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function month()
+    {
+        return $this->belongsToMany(Month::class, 'travel_month')->withTimestamps();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function complexity()
+    {
+        return $this->belongsToMany(Complexity::class, 'travel_complexity')->withTimestamps();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function overNightStay()
+    {
+        return $this->belongsToMany(OverNightStay::class, 'travel_over_night_stay')->withTimestamps();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function countries()
+    {
+        return $this->belongsToMany(Country::class, 'travel_country')->withTimestamps();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function cities()
+    {
+        return $this->belongsToMany(City::class, 'travel_city')->withTimestamps();
     }
 }

@@ -4,7 +4,13 @@ namespace App\Http\Controllers\Travels;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\CategoryRepository;
+use App\Repositories\MonthRepository;
+use App\Repositories\OverNightStayRepository;
+use App\Repositories\TransportRepository;
+use App\Repositories\ComplexityRepository;
 use App\Repositories\TravelRepository;
+use App\Repositories\CityRepository;
+use App\Repositories\CountryRepository;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -27,13 +33,56 @@ class TravelsController extends Controller
     private $categoryRepository;
 
     /**
+     * @var MonthRepository
+     */
+    private $monthRepository;
+
+    /**
+     * @var ComplexityRepository
+     */
+    private $complexityRepository;
+
+    /**
+     * @var TransportRepository
+     */
+    private $transportRepository;
+
+    /**
+     * @var OverNightStayRepository
+     */
+    private $overNightStayRepository;
+
+    /**
+     * @var cityRepository
+     */
+    private $cityRepository;
+    /**
+     * @var countryRepository
+     */
+    private $countryRepository;
+
+    /**
      * TravelsController constructor.
      * @param TravelRepository $travelRepository
      */
-    public function __construct(TravelRepository $travelRepository, CategoryRepository $categoryRepository)
+    public function __construct(TravelRepository $travelRepository,
+                                CategoryRepository $categoryRepository,
+                                TransportRepository $transportRepository,
+                                MonthRepository $monthRepository,
+                                ComplexityRepository $complexityRepository,
+                                OverNightStayRepository $overNightStayRepository,
+                                cityRepository $cityRepository,
+                                countryRepository $countryRepository
+    )
     {
         $this->travelRepository = $travelRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->transportRepository = $transportRepository;
+        $this->monthRepository = $monthRepository;
+        $this->complexityRepository = $complexityRepository;
+        $this->overNightStayRepository = $overNightStayRepository;
+        $this->cityRepository = $cityRepository;
+        $this->countryRepository = $countryRepository;
     }
 
     /**
@@ -64,6 +113,12 @@ class TravelsController extends Controller
     {
         return view('travels.create', [
             'categories' => $this->categoryRepository->all(),
+            'transports' => $this->transportRepository->all(),
+            'month' => $this->monthRepository->all(),
+            'complexity' => $this->complexityRepository->all(),
+            'overNightStay' => $this->overNightStayRepository->all(),
+            'cities' => $this->cityRepository->all(),
+            'countries' => $this->countryRepository->all()
         ]);
     }
 
@@ -77,13 +132,28 @@ class TravelsController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
-        $sanitized['categoriesIds'] = $request->getCategoriesIds();
-       // dd($request->getCategoriesIds());
+        $relations = [
+            'categories',
+            'transports',
+            'month',
+            'complexity',
+            'overNightStay',
+            'countries',
+            'cities'
+        ];
+
+        foreach ($relations as $relation) {
+            $sanitized[$relation . 'Ids'] = $request->getRelationIds($relation);
+        }
+
         // Store the Travel
         $this->travelRepository->fill($sanitized);
         $this->travelRepository->save();
         $this->travelRepository->users()->sync(auth()->user()->id);
-        $this->travelRepository->categories()->sync($sanitized['categoriesIds']);
+        foreach ($relations as $relation) {
+            $this->travelRepository->$relation()->sync($sanitized[$relation . 'Ids']);
+        }
+
         if ($request->ajax()) {
             return ['redirect' => url('travels'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }

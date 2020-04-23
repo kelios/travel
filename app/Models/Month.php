@@ -11,22 +11,28 @@ class Month extends Model
     protected $fillable = [
         'name',
         'status',
-    
+
     ];
-    
-    
+
+
     protected $dates = [
         'created_at',
         'updated_at',
-    
+
     ];
-    
+
     protected $appends = ['resource_url'];
 
     /* ************************ ACCESSOR ************************* */
 
     public function getResourceUrlAttribute()
     {
-        return url('/admin/months/'.$this->getKey());
+        return url('/admin/months/' . $this->getKey());
     }
+
+    public function travels()
+    {
+        return $this->belongsToMany(Travel::class);
+    }
+
 }

@@ -47,17 +47,19 @@ class StoreTravel extends FormRequest
     }
 
     /**
+     * @param $keyEntity
+     * @param string $searchKey
      * @return array|null
      */
-    public function getCategoriesIds()
-    {
-        if ($this->has('categories')) {
+    public function getRelationIds($keyEntity,$searchKey = 'id'){
+        if ($this->has($keyEntity) && !is_null($this->get($keyEntity)) ) {
             $data = [];
-            foreach ($this->get('categories') as $category) {
-                $data[] = array_get($category, 'id');
+            foreach ($this->get($keyEntity) as $entity) {
+                $data[] = array_get($entity, $searchKey);
             }
             return $data;
         }
         return null;
     }
+
 }
