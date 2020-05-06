@@ -10,3 +10,5 @@ import './month';
 import './over-night-stay';
 import './travel';
 import './category';
+import './category';
+import './categoriese';

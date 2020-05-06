@@ -25,7 +25,7 @@ class IndexCategory extends FormRequest
     public function rules(): array
     {
         return [
-            'orderBy' => 'in:id,name,status|nullable',
+            'orderBy' => 'in:|nullable',
             'orderDirection' => 'in:asc,desc|nullable',
             'search' => 'string|nullable',
             'page' => 'integer|nullable',

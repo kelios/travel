@@ -140,6 +140,7 @@ $factory->define(App\Models\Category::class, static function (Faker\Generator $f
         'status' => $faker->boolean(),
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
+        'image' => $faker->sentence,
 
 
     ];

@@ -7,6 +7,7 @@ Vue.component('category-form', {
             form: {
                 name:  '' ,
                 status:  false ,
+                image:  '' ,
                 
             }
         }
