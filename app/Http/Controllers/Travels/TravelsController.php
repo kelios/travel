@@ -116,9 +116,7 @@ class TravelsController extends Controller
             'transports' => $this->transportRepository->all(),
             'month' => $this->monthRepository->all(),
             'complexity' => $this->complexityRepository->all(),
-            'overNightStay' => $this->overNightStayRepository->all(),
-            'cities' => $this->cityRepository->all(),
-            'countries' => $this->countryRepository->all()
+            'overNightStay' => $this->overNightStayRepository->all()
         ]);
     }
 

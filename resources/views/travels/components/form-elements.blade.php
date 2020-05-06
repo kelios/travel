@@ -101,7 +101,7 @@
 
 
 <div class="form-group row align-items-center"
-           :class="{'has-danger': errors.has('overNightStay'), 'has-success': fields.overNightStay && fields.overNightStay.valid }">
+     :class="{'has-danger': errors.has('overNightStay'), 'has-success': fields.overNightStay && fields.overNightStay.valid }">
     <label for="overNightStay" class="col-form-label text-md-right"
            :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.overNightStay') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
@@ -130,7 +130,7 @@
 
         <multiselect
             @input="getCities"
-            :options="{{$countries->toJson()}}"
+            :options="form.optionsCountries"
             :multiple="true"
             v-model="form.countries"
             track-by="id"
@@ -152,9 +152,10 @@
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
 
         <multiselect
-            :options="{{$cities->toJson()}}"
+            @input="setMarker"
+            :options="form.optionsCities"
             :multiple="true"
-            v-model="form.cities"
+            v-model='form.cities'
             track-by="id"
             label="name"
             tag-placeholder="{{ trans('travels.cities') }}"
@@ -164,6 +165,31 @@
         <div v-if="errors.has('cities')" class="form-control-feedback form-text" v-cloak>@{{
             errors.first('cities') }}
         </div>
+    </div>
+</div>
+
+
+<div class="form-check row">
+    <div class="ml-md-auto" :class="isFormLocalized ? 'col-md-8' : 'col-md-10'">
+        <template>
+            <yandex-map
+                :coords="form.mapCoords"
+                :zoom="10"
+                @click="onClick"
+                style="width: 600px; height: 600px;"
+                :settings="mapSettings"
+                ref="map"
+
+            >
+                <ymap-marker
+                    v-for="(coord,index) in form.coords"
+                    :key="index"
+                    :coords="coord.map(i => Number(i))"
+                    marker-id="123"
+                    hint-content="some hint"
+                />
+            </yandex-map>
+        </template>
     </div>
 </div>
 

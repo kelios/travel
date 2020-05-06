@@ -1,4 +1,6 @@
 import AppForm from '../app-components/Form/AppForm';
+import config from "../../config";
+import {yandexMap, ymapMarker} from 'vue-yandex-maps';
 
 Vue.component('travel-form', {
     mixins: [AppForm],
@@ -11,8 +13,10 @@ Vue.component('travel-form', {
                 month: '',
                 complexity: '',
                 overNightStay: '',
-                cities: '',
-                countries: '',
+                cities: [],
+                optionsCities: [],
+                countries: [],
+                optionsCountries: [],
                 budget: '',
                 year: '',
                 number_peoples: '',
@@ -23,15 +27,29 @@ Vue.component('travel-form', {
                 description: '',
                 publish: false,
                 visa: false,
-
+                mapCoords: [
+                    53.8828449,
+                    27.7273595
+                ],
+                coords: [],
+                bounds: [],
+                address: '',
             }
         }
     },
+    computed: {
+        mapSettings() {
+            return config.map;
+        },
+    },
     methods: {
+        mapInit() {
+        },
         getCountries: function () {
             axios.get('/location/countries')
                 .then(function (response) {
-                    this.countries = response.data;
+                    this.form.optionsCountries = response.data;
+
                 }.bind(this));
 
         },
@@ -45,13 +63,42 @@ Vue.component('travel-form', {
                     country_id: selectedCounties
                 }
             }).then(function (response) {
-                this.cities = response.data;
-                console.log(this.cities);
+                this.form.optionsCities = response.data;
+                var cities = response.data;
             }.bind(this));
-        }
+        },
+        onClick(e) {
+            this.form.coords = e.get('form.coords');
+        },
+        setMarker: function (items) {
+            let selectedCities = [];
+            let data = [];
+            items.forEach((item) => {
+                selectedCities.push(item.name);
+                ymaps.geocode(item.name, {results: 1}).then(res => {
+                    const firstGeoObject = res.geoObjects.get(0),
+                        // Координаты геообъекта.
+                        coords = firstGeoObject.geometry.getCoordinates(),
+                        // Область видимости геообъекта.
+                        bounds = firstGeoObject.properties.get('boundedBy');
+
+                    this.form.coords.push(coords);
+                    this.form.mapCoords = coords;
+                    this.$emit('coordinates-changed', {
+                        coords: this.form.coords,
+                        address: this.form.address,
+                    });
+                    this.$refs.map.setBounds(bounds, {
+                        checkZoomRange: true
+                    });
+                });
+            });
+        },
     },
     created: function () {
-        this.getCountries()
+        this.getCountries();
+    },
+    components: {
+        yandexMap, ymapMarker
     }
-
 });

@@ -97,15 +97,14 @@ class TravelRepository implements TravelRepositoryInterface
         return $this->travel->overNightStay();
     }
 
-
     public function cities()
     {
         return $this->travel->cities();
     }
 
-    public function counties()
+    public function countries()
     {
-        return $this->travel->counties();
+        return $this->travel->countries();
     }
 
     /**
