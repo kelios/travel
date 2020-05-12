@@ -27,7 +27,7 @@ class Travel extends Model
 
     ];
 
-    protected $appends = ['resource_url'];
+    protected $appends = ['resource_url','url'];
 
     /* ************************ ACCESSOR ************************* */
 
@@ -36,12 +36,17 @@ class Travel extends Model
         return url('/admin/travels/' . $this->getKey());
     }
 
+    public function getUrlAttribute()
+    {
+        return url('/travels/' . $this->getKey());
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users()
     {
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsToMany(User::class, 'travel_user')->withTimestamps();
     }
 
     /**

@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
-        test
+    <div id="app">
+        <travel-index :travels='@json($travels)'></travel-index>
     </div>
 @endsection
-
-

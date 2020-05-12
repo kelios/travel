@@ -69,6 +69,7 @@ Vue.component('travel-form', {
         },
         onClick(e) {
             this.form.coords = e.get('form.coords');
+            console.log(this.form.coords);
         },
         setMarker: function (items) {
             let selectedCities = [];
@@ -96,7 +97,8 @@ Vue.component('travel-form', {
         },
     },
     created: function () {
-        this.getCountries();
+        //this.getCountries();
+        console.log(this.data.categories);
     },
     components: {
         yandexMap, ymapMarker

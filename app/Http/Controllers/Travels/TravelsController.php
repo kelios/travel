@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Travels;
 
 use App\Http\Controllers\Controller;
+use App\Models\Travel;
 use App\Repositories\CategoryRepository;
 use App\Repositories\MonthRepository;
 use App\Repositories\OverNightStayRepository;
@@ -15,6 +16,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use App\Http\Requests\Travel\IndexTravel;
 use App\Http\Requests\Travel\StoreTravel;
@@ -93,8 +95,18 @@ class TravelsController extends Controller
      */
     public function index(IndexTravel $request)
     {
-        $travels = $this->travelRepository->all();
-        return view('travels.index', ['data' => $travels]);
+        $travels = $this->travelRepository->getList();
+       /* foreach ($travels as $travel) {
+            dd($travel->categories[0]->getCategoryImageThumbUrlAttribute());
+        }*/
+        //dd(json_encode($travels));
+        return view('travels.index')->with('travels', $travels);
+    }
+
+    public function indexapi()
+    {
+        $data = $this->travelRepository->getList();
+        return response()->json($data);
     }
 
     public function detail($id)
@@ -161,16 +173,20 @@ class TravelsController extends Controller
 
 
     /**
-     * Show the form for editing the specified resource.
-     *
      * @param Travel $travel
      * @return Factory|View
-     * @throws AuthorizationException
      */
-    public function edit(Travel $travel)
+    public function edit(int $id)
     {
+        $travel = $this->travelRepository->getById($id);
+     //   dd($travel);
         return view('travels.edit', [
             'travel' => $travel,
+            'categories' => $this->categoryRepository->all(),
+            'transports' => $this->transportRepository->all(),
+            'month' => $this->monthRepository->all(),
+            'complexity' => $this->complexityRepository->all(),
+            'overNightStay' => $this->overNightStayRepository->all()
         ]);
     }
 

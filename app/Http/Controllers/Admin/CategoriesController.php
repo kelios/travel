@@ -37,10 +37,10 @@ class CategoriesController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'name', 'status', 'image'],
+            ['id', 'name', 'status'],
 
             // set columns to searchIn
-            ['id', 'name', 'image']
+            ['id', 'name']
         );
 
         if ($request->ajax()) {
@@ -113,8 +113,6 @@ class CategoriesController extends Controller
     public function edit(Category $category)
     {
         $this->authorize('admin.category.edit', $category);
-
-
         return view('admin.category.edit', [
             'category' => $category,
         ]);

@@ -24,6 +24,11 @@ Vue.use(VModal, {dialog: true, dynamic: true, injectModalsContainer: true});
 Vue.use(VueQuillEditor);
 Vue.use(Notifications);
 Vue.use(VueCookie);
+Vue.component('travel-index', require('../components/TravelIndex.vue').default);
+Vue.prototype.trans = (key) => {
+    return _.get(window.trans, key, key);
+};
+
 
 new Vue({
     mixins: [Admin],

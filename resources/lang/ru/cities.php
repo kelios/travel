@@ -36021,13 +36021,6 @@ return [
     "Reghiu" => '',
     "Ruginesti" => '',
     "Sihlea" => '',
-
-         ;
-
-        DB::table($citiesTable->insert($cities'';
-
-        $cities'' = array(
-
     "Slobozia Bradului" => '',
     "Slobozia-Ciorasti" => '',
     "Soveja" => '',
@@ -48341,5 +48334,5 @@ return [
     "Weston" => '',
     "Lewisburg" => '',
     "Ravenswood" => '',
-    "Summersville" => '',
+    "Summersville" => ''
 ];

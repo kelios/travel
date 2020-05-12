@@ -34,6 +34,16 @@ class TravelRepository implements TravelRepositoryInterface
         return $this->travel->all();
     }
 
+    public function getList($where = [])
+    {
+        return $this->travel->with('categories')->paginate(500);
+    }
+
+    public function get($columns = [])
+    {
+        return $this->travel->get($columns);
+    }
+
     /**
      * @param $attr
      * @return Travel
@@ -113,6 +123,21 @@ class TravelRepository implements TravelRepositoryInterface
      */
     public function getByUser(User $user)
     {
-        return $this->travel->where('user_id' . $user->id)->get();
+        return $this->travel->with(["users" => function ($q) use ($user) {
+            $q->where('users.id', '=', $user->id);
+        }])->get();
+    }
+
+    public function getById($id)
+    {
+        return $this->travel->with([
+            'categories',
+            'transports',
+            'month',
+            'complexity',
+            'overNightStay',
+            'cities',
+            'countries'
+        ])->find($id);
     }
 }

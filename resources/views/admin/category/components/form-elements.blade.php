@@ -1,28 +1,51 @@
-<div class="form-group row align-items-center" :class="{'has-danger': errors.has('name'), 'has-success': fields.name && fields.name.valid }">
-    <label for="name" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.category.columns.name') }}</label>
-        <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-        <input type="text" v-model="form.name" v-validate="'required'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('name'), 'form-control-success': fields.name && fields.name.valid}" id="name" name="name" placeholder="{{ trans('admin.category.columns.name') }}">
-        <div v-if="errors.has('name')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('name') }}</div>
+<div class="row">
+    <div class="col-md-4 text-center">
+        <div class="avatar-upload">
+            @include('brackets/admin-ui::admin.includes.avatar-uploader', [
+                'mediaCollection' => app(\App\Models\Category::class)->getMediaCollection('categoryImage'),
+                'media' => $category->getThumbs200ForCollection('categoryImage')
+            ])
+        </div>
     </div>
+
+
+    <div class="col-md-8">
+        <div class="form-group row align-items-center"
+             :class="{'has-danger': errors.has('name'), 'has-success': fields.name && fields.name.valid }">
+            <label for="name" class="col-form-label text-md-right"
+                   :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.category.columns.name') }}</label>
+            <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+                <input type="text" v-model="form.name" v-validate="'required'" @input="validate($event)"
+                       class="form-control"
+                       :class="{'form-control-danger': errors.has('name'), 'form-control-success': fields.name && fields.name.valid}"
+                       id="name" name="name" placeholder="{{ trans('admin.category.columns.name') }}">
+                <div v-if="errors.has('name')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('name')
+                    }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-check row"
+             :class="{'has-danger': errors.has('status'), 'has-success': fields.status && fields.status.valid }">
+            <div class="ml-md-auto" :class="isFormLocalized ? 'col-md-8' : 'col-md-10'">
+                <input class="form-check-input" id="status" type="checkbox" v-model="form.status" v-validate="''"
+                       data-vv-name="status" name="status_fake_element">
+                <label class="form-check-label" for="status">
+                    {{ trans('admin.category.columns.status') }}
+                </label>
+                <input type="hidden" name="status" :value="form.status">
+                <div v-if="errors.has('status')" class="form-control-feedback form-text" v-cloak>@{{
+                    errors.first('status')
+                    }}
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-<div class="form-check row" :class="{'has-danger': errors.has('status'), 'has-success': fields.status && fields.status.valid }">
-    <div class="ml-md-auto" :class="isFormLocalized ? 'col-md-8' : 'col-md-10'">
-        <input class="form-check-input" id="status" type="checkbox" v-model="form.status" v-validate="''" data-vv-name="status"  name="status_fake_element">
-        <label class="form-check-label" for="status">
-            {{ trans('admin.category.columns.status') }}
-        </label>
-        <input type="hidden" name="status" :value="form.status">
-        <div v-if="errors.has('status')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('status') }}</div>
-    </div>
-</div>
 
-<div class="form-group row align-items-center" :class="{'has-danger': errors.has('image'), 'has-success': fields.image && fields.image.valid }">
-    <label for="image" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.category.columns.image') }}</label>
-        <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-        <input type="text" v-model="form.image" v-validate="''" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('image'), 'form-control-success': fields.image && fields.image.valid}" id="image" name="image" placeholder="{{ trans('admin.category.columns.image') }}">
-        <div v-if="errors.has('image')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('image') }}</div>
-    </div>
-</div>
+
+
 
 

@@ -238,6 +238,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 Route::group(['namespace' => 'travels', 'prefix' => 'travels', 'as' => 'travels.'], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::get('/', 'TravelsController@index')->name('index');
+        Route::get('/api/travels', 'TravelsController@indexapi')->name('index');
         Route::get('/create', 'TravelsController@create')->name('create');
         Route::post('/', 'TravelsController@store')->name('store');
         Route::get('/{travel}/edit', 'TravelsController@edit')->name('edit');
