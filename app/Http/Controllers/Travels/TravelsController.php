@@ -11,7 +11,7 @@ use App\Repositories\TransportRepository;
 use App\Repositories\ComplexityRepository;
 use App\Repositories\TravelRepository;
 use App\Repositories\CityRepository;
-use App\Repositories\CountryRepository;
+use App\Repositories\MeCountryRepository;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -59,9 +59,9 @@ class TravelsController extends Controller
      */
     private $cityRepository;
     /**
-     * @var countryRepository
+     * @var MeCountryRepository
      */
-    private $countryRepository;
+    private $meCountryRepository;
 
     /**
      * TravelsController constructor.
@@ -74,7 +74,7 @@ class TravelsController extends Controller
                                 ComplexityRepository $complexityRepository,
                                 OverNightStayRepository $overNightStayRepository,
                                 cityRepository $cityRepository,
-                                countryRepository $countryRepository
+                                MeCountryRepository $meCountryRepository
     )
     {
         $this->travelRepository = $travelRepository;
@@ -84,7 +84,7 @@ class TravelsController extends Controller
         $this->complexityRepository = $complexityRepository;
         $this->overNightStayRepository = $overNightStayRepository;
         $this->cityRepository = $cityRepository;
-        $this->countryRepository = $countryRepository;
+        $this->meCountryRepository = $meCountryRepository;
     }
 
     /**

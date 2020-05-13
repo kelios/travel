@@ -2,14 +2,14 @@
 
 namespace App\Repositories;
 
-use App\Models\Country;
+use App\Models\MeCountry;
 use App\Repositories\Interfaces\TravelRelationRepositoryInterface;
 
 /**
- * Class CountryRepository
+ * Class MeCountryRepository
  * @package App\Repositories
  */
-class CountryRepository implements TravelRelationRepositoryInterface
+class MeCountryRepository implements TravelRelationRepositoryInterface
 {
     /**
      * @var Country
@@ -20,7 +20,7 @@ class CountryRepository implements TravelRelationRepositoryInterface
      * CountryRepository constructor.
      * @param Country $country
      */
-    public function __construct(Country $country)
+    public function __construct(MeCountry $country)
     {
         $this->country = $country;
     }

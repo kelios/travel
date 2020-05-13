@@ -129,12 +129,13 @@
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
 
         <multiselect
-            @input="getCities"
+            @input="getCitiesSelected"
+            @remove="toggleUnSelectMarketCounty"
             :options="form.optionsCountries"
             :multiple="true"
             v-model="form.countries"
             track-by="id"
-            label="name"
+            label="local_name"
             tag-placeholder="{{ trans('travels.countries') }}"
             placeholder="{{ trans('travels.Select countries') }}">
         </multiselect>
@@ -165,6 +166,22 @@
         <div v-if="errors.has('cities')" class="form-control-feedback form-text" v-cloak>@{{
             errors.first('cities') }}
         </div>
+    </div>
+</div>
+
+<div class="form-group row align-items-center"
+     :class="{'has-danger': errors.has('address'), 'has-success': fields.address && fields.address.valid }">
+    <label for="cities" class="col-form-label text-md-right"
+           :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.selectedAddress') }}</label>
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+
+        <ul id="example-1">
+            <li v-for="place in form.selectedAddress">
+                <ul>
+                    <li>@{{ place }}</li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </div>
 

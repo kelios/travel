@@ -22,10 +22,6 @@ class TravelsCity extends Migration
             $table->foreign('travel_id')
                 ->references('id')
                 ->on('travels');
-
-            $table->foreign('country_id')
-                ->references('id')
-                ->on('countries');
         });
 
         Schema::create('travel_city', function (Blueprint $table) {
@@ -35,12 +31,9 @@ class TravelsCity extends Migration
             $table->timestamps();
 
             $table->foreign('travel_id')
-                ->references('id')
-                ->on('travels');
+                    ->references('id')
+                    ->on('travels');
 
-            $table->foreign('city_id')
-                ->references('id')
-                ->on('cities');
         });
     }
 
