@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class WorldCitiesLocaleTableSeeder extends Seeder
+class WorldCitiesLocaleRUTableSeeder extends Seeder
 {
 
     /**
@@ -12,7 +12,6 @@ class WorldCitiesLocaleTableSeeder extends Seeder
      */
     public function run()
     {
-
 
         \DB::table('world_cities_locale')->truncate();
 
@@ -67709,6 +67708,15 @@ class WorldCitiesLocaleTableSeeder extends Seeder
                     'id' => 10005,
                     'locale' => 'ru',
                     'name' => 'Могилев',
+                ),
+            10006 =>
+                array (
+                    'alias' => NULL,
+                    'city_id' => 305,
+                    'full_name' => NULL,
+                    'id' => 10006,
+                    'locale' => 'ru',
+                    'name' => 'Витебск',
                 ),
 
 

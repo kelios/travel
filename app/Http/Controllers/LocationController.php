@@ -25,7 +25,7 @@ class LocationController extends BaseController
      */
     public function getCitiesByCountries(Request $request)
     {
-        $countryCities = City::whereIn('country_id', $request->country_id)->get();
+        $countryCities = City::whereIn('country_id', $request->country_id)->with('country')->get();
         return response()->json($countryCities, 200);
     }
 

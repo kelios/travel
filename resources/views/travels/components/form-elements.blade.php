@@ -169,44 +169,55 @@
     </div>
 </div>
 
+<div class="form-check row">
+    <div class="ml-md-auto" :class="'col-md-10'">
+        <template>
+            <div style="height: 500px; width: 80%">
+                <l-map
+                    :zoom="form.zoom"
+                    :center="form.center"
+                    ref="myMap"
+                    @click="onClick"
+                    style="z-index: 0"
+                >
+                    <l-tile-layer :url="form.url" :attribution="form.attribution"></l-tile-layer>
+                    <l-marker
+                        v-for="latlng in form.coords"
+                        :lat-lng="latlng"
+
+                    >
+                        <l-icon
+                            :icon-anchor="form.staticAnchor"
+                            class-name="someExtraClass"
+                        >
+                            <div class="headline">
+                                Me
+                            </div>
+                        </l-icon>
+                    </l-marker>
+                </l-map>
+            </div>
+        </template>
+    </div>
+</div>
+
 <div class="form-group row align-items-center"
      :class="{'has-danger': errors.has('address'), 'has-success': fields.address && fields.address.valid }">
     <label for="cities" class="col-form-label text-md-right"
            :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('travels.selectedAddress') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
 
-        <ul id="example-1">
-            <li v-for="place in form.selectedAddress">
-                <ul>
-                    <li>@{{ place }}</li>
+        <ul class="list-group">
+            <li class="list-group-item" v-for="(coords,index) in form.selectedAddress.coords">
+                <ul class="list-group">
+                    <li class="list-group-item">@{{ form.selectedAddress.address[index] }}-@{{coords}}
+                        <button class="btn btn-sm btn-danger" v-on:click="removeMarker(coords,index)">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </li>
                 </ul>
             </li>
         </ul>
-    </div>
-</div>
-
-
-<div class="form-check row">
-    <div class="ml-md-auto" :class="isFormLocalized ? 'col-md-8' : 'col-md-10'">
-        <template>
-            <yandex-map
-                :coords="form.mapCoords"
-                :zoom="10"
-                @click="onClick"
-                style="width: 600px; height: 600px;"
-                :settings="mapSettings"
-                ref="map"
-
-            >
-                <ymap-marker
-                    v-for="(coord,index) in form.coords"
-                    :key="index"
-                    :coords="coord.map(i => Number(i))"
-                    marker-id="123"
-                    hint-content="some hint"
-                />
-            </yandex-map>
-        </template>
     </div>
 </div>
 

@@ -26,6 +26,8 @@
         "vue2-google-maps": "^0.10.7"
     },
     "dependencies": {
-        "vue-yandex-maps": "^0.10.7"
+        "leaflet": "^1.6.0",
+        "vue-yandex-maps": "^0.10.7",
+        "vue2-leaflet": "^2.5.2"
     }
 }
