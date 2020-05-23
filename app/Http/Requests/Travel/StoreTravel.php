@@ -51,8 +51,9 @@ class StoreTravel extends FormRequest
      * @param string $searchKey
      * @return array|null
      */
-    public function getRelationIds($keyEntity,$searchKey = 'id'){
-        if ($this->has($keyEntity) && !is_null($this->get($keyEntity)) ) {
+    public function getRelationIds($keyEntity, $searchKey = 'id')
+    {
+        if ($this->has($keyEntity) && !is_null($this->get($keyEntity))) {
             $data = [];
             foreach ($this->get($keyEntity) as $entity) {
                 $data[] = array_get($entity, $searchKey);
@@ -61,5 +62,22 @@ class StoreTravel extends FormRequest
         }
         return null;
     }
+
+    public function getRelationAddress()
+    {
+        $data = [];
+        $travelAddress = $this->get('travelAddressAdress');
+        $travelAddressCountry = $this->get('travelAddressCountry');
+        $travelAddressCity = $this->get('travelAddressCity');
+        $coordsMeTravel = $this->get('coordsMeTravel');
+        foreach ($travelAddress as $key => $value) {
+            $data[$key]['address'] = $value;
+            $data[$key]['coord'] = implode(',', $coordsMeTravel[$key]);
+            $data[$key]['city_id'] = $travelAddressCity[$key] != '-1' ? $travelAddressCity[$key] : null;
+            $data[$key]['country_id'] = $travelAddressCountry[$key];
+        }
+        return $data;
+    }
+
 
 }

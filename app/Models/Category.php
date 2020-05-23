@@ -43,6 +43,9 @@ class Category extends Model implements HasMedia
     }
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function travels()
     {
         return $this->belongsToMany(Travel::class);

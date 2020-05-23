@@ -17,17 +17,17 @@ class UpdateTravel extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['sometimes', 'string'],
+            'name' => ['nullable', 'string'],
             'budget' => ['nullable', 'integer'],
+            'year' => ['nullable', 'integer'],
             'number_peoples' => ['nullable', 'integer'],
             'number_days' => ['nullable', 'integer'],
-            'minus' => ['sometimes', 'string'],
-            'plus' => ['sometimes', 'string'],
-            'recommendation' => ['sometimes', 'string'],
-            'description' => ['sometimes', 'string'],
-            'publish' => ['sometimes', 'boolean'],
-            'visa' => ['sometimes', 'boolean'],
-
+            'minus' => ['nullable', 'string'],
+            'plus' => ['nullable', 'string'],
+            'recommendation' => ['nullable', 'string'],
+            'description' => ['nullable', 'string'],
+            'publish' => ['nullable', 'boolean'],
+            'visa' => ['nullable', 'boolean'],
         ];
     }
 
@@ -45,4 +45,38 @@ class UpdateTravel extends FormRequest
 
         return $sanitized;
     }
+
+    /**
+     * @param $keyEntity
+     * @param string $searchKey
+     * @return array|null
+     */
+    public function getRelationIds($keyEntity, $searchKey = 'id')
+    {
+        if ($this->has($keyEntity) && !is_null($this->get($keyEntity))) {
+            $data = [];
+            foreach ($this->get($keyEntity) as $entity) {
+                $data[] = array_get($entity, $searchKey);
+            }
+            return $data;
+        }
+        return null;
+    }
+
+    public function getRelationAddress()
+    {
+        $data = [];
+        $travelAddress = $this->get('travelAddressAdress');
+        $travelAddressCountry = $this->get('travelAddressCountry');
+        $travelAddressCity = $this->get('travelAddressCity');
+        $coordsMeTravel = $this->get('coordsMeTravel');
+        foreach ($travelAddress as $key => $value) {
+            $data[$key]['address'] = $value;
+            $data[$key]['coord'] = implode(',', $coordsMeTravel[$key]);
+            $data[$key]['city_id'] = $travelAddressCity[$key] != '-1' ? $travelAddressCity[$key] : null;
+            $data[$key]['country_id'] = $travelAddressCountry[$key];
+        }
+        return $data;
+    }
+
 }

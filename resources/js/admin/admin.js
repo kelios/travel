@@ -17,8 +17,10 @@ import './index';
 
 import 'craftable/dist/ui';
 
-import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css';
+import store from './../store/index'
+
 
 Vue.component('l-map', LMap);
 Vue.component('l-tile-layer', LTileLayer);
@@ -31,12 +33,21 @@ Vue.use(VModal, {dialog: true, dynamic: true, injectModalsContainer: true});
 Vue.use(VueQuillEditor);
 Vue.use(Notifications);
 Vue.use(VueCookie);
-Vue.component('travel-index', require('../components/TravelIndex.vue').default);
 Vue.prototype.trans = (key) => {
     return _.get(window.trans, key, key);
 };
 
+Vue.component('search-me-travel', require('../components/SearchMeTravel.vue').default);
+Vue.component('travel-last', require('../components/TravelLast.vue').default);
+Vue.component('travel-list', require('../components/TravelList.vue').default);
+Vue.component('travel-card', require('../components/TravelCard.vue').default);
+Vue.component('travel-card-last', require('../components/TravelCardLast.vue').default);
+Vue.component('map-me-travel', require('../components/mapMeTravel.vue').default);
+Vue.component('pagination', require('laravel-vue-pagination'));
+
 
 new Vue({
     mixins: [Admin],
+    el: '#app',
+    store
 });

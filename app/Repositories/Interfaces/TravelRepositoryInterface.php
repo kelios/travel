@@ -18,5 +18,7 @@ interface TravelRepositoryInterface
 
     public function categories();
 
+    public function travelAddress();
+
     public function getByUser(User $user);
 }

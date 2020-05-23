@@ -1,22 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header"></div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                    </div>
-                </div>
-            </div>
+    <section class="call-to-action text-white text-center">
+        <div class="overlay"></div>
+        <div class="home-quote">
+            <blockquote class="text-center">{{trans('main.blockquote')}}
+                <cite>{{trans('main.cite')}}</cite>
+            </blockquote>
         </div>
-    </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials text-center bg-light">
+        <div class="container">
+            <h2 class="mb-5">{{trans('main.titleMainHistory')}}</h2>
+            <travel-last></travel-last>
+        </div>
+    </section>
+
+    <section class="text-center">
+        <map-me-travel></map-me-travel>
+    </section>
+
+
 @endsection
+
+

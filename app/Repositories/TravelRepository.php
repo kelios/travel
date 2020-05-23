@@ -36,7 +36,35 @@ class TravelRepository implements TravelRepositoryInterface
 
     public function getList($where = [])
     {
-        return $this->travel->with('categories')->paginate(500);
+        return $this->travel->with('categories')->paginate();
+    }
+
+    public function getLast($where = [])
+    {
+        return $this->travel->orderBy('id', 'desc')->take(3)->get();
+    }
+
+    public function search($query)
+    {
+        return $this->travel->where('name', 'like', '%' . $query . '%')
+            ->orWhere('description', 'like', '%' . $query . '%')
+            ->orWhere('recommendation', 'like', '%' . $query . '%')
+            ->orWhere('plus', 'like', '%' . $query . '%')
+            ->orWhere('minus', 'like', '%' . $query . '%')
+            ->paginate();
+    }
+
+    /**
+     * @param User $user
+     * @return mixed
+     */
+    public function getByUser(User $user)
+    {
+        return $this->travel->with(["users" => function ($q) use ($user) {
+            $q->where('users.id', '=', $user->id);
+        },
+            'categories',
+        ])->paginate(500);
     }
 
     public function get($columns = [])
@@ -117,15 +145,9 @@ class TravelRepository implements TravelRepositoryInterface
         return $this->travel->countries();
     }
 
-    /**
-     * @param User $user
-     * @return mixed
-     */
-    public function getByUser(User $user)
+    public function travelAddress()
     {
-        return $this->travel->with(["users" => function ($q) use ($user) {
-            $q->where('users.id', '=', $user->id);
-        }])->get();
+        return $this->travel->travelAddress();
     }
 
     public function getById($id)
@@ -137,7 +159,13 @@ class TravelRepository implements TravelRepositoryInterface
             'complexity',
             'overNightStay',
             'cities',
-            'countries'
+            'countries',
+            'travelAddress'
         ])->find($id);
+    }
+
+    public function mapAddress(Travel $travel)
+    {
+
     }
 }

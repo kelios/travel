@@ -1,5 +1,4 @@
 import AppForm from '../app-components/Form/AppForm';
-import config from "../../config";
 import L from "leaflet";
 import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue2-leaflet";
 
@@ -9,20 +8,45 @@ const FORMAT = 'jsonv2';
 
 Vue.component('travel-form', {
     mixins: [AppForm],
+    mounted() {
+        this.init();
+        this.getCountries();
+        if (this.form.countryIds.length > 0) {
+            this.getCities();
+        }
+        console.log(this.form);
+    },
+
     data: function () {
         return {
+            mediaCollections: ['travelMainImage'],
+            optionsCountries: [],
+            optionsCities: [],
+            travelAddress: {
+                'address': [],
+                'meCoord': [],
+                'city': [],
+                'country': []
+            },
 
+            coords: [],
+            zoom: 9,
+            center: L.latLng(53.8828449, 27.7273595),
+            url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+            staticAnchor: [16, 37],
+            isLoading: false,
+            selectedCountriesCode: [],
+            selectedCountiesIds: [],
             form: {
                 name: '',
-                categories: '',
-                transports: '',
-                month: '',
-                complexity: '',
-                overNightStay: '',
+                categories: [],
+                transports: [],
+                month: [],
+                complexity: [],
+                over_night_stay: [],
                 cities: [],
-                optionsCities: [],
                 countries: [],
-                optionsCountries: [],
                 budget: '',
                 year: '',
                 number_peoples: '',
@@ -33,81 +57,87 @@ Vue.component('travel-form', {
                 description: '',
                 publish: false,
                 visa: false,
-
-                selectedCountriesCode: [],
-                selectedCountiesIds: [],
-                selectedAddress: {
-                    'address': [],
-                    'coords': []
-                },
-
-                mapCoords: [
-                    53.8828449,
-                    27.7273595
-                ],
-                coords: [],
-                bounds: [],
-                address: [],
-
-
-                zoom: 9,
-                center: L.latLng(53.8828449, 27.7273595),
-                url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                staticAnchor: [16, 37],
+                coordsMeTravel: [],
+                countryIds: [],
+                travelAddressCity: [],
+                travelAddressCountry: [],
+                travelAddressAdress: [],
             }
         }
     },
-    computed: {
-        mapSettings() {
-            return config.map;
-        },
-    },
-
     methods: {
-        getCountries: function () {
+        init: function () {
+            this.travelAddress.address = this.form.travelAddressAdress;
+            this.travelAddress.meCoord = this.form.coordsMeTravel;
+            this.travelAddress.city = this.form.travelAddressCity;
+            this.travelAddress.country = this.form.travelAddressCountry;
+            this.selectedCountiesIds = this.form.countryIds;
+          //  this.coords = this.form.coordsMeTravel;
+        },
+        async getCountries() {
+            let vm = this;
             axios.get('/location/countries')
                 .then(function (response) {
-                    this.form.optionsCountries = response.data;
-                }.bind(this));
+                    vm.optionsCountries = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
         },
         getCitiesSelected: function (items) {
             items.forEach((item) => {
-                this.form.selectedCountiesIds.push(item.id);
-                this.form.selectedCountriesCode.push(item.code);
+                this.selectedCountiesIds.push(item.country_id);
+                this.selectedCountriesCode.push(item.country_code);
 
             });
-            this.gecodingAddress({country: items[items.length-1].name}, false, true);
+            if (items.length > 1) {
+                this.gecodingAddress({country: items[items.length - 1].local_name}, false, true);
+            }
             this.getCities();
         },
         getCities: function () {
             let self = this;
-            if (this.form.selectedCountiesIds.length > 0) {
+            if (this.selectedCountiesIds.length > 0) {
                 axios.get('/location/countriesCities', {
                     params: {
-                        country_id: this.form.selectedCountiesIds
+                        country_id: this.selectedCountiesIds
                     }
                 }).then(function (response) {
-                    this.form.optionsCities = response.data;
+                    this.optionsCities = response.data;
                 }.bind(this));
             } else {
-                this.form.optionsCities = [];
+                this.optionsCities = [];
                 this.form.cities = [];
-                this.form.coords = [];
+              //  this.form.coordsMeTravel = [];
             }
         },
         onClick(e) {
-            let coords = e.latlng;
-            this.form.coords.push(coords);
-            this.getAddress(coords);
+            let coordOnClick = e.latlng;
+            console.log(this.coordsMeTravel);
+        //    this.form.coordsMeTravel.push(coordOnClick);
+            this.travelAddress.meCoord.push(coordOnClick);
+            this.getAddress(coordOnClick);
         },
-        setMarker: function (items) {
-            let selectedCities = [];
-            items.forEach((item) => {
-                selectedCities.push(item.name);
-                this.gecodingAddress({city: item.name,country:item.country.name}, true, true);
+        setMarkerCity: function (item) {
+            this.travelAddress.address.push(item.local_name);
+            this.travelAddress.country.push(item.country_id);
+            this.travelAddress.city.push(item.id);
+            this.gecodingAddress({q: item.local_name + ',' + item.country_title_en}, true, true);
+        },
+        removeCity: function (item) {
+            let indexCity = this.travelAddress.address.findIndex(function (value, index, arr) {
+                return value == item.local_name;
             });
+            let latlng = this.travelAddress.meCoord[indexCity];
+            this.$delete(this.travelAddress.meCoord, indexCity);
+            this.$delete(this.travelAddress.address, indexCity);
+            this.$delete(this.travelAddress.country, indexCity);
+            this.$delete(this.travelAddress.city, indexCity);
+
+          /*  this.form.coordsMeTravel = this.form.coordsMeTravel.filter(function (value, index, arr) {
+                return (value.lat != latlng.lat && value.lng != latlng.lng);
+            });*/
         },
         gecodingAddress: function (param, setMarker = false, setZoom = true) {
             param.format = FORMAT;
@@ -121,10 +151,11 @@ Vue.component('travel-form', {
                     latlng.lng = response.data[0].lon;
 
                     if (setMarker) {
-                        vm.form.coords.push(latlng);
+                     //   vm.form.coordsMeTravel.push(latlng);
+                        vm.travelAddress.meCoord.push(latlng);
                     }
                     if (setZoom) {
-                        vm.form.center = latlng;
+                        vm.center = latlng;
                         vm.zoomUpdate(4);
                     }
                 }
@@ -151,52 +182,63 @@ Vue.component('travel-form', {
                     lon: coords.lng,
                 },
             }).then(function (response) {
-                vm.form.selectedAddress.address.push(response.data.display_name);
-                vm.form.selectedAddress.coords.push(coords);
-
+                vm.travelAddress.address.push(response.data.display_name);
+                vm.travelAddress.city.push('-1');
                 let country_code = response.data.address.country_code;
 
-                if (!vm.form.selectedCountriesCode.includes(country_code)) {
-                    vm.form.optionsCountries.forEach(function (item, index, array) {
-                        if (item['code'] == country_code) {
-                            vm.form.selectedCountiesIds.push(item['id']);
-                            vm.form.selectedCountriesCode.push(item['code']);
+                if (!vm.selectedCountriesCode.includes(country_code)) {
+                    console.log(country_code);
+                    console.log(vm.selectedCountriesCode);
+                    vm.optionsCountries.forEach(function (item, index, array) {
+
+                        if (item['country_code'] == country_code) {
+                            vm.form.countries.push(item);
+                            vm.selectedCountiesIds.push(item['country_id']);
+                            vm.selectedCountriesCode.push(item['country_code']);
+                            vm.travelAddress.country.push(item['country_id']);
                             vm.getCities();
+                        }
+                    });
+                } else {
+                    console.log(country_code);
+                    console.log(vm.selectedCountriesCode);
+                    vm.optionsCountries.forEach(function (item, index, array) {
+                        if (item['country_code'] == country_code) {
+                            vm.travelAddress.country.push(item['country_id']);
                         }
                     });
                 }
             });
         },
         toggleUnSelectMarketCounty: function (item) {
-            this.form.selectedCountiesIds = this.form.selectedCountiesIds.filter(function (value, index, arr) {
-                return value != item.id;
+            this.selectedCountiesIds = this.selectedCountiesIds.filter(function (value, index, arr) {
+                return value != item.country_id;
             });
 
-            this.form.selectedCountriesCode = this.form.selectedCountriesCode.filter(function (value, index, arr) {
+            this.selectedCountriesCode = this.selectedCountriesCode.filter(function (value, index, arr) {
                 return value != item.code;
             });
             this.form.cities = this.form.cities.filter(function (value, index, arr) {
-                return value.country_id != item.id;
+                return value.country_id != item.country_id;
             });
             this.getCities();
         },
-        removeMarker: function (latlng, index) {
-            this.$delete(this.form.selectedAddress.coords, index);
-            this.$delete(this.form.selectedAddress.address, index);
-            this.form.coords = this.form.coords.filter(function (value, index, arr) {
-                return (value[0] != latlng[0] && value[1] != latlng[1]);
+        removeMarker: function (address, latlng, index) {
+            this.form.cities = this.form.cities.filter(function (value, index, arr) {
+                return (value.local_name != address);
             });
+            this.$delete(this.travelAddress.meCoord, index);
+            this.$delete(this.travelAddress.address, index);
+            this.$delete(this.travelAddress.city, index);
+            this.$delete(this.travelAddress.country, index);
         },
         zoomUpdate(zoom) {
-            this.form.currentZoom = zoom;
+            this.zoom = zoom;
         },
         centerUpdate(center) {
-            this.form.currentCenter = center;
+            this.center = center;
         },
 
-    },
-    created: function () {
-        this.getCountries();
     },
     components: {
         LMap,

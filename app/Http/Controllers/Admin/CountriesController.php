@@ -8,7 +8,7 @@ use App\Http\Requests\Admin\Country\DestroyCountry;
 use App\Http\Requests\Admin\Country\IndexCountry;
 use App\Http\Requests\Admin\Country\StoreCountry;
 use App\Http\Requests\Admin\Country\UpdateCountry;
-use App\Models\MeCountryCountry;
+use App\Models\Country;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;

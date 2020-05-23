@@ -34,6 +34,16 @@ class CityRepository implements TravelRelationRepositoryInterface
     }
 
     /**
+     * @param $whereIn
+     * @return mixed
+     */
+    public function getCityByCountry($whereIn = [])
+    {
+        return $this->city->whereIn('country_id', $whereIn)->where('important',1)->with('country')->get();
+
+    }
+
+    /**
      * @param $attr
      * @return City
      */
@@ -51,7 +61,7 @@ class CityRepository implements TravelRelationRepositoryInterface
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return mixed
      */
     public function travels()
     {

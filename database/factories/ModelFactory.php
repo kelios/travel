@@ -54,7 +54,7 @@ $factory->define(App\Models\Complexity::class, static function (Faker\Generator 
     ];
 });
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\City::class, static function (Faker\Generator $faker) {
+$factory->define(App\Models\CityWorlt::class, static function (Faker\Generator $faker) {
     return [
 
 
@@ -68,7 +68,7 @@ $factory->define(App\Models\Country::class, static function (Faker\Generator $fa
     ];
 });
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\City::class, static function (Faker\Generator $faker) {
+$factory->define(App\Models\CityWorlt::class, static function (Faker\Generator $faker) {
     return [
         'name' => $faker->firstName,
         'state_id' => $faker->randomNumber(5),

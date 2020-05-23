@@ -1,6 +1,13 @@
 @extends('layouts.app')
 @section('content')
     <div id="app">
-        <travel-index :travels='@json($travels)'></travel-index>
-    </div>
+        <div class="container">
+            <section class="text-center">
+                <map-me-travel :travels='@json($travels)'></map-me-travel>
+            </section>
+            <div class="album py-5 bg-light">
+                <search-me-travel></search-me-travel>
+                <travel-list :readonly="true"></travel-list>
+            </div>
+        </div>
 @endsection

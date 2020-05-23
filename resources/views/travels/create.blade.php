@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-xl">
-
+    <div class="container">
         <div class="card">
             <travel-form
                 :action="'{{ url('travels') }}'"
@@ -10,14 +9,8 @@
 
                 <form class="form-horizontal form-create" method="post" @submit.prevent="onSubmit"
                       :action="action" novalidate>
-                    <div class="card-header"><i class="fa fa-plus"></i> {{ trans('travels.addTravels') }}</div>
-
-                    <div class="card-body">
-                        <div class="form-group">
+                    <div class="card-header"> {{ trans('travels.addTravels') }}</div>
                             @include('travels.components.form-elements')
-                        </div>
-                    </div>
-
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary" :disabled="submiting">
                                 <i class="fa" :class="submiting ? 'fa-spinner' : 'fa-download'"></i>
@@ -28,6 +21,7 @@
                 </form>
             </travel-form>
         </div>
+
     </div>
 @endsection
 

@@ -3,7 +3,7 @@
         <div class="avatar-upload">
             @include('brackets/admin-ui::admin.includes.avatar-uploader', [
                 'mediaCollection' => app(\App\Models\Category::class)->getMediaCollection('categoryImage'),
-                'media' => $category->getThumbs200ForCollection('categoryImage')
+                'media' => isset($category) ? $category->getThumbs200ForCollection('categoryImage') :null
             ])
         </div>
     </div>

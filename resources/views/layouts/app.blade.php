@@ -76,6 +76,9 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('travels') }}">{{ trans('main.alltravel') }}</a>
+                    </li>
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
@@ -94,7 +97,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ url('travels') }}">
+                                <a class="dropdown-item" href="{{ url('travels/metravel') }}">
                                     {{ trans('home.meTravels') }} <span class="caret"></span>
                                 </a>
                                 <a class="dropdown-item" href="{{ url('travels/create') }}">
@@ -120,7 +123,7 @@
         </div>
     </nav>
 
-    <main class="py-4">
+    <main >
         @yield('content')
     </main>
 </div>
@@ -129,4 +132,5 @@
 @yield('bottom-scripts')
 
 </body>
+@include('include.footer')
 </html>

@@ -1,6 +1,6 @@
 <?php
 return [
     'image' => [
-        'defaultCatImage' => 'media/metravel.JPG'
+        'defaultCatImage' => '/media/metravel.jpg'
     ]
 ];

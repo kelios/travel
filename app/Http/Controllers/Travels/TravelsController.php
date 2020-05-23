@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Travels;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Travel\DestroyTravel;
 use App\Models\Travel;
 use App\Repositories\CategoryRepository;
 use App\Repositories\MonthRepository;
@@ -11,16 +12,20 @@ use App\Repositories\TransportRepository;
 use App\Repositories\ComplexityRepository;
 use App\Repositories\TravelRepository;
 use App\Repositories\CityRepository;
-use App\Repositories\MeCountryRepository;
-use Illuminate\Auth\Access\AuthorizationException;
+use App\Repositories\CountryRepository;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Illuminate\View\View;
 use App\Http\Requests\Travel\IndexTravel;
 use App\Http\Requests\Travel\StoreTravel;
 use App\Http\Requests\Travel\UpdateTravel;
+use App\Http\Requests\Travel\MeTravel;
+use App\Events\SearchEvent;
 
 class TravelsController extends Controller
 {
@@ -59,9 +64,9 @@ class TravelsController extends Controller
      */
     private $cityRepository;
     /**
-     * @var MeCountryRepository
+     * @var countryRepository
      */
-    private $meCountryRepository;
+    private $countryRepository;
 
     /**
      * TravelsController constructor.
@@ -74,7 +79,7 @@ class TravelsController extends Controller
                                 ComplexityRepository $complexityRepository,
                                 OverNightStayRepository $overNightStayRepository,
                                 cityRepository $cityRepository,
-                                MeCountryRepository $meCountryRepository
+                                countryRepository $countryRepository
     )
     {
         $this->travelRepository = $travelRepository;
@@ -84,7 +89,7 @@ class TravelsController extends Controller
         $this->complexityRepository = $complexityRepository;
         $this->overNightStayRepository = $overNightStayRepository;
         $this->cityRepository = $cityRepository;
-        $this->meCountryRepository = $meCountryRepository;
+        $this->countryRepository = $countryRepository;
     }
 
     /**
@@ -96,22 +101,36 @@ class TravelsController extends Controller
     public function index(IndexTravel $request)
     {
         $travels = $this->travelRepository->getList();
-       /* foreach ($travels as $travel) {
-            dd($travel->categories[0]->getCategoryImageThumbUrlAttribute());
-        }*/
-        //dd(json_encode($travels));
+        if ($request->ajax()) {
+            return response()->json($travels);
+        }
         return view('travels.index')->with('travels', $travels);
     }
 
-    public function indexapi()
+    public function get(Request $request)
     {
-        $data = $this->travelRepository->getList();
-        return response()->json($data);
+        $travels = $this->travelRepository->getList();
+        return response()->json($travels);
     }
 
-    public function detail($id)
+    public function getLast(Request $request)
     {
-        $travels = $this->travelRepository->getByUser(Auth::user()->id);
+        $travels = $this->travelRepository->getLast();
+        return response()->json($travels);
+    }
+
+    public function search(IndexTravel $request)
+    {
+        $query = $request->query('query');
+        $travels = $this->travelRepository->search($query);
+        //broadcast search results with Pusher channels
+        event(new SearchEvent($travels));
+        return response()->json("ok");
+    }
+
+    public function metravel(MeTravel $request)
+    {
+        $travels = $this->travelRepository->getByUser(Auth::user());
         return view('travels.metravel')->withTravels($travels);
     }
 
@@ -143,26 +162,29 @@ class TravelsController extends Controller
         // Sanitize input
         $sanitized = $request->getSanitized();
         $relations = [
-            'categories',
-            'transports',
-            'month',
-            'complexity',
-            'overNightStay',
-            'countries',
-            'cities'
+            'categories' => 'id',
+            'transports' => 'id',
+            'month' => 'id',
+            'complexity' => 'id',
+            'over_night_stay' => 'id',
+            'countries' => 'country_id',
+            'cities' => 'city_id',
         ];
-
-        foreach ($relations as $relation) {
-            $sanitized[$relation . 'Ids'] = $request->getRelationIds($relation);
+        foreach ($relations as $relation => $publickey) {
+            $sanitized[$relation . 'Ids'] = $request->getRelationIds($relation, $publickey);
         }
 
+        $travelAddr = $request->getRelationAddress();
         // Store the Travel
         $this->travelRepository->fill($sanitized);
         $this->travelRepository->save();
         $this->travelRepository->users()->sync(auth()->user()->id);
-        foreach ($relations as $relation) {
-            $this->travelRepository->$relation()->sync($sanitized[$relation . 'Ids']);
+        foreach ($relations as $relation => $publickey) {
+            $relationFormat = str_replace('_', '', $relation);
+            $this->travelRepository->$relationFormat()->sync($sanitized[$relation . 'Ids']);
         }
+        $this->travelRepository->travelAddress()->delete();
+        $this->travelRepository->travelAddress()->createMany($travelAddr);
 
         if ($request->ajax()) {
             return ['redirect' => url('travels'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
@@ -179,14 +201,38 @@ class TravelsController extends Controller
     public function edit(int $id)
     {
         $travel = $this->travelRepository->getById($id);
-     //   dd($travel);
+        $travel->coordsMeTravel = $travel->travelAddress->pluck('coords')->toArray();
+        $optionsCities = $this->cityRepository->getCityByCountry($travel->countryIds)->
+        map->only(['local_name', 'country_id', 'city_id', 'title_en', 'country_title_en']);
         return view('travels.edit', [
             'travel' => $travel,
             'categories' => $this->categoryRepository->all(),
             'transports' => $this->transportRepository->all(),
             'month' => $this->monthRepository->all(),
             'complexity' => $this->complexityRepository->all(),
-            'overNightStay' => $this->overNightStayRepository->all()
+            'overNightStay' => $this->overNightStayRepository->all(),
+            'optionsCities' => $optionsCities,
+        ]);
+    }
+
+    /**
+     * @param Travel $travel
+     * @return Factory|View
+     */
+    public function show(int $id)
+    {
+        $travel = $this->travelRepository->getById($id);
+        $travel->coordsMeTravel = $travel->travelAddress->pluck('coords')->toArray();
+        $optionsCities = $this->cityRepository->getCityByCountry($travel->countryIds)->
+        map->only(['local_name', 'country_id', 'city_id', 'title_en', 'country_title_en']);
+        return view('travels.show', [
+            'travel' => $travel,
+            'categories' => $this->categoryRepository->all(),
+            'transports' => $this->transportRepository->all(),
+            'month' => $this->monthRepository->all(),
+            'complexity' => $this->complexityRepository->all(),
+            'overNightStay' => $this->overNightStayRepository->all(),
+            'optionsCities' => $optionsCities,
         ]);
     }
 
@@ -199,7 +245,55 @@ class TravelsController extends Controller
      */
     public function update(UpdateTravel $request, Travel $travel)
     {
+        // Sanitize input
+        $sanitized = $request->getSanitized();
+        $relations = [
+            'categories' => 'id',
+            'transports' => 'id',
+            'month' => 'id',
+            'complexity' => 'id',
+            'over_night_stay' => 'id',
+            'countries' => 'country_id',
+            'cities' => 'city_id',
+        ];
+        foreach ($relations as $relation => $publickey) {
+            $sanitized[$relation . 'Ids'] = $request->getRelationIds($relation, $publickey);
+        }
+
+        $travelAddr = $request->getRelationAddress();
+
+        // Store the Travel
+        $travel->fill($sanitized);
+        $travel->update($sanitized);
+        $travel->users()->sync(auth()->user()->id);
+        foreach ($relations as $relation => $publickey) {
+            $relationFormat = str_replace('_', '', $relation);
+            $travel->$relationFormat()->sync($sanitized[$relation . 'Ids']);
+        }
+        $travel->travelAddress()->delete();
+        $travel->travelAddress()->createMany($travelAddr);
+
+        if ($request->ajax()) {
+            return ['redirect' => url('travels'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+        }
         return redirect('travels');
     }
 
+    /**
+     * @param DestroyTravel $request
+     * @param Travel $travel
+     * @return ResponseFactory|RedirectResponse|Response
+     * @throws \Exception
+     *
+     */
+    public function destroy(DestroyTravel $request, Travel $travel)
+    {
+        $travel->delete();
+
+        if ($request->ajax()) {
+            return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
+        }
+
+        return redirect()->back();
+    }
 }

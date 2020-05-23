@@ -8,7 +8,7 @@ use App\Http\Requests\Admin\City\DestroyCity;
 use App\Http\Requests\Admin\City\IndexCity;
 use App\Http\Requests\Admin\City\StoreCity;
 use App\Http\Requests\Admin\City\UpdateCity;
-use App\Models\City;
+use App\Models\CityWorlt;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -32,7 +32,7 @@ class CitiesController extends Controller
     public function index(IndexCity $request)
     {
         // create and AdminListing instance for a specific model and
-        $data = AdminListing::create(City::class)->processRequestAndGet(
+        $data = AdminListing::create(CityWorlt::class)->processRequestAndGet(
             // pass the request with params
             $request,
 
@@ -80,7 +80,7 @@ class CitiesController extends Controller
         $sanitized = $request->getSanitized();
 
         // Store the City
-        $city = City::create($sanitized);
+        $city = CityWorlt::create($sanitized);
 
         if ($request->ajax()) {
             return ['redirect' => url('admin/cities'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
@@ -92,11 +92,11 @@ class CitiesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param City $city
-     * @throws AuthorizationException
+     * @param CityWorlt $city
      * @return void
+     *@throws AuthorizationException
      */
-    public function show(City $city)
+    public function show(CityWorlt $city)
     {
         $this->authorize('admin.city.show', $city);
 
@@ -106,11 +106,11 @@ class CitiesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param City $city
-     * @throws AuthorizationException
+     * @param CityWorlt $city
      * @return Factory|View
+     *@throws AuthorizationException
      */
-    public function edit(City $city)
+    public function edit(CityWorlt $city)
     {
         $this->authorize('admin.city.edit', $city);
 
@@ -124,10 +124,10 @@ class CitiesController extends Controller
      * Update the specified resource in storage.
      *
      * @param UpdateCity $request
-     * @param City $city
+     * @param CityWorlt $city
      * @return array|RedirectResponse|Redirector
      */
-    public function update(UpdateCity $request, City $city)
+    public function update(UpdateCity $request, CityWorlt $city)
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
@@ -149,11 +149,11 @@ class CitiesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param DestroyCity $request
-     * @param City $city
-     * @throws Exception
+     * @param CityWorlt $city
      * @return ResponseFactory|RedirectResponse|Response
+     *@throws Exception
      */
-    public function destroy(DestroyCity $request, City $city)
+    public function destroy(DestroyCity $request, CityWorlt $city)
     {
         $city->delete();
 
@@ -177,7 +177,7 @@ class CitiesController extends Controller
             collect($request->data['ids'])
                 ->chunk(1000)
                 ->each(static function ($bulkChunk) {
-                    City::whereIn('id', $bulkChunk)->delete();
+                    CityWorlt::whereIn('id', $bulkChunk)->delete();
 
                     // TODO your code goes here
                 });

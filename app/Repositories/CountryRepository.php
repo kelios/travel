@@ -2,17 +2,17 @@
 
 namespace App\Repositories;
 
-use App\Models\MeCountry;
+use App\Models\Country;
 use App\Repositories\Interfaces\TravelRelationRepositoryInterface;
 
 /**
- * Class MeCountryRepository
+ * Class CountryRepository
  * @package App\Repositories
  */
-class MeCountryRepository implements TravelRelationRepositoryInterface
+class CountryRepository implements TravelRelationRepositoryInterface
 {
     /**
-     * @var Country
+     * @var
      */
     private $country;
 
@@ -20,7 +20,7 @@ class MeCountryRepository implements TravelRelationRepositoryInterface
      * CountryRepository constructor.
      * @param Country $country
      */
-    public function __construct(MeCountry $country)
+    public function __construct(Country $country)
     {
         $this->country = $country;
     }
@@ -51,10 +51,11 @@ class MeCountryRepository implements TravelRelationRepositoryInterface
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return mixed
      */
     public function travels()
     {
         return $this->country->travels();
     }
+
 }
