@@ -59,19 +59,29 @@ class Travel extends Model implements HasMedia
         'travel_image_thumb_url',
         'coordMeTravel',
         'countryName',
-        'cityName'
+        'cityName',
+        'categoryName',
+        'monthName',
+        'complexityName',
+        'transportName',
+        'overNightStayName'
     ];
 
     /* ************************ ACCESSOR ************************* */
 
     /**
-     * Get url of category_image image
-     *
      * @return string|null
      */
     public function getTravelImageThumbUrlAttribute(): ?string
     {
-        return $this->getFirstMediaUrl('travelMainImage', 'thumb_200') ?: Config::get('constants.image.defaultCatImage');;
+        $travelImageThumbUrl = $this->getFirstMediaUrl('travelMainImage', 'thumb_200');
+        if (!$travelImageThumbUrl) {
+            $travelImageThumbUrl = $this->categories ?
+                $this->categories[0] . category_image_thumb_url : Config::get('constants.image.defaultCatImage');
+        }
+        return $travelImageThumbUrl
+            ?: Config::get('constants.image.defaultCatImage');
+
     }
 
     public function getResourceUrlAttribute()
@@ -185,12 +195,46 @@ class Travel extends Model implements HasMedia
 
     public function getCountryNameAttribute()
     {
-        return $this->countries()->pluck('countries.title_' . config('app.locale'));
+        $countriesName = $this->countries()->pluck('countries.title_' . config('app.locale'))->toArray();
+        return implode(',', $countriesName);
+        //return $this->countries()->pluck('countries.title_' . config('app.locale'));
     }
 
     public function getCityNameAttribute()
     {
-        return $this->cities()->pluck('cities.title_' . config('app.locale'));
+        $cityName = $this->cities()->pluck('cities.title_' . config('app.locale'))->toArray();
+        return implode(',', $cityName);
+        //return $this->cities()->pluck('cities.title_' . config('app.locale'));
+    }
+
+    public function getCategoryNameAttribute()
+    {
+        $categoriesName = $this->categories()->pluck('categories.name')->toArray();
+        return implode(',', $categoriesName);
+    }
+
+    public function getMonthNameAttribute()
+    {
+        $monthName = $this->month()->pluck('month.name')->toArray();
+        return implode(',', $monthName);
+    }
+
+    public function getComplexityNameAttribute()
+    {
+        $complexityName = $this->complexity()->pluck('complexity.name')->toArray();
+        return implode(',', $complexityName);
+    }
+
+    public function getTransportNameAttribute()
+    {
+        $transportsName = $this->transports()->pluck('transport.name')->toArray();
+        return implode(',', $transportsName);
+    }
+
+    public function getOverNightStayNameAttribute()
+    {
+        $overnightstayName = $this->overNightStay()->pluck('over_night_stay.name')->toArray();
+        return implode(',', $overnightstayName);
     }
 
 

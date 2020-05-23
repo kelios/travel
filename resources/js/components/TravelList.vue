@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <pagination :data="travels" @pagination-change-page="getResults"></pagination>
         <div class="row" v-for="travelsEvent in groupedTravels">
             <div class="col-md-6 col-sm-6" v-for="travel in travelsEvent">
                 <travel-card class="animated fadeIn" :readonly="readonly" :travel="travel"

@@ -9,9 +9,15 @@
     height: auto !important;
     margin: 0 !important;
 }
-
-
-
+.fixed-top-2 {
+    margin-top: 3.4rem;
+}
+.fixed-left-2 {
+    margin-left: 17rem;
+}
+.tab-content.showTravel{
+    border: none !important;
+}
 
 /*!
  * Start Bootstrap - Landing Page v5.0.7 (https://startbootstrap.com/template-overviews/landing-page)

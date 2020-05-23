@@ -41,6 +41,7 @@ Vue.component('search-me-travel', require('../components/SearchMeTravel.vue').de
 Vue.component('travel-last', require('../components/TravelLast.vue').default);
 Vue.component('travel-list', require('../components/TravelList.vue').default);
 Vue.component('travel-card', require('../components/TravelCard.vue').default);
+Vue.component('travel-show-section', require('../components/TravelShowSection.vue').default);
 Vue.component('travel-card-last', require('../components/TravelCardLast.vue').default);
 Vue.component('map-me-travel', require('../components/mapMeTravel.vue').default);
 Vue.component('pagination', require('laravel-vue-pagination'));
