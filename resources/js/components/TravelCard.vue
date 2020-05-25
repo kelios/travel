@@ -7,14 +7,11 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <p>
-                             <span v-for="(countryName, key) in travel.countryName">
-                                <span>{{countryName}}</span><span v-if="key+1 <  travel.countryName.length">, </span>
-                              </span>
+                        <span>{{travel.countryName}}</span>
+
                     </p>
                     <p>
-                             <span v-for="(cityName, key) in travel.cityName">
-                                <span>{{cityName}}</span><span v-if="key+1 <  travel.cityName.length">, </span>
-                              </span>
+                        <span>{{travel.cityName}}</span>
                     </p>
                     <p>{{ travel.name }}</p>
                 </div>
@@ -50,7 +47,7 @@
 <script>
     export default {
         name: 'TravelCard',
-        props: ['travel','readonly'],
+        props: ['travel', 'readonly'],
         created() {
             // this.data_travel = this.travel;
         },

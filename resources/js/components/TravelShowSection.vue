@@ -1,8 +1,7 @@
 <template>
     <div class="treavel-section-content">
         <h1 class="mb-0">{{title}}</h1>
-        <p class="lead mb-5" v-html="getData">
-        </p>
+        <p class="lead mb-5" v-html="getData"></p>
     </div>
 </template>
 

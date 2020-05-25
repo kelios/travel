@@ -6,10 +6,7 @@
             <h5>{{ travel.name }}</h5>
         </a>
         <p class="font-weight-light mb-0">
-                <span v-for="(countryName, key) in travel.countryName">
-                    <span>{{countryName}}</span>
-                <span v-if="key+1 <  travel.countryName.length">, </span>
-                              </span>
+            <span>{{travel.countryName}}</span>
         </p>
     </div>
 

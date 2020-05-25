@@ -11,6 +11,7 @@ import VueCookie from 'vue-cookie';
 import {Admin} from 'craftable';
 import VModal from 'vue-js-modal';
 import Vue from 'vue';
+import BootstrapVue from 'bootstrap-vue'
 
 import './app-components/bootstrap';
 import './index';
@@ -33,6 +34,7 @@ Vue.use(VModal, {dialog: true, dynamic: true, injectModalsContainer: true});
 Vue.use(VueQuillEditor);
 Vue.use(Notifications);
 Vue.use(VueCookie);
+Vue.use(BootstrapVue)
 Vue.prototype.trans = (key) => {
     return _.get(window.trans, key, key);
 };
@@ -42,9 +44,14 @@ Vue.component('travel-last', require('../components/TravelLast.vue').default);
 Vue.component('travel-list', require('../components/TravelList.vue').default);
 Vue.component('travel-card', require('../components/TravelCard.vue').default);
 Vue.component('travel-show-section', require('../components/TravelShowSection.vue').default);
+Vue.component('travel-show-list', require('../components/TravelShowList.vue').default);
+Vue.component('travel-show-menu', require('../components/TravelShowMenu.vue').default);
+Vue.component('travel-show-filter', require('../components/TravelShowFilter.vue').default);
 Vue.component('travel-card-last', require('../components/TravelCardLast.vue').default);
 Vue.component('map-me-travel', require('../components/mapMeTravel.vue').default);
 Vue.component('pagination', require('laravel-vue-pagination'));
+Vue.component('example-component', require('../components/ExampleComponent.vue').default);
+Vue.component('example2-component', require('../components/Example2Component.vue').default);
 
 
 new Vue({

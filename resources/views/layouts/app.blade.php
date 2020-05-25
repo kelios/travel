@@ -44,10 +44,16 @@
         }
         echo json_encode($trans);
         ?>;
+
     </script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="/fonts/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="/fonts/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+          type="text/css">
 
     <!-- Styles -->
     @include('brackets/admin-ui::admin.partials.main-styles')
@@ -123,10 +129,12 @@
         </div>
     </nav>
 
-    <main >
+    <main>
         @yield('content')
     </main>
 </div>
+
+
 @include('brackets/admin-ui::admin.partials.wysiwyg-svgs')
 @include('brackets/admin-ui::admin.partials.main-bottom-scripts')
 @yield('bottom-scripts')

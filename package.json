@@ -26,6 +26,7 @@
         "vue2-google-maps": "^0.10.7"
     },
     "dependencies": {
+        "bootstrap-vue": "^2.15.0",
         "laravel-echo": "^1.8.0",
         "laravel-vue-pagination": "^2.3.1",
         "leaflet": "^1.6.0",
