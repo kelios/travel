@@ -19,7 +19,7 @@
                     class-name="someExtraClass"
                 >
                     <div class="headline">
-                        <a v-bind:href="travelAddress.url[index]+'/show'" target="_blank">Me</a>
+                        <a v-bind:href="travelAddress.url[index]" target="_blank">Me</a>
                     </div>
                 </l-icon>
             </l-marker>

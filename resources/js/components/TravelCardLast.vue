@@ -1,7 +1,7 @@
 <template>
 
     <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-        <a v-bind:href="travel.url+'/show'"> <img :src="getCover(travel)" class="img-fluid rounded-circle mb-3"
+        <a v-bind:href="travel.url"> <img :src="getCover(travel)" class="img-fluid rounded-circle mb-3"
                                                   :alt="travel.name">
             <h5>{{ travel.name }}</h5>
         </a>

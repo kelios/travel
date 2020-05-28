@@ -12,10 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/mysitemap', 'SiteMapController@setSiteMap')->name('mysitemap');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/about', 'HomeController@about')->name('about');
+Route::get('/feedback', 'HomeController@feedback')->name('feedback');
 
 Auth::routes();
 
@@ -25,6 +26,14 @@ Route::get('/location/cities', 'LocationController@getCities')->name('cities');
 Route::get('/location/countries', 'LocationController@getCountries')->name('countries');
 Route::get('/location/countriesCities', 'LocationController@getCitiesByCountries')->name('countriesCities');
 Route::get('/travels/markers', 'TravelAddressController@getMarkers')->name('markers');
+
+/* Sitemap */
+Route::get('/sitemap', 'SitemapController@index');
+Route::get('/sitemap/travels', 'SitemapController@travels');
+Route::get('/sitemap/cities', 'SitemapController@cities');
+Route::get('/sitemap/countries', 'SitemapController@countries');
+Route::get('/sitemap/categories', 'SitemapController@categories');
+
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
@@ -224,9 +233,10 @@ Route::group(['namespace' => 'travels', 'prefix' => 'travels', 'as' => 'travels.
         Route::get('/', 'TravelsController@index')->name('index');
         Route::get('/metravel', 'TravelsController@metravel')->name('metravel');
         Route::get('/create', 'TravelsController@create')->name('create');
+        Route::get('/{slug}/edit', 'TravelsController@edit')->name('edit');
+        Route::get('/{slug}', 'TravelsController@show')->name('show');
+
         Route::post('/', 'TravelsController@store')->name('store');
-        Route::get('/{travel}/edit', 'TravelsController@edit')->name('edit');
-        Route::get('/{travel}/show', 'TravelsController@show')->name('show');
         Route::post('/bulk-destroy', 'TravelsController@bulkDestroy')->name('bulk-destroy');
         Route::post('/{travel}', 'TravelsController@update')->name('update');
         Route::delete('/{travel}', 'TravelsController@destroy')->name('destroy');

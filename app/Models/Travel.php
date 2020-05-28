@@ -11,9 +11,11 @@ use Illuminate\Support\Facades\Config;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\Models\Media;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Travel extends Model implements HasMedia
 {
+    use Sluggable;
     use AutoProcessMediaTrait;
     use HasMediaCollectionsTrait;
     use HasMediaThumbsTrait;
@@ -36,7 +38,10 @@ class Travel extends Model implements HasMedia
         'recommendation',
         'description',
         'publish',
-        'visa'
+        'visa',
+        'slug',
+        'meta_keywords',
+        'meta_description'
     ];
 
     /**
@@ -64,7 +69,8 @@ class Travel extends Model implements HasMedia
         'monthName',
         'complexityName',
         'transportName',
-        'overNightStayName'
+        'overNightStayName',
+
     ];
 
     /* ************************ ACCESSOR ************************* */
@@ -76,8 +82,7 @@ class Travel extends Model implements HasMedia
     {
         $travelImageThumbUrl = $this->getFirstMediaUrl('travelMainImage', 'thumb_200');
         if (!$travelImageThumbUrl) {
-            $travelImageThumbUrl = $this->categories ?
-                $this->categories[0] . category_image_thumb_url : Config::get('constants.image.defaultCatImage');
+            $travelImageThumbUrl = $this->categories ? $this->categories[0]->category_image_thumb_url : Config::get('constants.image.defaultCatImage');
         }
         return $travelImageThumbUrl
             ?: Config::get('constants.image.defaultCatImage');
@@ -91,7 +96,12 @@ class Travel extends Model implements HasMedia
 
     public function getUrlAttribute()
     {
-        return url('/travels/' . $this->getKey());
+        return url('/travels/' . $this->slug);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 
     /**
@@ -196,45 +206,45 @@ class Travel extends Model implements HasMedia
     public function getCountryNameAttribute()
     {
         $countriesName = $this->countries()->pluck('countries.title_' . config('app.locale'))->toArray();
-        return implode(',', $countriesName);
+        return implode(', ', $countriesName);
         //return $this->countries()->pluck('countries.title_' . config('app.locale'));
     }
 
     public function getCityNameAttribute()
     {
         $cityName = $this->cities()->pluck('cities.title_' . config('app.locale'))->toArray();
-        return implode(',', $cityName);
+        return implode(', ', $cityName);
         //return $this->cities()->pluck('cities.title_' . config('app.locale'));
     }
 
     public function getCategoryNameAttribute()
     {
         $categoriesName = $this->categories()->pluck('categories.name')->toArray();
-        return implode(',', $categoriesName);
+        return implode(', ', $categoriesName);
     }
 
     public function getMonthNameAttribute()
     {
         $monthName = $this->month()->pluck('month.name')->toArray();
-        return implode(',', $monthName);
+        return implode(', ', $monthName);
     }
 
     public function getComplexityNameAttribute()
     {
         $complexityName = $this->complexity()->pluck('complexity.name')->toArray();
-        return implode(',', $complexityName);
+        return implode(', ', $complexityName);
     }
 
     public function getTransportNameAttribute()
     {
         $transportsName = $this->transports()->pluck('transport.name')->toArray();
-        return implode(',', $transportsName);
+        return implode(', ', $transportsName);
     }
 
     public function getOverNightStayNameAttribute()
     {
         $overnightstayName = $this->overNightStay()->pluck('over_night_stay.name')->toArray();
-        return implode(',', $overnightstayName);
+        return implode(', ', $overnightstayName);
     }
 
 
@@ -263,6 +273,7 @@ class Travel extends Model implements HasMedia
     {
         $this->addMediaCollection('travelMainImage')
             ->maxFilesize(10 * 1024 * 1024)
+            ->useDisk('s3')
             ->accepts('image/*');
     }
 
@@ -307,6 +318,23 @@ class Travel extends Model implements HasMedia
                 ->performOnCollections($mediaCollection->getName())
                 ->nonQueued();
         });
+    }
+
+    public function sluggable()
+    {
+        return ['slug' => ['source' => 'name']];
+    }
+
+    public function setMetaKeywordsAttribute($value)
+    {
+        $this->attributes['meta_keywords'] = 'metravel, travel, путешествия, ' .
+            $this->countryName . ', ' . $this->cityName . ', ' . $this->name;
+    }
+
+    public function setMetaDescriptionAttribute($value)
+    {
+        $this->attributes['meta_description'] = 'metravel, travel, путешествия, выбрать место для отдыха,' .
+            $this->countryName . ', ' . $this->cityName . ', ' . $this->name;
     }
 
 

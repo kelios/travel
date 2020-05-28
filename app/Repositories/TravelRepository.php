@@ -164,6 +164,22 @@ class TravelRepository implements TravelRepositoryInterface
         ])->find($id);
     }
 
+    public function getBySlug($slug)
+    {
+        return $this->travel->with([
+            'categories',
+            'transports',
+            'month',
+            'complexity',
+            'overNightStay',
+            'cities',
+            'countries',
+            'travelAddress'
+        ])
+            ->where('slug', '=', $slug)
+            ->firstOrFail();
+    }
+
     public function mapAddress(Travel $travel)
     {
 

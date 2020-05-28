@@ -14,15 +14,15 @@
             <li class="nav-item info" v-if="travel.number_days">
                 {{ trans('travels.number_days') }} - {{ travel.number_days }}
             </li>
-            <b-nav-item class="nav-item" href="#description">
+            <b-nav-item class="nav-item" href="#description" v-if="travel.description">
                 {{ trans('travels.description') }}
             </b-nav-item>
 
 
-            <b-nav-item class="nav-item" href="#plus">
+            <b-nav-item class="nav-item" href="#plus" v-if="travel.plus">
                 {{ trans('travels.plus') }}
             </b-nav-item>
-            <b-nav-item class="nav-item" href="#minus">
+            <b-nav-item class="nav-item" href="#minus" v-if="travel.minus">
                 {{ trans('travels.minus') }}
             </b-nav-item>
         </b-nav>

@@ -6023,11 +6023,6 @@ pre code {
   box-shadow: 0 0 0 0.2rem rgba(66, 115, 250, 0.25);
 }
 
-.form-control::-webkit-input-placeholder {
-  color: #73818f;
-  opacity: 1;
-}
-
 .form-control::-moz-placeholder {
   color: #73818f;
   opacity: 1;
@@ -17451,10 +17446,6 @@ canvas {
   border: 0;
 }
 
-.sidebar .sidebar-form .form-control::-webkit-input-placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
-
 .sidebar .sidebar-form .form-control::-moz-placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
@@ -21754,10 +21745,6 @@ label {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAARCAMAAADaFm2tAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAaVBMVEXH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/DH0/D///+DRpGzAAAAIXRSTlMAIKfwph/n9fnorqQJCw366/wOK7ItpVzu713Ws0JLV/QsgbohAAAAAWJLR0QiXWVcrAAAAAd0SU1FB+QCExY6ErfWKNYAAABvSURBVAjXVc1ZDoAgDEXRKuKM4ow4vv1vUlGicD9oTkJaorsgZCwKyMZjJCkybpmjKEWB/FVVS0EkZNM+7NCb0aN7OGA0Y8Rwv5PC16xphhMjeL1cOF8crmbxT2yb+xn77vE4PJ6npXLvKNLyl9QXBpMVRBNLZCUAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjAtMDItMjBUMDU6NTg6MTgtMDc6MDBncDo8AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIwLTAyLTIwVDA1OjU4OjE4LTA3OjAwFi2CgAAAAABJRU5ErkJggg==");
 }
 
-.form-control::-webkit-input-placeholder {
-  color: #b9c8de;
-}
-
 .form-control::-moz-placeholder {
   color: #b9c8de;
 }
@@ -21944,10 +21931,6 @@ small select {
 
 .multiselect__option--highlight:after {
   background: #60CF7D !important;
-}
-
-.multiselect__input::-webkit-input-placeholder {
-  color: #b9c8de;
 }
 
 .multiselect__input::-moz-placeholder {

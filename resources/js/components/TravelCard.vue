@@ -18,7 +18,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <button type="button"
-                                v-on:click="goAction({url: travel.url+'/show' })"
+                                v-on:click="goAction({url: travel.url})"
                                 class="btn btn-sm btn-spinner btn-success">
                             <i class="fa  fa-eye"></i>
                         </button>

@@ -10718,7 +10718,7 @@ p.lead {
     font-size: 3rem;
 }
 
-section.treavel-section {
+section.travel-section {
     display: flex;
     align-items: center;
     padding-left: 1rem;
@@ -10728,7 +10728,7 @@ section.treavel-section {
     max-width: 75rem;
 }
 
-section.treavel-section img {
+section.travel-section img {
     padding: 0.25rem;
     background-color: #fff;
     border: 1px solid #dee2e6;
@@ -10737,18 +10737,18 @@ section.treavel-section img {
     height: auto;
 }
 
-section.treavel-section .treavel-section-content {
+section.travel-section .travel-section-content {
     width: 100%;
 }
 
 @media (min-width: 768px) {
-    section.treavel-section {
+    section.travel-section {
         min-height: 100vh;
     }
 }
 
 @media (min-width: 992px) {
-    section.treavel-section {
+    section.travel-section {
         padding-left: 3rem;
         padding-right: 3rem;
         padding-top: 5rem;

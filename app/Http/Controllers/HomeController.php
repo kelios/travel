@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        SEOMeta::setTitle('MeTravel - Travels');
+        SEOMeta::setDescription('Travels');
+        SEOMeta::setCanonical('https://metravel.by/');
+        return view('welcome');
+    }
+
+    public function about()
+    {
+        SEOMeta::setTitle('MeTravel - Travels');
+        SEOMeta::setDescription('Travels');
+        SEOMeta::setCanonical('https://metravel.by/');
+        return view('about');
+    }
+
+    public function feedback()
+    {
+        SEOMeta::setTitle('MeTravel - Travels');
+        SEOMeta::setDescription('Travels');
+        SEOMeta::setCanonical('https://metravel.by/');
+        return view('feedback');
     }
 }

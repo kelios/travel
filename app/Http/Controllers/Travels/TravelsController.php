@@ -26,6 +26,7 @@ use App\Http\Requests\Travel\StoreTravel;
 use App\Http\Requests\Travel\UpdateTravel;
 use App\Http\Requests\Travel\MeTravel;
 use App\Events\SearchEvent;
+use Artesaos\SEOTools\Facades\SEOMeta;
 
 class TravelsController extends Controller
 {
@@ -100,6 +101,10 @@ class TravelsController extends Controller
      */
     public function index(IndexTravel $request)
     {
+        SEOMeta::setTitle('MeTravel - Travels');
+        SEOMeta::setDescription('Travels');
+        SEOMeta::setCanonical('https://metravel.by/');
+
         $travels = $this->travelRepository->getList();
         if ($request->ajax()) {
             return response()->json($travels);
@@ -130,6 +135,9 @@ class TravelsController extends Controller
 
     public function metravel(MeTravel $request)
     {
+        SEOMeta::setTitle('MeTravel - Travels');
+        SEOMeta::setDescription('Travels');
+        SEOMeta::setCanonical('https://metravel.by/');
         $travels = $this->travelRepository->getByUser(Auth::user());
         return view('travels.metravel')->withTravels($travels);
     }
@@ -142,6 +150,7 @@ class TravelsController extends Controller
      */
     public function create()
     {
+
         return view('travels.create', [
             'categories' => $this->categoryRepository->all(),
             'transports' => $this->transportRepository->all(),
@@ -149,6 +158,100 @@ class TravelsController extends Controller
             'complexity' => $this->complexityRepository->all(),
             'overNightStay' => $this->overNightStayRepository->all()
         ]);
+    }
+
+
+    /**
+     * @param Travel $travel
+     * @return Factory|View
+     */
+    public function edit($slug)
+    {
+
+        $travel = $this->travelRepository->getBySlug($slug);
+        $travel->coordsMeTravel = $travel->travelAddress->pluck('coords')->toArray();
+        $optionsCities = $this->cityRepository->getCityByCountry($travel->countryIds)->
+        map->only(['local_name', 'country_id', 'city_id', 'title_en', 'country_title_en']);
+        SEOMeta::setTitle($travel->name);
+        SEOMeta::setDescription($travel->meta_description);
+        SEOMeta::addMeta('travel:published_time', $travel->created_at->toW3CString(), 'property');
+        SEOMeta::addKeyword($travel->meta_keywords);
+        return view('travels.edit', [
+            'travel' => $travel,
+            'categories' => $this->categoryRepository->all(),
+            'transports' => $this->transportRepository->all(),
+            'month' => $this->monthRepository->all(),
+            'complexity' => $this->complexityRepository->all(),
+            'overNightStay' => $this->overNightStayRepository->all(),
+            'optionsCities' => $optionsCities,
+        ]);
+    }
+
+    /**
+     * @param Travel $travel
+     * @return Factory|View
+     */
+    public function show($slug)
+    {
+        $travel = $this->travelRepository->getBySlug($slug);
+        $travel->coordsMeTravel = $travel->travelAddress->pluck('coords')->toArray();
+        $optionsCities = $this->cityRepository->getCityByCountry($travel->countryIds)->
+        map->only(['local_name', 'country_id', 'city_id', 'title_en', 'country_title_en']);
+
+        SEOMeta::setTitle($travel->name);
+        SEOMeta::setDescription($travel->meta_description);
+        SEOMeta::addMeta('travel:published_time', $travel->created_at->toW3CString(), 'property');
+        SEOMeta::addKeyword($travel->meta_keywords);
+        return view('travels.show', [
+            'travel' => $travel,
+            'categories' => $this->categoryRepository->all(),
+            'transports' => $this->transportRepository->all(),
+            'month' => $this->monthRepository->all(),
+            'complexity' => $this->complexityRepository->all(),
+            'overNightStay' => $this->overNightStayRepository->all(),
+            'optionsCities' => $optionsCities,
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param UpdateTravel $request
+     * @param Travel $travel
+     * @return array|RedirectResponse|Redirector
+     */
+    public function update(UpdateTravel $request, Travel $travel)
+    {
+        // Sanitize input
+        $sanitized = $request->getSanitized();
+        $relations = [
+            'categories' => 'id',
+            'transports' => 'id',
+            'month' => 'id',
+            'complexity' => 'id',
+            'over_night_stay' => 'id',
+            'countries' => 'country_id',
+            'cities' => 'city_id',
+        ];
+        foreach ($relations as $relation => $publickey) {
+            $sanitized[$relation . 'Ids'] = $request->getRelationIds($relation, $publickey);
+        }
+        $travelAddr = $request->getRelationAddress();
+        // Store the Travel
+        $travel->fill($sanitized);
+        $travel->update($sanitized);
+        $travel->users()->sync(auth()->user()->id);
+        foreach ($relations as $relation => $publickey) {
+            $relationFormat = str_replace('_', '', $relation);
+            $travel->$relationFormat()->sync($sanitized[$relation . 'Ids']);
+        }
+        $travel->travelAddress()->delete();
+        $travel->travelAddress()->createMany($travelAddr);
+
+        if ($request->ajax()) {
+            return ['redirect' => url('travels'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+        }
+        return redirect()->back();
     }
 
     /**
@@ -190,92 +293,6 @@ class TravelsController extends Controller
             return ['redirect' => url('travels'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
 
-        return redirect('travels');
-    }
-
-
-    /**
-     * @param Travel $travel
-     * @return Factory|View
-     */
-    public function edit(int $id)
-    {
-        $travel = $this->travelRepository->getById($id);
-        $travel->coordsMeTravel = $travel->travelAddress->pluck('coords')->toArray();
-        $optionsCities = $this->cityRepository->getCityByCountry($travel->countryIds)->
-        map->only(['local_name', 'country_id', 'city_id', 'title_en', 'country_title_en']);
-        return view('travels.edit', [
-            'travel' => $travel,
-            'categories' => $this->categoryRepository->all(),
-            'transports' => $this->transportRepository->all(),
-            'month' => $this->monthRepository->all(),
-            'complexity' => $this->complexityRepository->all(),
-            'overNightStay' => $this->overNightStayRepository->all(),
-            'optionsCities' => $optionsCities,
-        ]);
-    }
-
-    /**
-     * @param Travel $travel
-     * @return Factory|View
-     */
-    public function show(int $id)
-    {
-        $travel = $this->travelRepository->getById($id);
-        $travel->coordsMeTravel = $travel->travelAddress->pluck('coords')->toArray();
-        $optionsCities = $this->cityRepository->getCityByCountry($travel->countryIds)->
-        map->only(['local_name', 'country_id', 'city_id', 'title_en', 'country_title_en']);
-        return view('travels.show', [
-            'travel' => $travel,
-            'categories' => $this->categoryRepository->all(),
-            'transports' => $this->transportRepository->all(),
-            'month' => $this->monthRepository->all(),
-            'complexity' => $this->complexityRepository->all(),
-            'overNightStay' => $this->overNightStayRepository->all(),
-            'optionsCities' => $optionsCities,
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param UpdateTravel $request
-     * @param Travel $travel
-     * @return array|RedirectResponse|Redirector
-     */
-    public function update(UpdateTravel $request, Travel $travel)
-    {
-        // Sanitize input
-        $sanitized = $request->getSanitized();
-        $relations = [
-            'categories' => 'id',
-            'transports' => 'id',
-            'month' => 'id',
-            'complexity' => 'id',
-            'over_night_stay' => 'id',
-            'countries' => 'country_id',
-            'cities' => 'city_id',
-        ];
-        foreach ($relations as $relation => $publickey) {
-            $sanitized[$relation . 'Ids'] = $request->getRelationIds($relation, $publickey);
-        }
-
-        $travelAddr = $request->getRelationAddress();
-
-        // Store the Travel
-        $travel->fill($sanitized);
-        $travel->update($sanitized);
-        $travel->users()->sync(auth()->user()->id);
-        foreach ($relations as $relation => $publickey) {
-            $relationFormat = str_replace('_', '', $relation);
-            $travel->$relationFormat()->sync($sanitized[$relation . 'Ids']);
-        }
-        $travel->travelAddress()->delete();
-        $travel->travelAddress()->createMany($travelAddr);
-
-        if ($request->ajax()) {
-            return ['redirect' => url('travels'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
-        }
         return redirect('travels');
     }
 

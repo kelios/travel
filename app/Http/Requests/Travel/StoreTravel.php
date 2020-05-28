@@ -28,6 +28,9 @@ class StoreTravel extends FormRequest
             'description' => ['nullable', 'string'],
             'publish' => ['nullable', 'boolean'],
             'visa' => ['nullable', 'boolean'],
+            'slug' => ['nullable', 'string'],
+            'meta_keywords' => ['nullable', 'string'],
+            'meta_description' => ['nullable', 'string'],
 
         ];
     }

@@ -114,8 +114,6 @@ Vue.component('travel-form', {
         },
         onClick(e) {
             let coordOnClick = e.latlng;
-            console.log(this.coordsMeTravel);
-        //    this.form.coordsMeTravel.push(coordOnClick);
             this.travelAddress.meCoord.push(coordOnClick);
             this.getAddress(coordOnClick);
         },
@@ -134,10 +132,6 @@ Vue.component('travel-form', {
             this.$delete(this.travelAddress.address, indexCity);
             this.$delete(this.travelAddress.country, indexCity);
             this.$delete(this.travelAddress.city, indexCity);
-
-          /*  this.form.coordsMeTravel = this.form.coordsMeTravel.filter(function (value, index, arr) {
-                return (value.lat != latlng.lat && value.lng != latlng.lng);
-            });*/
         },
         gecodingAddress: function (param, setMarker = false, setZoom = true) {
             param.format = FORMAT;
@@ -151,7 +145,6 @@ Vue.component('travel-form', {
                     latlng.lng = response.data[0].lon;
 
                     if (setMarker) {
-                     //   vm.form.coordsMeTravel.push(latlng);
                         vm.travelAddress.meCoord.push(latlng);
                     }
                     if (setZoom) {
