@@ -51,8 +51,6 @@ Vue.component('travel-card-last', require('../components/TravelCardLast.vue').de
 Vue.component('map-me-travel', require('../components/mapMeTravel.vue').default);
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('feedback-form', require('../components/FeedbackForm.vue').default);
-Vue.component('example-component', require('../components/ExampleComponent.vue').default);
-Vue.component('example2-component', require('../components/Example2Component.vue').default);
 
 new Vue({
     mixins: [Admin],

@@ -104,17 +104,19 @@ class TravelsController extends Controller
         SEOMeta::setTitle('MeTravel - Travels');
         SEOMeta::setDescription('Travels');
         SEOMeta::setCanonical('https://metravel.by/');
-
-        $travels = $this->travelRepository->getList();
-        if ($request->ajax()) {
-            return response()->json($travels);
-        }
-        return view('travels.index')->with('travels', $travels);
+        $where = ['publish' => 1];
+        return view('travels.index', ['where' => $where]);
     }
 
-    public function get(Request $request)
+    public function get(IndexTravel $request)
     {
-        $travels = $this->travelRepository->getList();
+        $where = [];
+        if ($request->query('where')) {
+            $where = json_decode($request->query('where'), true);
+        }
+
+        $travels = $this->travelRepository->getList($where);
+
         return response()->json($travels);
     }
 
@@ -127,7 +129,11 @@ class TravelsController extends Controller
     public function search(IndexTravel $request)
     {
         $query = $request->query('query');
-        $travels = $this->travelRepository->search($query);
+        $where = [];
+        if ($request->query('where')) {
+            $where = json_decode($request->query('where'), true);
+        }
+        $travels = $this->travelRepository->search($query, $where);
         //broadcast search results with Pusher channels
         event(new SearchEvent($travels));
         return response()->json("ok");
@@ -138,8 +144,8 @@ class TravelsController extends Controller
         SEOMeta::setTitle('MeTravel - Travels');
         SEOMeta::setDescription('Travels');
         SEOMeta::setCanonical('https://metravel.by/');
-        $travels = $this->travelRepository->getByUser(Auth::user());
-        return view('travels.metravel')->withTravels($travels);
+        $where = ['user_id' => Auth::user()->id];
+        return view('travels.metravel', ['where' => $where]);
     }
 
 
@@ -249,7 +255,7 @@ class TravelsController extends Controller
         $travel->travelAddress()->createMany($travelAddr);
 
         if ($request->ajax()) {
-            return ['redirect' => url('travels'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            return ['redirect' => url('/travels/metravel'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
         return redirect()->back();
     }

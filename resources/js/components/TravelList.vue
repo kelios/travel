@@ -19,7 +19,7 @@
 
     export default {
         name: 'TravelList',
-        props: ['readonly'],
+        props: ['readonly', 'where'],
         components: {
             travel,
             pagination
@@ -44,7 +44,7 @@
                 this.travels.data = this.travels.data.filter(travel => travel.id !== id)
             },
             getResults(page = 1) {
-                this.$store.dispatch('GET_TRAVELS', {page});
+                this.$store.dispatch('GET_TRAVELS', {'page': page, 'where': this.where});
             }
         },
     }

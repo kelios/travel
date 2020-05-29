@@ -1,7 +1,6 @@
 <template>
     <section class="feedback-form">
         <form
-
             role="form"
             @submit.prevent="onSubmit"
         >
@@ -43,10 +42,10 @@
                 />
             </div>
             <p v-if="success" class="text-success text-center">
-                Your feedback<br />has been submitted.
+                {{trans('main.sendFeedbackSuccess')}}
             </p>
-            <p v-if="errors" class="text-danger text-center">
-              {{ errors }}
+            <p v-if="errors_feedback" class="text-danger text-center">
+                {{ errors_feedback }}
             </p>
             <button
                 :disabled="!isValid"
@@ -69,172 +68,91 @@
 </template>
 
 <style lang="scss">
-.feedback-form {
-    z-index: 100;
-    bottom: 1em;
-    right: 1em;
+    .feedback-form {
+        z-index: 100;
+        bottom: 1em;
+        right: 1em;
 
-    .form {
-        max-width: 16em;
-        padding: 1em;
-        background: white;
-        border-radius: 5px;
-        border: 1px solid darkgray;
-    }
+        .form {
+            max-width: 16em;
+            padding: 1em;
+            background: white;
+            border-radius: 5px;
+            border: 1px solid darkgray;
+        }
 
-    .feedback-btn {
-        font-size: 1.5em;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        color: white;
+        .feedback-btn {
+            font-size: 1.5em;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: white;
+        }
     }
-}
 </style>
 
 <script>
-import axios from 'axios';
+    import axios from 'axios';
 
-// Closable Directive courtesy of
-// https://tahazsh.com/detect-outside-click-in-vue
-
-// This variable will hold the reference to
-// document's click handler
-let handleOutsideClick;
-
-const Closable = {
-    bind(el, binding, vnode) {
-        // Here's the click/touchstart handler
-        // (it is registered below)
-        handleOutsideClick = (e) => {
-            e.stopPropagation();
-            // Get the handler method name and the exclude array
-            // from the object used in v-closable
-            const { handler, exclude } = binding.value;
-
-            // This variable indicates if the clicked element is excluded
-            let clickedOnExcludedEl = false;
-            exclude.forEach((refName) => {
-                // We only run this code if we haven't detected
-                // any excluded element yet
-                if (!clickedOnExcludedEl) {
-                    // Get the element using the reference name
-                    const excludedEl = vnode.context.$refs[refName];
-                    // See if this excluded element
-                    // is the same element the user just clicked on
-                    clickedOnExcludedEl = excludedEl.contains(e.target);
+    export default {
+        props: ['name', 'email'],
+        data() {
+            return {
+                emailField: this.email,
+                nameField: this.name,
+                body: null,
+                isLoading: false,
+                errors_feedback: null,
+                success: false,
+            };
+        },
+        computed: {
+            isValid() {
+                if (this.isLoading) {
+                    return false;
                 }
-            });
 
-            // We check to see if the clicked element is not
-            // the dialog element and not excluded
-            if (!el.contains(e.target) && !clickedOnExcludedEl) {
-                // If the clicked element is outside the dialog
-                // and not the button, then call the outside-click handler
-                // from the same component this directive is used in
-                vnode.context[handler]();
-            }
-        };
-        // Register click/touchstart event listeners on the whole page
-        document.addEventListener('click', handleOutsideClick);
-        document.addEventListener('touchstart', handleOutsideClick);
-    },
+                if (!this.nameField) {
+                    return false;
+                }
 
-    unbind() {
-        // If the element that has v-closable is removed, then
-        // unbind click/touchstart listeners from the whole page
-        document.removeEventListener('click', handleOutsideClick);
-        document.removeEventListener('touchstart', handleOutsideClick);
-    },
-};
-
-export default {
-    props: ['name', 'email'],
-
-    data() {
-        return {
-            emailField: this.email,
-            nameField: this.name,
-            body: null,
-            isActive: false,
-            isLoading: false,
-            errors: null,
-            success: false,
-        };
-    },
-
-    directives: {
-        Closable,
-    },
-
-    computed: {
-        isValid() {
-            if (this.isLoading) {
-                return false;
-            }
-
-            if (!this.name) {
-                return false;
-            }
-
-            if (!this.body) {
-                return false;
-            }
-
-            return true;
-        },
-    },
-
-    methods: {
-        toggleForm() {
-            this.isActive = !this.isActive;
+                if (!this.body) {
+                    return false;
+                }
+                return true;
+            },
         },
 
-        onClose() {
-            this.isActive = false;
+        methods: {
+            async onSubmit() {
+                try {
+                    this.errors_feedback = null;
+                    this.success = false;
+                    this.isLoading = true,
+
+                    await axios.post(`/feedback`, {
+                        name: this.nameField,
+                        email: this.emailField,
+                        body: this.body,
+                    });
+
+                    this.isLoading = false;
+                    this.success = true;
+
+                    this.reset();
+                } catch (error) {
+                    this.isLoading = false;
+                    this.errors_feedback = error.message;
+                }
+            },
+
+            reset() {
+                this.body = null;
+            },
         },
 
-        async onSubmit() {
-            try {
-             //   this.errors = null;
-                this.success = false;
-                this.isLoading = true,
-console.log('onSubmit');
-                await axios.post(`/feedback`, {
-                    name: this.nameField,
-                    email: this.emailField,
-                    body: this.body,
-                });
-
-                this.isLoading = false;
-                this.success = true;
-
-                this.reset();
-            } catch (error) {
-                this.isLoading = false;
-                this.errors = error.message;
-            }
+        mounted() {
+            this.reset();
         },
-
-        reset() {
-            this.body = null;
-        },
-    },
-
-    mounted() {
-        this.reset();
-    },
-
-    watch: {
-        isActive(value) {
-            if (value) {
-                return;
-            }
-
-            // Reset the state of the form.
-            this.success = false;
-            this.errors = null;
-        },
-    },
-};
+    };
 </script>

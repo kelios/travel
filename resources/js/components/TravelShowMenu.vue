@@ -35,8 +35,6 @@
         name: 'TravelShowMenu',
         props: ['travel'],
         created() {
-            console.log('mounted');
-            console.log(this.data);
         },
         computed: {
             getData() {

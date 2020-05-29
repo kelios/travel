@@ -34,6 +34,7 @@
 
     export default {
         name: "mapMeTravel",
+        props: ['data'],
         data: function () {
             return {
                 coords: [],
@@ -48,8 +49,6 @@
         created() {
             this.getResults();
         },
-        mounted() {
-        },
         computed: {
             groupedTravelAddress() {
                 return _.chunk(this.travelAddress.meCoord, 15);
@@ -60,7 +59,9 @@
         },
         methods: {
             getResults(page = 1) {
-                this.$store.dispatch('GET_TRAVELS', {page})
+                if (this.data) {
+                    this.$store.dispatch('GET_TRAVELS', {'page': page, 'where': {'publish':1}})
+                }
             },
 
         },

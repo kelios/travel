@@ -1,7 +1,8 @@
 let actions = {
-    SEARCH_TRAVELS({commit}, query) {
+    SEARCH_TRAVELS({commit}, data) {
         let params = {
-            query
+            query: data.query,
+            where:data.where,
         };
         axios.get(`/api/search`, {params})
             .then(res => {
@@ -14,9 +15,10 @@ let actions = {
     },
     GET_TRAVELS({commit}, data) {
         let params = {
-            page: data.page
+            page: data.page,
+            where:data.where,
         };
-        axios.get('/api/travels?page=', {params})
+        axios.get('/api/travels', {params})
             .then(res => {
                 {
                     commit('SET_TRAVELS', res.data);

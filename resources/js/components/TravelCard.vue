@@ -2,7 +2,7 @@
     <div class="row">
         <div class="card mb-4 shadow-sm">
             <img
-                :src="getCover(travel)"
+                :src="travel.travel_image_thumb_url"
                 class="img-fluid" :alt="travel.name">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
@@ -64,13 +64,7 @@
                     console.log(error.response.data.messag);
                 });
             },
-            getCover: function (travel) {
-                if (!travel.travel_image_thumb_url) {
-                    return travel.categories ?
-                        travel.categories[0].category_image_thumb_url : this.defImageTravel
-                }
-                return travel.travel_image_thumb_url
-            }
+
         },
     }
 </script>

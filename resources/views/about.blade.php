@@ -19,6 +19,7 @@
                     <h2> {{trans('main.aboutTitle')}}</h2>
                     <p class="lead mb-0">
                         {{trans('main.aboutText')}}
+                        <a href="mailto:ignatieva_julia@tut.by">ignatieva_julia@tut.by</a>
                     </p>
                 </div>
                 <div class="col-lg-6 order-lg-2 text-white showcase-img"

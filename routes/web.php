@@ -16,7 +16,9 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/mysitemap', 'SiteMapController@setSiteMap')->name('mysitemap');
 
 Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/feedback', 'HomeController@feedback')->name('feedback');
+Route::get('/contact', 'HomeController@contact')->name('contact');
+
+Route::post('/admin/wysiwyg-media','WysiwygUploadController@uploads3')->name('brackets/admin-ui::wysiwyg-upload');
 
 Auth::routes();
 

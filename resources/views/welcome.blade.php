@@ -19,7 +19,7 @@
     </section>
 
     <section class="text-center">
-        <map-me-travel></map-me-travel>
+        <map-me-travel :data="true"></map-me-travel>
     </section>
 
 

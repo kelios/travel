@@ -3,11 +3,11 @@
     <div id="app">
         <div class="container">
             <section class="text-center">
-                <map-me-travel :travels='@json($travels)'></map-me-travel>
+                <map-me-travel :where='@json($where)'></map-me-travel>
             </section>
             <div class="album py-5 bg-light">
-                <search-me-travel></search-me-travel>
-                <travel-list :readonly="true"></travel-list>
+                <search-me-travel :where='@json($where)'></search-me-travel>
+                <travel-list :readonly="true" :where='@json($where)'></travel-list>
             </div>
         </div>
 @endsection

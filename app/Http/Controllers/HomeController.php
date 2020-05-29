@@ -38,7 +38,7 @@ class HomeController extends Controller
         return view('about');
     }
 
-    public function feedback()
+    public function contact()
     {
         SEOMeta::setTitle('MeTravel - Travels');
         SEOMeta::setDescription('Travels');

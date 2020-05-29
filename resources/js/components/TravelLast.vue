@@ -12,7 +12,6 @@
 
     export default {
         name: 'TravelLast',
-        props: ['readonly'],
         components: {
             travel
         },

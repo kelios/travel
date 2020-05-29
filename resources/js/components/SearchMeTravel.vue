@@ -16,7 +16,7 @@
 <script>
     export default {
         name: "SearchMeTravel",
-        props: ['travels'],
+        props: ['travels','where'],
         data: function () {
             return {
                 query: '',
@@ -31,7 +31,7 @@
         },
         methods: {
             searchTravels() {
-                this.$store.dispatch('SEARCH_TRAVELS', this.query)
+                this.$store.dispatch('SEARCH_TRAVELS', {'query':this.query,'where':this.where})
             }
         }
 
