@@ -82,7 +82,7 @@ class Travel extends Model implements HasMedia
     {
         $travelImageThumbUrl = $this->getFirstMediaUrl('travelMainImage', 'thumb_200');
         if (!$travelImageThumbUrl) {
-            $travelImageThumbUrl = $this->categories ? $this->categories[0]->category_image_thumb_url : Config::get('constants.image.defaultCatImage');
+            $travelImageThumbUrl = array_get($this->categories,0) ? $this->categories[0]->category_image_thumb_url : Config::get('constants.image.defaultCatImage');
         }
         return $travelImageThumbUrl
             ?: Config::get('constants.image.defaultCatImage');

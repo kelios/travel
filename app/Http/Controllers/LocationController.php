@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-//use App\Models\MeWorld;
+use App\Events\SearchCityEvent;
 use App\Repositories\CityRepository;
 use App\Repositories\CountryRepository;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Khsing\World\Models\Country;
 
 //use Khsing\World\Models\City;
 
@@ -40,6 +39,32 @@ class LocationController extends BaseController
         $countryCities = $this->cityRep->getCityByCountry($request->country_id)->
         map->only(['local_name', 'country_id', 'city_id', 'title_en', 'country_title_en']);
         return response()->json($countryCities, 200);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function searchCities(Request $request)
+    {
+        $query = $request->query('query');
+        $whereIn = [];
+        if ($request->query('countryIds')) {
+            $whereIn = $request->query('countryIds');
+        }
+        $location = $this->cityRep->getLocale();
+        $cities = $this->cityRep->search($query, $whereIn)->
+        map->only(['local_name',
+            'country_id',
+            'city_id',
+            'title_en',
+            'country_title_en',
+            'title_' . $location,
+            'country_local_name'
+        ]);
+        //broadcast search results with Pusher channels
+        event(new SearchCityEvent($cities));
+        return response()->json("ok");
     }
 
 }

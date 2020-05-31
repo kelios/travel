@@ -1,7 +1,7 @@
 @extends('layouts.app')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/showmetravel.css') }}">
 @section('content')
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top-2" id="sideNav">
+    <nav class="navbar navbar-expand-lg navbar-dark" id="sideNav">
         <a class="navbar-brand js-scroll-trigger" href="#page-top"
         >            <span class="d-none d-lg-block">
                 <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{$travel->travel_image_thumb_url}}"

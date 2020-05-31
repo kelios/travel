@@ -11,7 +11,8 @@ import VueCookie from 'vue-cookie';
 import {Admin} from 'craftable';
 import VModal from 'vue-js-modal';
 import Vue from 'vue';
-import BootstrapVue from 'bootstrap-vue'
+import BootstrapVue from 'bootstrap-vue';
+import Lang from 'laravel-vue-lang';
 
 import './app-components/bootstrap';
 import './index';
@@ -34,10 +35,14 @@ Vue.use(VModal, {dialog: true, dynamic: true, injectModalsContainer: true});
 Vue.use(VueQuillEditor);
 Vue.use(Notifications);
 Vue.use(VueCookie);
-Vue.use(BootstrapVue)
-Vue.prototype.trans = (key) => {
-    return _.get(window.trans, key, key);
-};
+Vue.use(BootstrapVue);
+Vue.use(Lang, {
+    locale: 'ru',
+    fallback: 'en',
+    ignore: {
+        fr: ['validation'],
+    },
+});
 
 Vue.component('search-me-travel', require('../components/SearchMeTravel.vue').default);
 Vue.component('travel-last', require('../components/TravelLast.vue').default);

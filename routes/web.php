@@ -18,11 +18,9 @@ Route::get('/mysitemap', 'SiteMapController@setSiteMap')->name('mysitemap');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 
-Route::post('/admin/wysiwyg-media','WysiwygUploadController@uploads3')->name('brackets/admin-ui::wysiwyg-upload');
+Route::post('/admin/wysiwyg-media', 'WysiwygUploadController@uploads3')->name('brackets/admin-ui::wysiwyg-upload');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/location/cities', 'LocationController@getCities')->name('cities');
 Route::get('/location/countries', 'LocationController@getCountries')->name('countries');
@@ -232,11 +230,9 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 Route::group(['namespace' => 'travels', 'prefix' => 'travels', 'as' => 'travels.'], function () {
     Route::group(['middleware' => ['auth']], function () {
-        Route::get('/', 'TravelsController@index')->name('index');
         Route::get('/metravel', 'TravelsController@metravel')->name('metravel');
         Route::get('/create', 'TravelsController@create')->name('create');
         Route::get('/{slug}/edit', 'TravelsController@edit')->name('edit');
-        Route::get('/{slug}', 'TravelsController@show')->name('show');
 
         Route::post('/', 'TravelsController@store')->name('store');
         Route::post('/bulk-destroy', 'TravelsController@bulkDestroy')->name('bulk-destroy');
@@ -261,3 +257,5 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+Route::get('/travels', 'Travels\TravelsController@index')->name('index');
+Route::get('/travels/{slug}', 'Travels\TravelsController@show')->name('show');

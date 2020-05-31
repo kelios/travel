@@ -114,9 +114,9 @@ class TravelsController extends Controller
         if ($request->query('where')) {
             $where = json_decode($request->query('where'), true);
         }
-
         $travels = $this->travelRepository->getList($where);
-
+       // dd($travels);
+        //dd(response()->json($travels));
         return response()->json($travels);
     }
 
@@ -296,7 +296,7 @@ class TravelsController extends Controller
         $this->travelRepository->travelAddress()->createMany($travelAddr);
 
         if ($request->ajax()) {
-            return ['redirect' => url('travels'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+            return ['redirect' => url('/travels/metravel'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
 
         return redirect('travels');

@@ -15,12 +15,12 @@
 
             <section class="travel-section" id="plus">
                 <travel-show-section :data="travel.plus"
-                                     :title="trans('travels.plus')"></travel-show-section>
+                                     :title="__('travels.plus')"></travel-show-section>
             </section>
 
             <section class="travel-section" id="minus">
                 <travel-show-section :data="travel.minus"
-                                     :title="trans('travels.minus')"></travel-show-section>
+                                     :title="__('travels.minus')"></travel-show-section>
             </section>
         </div>
     </b-card-body>

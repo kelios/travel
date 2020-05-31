@@ -40,7 +40,7 @@
                     </div>
                 </div>
 
-                <div class="form-group "
+                <div v-if="form.countryIds" class="form-group "
                      :class="{'has-danger': errors.has('cities'), 'has-success': fields.cities && fields.cities.valid }">
                     <label for="cities">{{ trans('travels.cities') }}</label>
 
@@ -54,12 +54,15 @@
                         tag-placeholder="{{ trans('travels.cities') }}"
                         placeholder="{{ trans('travels.Select cities') }}"
                         :loading="form.isLoading"
-                        :options-limit="300"
                         :limit="3"
                         :max-height="600"
                         :show-no-results="false"
                         :hide-selected="true"
                         @remove="removeCity"
+                        :searchable="true"
+                        @search-change="searchCities"
+                        :options-limit="200"
+                        :custom-label="customLabel"
                     >
                     </multiselect>
 

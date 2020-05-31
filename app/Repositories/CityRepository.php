@@ -39,7 +39,7 @@ class CityRepository implements TravelRelationRepositoryInterface
      */
     public function getCityByCountry($whereIn = [])
     {
-        return $this->city->whereIn('country_id', $whereIn)->where('important',1)->with('country')->get();
+        return $this->city->whereIn('country_id', $whereIn)->where('important', 1)->with('country')->get();
 
     }
 
@@ -66,6 +66,31 @@ class CityRepository implements TravelRelationRepositoryInterface
     public function travels()
     {
         return $this->city->travels();
+    }
+
+    /**
+     * @param $search
+     * @param $where
+     * @return mixed
+     */
+    public function search($search, $whereIn)
+    {
+        $searchCities = $this->city;
+        if ($whereIn) {
+            $searchCities = $searchCities->whereIn('country_id', $whereIn);
+        }
+        $searchCities = $searchCities->where(function ($query) use ($search) {
+            return $query->where('title_'.$this->getLocale(), 'like',  $search . '%');
+        });
+        return $searchCities->with('country')->limit(20)->get();
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->city->locale;
     }
 
 }

@@ -13,13 +13,25 @@ class City extends Model
      *
      * @var string
      */
-    protected $locale = "en";
+    public $locale = "en";
 
+    /**
+     * @var string
+     */
     protected $primaryKey = 'city_id';
+    /**
+     * @var bool
+     */
     public $timestamps = false;
 
+    /**
+     * @var string
+     */
     protected $table = 'cities';
 
+    /**
+     * @var array
+     */
     protected $fillable = [
         'city_id',
         'country_id',
@@ -67,11 +79,23 @@ class City extends Model
         'title_cz',
         'area_cz',
         'region_cz'
-
     ];
 
-    protected $appends = ['resource_url', 'local_name', 'country_title_en'];
+    /**
+     * @var array
+     */
+    protected $appends = [
+        'resource_url',
+        'local_name',
+        'country_title_en',
+        'country_title_ru',
+        'country_local_name'
+    ];
 
+    /**
+     * City constructor.
+     * @param array $attributes
+     */
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
@@ -84,17 +108,43 @@ class City extends Model
         return url('/admin/cities/' . $this->getKey());
     }
 
+    /**
+     * @return mixed
+     */
     public function getCountryTitleEnAttribute()
     {
         return $this->country->title_en;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCountryTitleRuAttribute()
+    {
+        return $this->country->title_ru;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getLocalNameAttribute()
     {
         $local_name = 'title_' . $this->locale;
         return $this->$local_name;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCountryLocalNameAttribute()
+    {
+        $local_name = 'title_' . $this->locale;
+        return $this->country->$local_name;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function country()
     {
         return $this->belongsTo(Country::class, 'country_id', 'country_id');

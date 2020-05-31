@@ -44,7 +44,6 @@ class TravelRepository implements TravelRepositoryInterface
                 $query->whereIn('users.id', [$for_user]);
             });
         }
-
         return $travels->where($where)->orderBy('created_at', 'desc')->paginate();
     }
 

@@ -32,20 +32,7 @@
         <div><img src="https://mc.yandex.ru/watch/62803912" style="position:absolute; left:-9999px;" alt=""/></div>
     </noscript>
     <!-- /Yandex.Metrika counter -->
-    <script>
 
-        window.trans = <?php
-        // copy all translations from /resources/lang/CURRENT_LOCALE/* to global JS variable
-        $lang_files = File::files(resource_path() . '/lang/' . App::getLocale());
-        $trans = [];
-        foreach ($lang_files as $f) {
-            $filename = pathinfo($f)['filename'];
-            $trans[$filename] = trans($filename);
-        }
-        echo json_encode($trans);
-        ?>;
-
-    </script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -63,7 +50,7 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar fixed-top bg-white navbar-expand-md navbar-light shadow-sm">
+    <nav class="navbar bg-white navbar-expand-md navbar-light shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Me Travel') }}

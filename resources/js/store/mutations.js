@@ -5,6 +5,9 @@ let mutations = {
     SET_LAST_TRAVELS(state, travels) {
         state.lastTravels = travels
     },
+    SET_OPTIONS_CITIES(state, optionsCities) {
+        state.optionsCities = optionsCities
+    },
     SET_MAP_DATA(state, travels) {
         travels.data.forEach((travel) => {
             state.travelAddress.address.push(travel.travelAddressAdress);

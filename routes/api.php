@@ -20,4 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('search', 'travels\TravelsController@search');
 Route::get('travels', 'travels\TravelsController@get');
 Route::get('travelsLast', 'travels\TravelsController@getLast');
+Route::get('searchCities', 'LocationController@searchCities');
 

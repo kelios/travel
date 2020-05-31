@@ -9,13 +9,16 @@
     height: auto !important;
     margin: 0 !important;
 }
+
 .fixed-top-2 {
     margin-top: 3.4rem;
 }
+
 .fixed-left-2 {
     margin-left: 17rem;
 }
-.tab-content.showTravel{
+
+.tab-content.showTravel {
     border: none !important;
 }
 
@@ -38,6 +41,7 @@ h6 {
     font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 700;
 }
+
 .home-quote {
     display: flex;
     justify-content: center;
@@ -78,6 +82,19 @@ h6 {
     content: "\2014\2009";
 }
 
+.reg-header {
+    font-family: Georgia, serif;
+    font-size: 25px;
+    font-style: italic;
+    color: #f1f5ee;
+}
+
+.reg-text {
+    font-family: Georgia, serif;
+    font-size: 13px;
+    color: #f1f5ee;
+}
+
 header.masthead {
     position: relative;
     background-color: #343a40;
@@ -106,6 +123,7 @@ header.masthead h1 {
         padding-top: 12rem;
         padding-bottom: 12rem;
     }
+
     header.masthead h1 {
         font-size: 3rem;
     }
@@ -182,7 +200,7 @@ header.masthead h1 {
 }
 
 footer.footer {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 

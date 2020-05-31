@@ -7,6 +7,9 @@ let getters = {
     },
     travelAddress: state => {
         return state.travelAddress
+    },
+    optionsCities: state => {
+        return state.optionsCities
     }
 }
 

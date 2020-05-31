@@ -8,6 +8,7 @@ let state = {
         'country': [],
         'url': []
     },
+    optionsCities: [],
     defImageTravel: '/media/metravel.jpg',
 }
 export default state

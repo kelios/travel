@@ -12,18 +12,18 @@
                 {{ travel.cityName }}
             </li>
             <li class="nav-item info" v-if="travel.number_days">
-                {{ trans('travels.number_days') }} - {{ travel.number_days }}
+                {{ __('travels.number_days') }} - {{ travel.number_days }}
             </li>
             <b-nav-item class="nav-item" href="#description" v-if="travel.description">
-                {{ trans('travels.description') }}
+                {{ __('travels.description') }}
             </b-nav-item>
 
 
             <b-nav-item class="nav-item" href="#plus" v-if="travel.plus">
-                {{ trans('travels.plus') }}
+                {{ __('travels.plus') }}
             </b-nav-item>
             <b-nav-item class="nav-item" href="#minus" v-if="travel.minus">
-                {{ trans('travels.minus') }}
+                {{ __('travels.minus') }}
             </b-nav-item>
         </b-nav>
     </div>

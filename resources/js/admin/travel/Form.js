@@ -12,9 +12,13 @@ Vue.component('travel-form', {
         this.init();
         this.getCountries();
         if (this.form.countryIds.length > 0) {
-            this.getCities();
+            //  this.getCities();
         }
-        console.log(this.form);
+        window.Echo.channel('searchCity')
+            .listen('.searchResultsCity', (e) => {
+                console.log(e.cities);
+                this.optionsCities = e.cities;
+            })
     },
 
     data: function () {
@@ -28,7 +32,8 @@ Vue.component('travel-form', {
                 'city': [],
                 'country': []
             },
-
+            where: [],
+            query: '',
             coords: [],
             zoom: 9,
             center: L.latLng(53.8828449, 27.7273595),
@@ -72,7 +77,6 @@ Vue.component('travel-form', {
             this.travelAddress.city = this.form.travelAddressCity;
             this.travelAddress.country = this.form.travelAddressCountry;
             this.selectedCountiesIds = this.form.countryIds;
-          //  this.coords = this.form.coordsMeTravel;
         },
         async getCountries() {
             let vm = this;
@@ -85,16 +89,25 @@ Vue.component('travel-form', {
                 });
 
         },
+        limitText(count) {
+            return `and ${count} other countries`
+        },
+        searchCities: function (query) {
+            if (this.selectedCountiesIds.length > 0) {
+                this.$store.dispatch('SEARCH_CITIES', {'query': query, 'countryIds': this.selectedCountiesIds})
+            }
+        },
+        customLabel({local_name, country_local_name}) {
+            return `${local_name} – ${country_local_name}`
+        },
         getCitiesSelected: function (items) {
             items.forEach((item) => {
                 this.selectedCountiesIds.push(item.country_id);
                 this.selectedCountriesCode.push(item.country_code);
-
             });
             if (items.length > 1) {
                 this.gecodingAddress({country: items[items.length - 1].local_name}, false, true);
             }
-            this.getCities();
         },
         getCities: function () {
             let self = this;
@@ -109,7 +122,7 @@ Vue.component('travel-form', {
             } else {
                 this.optionsCities = [];
                 this.form.cities = [];
-              //  this.form.coordsMeTravel = [];
+                //  this.form.coordsMeTravel = [];
             }
         },
         onClick(e) {
@@ -189,7 +202,6 @@ Vue.component('travel-form', {
                             vm.selectedCountiesIds.push(item['country_id']);
                             vm.selectedCountriesCode.push(item['country_code']);
                             vm.travelAddress.country.push(item['country_id']);
-                            vm.getCities();
                         }
                     });
                 } else {
@@ -214,7 +226,6 @@ Vue.component('travel-form', {
             this.form.cities = this.form.cities.filter(function (value, index, arr) {
                 return value.country_id != item.country_id;
             });
-            this.getCities();
         },
         removeMarker: function (address, latlng, index) {
             this.form.cities = this.form.cities.filter(function (value, index, arr) {

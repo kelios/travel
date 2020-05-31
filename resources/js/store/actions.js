@@ -2,9 +2,23 @@ let actions = {
     SEARCH_TRAVELS({commit}, data) {
         let params = {
             query: data.query,
-            where:data.where,
+            where: data.where,
         };
         axios.get(`/api/search`, {params})
+            .then(res => {
+                if (res.data === 'ok')
+                    console.log('request sent successfully')
+
+            }).catch(err => {
+            console.log(err)
+        })
+    },
+    SEARCH_CITIES({commit}, data) {
+        let params = {
+            query: data.query,
+            countryIds: data.countryIds,
+        };
+        axios.get(`/api/searchCities`, {params})
             .then(res => {
                 if (res.data === 'ok')
                     console.log('request sent successfully')
@@ -16,7 +30,7 @@ let actions = {
     GET_TRAVELS({commit}, data) {
         let params = {
             page: data.page,
-            where:data.where,
+            where: data.where,
         };
         axios.get('/api/travels', {params})
             .then(res => {

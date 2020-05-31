@@ -18,10 +18,12 @@ return [
     'logout' => 'Выход',
     'login' => 'Войти',
     'password' => 'Пароль',
-    'register' => 'Зарегестрироваться',
-    'forgotYourPassword?' => 'Жми сюда если забыл пароль:)',
+    'register' => 'Зарегистрироваться',
+    'forgotYourPassword?' => 'Восстановить пароль',
     'rememberMe' => 'Запомнить меня',
     'Reset Password' => 'Сбросить пароль',
     'Send Password Reset Link' => 'Отправить ссылку для сброса пароля на почту',
-    'meTravels' => 'Мои путешествия'
+    'meTravels' => 'Мои путешествия',
+    'name' => 'Имя',
+    'confirmPassword' => 'Повторить пароль'
 ];
