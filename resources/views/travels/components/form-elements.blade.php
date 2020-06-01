@@ -80,6 +80,8 @@
                                 :center="center"
                                 ref="myMap"
                                 @click="onClick"
+                                @update:center="centerUpdate"
+                                @update:zoom="zoomUpdate"
                                 style="z-index: 0"
                             >
                                 <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
@@ -96,6 +98,7 @@
                                         </div>
                                     </l-icon>
                                 </l-marker>
+
                             </l-map>
                         </div>
                     </template>
@@ -158,6 +161,20 @@
 
                 </div>
 
+                @include('brackets/admin-ui::admin.includes.media-uploader', [
+                           'mediaCollection' => app(App\Models\Travel::class)->getMediaCollection('gallery'),
+                           'media' => isset($travel) ? $travel->getThumbs200ForCollection('gallery') : null,
+                           'label' => trans('main.gallery')
+                       ])
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 order-md-2 mb-4">
+        <div class="card ">
+            <div class="card-body">
                 <div class="form-check row"
                      :class="{'has-danger': errors.has('publish'), 'has-success': fields.publish && fields.publish.valid }">
                     <div class="ml-md-auto" :class="isFormLocalized ? 'col-md-8' : 'col-md-10'">
@@ -174,13 +191,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4 order-md-2 mb-4">
-        <div class="card ">
-            <div class="card-body">
                 <div class="form-group img__container text-center">
                     <label for="avatar"> {{ trans('travels.uploadCover') }}</label>
                     <div class="avatar-upload ">

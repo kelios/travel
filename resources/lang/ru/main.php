@@ -31,6 +31,7 @@ return [
     'comment' => 'Сообщение',
     'send' => 'Отправить',
     'loading' => 'Загрузка',
+    'gallery' => 'Галерея',
     'sendFeedbackSuccess' => 'Ваше сообщение отправлено.',
     'aboutTitle' => 'METRAVEL',
     'aboutText' =>

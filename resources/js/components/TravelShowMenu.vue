@@ -1,6 +1,9 @@
 <template>
     <div>
         <b-nav class="navbar-nav" v-b-scrollspy:nav-scroller>
+            <li class="nav-item info">
+                {{ travel.name }}
+            </li>
             <li class="nav-item info" v-if="travel.year">
                 {{ travel.year }}
                 {{ travel.monthName }}
@@ -24,6 +27,12 @@
             </b-nav-item>
             <b-nav-item class="nav-item" href="#minus" v-if="travel.minus">
                 {{ __('travels.minus') }}
+            </b-nav-item>
+            <b-nav-item class="nav-item" href="#recommendation" v-if="travel.recommendation">
+                {{ __('travels.recommendation') }}
+            </b-nav-item>
+            <b-nav-item class="nav-item" href="#gallery" v-if="travel.gallery">
+                {{ __('travels.gallery') }}
             </b-nav-item>
         </b-nav>
     </div>

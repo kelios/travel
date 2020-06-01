@@ -12,7 +12,10 @@
 
                 <form class="form-horizontal form-create" method="post" @submit.prevent="onSubmit"
                       :action="action" novalidate>
-                    <div class="card-header">{{ trans('travels.editTravels') }}</div>
+                    <div class="card-header">
+                        {{ trans('travels.editTravels') }}
+                        <a href="{{ $travel->url }}" target="_blank"><i class="fa  fa-eye"></i></a>
+                    </div>
 
                     <div class="card-body">
                         <div class="form-group">

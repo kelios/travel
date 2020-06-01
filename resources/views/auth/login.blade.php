@@ -4,9 +4,7 @@
     <section class="call-to-action text-white text-center">
         <div class="overlay"></div>
         <div class="home-quote">
-            <blockquote class="text-center">{{trans('main.blockquote')}}
-                <cite>{{trans('main.cite')}}</cite>
-            </blockquote>
+
 
             <div class="container">
 
@@ -55,7 +53,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <div class="col-md-6 offset-md-4">
+                                        <div class="col-md-8 offset-md-2">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" name="remember"
                                                        id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -63,16 +61,23 @@
                                                 <label class="form-check-label reg-text" for="remember">
                                                     {{ trans('home.rememberMe') }}
                                                 </label>
+
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group row mb-0">
-                                        <div class="col-md-8 offset-md-4">
+                                        <div class="col-md-8 offset-md-2">
                                             <button type="submit" class="btn btn-secondary">
                                                 {{ trans('home.login') }}
                                             </button>
 
+
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group row mb-0">
+                                        <div class="col-md-8 offset-md-2">
                                             @if (Route::has('password.request'))
                                                 <a class="reg-text" href="{{ route('password.request') }}">
                                                     {{ trans('home.forgotYourPassword?') }}
@@ -87,7 +92,9 @@
                 </div>
             </div>
 
-
+            <blockquote class="text-center">{{trans('main.blockquote')}}
+                <cite>{{trans('main.cite')}}</cite>
+            </blockquote>
         </div>
     </section>
 @endsection

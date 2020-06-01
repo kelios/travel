@@ -4,9 +4,7 @@
     <section class="call-to-action text-white text-center">
         <div class="overlay"></div>
         <div class="home-quote">
-            <blockquote class="text-center">{{trans('main.blockquote')}}
-                <cite>{{trans('main.cite')}}</cite>
-            </blockquote>
+
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
@@ -54,6 +52,9 @@
                     </div>
                 </div>
             </div>
+            <blockquote class="text-center">{{trans('main.blockquote')}}
+                <cite>{{trans('main.cite')}}</cite>
+            </blockquote>
         </div>
     </section>
 @endsection

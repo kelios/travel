@@ -62,6 +62,7 @@ class Travel extends Model implements HasMedia
         'travelAddressCountry',
         'countryIds',
         'travel_image_thumb_url',
+        'gallery',
         'coordMeTravel',
         'countryName',
         'cityName',
@@ -82,10 +83,22 @@ class Travel extends Model implements HasMedia
     {
         $travelImageThumbUrl = $this->getFirstMediaUrl('travelMainImage', 'thumb_200');
         if (!$travelImageThumbUrl) {
-            $travelImageThumbUrl = array_get($this->categories,0) ? $this->categories[0]->category_image_thumb_url : Config::get('constants.image.defaultCatImage');
+            $travelImageThumbUrl = array_get($this->categories, 0) ? $this->categories[0]->category_image_thumb_url : Config::get('constants.image.defaultCatImage');
         }
         return $travelImageThumbUrl
             ?: Config::get('constants.image.defaultCatImage');
+
+    }
+
+    public function getGalleryAttribute()
+    {
+        $images = $this->getMedia('gallery');
+        foreach ($images as $key => $image) {
+            $res[$key]['url'] = $image->getUrl();
+            $res[$key]['title'] = $this->name;
+        }
+
+        return $res ?? null;
 
     }
 
@@ -274,7 +287,16 @@ class Travel extends Model implements HasMedia
         $this->addMediaCollection('travelMainImage')
             ->maxFilesize(10 * 1024 * 1024)
             ->useDisk('s3')
-            ->accepts('image/*');
+            ->accepts('image/*')
+            ->singleFile();
+
+        $this->addMediaCollection('gallery')
+            ->maxNumberOfFiles(10)
+            ->maxFilesize(10 * 1024 * 1024)
+            ->useDisk('s3')
+            ->accepts('image/*')
+            ->onlyKeepLatest(10);
+
     }
 
     /**
@@ -286,22 +308,6 @@ class Travel extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null)
     {
         $this->autoRegisterThumb200();
-
-        $this->addMediaConversion('thumb_75')
-            ->width(75)
-            ->height(75)
-            ->fit('crop', 75, 75)
-            ->optimize()
-            ->performOnCollections('travelMainImage')
-            ->nonQueued();
-
-        $this->addMediaConversion('thumb_150')
-            ->width(150)
-            ->height(150)
-            ->fit('crop', 150, 150)
-            ->optimize()
-            ->performOnCollections('travelMainImage')
-            ->nonQueued();
     }
 
     /**
@@ -334,7 +340,7 @@ class Travel extends Model implements HasMedia
     public function setMetaDescriptionAttribute($value)
     {
         $this->attributes['meta_description'] = 'metravel, travel, путешествия, выбрать место для отдыха,' .
-            $this->countryName . ', ' . $this->cityName . ', ' . $this->name;
+            $this->countryName . ', ' . $this->cityName . ', ' . $this->name . ', ' . $this->categoryName;
     }
 
 

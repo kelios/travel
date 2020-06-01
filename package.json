@@ -31,6 +31,7 @@
         "laravel-vue-pagination": "^2.3.1",
         "leaflet": "^1.6.0",
         "pusher-js": "^6.0.3",
+        "vue-carousel-3d": "^0.2.0",
         "vue2-leaflet": "^2.5.2",
         "vuex": "^3.4.0"
     }

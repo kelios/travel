@@ -11,9 +11,9 @@ import VueCookie from 'vue-cookie';
 import {Admin} from 'craftable';
 import VModal from 'vue-js-modal';
 import Vue from 'vue';
+import Carousel3d from 'vue-carousel-3d';
 import BootstrapVue from 'bootstrap-vue';
 import Lang from 'laravel-vue-lang';
-
 import './app-components/bootstrap';
 import './index';
 
@@ -43,6 +43,7 @@ Vue.use(Lang, {
         fr: ['validation'],
     },
 });
+Vue.use(Carousel3d);
 
 Vue.component('search-me-travel', require('../components/SearchMeTravel.vue').default);
 Vue.component('travel-last', require('../components/TravelLast.vue').default);

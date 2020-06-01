@@ -115,8 +115,6 @@ class TravelsController extends Controller
             $where = json_decode($request->query('where'), true);
         }
         $travels = $this->travelRepository->getList($where);
-       // dd($travels);
-        //dd(response()->json($travels));
         return response()->json($travels);
     }
 

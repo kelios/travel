@@ -19,11 +19,13 @@ Vue.component('travel-form', {
                 console.log(e.cities);
                 this.optionsCities = e.cities;
             })
+
+
     },
 
     data: function () {
         return {
-            mediaCollections: ['travelMainImage'],
+            mediaCollections: ['travelMainImage','gallery'],
             optionsCountries: [],
             optionsCities: [],
             travelAddress: {
@@ -90,7 +92,7 @@ Vue.component('travel-form', {
 
         },
         limitText(count) {
-            return `and ${count} other countries`
+            return `и ${count} другие города`
         },
         searchCities: function (query) {
             if (this.selectedCountiesIds.length > 0) {
@@ -109,7 +111,7 @@ Vue.component('travel-form', {
                 this.gecodingAddress({country: items[items.length - 1].local_name}, false, true);
             }
         },
-        getCities: function () {
+        /*getCities: function () {
             let self = this;
             if (this.selectedCountiesIds.length > 0) {
                 axios.get('/location/countriesCities', {
@@ -124,7 +126,7 @@ Vue.component('travel-form', {
                 this.form.cities = [];
                 //  this.form.coordsMeTravel = [];
             }
-        },
+        },*/
         onClick(e) {
             let coordOnClick = e.latlng;
             this.travelAddress.meCoord.push(coordOnClick);
@@ -193,8 +195,6 @@ Vue.component('travel-form', {
                 let country_code = response.data.address.country_code;
 
                 if (!vm.selectedCountriesCode.includes(country_code)) {
-                    console.log(country_code);
-                    console.log(vm.selectedCountriesCode);
                     vm.optionsCountries.forEach(function (item, index, array) {
 
                         if (item['country_code'] == country_code) {
@@ -205,8 +205,6 @@ Vue.component('travel-form', {
                         }
                     });
                 } else {
-                    console.log(country_code);
-                    console.log(vm.selectedCountriesCode);
                     vm.optionsCountries.forEach(function (item, index, array) {
                         if (item['country_code'] == country_code) {
                             vm.travelAddress.country.push(item['country_id']);
@@ -242,6 +240,7 @@ Vue.component('travel-form', {
         centerUpdate(center) {
             this.center = center;
         },
+
 
     },
     components: {
