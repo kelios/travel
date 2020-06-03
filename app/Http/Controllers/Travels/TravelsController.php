@@ -13,6 +13,7 @@ use App\Repositories\ComplexityRepository;
 use App\Repositories\TravelRepository;
 use App\Repositories\CityRepository;
 use App\Repositories\CountryRepository;
+use App\Repositories\CompanionRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -70,6 +71,11 @@ class TravelsController extends Controller
     private $countryRepository;
 
     /**
+     * @var
+     */
+    private $companionRepository;
+
+    /**
      * TravelsController constructor.
      * @param TravelRepository $travelRepository
      */
@@ -80,7 +86,8 @@ class TravelsController extends Controller
                                 ComplexityRepository $complexityRepository,
                                 OverNightStayRepository $overNightStayRepository,
                                 cityRepository $cityRepository,
-                                countryRepository $countryRepository
+                                countryRepository $countryRepository,
+                                CompanionRepository $companionRepository
     )
     {
         $this->travelRepository = $travelRepository;
@@ -91,6 +98,7 @@ class TravelsController extends Controller
         $this->overNightStayRepository = $overNightStayRepository;
         $this->cityRepository = $cityRepository;
         $this->countryRepository = $countryRepository;
+        $this->companionRepository = $companionRepository;
     }
 
     /**
@@ -154,13 +162,13 @@ class TravelsController extends Controller
      */
     public function create()
     {
-
         return view('travels.create', [
             'categories' => $this->categoryRepository->all(),
             'transports' => $this->transportRepository->all(),
             'month' => $this->monthRepository->all(),
             'complexity' => $this->complexityRepository->all(),
-            'overNightStay' => $this->overNightStayRepository->all()
+            'overNightStay' => $this->overNightStayRepository->all(),
+            'companion' => $this->companionRepository->all(),
         ]);
     }
 
@@ -174,8 +182,9 @@ class TravelsController extends Controller
 
         $travel = $this->travelRepository->getBySlug($slug);
         $travel->coordsMeTravel = $travel->travelAddress->pluck('coords')->toArray();
-        $optionsCities = $this->cityRepository->getCityByCountry($travel->countryIds)->
-        map->only(['local_name', 'country_id', 'city_id', 'title_en', 'country_title_en']);
+        //dd($travel->coordsMeTravel);
+        // $optionsCities = $this->cityRepository->getCityByCountry($travel->countryIds)->
+        // map->only(['local_name', 'country_id', 'city_id', 'title_en', 'country_title_en']);
         SEOMeta::setTitle($travel->name);
         SEOMeta::setDescription($travel->meta_description);
         SEOMeta::addMeta('travel:published_time', $travel->created_at->toW3CString(), 'property');
@@ -186,8 +195,9 @@ class TravelsController extends Controller
             'transports' => $this->transportRepository->all(),
             'month' => $this->monthRepository->all(),
             'complexity' => $this->complexityRepository->all(),
+            'companion' => $this->companionRepository->all(),
             'overNightStay' => $this->overNightStayRepository->all(),
-            'optionsCities' => $optionsCities,
+            // 'optionsCities' => $optionsCities,
         ]);
     }
 
@@ -198,22 +208,14 @@ class TravelsController extends Controller
     public function show($slug)
     {
         $travel = $this->travelRepository->getBySlug($slug);
-        $travel->coordsMeTravel = $travel->travelAddress->pluck('coords')->toArray();
-        $optionsCities = $this->cityRepository->getCityByCountry($travel->countryIds)->
-        map->only(['local_name', 'country_id', 'city_id', 'title_en', 'country_title_en']);
-
+        $where = ['id' => $travel->id];
         SEOMeta::setTitle($travel->name);
         SEOMeta::setDescription($travel->meta_description);
         SEOMeta::addMeta('travel:published_time', $travel->created_at->toW3CString(), 'property');
         SEOMeta::addKeyword($travel->meta_keywords);
         return view('travels.show', [
             'travel' => $travel,
-            'categories' => $this->categoryRepository->all(),
-            'transports' => $this->transportRepository->all(),
-            'month' => $this->monthRepository->all(),
-            'complexity' => $this->complexityRepository->all(),
-            'overNightStay' => $this->overNightStayRepository->all(),
-            'optionsCities' => $optionsCities,
+            'where' => $where
         ]);
     }
 
@@ -233,6 +235,7 @@ class TravelsController extends Controller
             'transports' => 'id',
             'month' => 'id',
             'complexity' => 'id',
+            'companion' => 'id',
             'over_night_stay' => 'id',
             'countries' => 'country_id',
             'cities' => 'city_id',
@@ -273,6 +276,7 @@ class TravelsController extends Controller
             'transports' => 'id',
             'month' => 'id',
             'complexity' => 'id',
+            'companion' => 'id',
             'over_night_stay' => 'id',
             'countries' => 'country_id',
             'cities' => 'city_id',

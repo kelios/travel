@@ -10,3 +10,4 @@ import './month';
 import './over-night-stay';
 import './travel';
 import './category';
+import './companion';

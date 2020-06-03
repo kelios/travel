@@ -6,7 +6,6 @@
             <travel-form
                 :action="'{{ $travel->url }}'"
                 :data='@json($travel)'
-                :optionsCities='@json($optionsCities)'
                 v-cloak
                 inline-template>
 

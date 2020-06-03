@@ -259,3 +259,19 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 });
 Route::get('/travels', 'Travels\TravelsController@index')->name('index');
 Route::get('/travels/{slug}', 'Travels\TravelsController@show')->name('show');
+
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
+        Route::prefix('companions')->name('companions/')->group(static function() {
+            Route::get('/',                                             'CompanionController@index')->name('index');
+            Route::get('/create',                                       'CompanionController@create')->name('create');
+            Route::post('/',                                            'CompanionController@store')->name('store');
+            Route::get('/{companion}/edit',                             'CompanionController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'CompanionController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{companion}',                                 'CompanionController@update')->name('update');
+            Route::delete('/{companion}',                               'CompanionController@destroy')->name('destroy');
+        });
+    });
+});

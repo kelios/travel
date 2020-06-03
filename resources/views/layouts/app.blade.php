@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {!! SEO::generate(true) !!}
-    <!-- CSRF Token -->
+{!! SEO::generate(true) !!}
+<!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -32,19 +32,29 @@
     </noscript>
     <!-- /Yandex.Metrika counter -->
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-60089211-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-60089211-2');
+    </script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href="/fonts/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-    <link href="/fonts/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
-          type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@100&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     @include('brackets/admin-ui::admin.partials.main-styles')
     @yield('styles')
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <link href="{{ asset('css/metravel.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -52,7 +62,7 @@
     <nav class="navbar bg-white navbar-expand-md navbar-light shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Me Travel') }}
+              {{ config('app.name', 'Me Travel') }}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -69,16 +79,22 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('travels') }}">{{ trans('main.alltravel') }}</a>
+                        <a class="nav-link" href="{{ url('travels') }}">
+                            {{ trans('main.alltravel') }}
+                        </a>
                     </li>
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ trans('home.login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">
+                                {{ trans('home.login') }}
+                            </a>
                         </li>
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ trans('home.register') }}</a>
+                                <a class="nav-link" href="{{ route('register') }}">
+                                     {{ trans('home.register') }}
+                                </a>
                             </li>
                         @endif
                     @else

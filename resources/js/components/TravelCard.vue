@@ -6,16 +6,14 @@
                 class="img-fluid" :alt="travel.name">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
+                    <p class="text-truncate">{{ travel.name }}</p>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
                     <p>
                         <span>{{travel.countryName}}</span>
-
+                        <span> - {{travel.cityName}}</span>
                     </p>
-                    <p>
-                        <span>{{travel.cityName}}</span>
-                    </p>
-                    <p>{{ travel.name }}</p>
-                </div>
-                <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <button type="button"
                                 v-on:click="goAction({url: travel.url})"
@@ -27,15 +25,15 @@
                                 class="btn btn-sm btn-spinner btn-info">
                             <i class="fa fa-edit"></i>
                         </button>
-
+                        <button v-if="!readonly" type="button" class="btn btn-sm btn-danger"
+                                v-on:click="remove(travel.url)">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
 
                     </div>
 
 
-                    <button v-if="!readonly" type="button" class="btn btn-sm btn-danger"
-                            v-on:click="remove(travel.url)">
-                        <i class="fa fa-trash-o"></i>
-                    </button>
+
                 </div>
             </div>
         </div>

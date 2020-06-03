@@ -161,11 +161,11 @@
 
                 </div>
 
-                @include('brackets/admin-ui::admin.includes.media-uploader', [
+                @include('include.media-uploader', [
                            'mediaCollection' => app(App\Models\Travel::class)->getMediaCollection('gallery'),
                            'media' => isset($travel) ? $travel->getThumbs200ForCollection('gallery') : null,
                            'label' => trans('main.gallery')
-                       ])
+                         ])
 
 
             </div>
@@ -207,10 +207,10 @@
                             <ul class="list-group">
                                 <li class="list-group-item">@{{ travelAddress.address[index] }}-@{{meCoords}}
                                     <input type="hidden" v-model="travelAddress.address">
-                                    <button class="btn btn-sm btn-danger"
+                                    <a class="btn btn-sm btn-danger"
                                             v-on:click="removeMarker(travelAddress.address[index],meCoords,index)">
                                         <i class="fa fa-trash-o"></i>
-                                    </button>
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -305,6 +305,26 @@
 
                     <div v-if="errors.has('complexity')" class="form-control-feedback form-text" v-cloak>@{{
                         errors.first('complexity') }}
+                    </div>
+                </div>
+
+                <div class="form-group row align-items-center"
+                     :class="{'has-danger': errors.has('companion'), 'has-success': fields.companion && fields.companion.valid }">
+                    <label for="companion">{{ trans('travels.companion') }}</label>
+
+
+                    <multiselect
+                        :options="{{$companion->toJson()}}"
+                        :multiple="true"
+                        v-model="form.companion"
+                        track-by="id"
+                        label="name"
+                        tag-placeholder="{{ trans('travels.companion') }}"
+                        placeholder="{{ trans('travels.Select companion') }}">
+                    </multiselect>
+
+                    <div v-if="errors.has('companion')" class="form-control-feedback form-text" v-cloak>@{{
+                        errors.first('companion') }}
                     </div>
                 </div>
 

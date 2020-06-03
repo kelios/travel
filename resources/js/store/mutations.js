@@ -12,10 +12,10 @@ let mutations = {
         travels.data.forEach((travel) => {
             state.travelAddress.address.push(travel.travelAddressAdress);
             let arraycoordMeTravel = [];
-            travel.coordMeTravel.forEach((coords) => {
+            travel.coordsMeTravelArr.forEach((coords) => {
                 arraycoordMeTravel = coords.split(',');
                 state.travelAddress.meCoord.push({'lat': arraycoordMeTravel[0], 'lng': arraycoordMeTravel[1]});
-            })
+            });
             state.travelAddress.url.push(travel.url);
         })
     }

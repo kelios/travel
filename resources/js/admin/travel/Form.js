@@ -16,7 +16,6 @@ Vue.component('travel-form', {
         }
         window.Echo.channel('searchCity')
             .listen('.searchResultsCity', (e) => {
-                console.log(e.cities);
                 this.optionsCities = e.cities;
             })
 
@@ -25,7 +24,7 @@ Vue.component('travel-form', {
 
     data: function () {
         return {
-            mediaCollections: ['travelMainImage','gallery'],
+            mediaCollections: ['travelMainImage', 'gallery'],
             optionsCountries: [],
             optionsCities: [],
             travelAddress: {
@@ -79,6 +78,12 @@ Vue.component('travel-form', {
             this.travelAddress.city = this.form.travelAddressCity;
             this.travelAddress.country = this.form.travelAddressCountry;
             this.selectedCountiesIds = this.form.countryIds;
+            this.selectedCountriesCode = this.form.countriesCode;
+        /*    let arraycoordMeTravel = [];
+            this.form.coordsMeTravel.forEach((coords) => {
+                arraycoordMeTravel = coords.split(',');
+                this.travelAddress.meCoord.push({'lat': arraycoordMeTravel[0], 'lng': arraycoordMeTravel[1]});
+            });*/
         },
         async getCountries() {
             let vm = this;
@@ -193,10 +198,8 @@ Vue.component('travel-form', {
                 vm.travelAddress.address.push(response.data.display_name);
                 vm.travelAddress.city.push('-1');
                 let country_code = response.data.address.country_code;
-
                 if (!vm.selectedCountriesCode.includes(country_code)) {
                     vm.optionsCountries.forEach(function (item, index, array) {
-
                         if (item['country_code'] == country_code) {
                             vm.form.countries.push(item);
                             vm.selectedCountiesIds.push(item['country_id']);

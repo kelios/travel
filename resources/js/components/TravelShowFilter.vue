@@ -1,6 +1,7 @@
 <template>
     <div id="page-top">
         <div class="navbar fixed-right">
+
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" v-if="travel.categoryName">
                     <a class="nav-link" id="pills-categories-tab"

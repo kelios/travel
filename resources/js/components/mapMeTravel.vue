@@ -34,7 +34,7 @@
 
     export default {
         name: "mapMeTravel",
-        props: ['data'],
+        props: ['data','where'],
         data: function () {
             return {
                 coords: [],
@@ -60,7 +60,7 @@
         methods: {
             getResults(page = 1) {
                 if (this.data) {
-                    this.$store.dispatch('GET_TRAVELS', {'page': page, 'where': {'publish':1}})
+                    this.$store.dispatch('GET_TRAVELS', {'page': page, 'where':this.where})
                 }
             },
 

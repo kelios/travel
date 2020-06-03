@@ -150,6 +150,11 @@ class TravelRepository implements TravelRepositoryInterface
         return $this->travel->complexity();
     }
 
+    public function companion()
+    {
+        return $this->travel->companion();
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -183,7 +188,8 @@ class TravelRepository implements TravelRepositoryInterface
             'overNightStay',
             'cities',
             'countries',
-            'travelAddress'
+            'travelAddress',
+            'companion'
         ])->find($id);
     }
 
@@ -197,7 +203,9 @@ class TravelRepository implements TravelRepositoryInterface
             'overNightStay',
             'cities',
             'countries',
-            'travelAddress'
+            'travelAddress',
+            'companion',
+            'users'
         ])
             ->where('slug', '=', $slug)
             ->firstOrFail();

@@ -8,6 +8,7 @@ use Brackets\Media\HasMedia\HasMediaThumbsTrait;
 use Brackets\Media\HasMedia\ProcessMediaTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\Models\Media;
@@ -61,9 +62,11 @@ class Travel extends Model implements HasMedia
         'travelAddressCity',
         'travelAddressCountry',
         'countryIds',
+        'countriesCode',
         'travel_image_thumb_url',
         'gallery',
         'coordMeTravel',
+        'coordsMeTravelArr',
         'countryName',
         'cityName',
         'categoryName',
@@ -71,6 +74,7 @@ class Travel extends Model implements HasMedia
         'complexityName',
         'transportName',
         'overNightStayName',
+        'userIds',
 
     ];
 
@@ -94,7 +98,8 @@ class Travel extends Model implements HasMedia
     {
         $images = $this->getMedia('gallery');
         foreach ($images as $key => $image) {
-            $res[$key]['url'] = $image->getUrl();
+            Storage::disk('s3')->delete($image->getPath());
+            $res[$key]['url'] = $image->getUrl('detail_hd');
             $res[$key]['title'] = $this->name;
         }
 
@@ -154,7 +159,16 @@ class Travel extends Model implements HasMedia
      */
     public function complexity()
     {
-        return $this->belongsToMany(Complexity::class, 'travel_complexity')->withTimestamps();
+        return $this->belongsToMany(Complexity::class, 'travel_complexity')
+            ->withTimestamps();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function companion()
+    {
+        return $this->belongsToMany(Companion::class, 'travel_companion', 'travel_id', 'travel_companion_id')->withTimestamps();
     }
 
     /**
@@ -206,14 +220,41 @@ class Travel extends Model implements HasMedia
         return $this->travelAddress()->pluck('coord');
     }
 
+    public function getCoordsMeTravelArrAttribute()
+    {
+        return $this->travelAddress()->pluck('coord')->toArray();
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function getTravelAddressCountryAttribute()
     {
         return $this->travelAddress()->pluck('country_id');
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function getcountryIdsAttribute()
     {
         return $this->countries()->pluck('countries.country_id');
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getCountriesCodeAttribute()
+    {
+        return $this->countries()->pluck('countries.country_code');
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getUserIdsAttribute()
+    {
+        return $this->users()->pluck('users.id')->toArray();
     }
 
     public function getCountryNameAttribute()
@@ -267,6 +308,7 @@ class Travel extends Model implements HasMedia
         $this->countries()->detach();
 
         $this->complexity()->detach();
+        $this->companion()->detach();
         $this->transports()->detach();
         $this->overNightStay()->detach();
         $this->users()->detach();
@@ -308,6 +350,13 @@ class Travel extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null)
     {
         $this->autoRegisterThumb200();
+        $this->addMediaConversion('detail_hd')
+            ->width(1000)
+            ->height(600)
+            ->optimize()
+            ->performOnCollections('gallery')
+            ->nonQueued();
+
     }
 
     /**

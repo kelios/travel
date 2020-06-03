@@ -145,3 +145,14 @@ $factory->define(App\Models\Category::class, static function (Faker\Generator $f
 
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Companion::class, static function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
+        'status' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

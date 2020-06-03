@@ -60,12 +60,12 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
     margin: 0;
-    font-family: "Muli", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 1rem;
+    font-family: 'Bad Script', cursive;
+    font-size: 2rem;
     font-weight: 400;
     line-height: 1.5;
     color: #212529;
-    text-align: left;
+    text-align: center !important;
     background-color: #fff;
 }
 
@@ -183,7 +183,7 @@ pre,
 code,
 kbd,
 samp {
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: Garamond, Baskerville, Baskerville Old Face, Hoefler Text, Times New Roman, serif;
     font-size: 1em;
 }
 
@@ -4202,7 +4202,7 @@ input[type=button].btn-block {
 }
 
 .nav-link:hover, .nav-link:focus {
-    text-decoration:underline;
+    text-decoration: underline;
     font-weight: 800 !important;
 }
 
@@ -4637,7 +4637,7 @@ input[type=button].btn-block {
 .navbar-light .navbar-nav .active > .nav-link,
 .navbar-light .navbar-nav .nav-link.show,
 .navbar-light .navbar-nav .nav-link.active {
-    color:  #e3dfdf !important;
+    color: #e3dfdf !important;
 
 }
 
@@ -10670,7 +10670,6 @@ p.lead {
         display: flex;
         align-items: flex-start;
         flex-grow: 0;
-        width: 100%;
         margin-bottom: auto;
     }
 
@@ -10681,11 +10680,13 @@ p.lead {
 
     #sideNav .navbar-collapse .navbar-nav .nav-item {
         display: block;
+        font-family: 'Bad Script', cursive;
+
     }
 
     #sideNav .navbar-collapse .navbar-nav .nav-item.info {
         color: #ffffff !important;
-        font-style: italic;
+        font-family: 'Jost', sans-serif;
     }
 
     #sideNav .navbar-collapse .navbar-nav .nav-item .nav-link {
@@ -10728,13 +10729,24 @@ section.travel-section {
     max-width: 75rem;
 }
 
-section.travel-section img {
+section.travel-section.description img {
     padding: 0.25rem;
     background-color: #fff;
     border: 1px solid #dee2e6;
     border-radius: 0.25rem;
     max-width: 100%;
     height: auto;
+    max-height: 800px;
+    margin: 10px auto 20px;
+    display: block;
+}
+
+section.travel-section.description {
+    font-size: 1.25rem;
+}
+
+section.travel-section.description span {
+    font-size: 1.25rem !important;
 }
 
 section.travel-section .travel-section-content {
@@ -10754,4 +10766,25 @@ section.travel-section .travel-section-content {
         padding-top: 5rem;
         padding-bottom: 5rem;
     }
+}
+
+.textmenu {
+     color: #ffffff;
+     font-family: 'Cousine', monospace;
+ }
+
+.ulmap{
+    font-family: 'Cousine', monospace;
+}
+
+.textmenu li {
+    list-style: none;
+}
+
+.small {
+    font-size:0.8rem;
+}
+
+.travel-section.gallery img {
+    background: #ffffff;
 }

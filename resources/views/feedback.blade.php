@@ -29,7 +29,7 @@
     </section>
 
     <!-- Testimonials -->
-    <section class="testimonials text-center bg-light">
+    <section class="testimonials text-center ">
         <div class="container">
             <h2 class="mb-5">{{trans('main.titleMainHistory')}}</h2>
             <travel-last></travel-last>
@@ -37,7 +37,7 @@
     </section>
 
     <section class="text-center">
-        <map-me-travel></map-me-travel>
+        <map-me-travel :data="true" ></map-me-travel>
     </section>
 
 

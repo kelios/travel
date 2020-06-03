@@ -5,8 +5,21 @@
         style="position:relative; height:100%; overflow-y: scroll"
         class="fixed-top-2"
     >
+        <section class="travel-section gallery" id="gallery" v-if="travel.gallery">
+
+            <carousel-3d :perspective="9" :controls-visible="true"
+                         :width="1450" :height="757" :display="1" border="0">
+                <slide v-for="(slide, i) in travel.gallery" :index="i" :key="i">
+                    <template slot-scope="{ index}">
+                        <img :data-index="index"
+                             :src="slide.url">
+                    </template>
+                </slide>
+            </carousel-3d>
+
+        </section>
         <div class="container-fluid p-0">
-            <section class="travel-section" id="description" v-if="travel.description">
+            <section class="travel-section description" id="description" v-if="travel.description">
                 <div class="travel-section-content">
                     <h2 class="mb-5">{{travel.name}}</h2>
                     <p class="lead mb-0" v-html="travel.description"></p>
@@ -28,17 +41,20 @@
                                      :title="__('travels.recommendation')"></travel-show-section>
             </section>
 
-            <section class="travel-section" id="gallery" v-if="travel.gallery">
-                <carousel-3d :perspective="9" :controls-visible="true"
-                             :width="1450" :height="757" :display="1" border="0">
-                    <slide v-for="(slide, i) in travel.gallery" :index="i" :key="i">
-                        <template slot-scope="{ index}">
-                            <img :data-index="index"
-                                 :src="slide.url">
-                        </template>
-                    </slide>
-                </carousel-3d>
+            <section class="travel-section ulmap" id="map" v-if="travel.travelAddressAdress">
+                <div class="travel-section-content">
+                    <h2>{{__('travels.map')}}</h2>
+                    <map-me-travel :data="true" :where="where"></map-me-travel>
+                    <ul class="list-group">
+                        <li class="list-group-item" v-for="(address,index) in travel.travelAddressAdress" :key="index">
+                            {{address}}-
+                            {{travel.coordsMeTravelArr[index]}}
+                        </li>
+                    </ul>
+
+                </div>
             </section>
+
         </div>
     </b-card-body>
 </template>
@@ -47,8 +63,10 @@
 
     export default {
         name: 'TravelShowList',
-        props: ['travel'],
-
+        props: ['travel', 'where'],
+        created() {
+            console.log(this.travel);
+        },
         computed: {
 
             getData() {

@@ -41,13 +41,12 @@ class WysiwygUploadController extends Controller
                 $constraint->upsize();
             })
             ->stream();
+
         $s3->put($savedPath, $image, 'public');
         // optimize image
        // OptimizerChainFactory::create()->optimize(Storage::disk('s3')->url($savedPath));
-
         // create related model
         $wysiwygMedia = WysiwygMedia::create(['file_path' => $savedPath]);
-
         // return image's path to use in wysiwyg
         return response()->json([
             'file' => Storage::disk('s3')->url($savedPath),

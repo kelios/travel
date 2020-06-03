@@ -29,7 +29,13 @@
  */
 
 body {
-    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    font-family: 'Bad Script', cursive;
+    font-size:1rem;
+    font-weight: 600;
+    line-height: 1.6;
+    color: #212529;
+    background-color: #ffffff !important;
 }
 
 h1,
@@ -38,8 +44,13 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Bad Script', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 700;
+}
+a {
+    color: #4b7c6f;
+    text-decoration: none;
+    background-color: transparent;
 }
 
 .home-quote {
@@ -50,7 +61,7 @@ h6 {
 }
 
 .home-quote blockquote {
-    font-family: Georgia, serif;
+    font-family: 'Bad Script', cursive;
     font-size: 25px;
     font-style: italic;
     max-width: 100%;
@@ -203,4 +214,5 @@ footer.footer {
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
+
 
