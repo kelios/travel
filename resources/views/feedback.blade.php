@@ -22,7 +22,7 @@
                     </p>
                 </div>
                 <div class="col-lg-6 order-lg-2 text-white showcase-img"
-                     style="background-image: url('/media/slider/about.jpg');"></div>
+                     style="background-image: url('/media/slider/main2.jpg');"></div>
             </div>
 
         </div>
@@ -37,7 +37,7 @@
     </section>
 
     <section class="text-center">
-        <map-me-travel :data="true" ></map-me-travel>
+        <map-me-travel :data="false" ></map-me-travel>
     </section>
 
 

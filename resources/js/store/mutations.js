@@ -9,13 +9,16 @@ let mutations = {
         state.optionsCities = optionsCities
     },
     SET_MAP_DATA(state, travels) {
-        travels.data.forEach((travel) => {
+        state.travelAddress.meCoord = [];
+        travels.data.forEach((travel, indexMe) => {
             state.travelAddress.address.push(travel.travelAddressAdress);
-            let arraycoordMeTravel = [];
-            travel.coordsMeTravelArr.forEach((coords) => {
+            state.travelAddress.meCoord.push(travel.coordsMeTravelArr);
+          /*  let arraycoordMeTravel = [];
+            state.travelAddress.meCoord.forEach((coords) => {
+                console.log(indexMe);
                 arraycoordMeTravel = coords.split(',');
                 state.travelAddress.meCoord.push({'lat': arraycoordMeTravel[0], 'lng': arraycoordMeTravel[1]});
-            });
+            });*/
             state.travelAddress.url.push(travel.url);
         })
     }

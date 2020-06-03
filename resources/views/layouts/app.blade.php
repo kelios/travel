@@ -62,7 +62,8 @@
     <nav class="navbar bg-white navbar-expand-md navbar-light shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-              {{ config('app.name', 'Me Travel') }}
+                {{ config('app.name', 'Me Travel') }}
+                <img class="logoimg" src="/media/slider/logo_yellow.png">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -73,17 +74,27 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
+                    <a class="nav-link" href="{{ url('travels') }}">
+                        {{ trans('main.alltravel') }}
+                    </a>
 
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('travels') }}">
-                            {{ trans('main.alltravel') }}
-                        </a>
-                    </li>
-                    <!-- Authentication Links -->
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('travels/create') }}">
+                                {{ trans('home.addTravels') }} <span class="caret"></span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('travels/metravel') }}">
+                                {{ trans('home.meTravels') }} <span class="caret"></span>
+                            </a>
+                        </li>
+                    @endauth
+                <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">
@@ -93,7 +104,7 @@
                         @if (Route::has('register'))
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('register') }}">
-                                     {{ trans('home.register') }}
+                                    {{ trans('home.register') }}
                                 </a>
                             </li>
                         @endif
@@ -105,12 +116,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ url('travels/metravel') }}">
-                                    {{ trans('home.meTravels') }} <span class="caret"></span>
-                                </a>
-                                <a class="dropdown-item" href="{{ url('travels/create') }}">
-                                    {{ trans('home.addTravels') }} <span class="caret"></span>
-                                </a>
+
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();

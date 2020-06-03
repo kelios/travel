@@ -45,6 +45,10 @@ class Travel extends Model implements HasMedia
         'meta_description'
     ];
 
+    protected $casts = [
+        'publish' => 'boolean',
+    ];
+
     /**
      * @var array
      */
@@ -246,7 +250,7 @@ class Travel extends Model implements HasMedia
      */
     public function getCountriesCodeAttribute()
     {
-        return $this->countries()->pluck('countries.country_code');
+        return $this->countries()->pluck('countries.country_code')->toArray() ?? [];
     }
 
     /**

@@ -8,21 +8,21 @@
             style="z-index: 0"
         >
             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-
-            <l-marker
-                v-for="(latlng,index) in travelAddress.meCoord"
-                :lat-lng="latlng"
-                :key="index"
-            >
-                <l-icon
-                    :icon-anchor="staticAnchor"
-                    class-name="someExtraClass"
+            <div v-for="(coordsMe,indexCoord) in  travelAddress.meCoord">
+                <l-marker
+                    v-for="(latlng,index) in getcoord(coordsMe)"
+                    :lat-lng="latlng"
+                    :key="index"
+                    :icon="iconMe"
                 >
-                    <div class="headline">
-                        <a v-bind:href="travelAddress.url[index]" target="_blank">Me</a>
-                    </div>
-                </l-icon>
-            </l-marker>
+                    <l-popup
+                        :content="'<a href='+travelAddress.url[index]+' target=\'_blank\'>'
+                    +travelAddress.address[index]+
+                    '</a>'"
+                    >
+                    </l-popup>
+                </l-marker>
+            </div>
         </l-map>
     </div>
 </template>
@@ -34,7 +34,7 @@
 
     export default {
         name: "mapMeTravel",
-        props: ['data','where'],
+        props: ['data', 'where'],
         data: function () {
             return {
                 coords: [],
@@ -43,25 +43,63 @@
                 url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 staticAnchor: [16, 37],
+                iconMe: L.icon({
+                    iconUrl: '/media/slider/logo_yellow.png',
+                    iconSize: [27, 30],
+                    iconAnchor: [16, 37]
+                }),
                 isLoading: false,
             }
         },
         created() {
             this.getResults();
+
         },
         computed: {
             groupedTravelAddress() {
                 return _.chunk(this.travelAddress.meCoord, 15);
             },
-            ...mapGetters([
-                'travelAddress'
-            ])
+            dynamicSize() {
+                return [this.iconSize, this.iconSize * 1.15];
+            },
+            dynamicAnchor() {
+                return [this.iconSize / 2, this.iconSize * 1.15];
+            },
+            getcoord: function () {
+                let arraycoordMeTravel = [];
+                let res = [];
+                var vm = this;
+                return function (coordsMe) {
+                    coordsMe.map(function (latlng) {
+                        arraycoordMeTravel = latlng.split(',');
+                        res.push({'lat': arraycoordMeTravel[0], 'lng': arraycoordMeTravel[1]});
+                    });
+                    return res;
+                }
+            },
+            ...
+                mapGetters([
+                    'travelAddress'
+                ])
         },
         methods: {
             getResults(page = 1) {
                 if (this.data) {
-                    this.$store.dispatch('GET_TRAVELS', {'page': page, 'where':this.where})
+                    this.$store.dispatch('GET_TRAVELS', {'page': page, 'where': this.where})
                 }
+            },
+            getcoord2: function (indexCoord) {
+                let arraycoordMeTravel = [];
+                let res = [];
+                console.log(this.travelAddress.meCoord[indexCoord]);
+                console.log(indexCoord);
+                this.travelAddress.meCoord[indexCoord].map(function (latlng) {
+                    console.log(latlng);
+                    arraycoordMeTravel = latlng.split(',');
+                    res.push({'lat': arraycoordMeTravel[0], 'lng': arraycoordMeTravel[1]});
+
+                });
+                return res;
             },
 
         },

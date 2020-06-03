@@ -8,7 +8,7 @@
 
             <div class="container">
 
-                <div class="row justify-content-center p-3">
+                <div class="row justify-content-center p-3 label-white">
                     <div class="col-md-8">
                         <div class="">
                             <div class="reg-header">{{ trans('home.login')}}</div>

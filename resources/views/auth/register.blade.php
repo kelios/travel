@@ -6,7 +6,7 @@
         <div class="home-quote">
 
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-center label-white">
                     <div class="col-md-8">
                         <div class="">
                             <div class="reg-header">{{ trans('home.register')}}</div>

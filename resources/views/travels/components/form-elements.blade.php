@@ -88,15 +88,9 @@
                                 <l-marker
                                     v-for="latlng in travelAddress.meCoord"
                                     :lat-lng="latlng"
+                                    :icon="iconMe"
                                 >
-                                    <l-icon
-                                        :icon-anchor="staticAnchor"
-                                        class-name="someExtraClass"
-                                    >
-                                        <div class="headline">
-                                            Me
-                                        </div>
-                                    </l-icon>
+
                                 </l-marker>
 
                             </l-map>
@@ -178,19 +172,19 @@
                 <div class="form-check row"
                      :class="{'has-danger': errors.has('publish'), 'has-success': fields.publish && fields.publish.valid }">
                     <div class="ml-md-auto" :class="isFormLocalized ? 'col-md-8' : 'col-md-10'">
-                        <input class="form-check-input" id="publish" type="checkbox" v-model="form.publish"
-                               v-validate="''"
-                               data-vv-name="publish" name="publish_fake_element">
-                        <label class="form-check-label" for="publish">
-                            {{ trans('travels.publish') }}
-                        </label>
-                        <input type="hidden" name="publish" :value="form.publish">
-                        <div v-if="errors.has('publish')" class="form-control-feedback form-text" v-cloak>@{{
-                            errors.first('publish')
-                            }}
-                        </div>
+                        <toggle-button
+                            id="publish"
+                            :labels="{checked: '{{trans('travels.publish')}}', unchecked: '{{trans('main.hide')}}'}"
+                            v-model="form.publish"
+                            name="publish"
+                            color="#ff9f5a"
+                            :width='120'
+                            :height='40'
+                            :font-size='14'
+                        />
                     </div>
                 </div>
+                <hr class="mb-4">
                 <div class="form-group img__container text-center">
                     <label for="avatar"> {{ trans('travels.uploadCover') }}</label>
                     <div class="avatar-upload ">
@@ -208,7 +202,7 @@
                                 <li class="list-group-item">@{{ travelAddress.address[index] }}-@{{meCoords}}
                                     <input type="hidden" v-model="travelAddress.address">
                                     <a class="btn btn-sm btn-danger"
-                                            v-on:click="removeMarker(travelAddress.address[index],meCoords,index)">
+                                       v-on:click="removeMarker(travelAddress.address[index],meCoords,index)">
                                         <i class="fa fa-trash-o"></i>
                                     </a>
                                 </li>

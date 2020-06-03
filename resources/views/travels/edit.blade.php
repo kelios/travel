@@ -13,10 +13,21 @@
                       :action="action" novalidate>
                     <div class="card-header">
                         {{ trans('travels.editTravels') }}
-                        <a href="{{ $travel->url }}" target="_blank"><i class="fa  fa-eye"></i></a>
+                        <div class="float-right">
+                            <a href="{{ $travel->url }}" target="_blank">
+                                {{trans('main.preShow')}}
+                            </a>
+
+                            <button type="submit" class="btn btn-primary" :disabled="submiting">
+                                <i class="fa" :class="submiting ? 'fa-spinner' : 'fa-download'"></i>
+                                {{ trans('main.save') }}
+                            </button>
+
+                        </div>
+
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body blue">
                         <div class="form-group">
                             @include('travels.components.form-elements')
                         </div>

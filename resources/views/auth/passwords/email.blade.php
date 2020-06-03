@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="call-to-action text-white text-center">
+    <section class="call-to-action text-white text-center label-white">
         <div class="overlay"></div>
         <div class="home-quote">
 

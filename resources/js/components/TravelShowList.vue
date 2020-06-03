@@ -5,7 +5,7 @@
         style="position:relative; height:100%; overflow-y: scroll"
         class="fixed-top-2"
     >
-        <section class="travel-section gallery" id="gallery" v-if="travel.gallery">
+        <section class="travel-section gallery active" id="gallery" v-if="travel.gallery">
 
             <carousel-3d :perspective="9" :controls-visible="true"
                          :width="1450" :height="757" :display="1" border="0">

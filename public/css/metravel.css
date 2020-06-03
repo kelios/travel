@@ -1,14 +1,80 @@
-.someExtraClass {
-    background-color: #D18780;
-    padding: 10px;
-    border: 1px solid #333;
-    border-radius: 0 20px 20px 20px;
-    box-shadow: 5px 3px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: auto !important;
-    height: auto !important;
-    margin: 0 !important;
+body {
+    margin: 0;
+    font-family: 'Bad Script', cursive !important;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.6;
+    color: #212529;
+    background-color: #ffffff !important;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Bad Script', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+}
+
+a {
+    color: #4b7c6f;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+label {
+    font-family: 'Jost', sans-serif;
+    color: #222;
+}
+
+.label-white label {
+    color: #ffffff;
+}
+
+.logoimg {
+    height: 30px;
+}
+
+.card-header {
+    background: #ff9f5a !important;
+    color: #222;
+}
+
+.card-footer {
+    background: #ff9f5a !important;
+    color: #222;
+}
+
+.card-body.blue {
+    background: #6aaaaa !important;
+}
+
+.btn-primary, .btn-info {
+    background-color: #6aaaaa;
+    border-color: #6aaaaa;
+    color: #222;
+}
+
+small {
+    color: #222 !important;
+}
+
+.multiselect__tag {
+    background: #ff9f5a !important;
+    color: #222 !important;
+}
+
+.multiselect__tag-icon {
+    background: #ff9f5a !important;
+    color: #222 !important;
+}
+
+.multiselect__tag-icon:after {
+    color: #222 !important;
+}
+
 
 .fixed-top-2 {
     margin-top: 3.4rem;
@@ -28,30 +94,6 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-landing-page/blob/master/LICENSE)
  */
 
-body {
-    margin: 0;
-    font-family: 'Bad Script', cursive;
-    font-size:1rem;
-    font-weight: 600;
-    line-height: 1.6;
-    color: #212529;
-    background-color: #ffffff !important;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: 'Bad Script', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 700;
-}
-a {
-    color: #4b7c6f;
-    text-decoration: none;
-    background-color: transparent;
-}
 
 .home-quote {
     display: flex;
@@ -109,7 +151,7 @@ a {
 header.masthead {
     position: relative;
     background-color: #343a40;
-    background: url("/media/slider/main2.jpg") no-repeat center center;
+    background: url("/media/slider/about.jpg") no-repeat center center;
     background-size: cover;
     padding-top: 8rem;
     padding-bottom: 8rem;
@@ -178,8 +220,8 @@ header.masthead h1 {
 }
 
 .testimonials {
-    padding-top: 7rem;
-    padding-bottom: 7rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
 }
 
 .testimonials .testimonial-item {
@@ -194,7 +236,7 @@ header.masthead h1 {
 .call-to-action {
     position: relative;
     background-color: #343a40;
-    background: url("/media/slider/main2.jpg") no-repeat center center;
+    background: url("/media/slider/about.jpg") no-repeat center center;
     background-size: cover;
     padding-top: 7rem;
     padding-bottom: 7rem;
@@ -215,4 +257,75 @@ footer.footer {
     padding-bottom: 1rem;
 }
 
+.perekluchatel {
+    position: relative;
+    display: inline-block;
+    width: 98px;
+    height: 49px;
+}
 
+.perekluchatel input {
+    display: none;
+}
+
+.sumblavam {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #2f2c2c;
+    transition: .4s;
+    border: 1px solid #b5afaf;;
+    box-shadow: 0px 1px 5px 1px rgba(179, 173, 173, 0.69), 0px 3px 13px 4px rgba(255, 243, 243, 0.95);
+}
+
+.sumblavam:before {
+    position: absolute;
+    content: "";
+    height: 40px;
+    width: 38px;
+    left: 3px;
+    bottom: 3.8px;
+    background-color: #e7ebec;
+    transition: .4s;
+}
+
+input:checked + .sumblavam {
+    background-color: #10c110;
+}
+
+input:focus + .sumblavam {
+    box-shadow: 0 0 1px #00FF00;
+}
+
+input:checked + .sumblavam:before {
+    transform: translateX(52px);
+}
+
+.sumblavam.alemen {
+    border-radius: 34px;
+}
+
+.sumblavam.alemen:before {
+    border-radius: 50%;
+}
+
+.list-inline {
+    padding-left: 0;
+    list-style: none;
+}
+
+.list-inline-item {
+    display: inline-block;
+}
+
+.list-inline-item:not(:last-child) {
+    margin-right: 0.5rem;
+}
+
+.initialism {
+    font-size: 90%;
+    text-transform: uppercase;
+}

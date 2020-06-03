@@ -14,6 +14,7 @@ import Vue from 'vue';
 import Carousel3d from 'vue-carousel-3d';
 import BootstrapVue from 'bootstrap-vue';
 import Lang from 'laravel-vue-lang';
+import { ToggleButton } from 'vue-js-toggle-button'
 import './app-components/bootstrap';
 import './index';
 
@@ -36,6 +37,8 @@ Vue.use(VueQuillEditor);
 Vue.use(Notifications);
 Vue.use(VueCookie);
 Vue.use(BootstrapVue);
+Vue.component('ToggleButton', ToggleButton)
+
 Vue.use(Lang, {
     locale: 'ru',
     fallback: 'en',

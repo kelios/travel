@@ -1,6 +1,6 @@
 <template>
-    <div class="row">
-        <div class="card mb-4 shadow-sm">
+    <div class="row justify-content-center">
+        <div class="card col-11 shadow-sm">
             <img
                 :src="travel.travel_image_thumb_url"
                 class="img-fluid" :alt="travel.name">
@@ -12,26 +12,32 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <p>
                         <span>{{travel.countryName}}</span>
-                        <span> - {{travel.cityName}}</span>
+                        <span v-if="travel.cityName"> - {{travel.cityName}}</span>
                     </p>
-                    <div class="btn-group">
-                        <button type="button"
-                                v-on:click="goAction({url: travel.url})"
-                                class="btn btn-sm btn-spinner btn-success">
-                            <i class="fa  fa-eye"></i>
+                    <p v-if="!readonly">
+                        <span class="badge badge-success" v-if="travel.publish">{{__('main.puplish')}}</span>
+                        <span  class="badge badge-dark" v-else>{{__('main.hide')}}</span>
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <p>
+                        <a :href="'/travels/'+travel.slug">
+                            {{__('main.readMore')}}
+                        </a>
+
+                    </p>
+                    <div class="btn-group-lg">
+                        <button v-if="!readonly" type="button" class="btn btn-sm btn-warning"
+                                v-on:click="goAction({url: travel.url+'/edit' })">
+                            {{__('main.edit')}}
                         </button>
-                        <button v-if="!readonly" type="button"
-                                v-on:click="goAction({url: travel.url+'/edit' })"
-                                class="btn btn-sm btn-spinner btn-info">
-                            <i class="fa fa-edit"></i>
-                        </button>
+
                         <button v-if="!readonly" type="button" class="btn btn-sm btn-danger"
                                 v-on:click="remove(travel.url)">
-                            <i class="fa fa-trash-o"></i>
+                            {{__('main.delete')}}
                         </button>
 
                     </div>
-
 
 
                 </div>
