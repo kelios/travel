@@ -89,6 +89,13 @@ class Travel extends Model implements HasMedia
      */
     public function getTravelImageThumbUrlAttribute(): ?string
     {
+        $image = $this->getMedia('travelMainImage');
+        if (array_get($image, 0)) {
+            if (Storage::disk('s3')->exists($image[0]->getPath())) {
+                Storage::disk('s3')->delete($image[0]->getPath());
+            }
+        }
+
         $travelImageThumbUrl = $this->getFirstMediaUrl('travelMainImage', 'thumb_200');
         if (!$travelImageThumbUrl) {
             $travelImageThumbUrl = array_get($this->categories, 0) ? $this->categories[0]->category_image_thumb_url : Config::get('constants.image.defaultCatImage');
@@ -102,7 +109,9 @@ class Travel extends Model implements HasMedia
     {
         $images = $this->getMedia('gallery');
         foreach ($images as $key => $image) {
-            Storage::disk('s3')->delete($image->getPath());
+            if (Storage::disk('s3')->exists($image->getPath())) {
+                Storage::disk('s3')->delete($image->getPath());
+            }
             $res[$key]['url'] = $image->getUrl('detail_hd');
             $res[$key]['title'] = $this->name;
         }
@@ -355,8 +364,7 @@ class Travel extends Model implements HasMedia
     {
         $this->autoRegisterThumb200();
         $this->addMediaConversion('detail_hd')
-            ->width(1000)
-            ->height(600)
+            ->width(1024)
             ->optimize()
             ->performOnCollections('gallery')
             ->nonQueued();

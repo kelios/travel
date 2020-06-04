@@ -82,7 +82,6 @@ Vue.component('travel-form', {
         },
         getCountries() {
             let vm = this;
-            console.log('getCountries');
             axios.get('/location/countries')
                 .then(function (response) {
                     vm.optionsCountries = response.data;
@@ -152,7 +151,6 @@ Vue.component('travel-form', {
         gecodingAddress: function (param, setMarker = false, setZoom = true) {
             param.format = FORMAT;
             let vm = this;
-            console.log('gecodingAddress');
             axios.get(ENDPOINTSEARCH, {
                 params: param,
             }).then(function (response) {
@@ -185,7 +183,6 @@ Vue.component('travel-form', {
 // Определяем адрес по координатам (обратное геокодирование).
         getAddress: function (coords) {
             let vm = this;
-            console.log('getAddress');
             axios.get(ENDPOINTREVERSE, {
                 params: {
                     format: FORMAT,
@@ -196,7 +193,6 @@ Vue.component('travel-form', {
                 vm.travelAddress.address.push(response.data.display_name);
                 vm.travelAddress.city.push('-1');
                 let country_code = response.data.address.country_code;
-                console.log(vm.selectedCountriesCode);
                 if (!vm.selectedCountriesCode.includes(country_code)) {
                     vm.optionsCountries.forEach(function (item, index, array) {
                         if (item['country_code'] == country_code) {
@@ -244,7 +240,6 @@ Vue.component('travel-form', {
         },
         onToggleChange(id, event) { // added event as second arg
             let value = event.value;  // changed from event.target.value to event.value
-            console.log(value);
         },
 
     },

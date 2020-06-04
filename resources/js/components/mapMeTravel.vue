@@ -16,8 +16,8 @@
                     :icon="iconMe"
                 >
                     <l-popup
-                        :content="'<a href='+travelAddress.url[index]+' target=\'_blank\'>'
-                    +travelAddress.address[index]+
+                        :content="'<a href='+travelAddress.url[indexCoord]+' target=\'_blank\'>'
+                    +travelAddress.address[indexCoord][index]+
                     '</a>'"
                     >
                     </l-popup>
@@ -53,7 +53,6 @@
         },
         created() {
             this.getResults();
-
         },
         computed: {
             groupedTravelAddress() {
@@ -91,11 +90,8 @@
             getcoord2: function (indexCoord) {
                 let arraycoordMeTravel = [];
                 let res = [];
-                console.log(this.travelAddress.meCoord[indexCoord]);
-                console.log(indexCoord);
                 this.travelAddress.meCoord[indexCoord].map(function (latlng) {
-                    console.log(latlng);
-                    arraycoordMeTravel = latlng.split(',');
+                     arraycoordMeTravel = latlng.split(',');
                     res.push({'lat': arraycoordMeTravel[0], 'lng': arraycoordMeTravel[1]});
 
                 });

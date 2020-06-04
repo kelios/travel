@@ -61,7 +61,6 @@
             },
             remove: function (url) {
                 let vm = this;
-                console.log('remove');
                 axios.delete(url).then(function (response) {
                     vm.$emit('remove', vm.travel.id);
                 }, function (error) {

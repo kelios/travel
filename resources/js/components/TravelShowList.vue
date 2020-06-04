@@ -65,7 +65,6 @@
         name: 'TravelShowList',
         props: ['travel', 'where'],
         created() {
-            console.log(this.travel);
         },
         computed: {
 
