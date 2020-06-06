@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Storage;
 
 class WysiwygUploadController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function uploads3(Request $request)
     {
@@ -44,7 +48,7 @@ class WysiwygUploadController extends Controller
 
         $s3->put($savedPath, $image, 'public');
         // optimize image
-       // OptimizerChainFactory::create()->optimize(Storage::disk('s3')->url($savedPath));
+        // OptimizerChainFactory::create()->optimize(Storage::disk('s3')->url($savedPath));
         // create related model
         $wysiwygMedia = WysiwygMedia::create(['file_path' => $savedPath]);
         // return image's path to use in wysiwyg
