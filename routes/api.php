@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('search', 'travels\TravelsController@search');
-Route::get('travels', 'travels\TravelsController@get');
-Route::get('travelsLast', 'travels\TravelsController@getLast');
+Route::get('search', 'Travels\TravelsController@search');
+Route::get('travels', 'Travels\TravelsController@get');
+Route::get('travelsLast', 'Travels\TravelsController@getLast');
 Route::get('searchCities', 'LocationController@searchCities');
 

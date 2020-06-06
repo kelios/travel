@@ -1,6 +1,6 @@
 <template>
     <div style="height: 300px; width: 100%">
-        <div></div>
+
         <l-map
             :zoom="zoom"
             :center="center"
@@ -8,11 +8,11 @@
             style="z-index: 0"
         >
             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-            <div v-for="(coordsMe,indexCoord) in  travelAddress.meCoord">
+            <div v-for="(coordsMe,indexCoord) in  travelAddress.meCoord"  :key="`Record-${indexCoord}`">
                 <l-marker
-                    v-for="(latlng,index) in getcoord(coordsMe)"
+                    v-for="(latlng,indexLat) in getcoord(coordsMe)"
                     :lat-lng="latlng"
-                    :key="index"
+                    :key="`item-${indexCoord}-${indexLat}`"
                     :icon="iconMe"
                 >
                     <l-popup
@@ -53,6 +53,7 @@
         },
         created() {
             this.getResults();
+            console.log(this.travelAddress);
         },
         computed: {
             groupedTravelAddress() {
@@ -68,7 +69,9 @@
                 let arraycoordMeTravel = [];
                 let res = [];
                 var vm = this;
+
                 return function (coordsMe) {
+                    console.log(coordsMe);
                     coordsMe.map(function (latlng) {
                         arraycoordMeTravel = latlng.split(',');
                         res.push({'lat': arraycoordMeTravel[0], 'lng': arraycoordMeTravel[1]});
