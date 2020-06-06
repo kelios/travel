@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Storage;
 
 class WysiwygUploadController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function uploads3(Request $request)
     {
         // get image from request and check validity
