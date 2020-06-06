@@ -228,7 +228,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-Route::group(['namespace' => 'travels', 'prefix' => 'travels', 'as' => 'travels.'], function () {
+Route::group(['namespace' => 'Travels', 'prefix' => 'travels', 'as' => 'travels.'], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::get('/metravel', 'TravelsController@metravel')->name('metravel');
         Route::get('/create', 'TravelsController@create')->name('create');

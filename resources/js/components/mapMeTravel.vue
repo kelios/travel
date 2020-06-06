@@ -17,7 +17,7 @@
                 >
                     <l-popup
                         :content="'<a href='+travelAddress.url[indexCoord]+' target=\'_blank\'>'
-                    +travelAddress.address[indexCoord][index]+
+                    +travelAddress.address[indexCoord][indexLat]+
                     '</a>'"
                     >
                     </l-popup>
@@ -71,7 +71,6 @@
                 var vm = this;
 
                 return function (coordsMe) {
-                    console.log(coordsMe);
                     coordsMe.map(function (latlng) {
                         arraycoordMeTravel = latlng.split(',');
                         res.push({'lat': arraycoordMeTravel[0], 'lng': arraycoordMeTravel[1]});
