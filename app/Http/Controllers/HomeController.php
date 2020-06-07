@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-    //    $this->middleware('auth');
+        //    $this->middleware('auth');
     }
 
     /**
@@ -27,7 +27,8 @@ class HomeController extends Controller
         SEOMeta::setTitle('MeTravel - Travels');
         SEOMeta::setDescription('Travels');
         SEOMeta::setCanonical('https://metravel.by/');
-        return view('welcome');
+        $where = ['publish' => 1];
+        return view('welcome', ['where' => $where]);
     }
 
     public function about()
@@ -35,7 +36,8 @@ class HomeController extends Controller
         SEOMeta::setTitle('MeTravel - Travels');
         SEOMeta::setDescription('Travels');
         SEOMeta::setCanonical('https://metravel.by/');
-        return view('about');
+        $where = ['publish' => 1];
+        return view('about', ['where' => $where]);
     }
 
     public function contact()
@@ -43,6 +45,7 @@ class HomeController extends Controller
         SEOMeta::setTitle('MeTravel - Travels');
         SEOMeta::setDescription('Travels');
         SEOMeta::setCanonical('https://metravel.by/');
-        return view('feedback');
+        $where = ['publish' => 1];
+        return view('feedback', ['where' => $where]);
     }
 }

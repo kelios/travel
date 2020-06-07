@@ -8,21 +8,21 @@
             style="z-index: 0"
         >
             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-            <div v-for="(coordsMe,indexCoord) in  travelAddress.meCoord"  :key="`Record-${indexCoord}`">
-                <l-marker
-                    v-for="(latlng,indexLat) in getcoord(coordsMe)"
-                    :lat-lng="latlng"
-                    :key="`item-${indexCoord}-${indexLat}`"
-                    :icon="iconMe"
-                >
-                    <l-popup
-                        :content="'<a href='+travelAddress.url[indexCoord]+' target=\'_blank\'>'
-                    +travelAddress.address[indexCoord][indexLat]+
-                    '</a>'"
+            <template v-for="(coordsMe,indexCoord) in  travelAddress.meCoord">
+                <div v-for="(latlng,indexLat) in coordsMe">
+                    <l-marker
+                        :lat-lng="getLatLng(latlng)"
+                        :icon="iconMe"
                     >
-                    </l-popup>
-                </l-marker>
-            </div>
+                        <l-popup
+                            :content="'<a href='+travelAddress.url[indexCoord]+' target=\'_blank\'>'
+                        +travelAddress.address[indexCoord][indexLat]+
+                        '</a>'"
+                        >
+                        </l-popup>
+                    </l-marker>
+                </div>
+            </template>
         </l-map>
     </div>
 </template>
@@ -53,7 +53,6 @@
         },
         created() {
             this.getResults();
-            console.log(this.travelAddress);
         },
         computed: {
             groupedTravelAddress() {
@@ -65,17 +64,10 @@
             dynamicAnchor() {
                 return [this.iconSize / 2, this.iconSize * 1.15];
             },
-            getcoord: function () {
-                let arraycoordMeTravel = [];
-                let res = [];
-                var vm = this;
-
-                return function (coordsMe) {
-                    coordsMe.map(function (latlng) {
-                        arraycoordMeTravel = latlng.split(',');
-                        res.push({'lat': arraycoordMeTravel[0], 'lng': arraycoordMeTravel[1]});
-                    });
-                    return res;
+            getLatLng: function () {
+                return function (latlng) {
+                    let arraycoordMeTravel = latlng.split(',');
+                    return {'lat': arraycoordMeTravel[0], 'lng': arraycoordMeTravel[1]}
                 }
             },
             ...
@@ -93,7 +85,7 @@
                 let arraycoordMeTravel = [];
                 let res = [];
                 this.travelAddress.meCoord[indexCoord].map(function (latlng) {
-                     arraycoordMeTravel = latlng.split(',');
+                    arraycoordMeTravel = latlng.split(',');
                     res.push({'lat': arraycoordMeTravel[0], 'lng': arraycoordMeTravel[1]});
 
                 });

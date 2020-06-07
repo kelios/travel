@@ -17,7 +17,7 @@
                     <h2> {{trans('main.aboutTitle')}}</h2>
                     <p class="lead mb-0">
                         @if (config('feedback.enabled'))
-                            <feedback-form />
+                            <feedback-form/>
                         @endif
                     </p>
                 </div>
@@ -37,7 +37,7 @@
     </section>
 
     <section class="text-center">
-        <map-me-travel :data="false" ></map-me-travel>
+        <map-me-travel :where='@json($where ?? '')' :data="true"></map-me-travel>
     </section>
 
 
