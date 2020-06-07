@@ -117,7 +117,7 @@ small {
 .home-quote blockquote:before {
     display: block;
     content: "\201C";
-    font-size: 89px;
+    font-size: 70px;
     position: absolute;
     left: -15px;
     top: -20px;
@@ -126,7 +126,7 @@ small {
 .home-quote blockquote:after {
     display: block;
     content: "\201d";
-    font-size: 89px;
+    font-size: 70px;
     position: absolute;
     right: -15px;
     color: #ffffff;
