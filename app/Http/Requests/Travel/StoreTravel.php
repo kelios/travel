@@ -5,6 +5,7 @@ namespace App\Http\Requests\Travel;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Arr;
 
 class StoreTravel extends FormRequest
 {
@@ -59,7 +60,7 @@ class StoreTravel extends FormRequest
         if ($this->has($keyEntity) && !is_null($this->get($keyEntity))) {
             $data = [];
             foreach ($this->get($keyEntity) as $entity) {
-                $data[] = array_get($entity, $searchKey);
+                $data[] = Arr::get($entity, $searchKey);
             }
             return $data;
         }

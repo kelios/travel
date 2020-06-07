@@ -13,6 +13,7 @@ use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\Models\Media;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Arr;
 
 class Travel extends Model implements HasMedia
 {
@@ -90,7 +91,7 @@ class Travel extends Model implements HasMedia
     public function getTravelImageThumbUrlAttribute(): ?string
     {
         $image = $this->getMedia('travelMainImage');
-        if (array_get($image, 0)) {
+        if (Arr::get($image, 0)) {
             if (Storage::disk('s3')->exists($image[0]->getPath())) {
                 Storage::disk('s3')->delete($image[0]->getPath());
             }
@@ -98,7 +99,7 @@ class Travel extends Model implements HasMedia
 
         $travelImageThumbUrl = $this->getFirstMediaUrl('travelMainImage', 'thumb_200');
         if (!$travelImageThumbUrl) {
-            $travelImageThumbUrl = array_get($this->categories, 0) ? $this->categories[0]->category_image_thumb_url : Config::get('constants.image.defaultCatImage');
+            $travelImageThumbUrl = Arr::get($this->categories, 0) ? $this->categories[0]->category_image_thumb_url : Config::get('constants.image.defaultCatImage');
         }
         return $travelImageThumbUrl
             ?: Config::get('constants.image.defaultCatImage');

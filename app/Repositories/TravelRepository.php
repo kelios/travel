@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Travel;
 use App\User;
 use App\Repositories\Interfaces\TravelRepositoryInterface;
+use Illuminate\Support\Arr;
 
 /**
  * Class TravelRepository
@@ -37,8 +38,8 @@ class TravelRepository implements TravelRepositoryInterface
     public function getList($where = [])
     {
         $travels = $this->travel;
-        if (array_get($where, 'user_id')) {
-            $for_user = array_get($where, 'user_id');
+        if (Arr::get($where, 'user_id')) {
+            $for_user = Arr::get($where, 'user_id');
             unset($where['user_id']);
             $travels = $travels->whereHas('users', function ($query) use ($for_user) {
                 $query->whereIn('users.id', [$for_user]);
@@ -55,8 +56,8 @@ class TravelRepository implements TravelRepositoryInterface
     public function search($search, $where = [])
     {
         $searchTravel = $this->travel;
-        if (array_get($where, 'user_id')) {
-            $for_user = array_get($where, 'user_id');
+        if (Arr::get($where, 'user_id')) {
+            $for_user = Arr::get($where, 'user_id');
             unset($where['user_id']);
             $searchTravel = $searchTravel->whereHas('users', function ($query) use ($for_user) {
                 $query->whereIn('users.id', [$for_user]);
