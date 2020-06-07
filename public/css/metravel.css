@@ -121,7 +121,15 @@ small {
     position: absolute;
     left: -15px;
     top: -20px;
-    color: #7a7a7a;
+    color: #ffffff;
+}
+.home-quote blockquote:after {
+    display: block;
+    content: "\201d";
+    font-size: 89px;
+    position: absolute;
+    right: -15px;
+    color: #ffffff;
 }
 
 .home-quote blockquote cite {
