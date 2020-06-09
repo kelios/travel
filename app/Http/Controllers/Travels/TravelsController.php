@@ -123,12 +123,33 @@ class TravelsController extends Controller
             $where = json_decode($request->query('where'), true);
         }
         $travels = $this->travelRepository->getList($where);
+        $travels->getCollection()->transform(function ($value) {
+            return $value->only([
+                'name',
+                'url',
+                'publish',
+                'countryName',
+                'cityName',
+                'travel_image_thumb_url',
+                'travelAddressAdress',
+                'coordsMeTravelArr'
+            ]);
+        });
         return response()->json($travels);
     }
 
     public function getLast(Request $request)
     {
         $travels = $this->travelRepository->getLast();
+        $travels->transform(function ($value) {
+            return $value->only([
+                'name',
+                'url',
+                'publish',
+                'countryName',
+                'travel_image_thumb_url'
+            ]);
+        });
         return response()->json($travels);
     }
 
@@ -182,9 +203,7 @@ class TravelsController extends Controller
 
         $travel = $this->travelRepository->getBySlug($slug);
         $travel->coordsMeTravel = $travel->travelAddress->pluck('coords')->toArray();
-        //dd($travel->coordsMeTravel);
-        // $optionsCities = $this->cityRepository->getCityByCountry($travel->countryIds)->
-        // map->only(['local_name', 'country_id', 'city_id', 'title_en', 'country_title_en']);
+
         SEOMeta::setTitle($travel->name);
         SEOMeta::setDescription($travel->meta_description);
         SEOMeta::addMeta('travel:published_time', $travel->created_at->toW3CString(), 'property');
@@ -197,7 +216,6 @@ class TravelsController extends Controller
             'complexity' => $this->complexityRepository->all(),
             'companion' => $this->companionRepository->all(),
             'overNightStay' => $this->overNightStayRepository->all(),
-            // 'optionsCities' => $optionsCities,
         ]);
     }
 

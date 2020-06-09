@@ -45,7 +45,10 @@ class TravelRepository implements TravelRepositoryInterface
                 $query->whereIn('users.id', [$for_user]);
             });
         }
-        return $travels->where($where)->orderBy('created_at', 'desc')->paginate();
+        return $travels
+            ->where($where)
+            ->orderBy('created_at', 'desc')
+            ->paginate();
     }
 
     public function getLast($where = [])
@@ -212,8 +215,4 @@ class TravelRepository implements TravelRepositoryInterface
             ->firstOrFail();
     }
 
-    public function mapAddress(Travel $travel)
-    {
-
-    }
 }
