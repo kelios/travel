@@ -132,7 +132,8 @@ class TravelsController extends Controller
                 'cityName',
                 'travel_image_thumb_url',
                 'travelAddressAdress',
-                'coordsMeTravelArr'
+                'coordsMeTravelArr',
+                'slug'
             ]);
         });
         return response()->json($travels);
@@ -147,7 +148,8 @@ class TravelsController extends Controller
                 'url',
                 'publish',
                 'countryName',
-                'travel_image_thumb_url'
+                'travel_image_thumb_url',
+                'slug'
             ]);
         });
         return response()->json($travels);
