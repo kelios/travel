@@ -163,31 +163,33 @@ section.travel-section .travel-section-content {
     font-size: 0.8rem;
 }
 
-.gallery .agile__nav-button {
-    background: transparent;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    font-size: 24px;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    width: 80px;
-}
+@media (min-width: 480px) {
+    .gallery .agile__nav-button {
+        background: transparent;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 24px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        width: 80px;
+    }
 
-.gallery .agile__nav-button:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 1;
-}
+    .gallery .agile__nav-button:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 1;
+    }
 
-.gallery .agile__nav-button--prev {
-    left: 0;
-}
+    .gallery .agile__nav-button--prev {
+        left: 0;
+    }
 
-.gallery .agile__nav-button--next {
-    right: 0;
+    .gallery .agile__nav-button--next {
+        right: 0;
+    }
 }
 
 .gallery .agile__dots {
