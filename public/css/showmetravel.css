@@ -23,6 +23,14 @@ body {
         background: url("/media/slider/8.jpg") center;
         background-size: cover;
     }
+    #sideNav .navbar-collapse .navbar-nav .nav-item .nav-link{
+        color:#935233;
+    }
+
+    #sideNav .navbar-collapse .navbar-nav .nav-item .active{
+        color:#222;
+        font-size: large;
+    }
 
     #sideNav .navbar-brand {
         display: flex;
