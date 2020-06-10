@@ -226,10 +226,9 @@ section.travel-section .travel-section-content {
     display: block;
     height: 600px;
     -o-object-fit: cover;
-    object-fit: cover;
+    object-fit: contain;
     width: 100%;
-    background-position-x: center;
-    background-position-y: center;
+    background: #222;
 }
 
 .gallery .fa-chevron-right:before {
