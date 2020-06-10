@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Country;
 use Illuminate\Support\Str;
 
 class City extends Model
@@ -89,7 +88,9 @@ class City extends Model
         'local_name',
         'country_title_en',
         'country_title_ru',
-        'country_local_name'
+        'country_local_name',
+        'region_local_name',
+        'area_local_name'
     ];
 
     /**
@@ -141,6 +142,25 @@ class City extends Model
         $local_name = 'title_' . $this->locale;
         return $this->country->$local_name;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getRegionLocalNameAttribute()
+    {
+        $region_local_name = 'region_' . $this->locale;
+        return $this->$region_local_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAreaLocalNameAttribute()
+    {
+        $region_local_name = 'area_' . $this->locale;
+        return $this->$region_local_name;
+    }
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -123,6 +123,7 @@ small {
     top: -20px;
     color: #ffffff;
 }
+
 .home-quote blockquote:after {
     display: block;
     content: "\201d";
@@ -336,4 +337,8 @@ input:checked + .sumblavam:before {
 .initialism {
     font-size: 90%;
     text-transform: uppercase;
+}
+
+.multiselect__element {
+    font-size: 14px;
 }

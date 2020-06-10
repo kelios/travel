@@ -99,8 +99,11 @@ Vue.component('travel-form', {
                 this.$store.dispatch('SEARCH_CITIES', {'query': query, 'countryIds': this.selectedCountiesIds})
             }
         },
-        customLabel({local_name, country_local_name}) {
-            return `${local_name} – ${country_local_name}`
+        customLabel({local_name, region_local_name, area_local_name, country_local_name}) {
+            return `${local_name}
+             - ${region_local_name}
+            - ${area_local_name}
+             – ${country_local_name}`
         },
         getCitiesSelected: function (items) {
             items.forEach((item) => {
@@ -108,7 +111,12 @@ Vue.component('travel-form', {
                 this.selectedCountriesCode.push(item.country_code);
             });
             if (items.length > 1) {
-                this.gecodingAddress({country: items[items.length - 1].local_name}, false, true);
+                this.gecodingAddress(
+                    {
+                        country: items[items.length - 1].local_name,
+                        region: items[items.length - 1].region_local_name
+                    },
+                    false, true);
             }
         },
         /*getCities: function () {
@@ -136,7 +144,13 @@ Vue.component('travel-form', {
             this.travelAddress.address.push(item.local_name);
             this.travelAddress.country.push(item.country_id);
             this.travelAddress.city.push(item.id);
-            this.gecodingAddress({q: item.local_name + ',' + item.country_title_en}, true, true);
+            this.gecodingAddress({
+                    q: item.local_name + ','
+                        + item.region_local_name + ','
+                        + item.area_local_name + ','
+                        + item.country_title_en
+                },
+                true, true);
         },
         removeCity: function (item) {
             let indexCity = this.travelAddress.address.findIndex(function (value, index, arr) {
@@ -156,6 +170,8 @@ Vue.component('travel-form', {
             }).then(function (response) {
                 if (response.data[0]) {
                     let latlng = {};
+
+                    console.log(param);
                     latlng.lat = response.data[0].lat;
                     latlng.lng = response.data[0].lon;
 

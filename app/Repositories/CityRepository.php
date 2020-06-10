@@ -80,9 +80,9 @@ class CityRepository implements TravelRelationRepositoryInterface
             $searchCities = $searchCities->whereIn('country_id', $whereIn);
         }
         $searchCities = $searchCities->where(function ($query) use ($search) {
-            return $query->where('title_'.$this->getLocale(), 'like',  $search . '%');
+            return $query->where('title_' . $this->getLocale(), 'like', $search . '%');
         });
-        return $searchCities->with('country')->limit(20)->get();
+        return $searchCities->with('country')->limit(10)->get();
     }
 
     /**

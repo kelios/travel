@@ -60,7 +60,9 @@ class LocationController extends BaseController
             'title_en',
             'country_title_en',
             'title_' . $location,
-            'country_local_name'
+            'country_local_name',
+            'region_local_name',
+            'area_local_name'
         ]);
         //broadcast search results with Pusher channels
         event(new SearchCityEvent($cities));
