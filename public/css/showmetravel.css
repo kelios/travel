@@ -23,12 +23,13 @@ body {
         background: url("/media/slider/8.jpg") center;
         background-size: cover;
     }
-    #sideNav .navbar-collapse .navbar-nav .nav-item .nav-link{
-        color:#935233;
+
+    #sideNav .navbar-collapse .navbar-nav .nav-item .nav-link {
+        color: #935233;
     }
 
-    #sideNav .navbar-collapse .navbar-nav .nav-item .active{
-        color:#222;
+    #sideNav .navbar-collapse .navbar-nav .nav-item .active {
+        color: #222;
         font-size: large;
     }
 
@@ -227,6 +228,8 @@ section.travel-section .travel-section-content {
     -o-object-fit: cover;
     object-fit: cover;
     width: 100%;
+    background-position-x: center;
+    background-position-y: center;
 }
 
 .gallery .fa-chevron-right:before {
