@@ -91,9 +91,6 @@
                 </div>
             </div>
 
-            <blockquote class="text-center">{{trans('main.blockquote')}}
-                <cite>{{trans('main.cite')}}</cite>
-            </blockquote>
 
         </div>
     </section>

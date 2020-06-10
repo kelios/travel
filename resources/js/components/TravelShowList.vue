@@ -6,17 +6,7 @@
         class="fixed-top-2"
     >
         <section class="travel-section gallery active" id="gallery" v-if="travel.gallery">
-
-            <carousel-3d :perspective="9" :controls-visible="true"
-                         :width="1450" :height="757" :display="1" border="0">
-                <slide v-for="(slide, i) in travel.gallery" :index="i" :key="i">
-                    <template slot-scope="{ index}">
-                        <img :data-index="index"
-                             :src="slide.url">
-                    </template>
-                </slide>
-            </carousel-3d>
-
+            <slider :slides='travel.gallery'></slider>
         </section>
         <div class="container-fluid p-0">
             <section class="travel-section description" id="description" v-if="travel.description">

@@ -229,6 +229,7 @@ class TravelsController extends Controller
     {
         $travel = $this->travelRepository->getBySlug($slug);
         $where = ['id' => $travel->id];
+      //  dd($travel->gallery);
         SEOMeta::setTitle($travel->name);
         SEOMeta::setDescription($travel->meta_description);
         SEOMeta::addMeta('travel:published_time', $travel->created_at->toW3CString(), 'property');

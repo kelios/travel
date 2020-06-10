@@ -11,10 +11,10 @@ import VueCookie from 'vue-cookie';
 import {Admin} from 'craftable';
 import VModal from 'vue-js-modal';
 import Vue from 'vue';
-import Carousel3d from 'vue-carousel-3d';
+import VueAgile from 'vue-agile'
 import BootstrapVue from 'bootstrap-vue';
 import Lang from 'laravel-vue-lang';
-import { ToggleButton } from 'vue-js-toggle-button'
+import {ToggleButton} from 'vue-js-toggle-button'
 import './app-components/bootstrap';
 import './index';
 
@@ -37,6 +37,7 @@ Vue.use(VueQuillEditor);
 Vue.use(Notifications);
 Vue.use(VueCookie);
 Vue.use(BootstrapVue);
+Vue.use(VueAgile)
 Vue.component('ToggleButton', ToggleButton)
 
 Vue.use(Lang, {
@@ -46,8 +47,6 @@ Vue.use(Lang, {
         fr: ['validation'],
     },
 });
-Vue.use(Carousel3d);
-
 Vue.component('search-me-travel', require('../components/SearchMeTravel.vue').default);
 Vue.component('travel-last', require('../components/TravelLast.vue').default);
 Vue.component('travel-list', require('../components/TravelList.vue').default);
@@ -58,6 +57,7 @@ Vue.component('travel-show-menu', require('../components/TravelShowMenu.vue').de
 Vue.component('travel-show-filter', require('../components/TravelShowFilter.vue').default);
 Vue.component('travel-card-last', require('../components/TravelCardLast.vue').default);
 Vue.component('map-me-travel', require('../components/mapMeTravel.vue').default);
+Vue.component('slider', require('../components/Slider.vue').default);
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('feedback-form', require('../components/FeedbackForm.vue').default);
 
