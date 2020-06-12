@@ -48,7 +48,7 @@ class TravelRepository implements TravelRepositoryInterface
         return $travels
             ->where($where)
             ->orderBy('created_at', 'desc')
-            ->paginate();
+            ->paginate(6);
     }
 
     public function getLast($where = [])

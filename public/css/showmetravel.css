@@ -226,7 +226,7 @@ section.travel-section .travel-section-content {
 
 .gallery .slide img {
     display: block;
-    height: 600px;
+    max-height: 600px;
     -o-object-fit: cover;
     object-fit: contain;
     width: 100%;

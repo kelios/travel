@@ -342,3 +342,12 @@ input:checked + .sumblavam:before {
 .multiselect__element {
     font-size: 14px;
 }
+
+.page-link {
+    color: #222;
+}
+.pagination li.active a{
+    color: #222 !important;
+    background-color: #ff9f5a !important;
+}
+
