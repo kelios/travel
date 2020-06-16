@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class TravelAddress extends Model
 {
@@ -28,7 +29,7 @@ class TravelAddress extends Model
     /* ************************ ACCESSOR ************************* */
     public function getLatAttribute()
     {
-        return $this->coords['lat'];
+        return Arr::get($this->coords,'lat');
     }
 
     public function getCoordsAttribute()
@@ -37,8 +38,8 @@ class TravelAddress extends Model
             $coords = explode(',', $this->coord);
 
             return [
-                'lat' => $coords[0],
-                'lng' => $coords[1]
+                'lat' => Arr::get($coords,0),
+                'lng' => Arr::get($coords,1)
             ];
         } else {
             return [];
@@ -47,7 +48,7 @@ class TravelAddress extends Model
 
     public function getlngAttribute()
     {
-        return $this->coords['lng'];
+        return Arr::get($this->coords,'lng');
     }
 
 
