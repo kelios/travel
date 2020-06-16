@@ -77,9 +77,9 @@ class UpdateTravel extends FormRequest
         $coordsMeTravel = $this->get('coordsMeTravel');
         foreach ($travelAddress as $key => $value) {
             $data[$key]['address'] = $value;
-            $data[$key]['coord'] = implode(',', $coordsMeTravel[$key]);
-            $data[$key]['city_id'] = $travelAddressCity[$key] != '-1' ? $travelAddressCity[$key] : null;
-            $data[$key]['country_id'] = $travelAddressCountry[$key];
+            $data[$key]['coord'] = implode(',', Arr::get($coordsMeTravel, $key));
+            $data[$key]['city_id'] = Arr::get($travelAddressCity, $key) != '-1' ? Arr::get($travelAddressCity, $key) : null;
+            $data[$key]['country_id'] = Arr::get($travelAddressCountry, $key);
         }
         return $data;
     }
