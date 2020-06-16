@@ -22,7 +22,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "*",
         "league/flysystem-aws-s3-v3": "^1.0",
-        "pusher/pusher-php-server": "~3.0"
+        "pusher/pusher-php-server": "~3.0",
+        "laravelium/sitemap": "7.0.*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
@@ -31,7 +32,7 @@
         "nunomaduro/collision": "^4.1",
         "phpunit/phpunit": "^8.5",
         "brackets/admin-generator": "*",
-        "laravelium/sitemap": "7.0.*"
+
     },
     "config": {
         "optimize-autoloader": true,
