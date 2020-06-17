@@ -33,8 +33,8 @@ Vue.component('travel-form', {
             coords: [],
             zoom: 9,
             center: L.latLng(53.8828449, 27.7273595),
-            url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+            url: 'https://{s}.tile.osm.org/{z}/{x}/{y}.png',
+            attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
             staticAnchor: [16, 37],
             iconMe: L.icon({
                 iconUrl: '/media/slider/logo_yellow.png',

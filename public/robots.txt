@@ -2,4 +2,4 @@ User-agent: *
 Disallow:
 
 Host: www.metravel.by
-Sitemap: http://metravel.by/mysitemap
+Sitemap: https://metravel.by/mysitemap
