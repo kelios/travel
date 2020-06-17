@@ -67,6 +67,7 @@ class WysiwygUploadController extends Controller
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })
+            ->orientate()
             ->stream();
 
         $s3->put($savedPath, $image, 'public');
