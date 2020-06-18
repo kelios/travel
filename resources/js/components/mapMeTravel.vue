@@ -66,8 +66,14 @@
             },
             getLatLng: function () {
                 return function (latlng) {
-                    let arraycoordMeTravel = latlng.split(',');
-                    return {'lat': arraycoordMeTravel[0], 'lng': arraycoordMeTravel[1]}
+                    console.log(latlng);
+                    if (latlng) {
+                        let arraycoordMeTravel = latlng.split(',');
+                        return {'lat': arraycoordMeTravel[0], 'lng': arraycoordMeTravel[1]}
+                    } else {
+                        //if city or place not fount set MINSK @to do fix this
+                        return {'lat': 53.8828449, 'lng': 27.7273595}
+                    }
                 }
             },
             ...

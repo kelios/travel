@@ -24,11 +24,13 @@ class TravelCollection extends ResourceCollection
             return [
                 'name' => $item->name,
                 'url' => $item->url,
-                'slug' => $item->slug,
-                'travel_image_thumb_url' => $item->travel_image_thumb_url,
-                'cityName' => $item->cityName,
+                'publish' => $item->publish,
                 'countryName' => $item->countryName,
-                'categories' => new Category($item->categories),
+                'cityName' => $item->cityName,
+                'travel_image_thumb_url' => $item->travel_image_thumb_url,
+                'travelAddressAdress' => $item->travelAddressAdress,
+                'coordsMeTravelArr' => $item->coordsMeTravelArr,
+
             ];
         })->toArray();
 

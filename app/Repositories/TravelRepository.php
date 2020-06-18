@@ -77,7 +77,7 @@ class TravelRepository implements TravelRepositoryInterface
                 ->orWhere('plus', 'like', '%' . $search . '%')
                 ->orWhere('minus', 'like', '%' . $search . '%');
         });
-        return $searchTravel->paginate();
+        return $searchTravel->paginate(6);
     }
 
     /**
