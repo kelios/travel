@@ -2014,12 +2014,12 @@
     }
 
     .slide {
-        height: 300px
+        height: 400px
     }
 
     @media (min-width: 320px) {
         .slide {
-            height: 300px
+            height: 400px
         }
         .section--demo-2 .agile__nav-button{
             background:none !important;
