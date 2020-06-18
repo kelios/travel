@@ -26,6 +26,7 @@ class TravelCollection extends ResourceCollection
                 'url' => $item->url,
                 'publish' => $item->publish,
                 'countryName' => $item->countryName,
+                'slug' => $item->slug,
                 'cityName' => $item->cityName,
                 'travel_image_thumb_url' => $item->travel_image_thumb_url,
                 'travelAddressAdress' => $item->travelAddressAdress,
