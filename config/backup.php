@@ -68,7 +68,17 @@ return [
              * For a complete list of available customization options, see https://github.com/spatie/db-dumper
              */
             'databases' => [
-                'mysql',
+                'mysql' => [
+
+                    'dump' => [
+                        'excludeTables' => [
+                            'countries',
+                            'regions',
+                            'cities'
+                        ]
+                    ],
+
+                ],
             ],
         ],
 
@@ -96,6 +106,7 @@ return [
              * The disk names on which the backups will be stored.
              */
             'disks' => [
+                'google',
                 'local',
             ],
         ],
@@ -131,11 +142,11 @@ return [
         'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
         'mail' => [
-            'to' => 'your@example.com',
+            'to' => 'admin@metravel.by',
 
             'from' => [
-                'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-                'name' => env('MAIL_FROM_NAME', 'Example'),
+                'address' => env('MAIL_FROM_ADDRESS', 'admin@metravel.by'),
+                'name' => env('MAIL_FROM_NAME', 'BACKUP'),
             ],
         ],
 
