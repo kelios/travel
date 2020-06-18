@@ -20,6 +20,9 @@ Route::get('/contact', 'HomeController@contact')->name('contact');
 
 Route::post('/admin/wysiwyg-media', 'WysiwygUploadController@uploads3')->name('brackets/admin-ui::wysiwyg-upload');
 Route::post('upload', 'WysiwygUploadController@upload')->name('brackets/media::upload');
+
+Route::post('feedback','HomeController@feedback')->name('feedback');
+
 Auth::routes();
 
 Route::get('/location/cities', 'LocationController@getCities')->name('cities');

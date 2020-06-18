@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::middleware('auth:api')->get('/user', 'Admin/UsersController@AuthRouteAPI');
 Route::get('search', 'Travels\TravelsController@search');
 Route::get('travels', 'Travels\TravelsController@get');
 Route::get('travelsLast', 'Travels\TravelsController@getLast');

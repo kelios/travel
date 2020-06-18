@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Http\Request;
+use App\Notifications\Feedback;
+use Illuminate\Support\Facades\Notification;
 
 class HomeController extends Controller
 {
@@ -47,5 +49,14 @@ class HomeController extends Controller
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['publish' => 1];
         return view('feedback', ['where' => $where]);
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function feedback(Request $request)
+    {
+        Notification::route('mail', config('feedback.email'))
+            ->notify(new Feedback($request->input()));
     }
 }

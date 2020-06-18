@@ -33,7 +33,7 @@ class UsersController extends Controller
     {
         // create and AdminListing instance for a specific model and
         $data = AdminListing::create(User::class)->processRequestAndGet(
-            // pass the request with params
+        // pass the request with params
             $request,
 
             // set columns to query
@@ -58,8 +58,8 @@ class UsersController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @throws AuthorizationException
      * @return Factory|View
+     * @throws AuthorizationException
      */
     public function create()
     {
@@ -93,8 +93,8 @@ class UsersController extends Controller
      * Display the specified resource.
      *
      * @param User $user
-     * @throws AuthorizationException
      * @return void
+     * @throws AuthorizationException
      */
     public function show(User $user)
     {
@@ -107,8 +107,8 @@ class UsersController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param User $user
-     * @throws AuthorizationException
      * @return Factory|View
+     * @throws AuthorizationException
      */
     public function edit(User $user)
     {
@@ -150,8 +150,8 @@ class UsersController extends Controller
      *
      * @param DestroyUser $request
      * @param User $user
-     * @throws Exception
      * @return ResponseFactory|RedirectResponse|Response
+     * @throws Exception
      */
     public function destroy(DestroyUser $request, User $user)
     {
@@ -168,10 +168,10 @@ class UsersController extends Controller
      * Remove the specified resources from storage.
      *
      * @param BulkDestroyUser $request
-     * @throws Exception
      * @return Response|bool
+     * @throws Exception
      */
-    public function bulkDestroy(BulkDestroyUser $request) : Response
+    public function bulkDestroy(BulkDestroyUser $request): Response
     {
         DB::transaction(static function () use ($request) {
             collect($request->data['ids'])
@@ -184,5 +184,14 @@ class UsersController extends Controller
         });
 
         return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function AuthRouteAPI(Request $request)
+    {
+        return $request->user();
     }
 }
