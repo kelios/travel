@@ -192,47 +192,6 @@ section.travel-section .travel-section-content {
     }
 }
 
-.gallery .agile__dots {
-    bottom: 10px;
-    left: 50%;
-    position: absolute;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
-}
-
-.gallery .agile__dot {
-    margin: 0 10px;
-}
-
-.gallery .agile__dot button {
-    background-color: transparent;
-    border: 1px solid #fff;
-    border-radius: 50%;
-    cursor: pointer;
-    display: block;
-    height: 10px;
-    font-size: 0;
-    line-height: 0;
-    margin: 0;
-    padding: 0;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    width: 10px;
-}
-
-.gallery .agile__dot--current button, .agile__dot:hover button {
-    background-color: #fff;
-}
-
-.gallery .slide img {
-    display: block;
-    max-height: 600px;
-    -o-object-fit: cover;
-    object-fit: contain;
-    width: 100%;
-    background: #222;
-}
-
 .gallery .fa-chevron-right:before {
     content: "\003E";
 }

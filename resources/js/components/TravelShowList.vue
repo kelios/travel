@@ -5,8 +5,14 @@
         style="position:relative; height:100%; overflow-y: scroll"
         class="fixed-top-2"
     >
-        <section class="travel-section gallery active" id="gallery" v-if="travel.gallery">
-            <slider :slides='travel.gallery'></slider>
+        <section class="travel-section gallery section--demo-2 active" id="gallery" v-if="travel.gallery">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                            <slider :slides='travel.gallery'></slider>
+                    </div>
+                </div>
+            </div>
         </section>
         <div class="container-fluid p-0">
             <section class="travel-section description" id="description" v-if="travel.description">
