@@ -24,6 +24,7 @@ class TravelCollection extends ResourceCollection
             return [
                 'name' => $item->name,
                 'url' => $item->url,
+                'slug' => $item->slug,
                 'travel_image_thumb_url' => $item->travel_image_thumb_url,
                 'cityName' => $item->cityName,
                 'countryName' => $item->countryName,
