@@ -27,6 +27,7 @@ a {
 label {
     font-family: 'Jost', sans-serif;
     color: #222;
+    font-weight: bold;
 }
 
 .label-white label {
