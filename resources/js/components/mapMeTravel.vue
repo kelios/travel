@@ -66,7 +66,6 @@
             },
             getLatLng: function () {
                 return function (latlng) {
-                    console.log(latlng);
                     if (latlng) {
                         let arraycoordMeTravel = latlng.split(',');
                         return {'lat': arraycoordMeTravel[0], 'lng': arraycoordMeTravel[1]}
