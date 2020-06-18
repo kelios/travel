@@ -341,14 +341,14 @@ class Travel extends Model implements HasMedia
     public function registerMediaCollections()
     {
         $this->addMediaCollection('travelMainImage')
-            ->maxFilesize(10 * 1024 * 1024)
+            ->maxFilesize(20 * 1024 * 1024)
             ->useDisk('s3')
             ->accepts('image/*')
             ->singleFile();
 
         $this->addMediaCollection('gallery')
             ->maxNumberOfFiles(10)
-            ->maxFilesize(10 * 1024 * 1024)
+            ->maxFilesize(20 * 1024 * 1024)
             ->useDisk('s3')
             ->accepts('image/*')
             ->onlyKeepLatest(10);
