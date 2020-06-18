@@ -2017,6 +2017,15 @@
         height: 300px
     }
 
+    @media (min-width: 320px) {
+        .slide {
+            height: 300px
+        }
+        .section--demo-2 .agile__nav-button{
+            background:none !important;
+        }
+    }
+
     @media (min-width: 420px) {
         .slide {
             height: 400px
