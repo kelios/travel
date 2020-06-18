@@ -3,7 +3,6 @@
         id="nav-scroller"
         ref="content"
         style="position:relative; height:100%; overflow-y: scroll"
-        class="fixed-top-2"
     >
         <section class="travel-section gallery section--demo-2 active" id="gallery" v-if="travel.gallery">
             <div class="container-fluid">
