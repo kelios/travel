@@ -110,7 +110,7 @@ class TravelsController extends Controller
     public function index(IndexTravel $request)
     {
         SEOMeta::setTitle('MeTravel - Travels');
-        SEOMeta::setDescription('Travels');
+        SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['publish' => 1];
         return view('travels.index', ['where' => $where]);
@@ -171,7 +171,7 @@ class TravelsController extends Controller
     public function metravel(MeTravel $request)
     {
         SEOMeta::setTitle('MeTravel - Travels');
-        SEOMeta::setDescription('Travels');
+        SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['user_id' => Auth::user()->id];
         return view('travels.metravel', ['where' => $where]);
