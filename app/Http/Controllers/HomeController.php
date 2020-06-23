@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        SEOMeta::setTitle('MeTravel - Travels');
+        SEOMeta::setTitle(trans('home.metaMainTitle'));
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['publish' => 1];
@@ -35,7 +35,7 @@ class HomeController extends Controller
 
     public function about()
     {
-        SEOMeta::setTitle('MeTravel - Travels');
+        SEOMeta::setTitle(trans('home.metaMainTitle'));
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['publish' => 1];
@@ -44,7 +44,7 @@ class HomeController extends Controller
 
     public function contact()
     {
-        SEOMeta::setTitle('MeTravel - Travels');
+        SEOMeta::setTitle(trans('home.metaMainTitle'));
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['publish' => 1];

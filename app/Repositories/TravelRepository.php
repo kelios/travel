@@ -51,6 +51,22 @@ class TravelRepository implements TravelRepositoryInterface
             ->paginate(6);
     }
 
+    public function getListBy($where = [])
+    {
+        $travels = $this->travel;
+        if (Arr::get($where, 'user_id')) {
+            $for_user = Arr::get($where, 'user_id');
+            unset($where['user_id']);
+            $travels = $travels->whereHas('users', function ($query) use ($for_user) {
+                $query->whereIn('users.id', [$for_user]);
+            });
+        }
+        return $travels->whereHas('belTravels')
+            ->where($where)
+            ->orderBy('created_at', 'desc')
+            ->paginate(6);
+    }
+
     public function getLast($where = [])
     {
         return $this->travel->where('publish', 1)->orderBy('id', 'desc')->take(3)->get();

@@ -202,6 +202,12 @@ class Travel extends Model implements HasMedia
             ->withTimestamps();
     }
 
+    public function belTravels()
+    {
+        return $this->belongsToMany(Country::class, 'travel_country', 'travel_id', 'country_id')
+            ->withTimestamps()->where('countries.country_id', 3);
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

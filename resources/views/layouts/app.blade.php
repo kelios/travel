@@ -78,6 +78,9 @@
                     <a class="nav-link" href="{{ url('travels') }}">
                         {{ trans('main.alltravel') }}
                     </a>
+                    <a class="nav-link" href="{{ url('travelsby') }}">
+                        {{ trans('main.beltravel') }}
+                    </a>
 
                 </ul>
 

@@ -99,11 +99,12 @@ Vue.component('travel-form', {
                 this.$store.dispatch('SEARCH_CITIES', {'query': query, 'countryIds': this.selectedCountiesIds})
             }
         },
-        customLabel({local_name, region_local_name, area_local_name, country_local_name}) {
-            return `${local_name}
-             - ${region_local_name}
-            - ${area_local_name}
-             – ${country_local_name}`
+        customLabel({local_name = '', region_local_name = '', area_local_name = '', country_local_name = ''}) {
+            let customLabel = `${local_name ? local_name : ''}
+             ${region_local_name ? "-" + region_local_name : ''}
+             ${area_local_name ? "-" + area_local_name : ''}
+             ${country_local_name ? "-" + country_local_name : ''}`
+            return customLabel;
         },
         getCitiesSelected: function (items) {
             items.forEach((item) => {
@@ -113,8 +114,8 @@ Vue.component('travel-form', {
             if (items.length > 1) {
                 this.gecodingAddress(
                     {
-                        country: items[items.length - 1].local_name,
-                        region: items[items.length - 1].region_local_name
+                        country: items[items.length - 1].local_name ?? '',
+                        region: items[items.length - 1].region_local_name ?? '',
                     },
                     false, true);
             }
@@ -144,11 +145,14 @@ Vue.component('travel-form', {
             this.travelAddress.address.push(item.local_name);
             this.travelAddress.country.push(item.country_id);
             this.travelAddress.city.push(item.id);
+            let search = [item.local_name, item.region_local_name, item.country_title_en].filter(Boolean).join(", ");
+            console.log(search);
+            console.log(item.local_name);
+            console.log(item.region_local_name);
+            console.log(item.area_local_name);
+            console.log(item.country_title_en);
             this.gecodingAddress({
-                    q: item.local_name + ','
-                        + item.region_local_name + ','
-                        + item.area_local_name + ','
-                        + item.country_title_en
+                    q: search
                 },
                 true, true);
         },

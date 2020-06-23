@@ -19,6 +19,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\View\View;
@@ -109,10 +110,25 @@ class TravelsController extends Controller
      */
     public function index(IndexTravel $request)
     {
-        SEOMeta::setTitle('MeTravel - Travels');
+        SEOMeta::setTitle(trans('home.metaMainTitle'));
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['publish' => 1];
+        return view('travels.index', ['where' => $where]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param IndexTravel $request
+     * @return array|Factory|View
+     */
+    public function indexby(IndexTravel $request)
+    {
+        SEOMeta::setTitle(trans('home.metaMainTitle'));
+        SEOMeta::setDescription(trans('home.metaMainDescription'));
+        SEOMeta::setCanonical('https://metravel.by/');
+        $where = ['publish' => 1, 'belTravels' => 'true'];
         return view('travels.index', ['where' => $where]);
     }
 
@@ -122,7 +138,13 @@ class TravelsController extends Controller
         if ($request->query('where')) {
             $where = json_decode($request->query('where'), true);
         }
-        $travels = $this->travelRepository->getList($where);
+        if (Arr::get($where, 'belTravels')) {
+            unset($where['belTravels']);
+            $travels = $this->travelRepository->getListBy($where);
+
+        } else {
+            $travels = $this->travelRepository->getList($where);
+        }
         $travels->getCollection()->transform(function ($value) {
             return $value->only([
                 'name',
@@ -170,7 +192,7 @@ class TravelsController extends Controller
 
     public function metravel(MeTravel $request)
     {
-        SEOMeta::setTitle('MeTravel - Travels');
+        SEOMeta::setTitle(trans('home.metaMainTitle'));
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['user_id' => Auth::user()->id];
