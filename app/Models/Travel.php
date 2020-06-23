@@ -401,14 +401,14 @@ class Travel extends Model implements HasMedia
 
     public function setMetaKeywordsAttribute($value)
     {
-        $this->attributes['meta_keywords'] = 'metravel, travel, путешествия, ' .
-            $this->countryName . ', ' . $this->cityName . ', ' . $this->name;
+        $this->attributes['meta_keywords'] = mb_strimwidth('metravel, travel, путешествия, ' .
+            $this->countryName . ', ' . $this->cityName . ', ' . $this->name, 0,255);
     }
 
     public function setMetaDescriptionAttribute($value)
     {
-        $this->attributes['meta_description'] = 'metravel, travel, путешествия, выбрать место для отдыха,' .
-            $this->countryName . ', ' . $this->cityName . ', ' . $this->name . ', ' . $this->categoryName;
+        $this->attributes['meta_description'] = mb_strimwidth('metravel, travel, путешествия, выбрать место для отдыха,' .
+            $this->countryName . ', ' . $this->cityName . ', ' . $this->name . ', ' . $this->categoryName,0, 255);
     }
 
 
