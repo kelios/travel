@@ -261,7 +261,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 Route::get('/travels', 'Travels\TravelsController@index')->name('index');
-Route::get('/travelsby', 'Travels\TravelsController@indexby')->name('index');
+Route::get('/travelsby', 'Travels\TravelsController@indexby')->name('indexby');
 Route::get('/travels/{slug}', 'Travels\TravelsController@show')->name('show');
 
 
