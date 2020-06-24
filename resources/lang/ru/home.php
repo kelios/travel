@@ -26,8 +26,9 @@ return [
     'meTravels' => 'Мои путешествия',
     'name' => 'Имя',
     'confirmPassword' => 'Повторить пароль',
-    'metaMainTitle'=>'MeTravel - сайт о путешествиях',
-    'metaMainDescription'=>'Travels. Сайт о путешествиях.
+    'metaMainTitle' => 'MeTravel - сайт о путешествиях',
+    'editProfile' => 'Мой профиль',
+    'metaMainDescription' => 'Travels. Сайт о путешествиях.
         Оставляй здесь свои воспоминания, о самых ярких моментах в жизни.
         Планируешь маршрут, ищешь куда поехать - путешествуй вместе с meTravel.'
 ];

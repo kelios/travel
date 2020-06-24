@@ -17,7 +17,7 @@ $factory->define(Brackets\AdminAuth\Models\AdminUser::class, function (Faker\Gen
 
     ];
 });/** @var  \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Models\User::class, static function (Faker\Generator $faker) {
+$factory->define(App\User::class, static function (Faker\Generator $faker) {
     return [
         'name' => $faker->firstName,
         'email' => $faker->email,
@@ -152,7 +152,7 @@ $factory->define(App\Models\Companion::class, static function (Faker\Generator $
         'status' => $faker->boolean(),
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
-        
-        
+
+
     ];
 });

@@ -23,6 +23,9 @@ Route::post('upload', 'WysiwygUploadController@upload')->name('brackets/media::u
 
 Route::post('feedback','HomeController@feedback')->name('feedback');
 
+Route::get('users/{user}',  ['as' => 'users.edit', 'uses' => 'UserController@edit']);
+Route::post('users/{user}',  ['as' => 'users.update', 'uses' => 'UserController@update']);
+
 Auth::routes();
 
 Route::get('/location/cities', 'LocationController@getCities')->name('cities');
