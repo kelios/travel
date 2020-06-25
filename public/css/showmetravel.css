@@ -170,3 +170,8 @@ section.travel-section .travel-section-content {
 .gallery .fa-chevron-left:before {
     content: "\003C";
 }
+
+.btn-success {
+    background-color: #6aaaaa !important;
+    border-color: #6aaaaa !important;
+}

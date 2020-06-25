@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
-                            <slider :slides='travel.gallery'></slider>
+                        <slider :slides='travel.gallery'></slider>
                     </div>
                 </div>
             </div>
@@ -49,6 +49,9 @@
 
                 </div>
             </section>
+            <section class="travel-section" id="comment">
+                <comment :auth_user="auth_user" :travel="travel"></comment>
+            </section>
 
         </div>
     </b-card-body>
@@ -58,7 +61,7 @@
 
     export default {
         name: 'TravelShowList',
-        props: ['travel', 'where'],
+        props: ['travel', 'where', 'auth_user'],
         created() {
         },
         computed: {

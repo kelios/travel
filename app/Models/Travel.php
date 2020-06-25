@@ -225,6 +225,11 @@ class Travel extends Model implements HasMedia
         return $this->hasMany(TravelAddress::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function getTravelAddressAdressAttribute()
     {
         return $this->travelAddress()->pluck('address');
@@ -402,13 +407,13 @@ class Travel extends Model implements HasMedia
     public function setMetaKeywordsAttribute($value)
     {
         $this->attributes['meta_keywords'] = mb_strimwidth('metravel, travel, путешествия, ' .
-            $this->countryName . ', ' . $this->cityName . ', ' . $this->name, 0,255);
+            $this->countryName . ', ' . $this->cityName . ', ' . $this->name, 0, 255);
     }
 
     public function setMetaDescriptionAttribute($value)
     {
         $this->attributes['meta_description'] = mb_strimwidth('metravel, travel, путешествия, выбрать место для отдыха,' .
-            $this->countryName . ', ' . $this->cityName . ', ' . $this->name . ', ' . $this->categoryName,0, 255);
+            $this->countryName . ', ' . $this->cityName . ', ' . $this->name . ', ' . $this->categoryName, 0, 255);
     }
 
 

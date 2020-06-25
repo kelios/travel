@@ -77,7 +77,9 @@ class User extends Authenticatable implements HasMedia
             }
         }
 
-        return $this->getFirstMediaUrl('userAvatar', 'thumb_150') ?: null;
+        return $this->getFirstMediaUrl('userAvatar', 'thumb_150') ?
+            $this->getFirstMediaUrl('userAvatar', 'thumb_150')
+            : null;
     }
 
     public function registerMediaCollections()

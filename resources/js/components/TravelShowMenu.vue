@@ -22,6 +22,9 @@
             <b-nav-item class="nav-item" href="#map" v-if="travel.travelAddressAdress">
                 {{ __('travels.map') }}
             </b-nav-item>
+            <b-nav-item class="nav-item" href="#comment">
+                {{ __('travels.comment') }}
+            </b-nav-item>
 
         </b-nav>
     </div>
@@ -31,7 +34,7 @@
 
     export default {
         name: 'TravelShowMenu',
-        props: ['travel'],
+        props: ['travel','auth_user'],
         created() {
         },
         computed: {

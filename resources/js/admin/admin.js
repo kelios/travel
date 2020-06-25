@@ -17,6 +17,7 @@ import Lang from 'laravel-vue-lang';
 import {ToggleButton} from 'vue-js-toggle-button'
 import './app-components/bootstrap';
 import './index';
+import VueResource from "vue-resource"
 
 import 'craftable/dist/ui';
 
@@ -28,6 +29,8 @@ import store from './../store/index'
 Vue.component('l-map', LMap);
 Vue.component('l-tile-layer', LTileLayer);
 Vue.component('l-marker', LMarker);
+
+Vue.use(VueResource);
 
 Vue.component('multiselect', Multiselect);
 Vue.use(VeeValidate, {strict: true});
@@ -60,6 +63,7 @@ Vue.component('map-me-travel', require('../components/mapMeTravel.vue').default)
 Vue.component('slider', require('../components/Slider.vue').default);
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('feedback-form', require('../components/FeedbackForm.vue').default);
+Vue.component('comment', require('../components/Comments.vue').default);
 
 new Vue({
     mixins: [Admin],

@@ -45,6 +45,10 @@ return [
     'map' => 'Карта',
     'max_number_of_files' => 'Максимальное количество фото :maxNumberOfFiles',
     'max_size_pre_file' => 'Максимальное размер загружаемого фото :maxFileSize',
-    '' => '',
+    'comment' => 'Комментарии',
+    'addcomment'=>'Добавить комментарий',
+    ''=>'',
+    ''=>'',
+    ''=>'',
 
 ];

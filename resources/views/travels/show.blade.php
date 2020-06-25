@@ -1,7 +1,10 @@
 @extends('layouts.app')
+
 <link rel="stylesheet" type="text/css" href="{{ asset('css/showmetravel.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/slider.css') }}">
+
 @section('content')
+    @yield('comments')
     <div class="showtravel">
         <nav class="navbar navbar-expand-lg navbar-dark" id="sideNav">
             <ul class="list-group list-group-flush textmenu">
@@ -38,13 +41,16 @@
                     class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <travel-show-menu :travel='@json($travel)'
+                                  :auth_user='@json(Auth::user())'
                 ></travel-show-menu>
             </div>
         </nav>
         <travel-show-filter :travel='@json($travel)'></travel-show-filter>
-        <travel-show-list :where='@json($where)' :travel='@json($travel)'></travel-show-list>
+        <travel-show-list :where='@json($where)' :travel='@json($travel)' :auth_user='@json(Auth::user())'></travel-show-list>
 
     </div>
+
+
 @endsection
 
 

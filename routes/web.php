@@ -21,12 +21,22 @@ Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::post('/admin/wysiwyg-media', 'WysiwygUploadController@uploads3')->name('brackets/admin-ui::wysiwyg-upload');
 Route::post('upload', 'WysiwygUploadController@upload')->name('brackets/media::upload');
 
-Route::post('feedback','HomeController@feedback')->name('feedback');
+Route::post('feedback', 'HomeController@feedback')->name('feedback');
 
-Route::get('users/{user}',  ['as' => 'users.edit', 'uses' => 'UserController@edit']);
-Route::post('users/{user}',  ['as' => 'users.update', 'uses' => 'UserController@update']);
+Route::get('users/{user}', ['as' => 'users.edit', 'uses' => 'UserController@edit']);
+Route::post('users/{user}', ['as' => 'users.update', 'uses' => 'UserController@update']);
+Route::get('/travels', 'Travels\TravelsController@index')->name('index');
+Route::get('/travelsby', 'Travels\TravelsController@indexby')->name('indexby');
+Route::get('/travels/{slug}', 'Travels\TravelsController@show')->name('show');
 
 Auth::routes();
+
+Route::get('/{pageId}', function ($pageId) {
+    return view('page', ['pageId' => $pageId]);
+});
+Route::get('comments/{travelId}', 'CommentController@index');
+Route::post('comments', 'CommentController@store');
+Route::post('comments/{commentId}/{type}', 'CommentController@update');
 
 Route::get('/location/cities', 'LocationController@getCities')->name('cities');
 Route::get('/location/countries', 'LocationController@getCountries')->name('countries');
@@ -219,21 +229,6 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 });
 
 
-/* Auto-generated admin routes */
-Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {
-        Route::prefix('travels')->name('travels/')->group(static function () {
-            Route::get('/', 'TravelsController@index')->name('index');
-            Route::get('/create', 'TravelsController@create')->name('create');
-            Route::post('/', 'TravelsController@store')->name('store');
-            Route::get('/{travel}/edit', 'TravelsController@edit')->name('edit');
-            Route::post('/bulk-destroy', 'TravelsController@bulkDestroy')->name('bulk-destroy');
-            Route::post('/{travel}', 'TravelsController@update')->name('update');
-            Route::delete('/{travel}', 'TravelsController@destroy')->name('destroy');
-        });
-    });
-});
-
 Route::group(['namespace' => 'Travels', 'prefix' => 'travels', 'as' => 'travels.'], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::get('/metravel', 'TravelsController@metravel')->name('metravel');
@@ -263,22 +258,18 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
-Route::get('/travels', 'Travels\TravelsController@index')->name('index');
-Route::get('/travelsby', 'Travels\TravelsController@indexby')->name('indexby');
-Route::get('/travels/{slug}', 'Travels\TravelsController@show')->name('show');
-
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
-        Route::prefix('companions')->name('companions/')->group(static function() {
-            Route::get('/',                                             'CompanionController@index')->name('index');
-            Route::get('/create',                                       'CompanionController@create')->name('create');
-            Route::post('/',                                            'CompanionController@store')->name('store');
-            Route::get('/{companion}/edit',                             'CompanionController@edit')->name('edit');
-            Route::post('/bulk-destroy',                                'CompanionController@bulkDestroy')->name('bulk-destroy');
-            Route::post('/{companion}',                                 'CompanionController@update')->name('update');
-            Route::delete('/{companion}',                               'CompanionController@destroy')->name('destroy');
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {
+        Route::prefix('companions')->name('companions/')->group(static function () {
+            Route::get('/', 'CompanionController@index')->name('index');
+            Route::get('/create', 'CompanionController@create')->name('create');
+            Route::post('/', 'CompanionController@store')->name('store');
+            Route::get('/{companion}/edit', 'CompanionController@edit')->name('edit');
+            Route::post('/bulk-destroy', 'CompanionController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{companion}', 'CompanionController@update')->name('update');
+            Route::delete('/{companion}', 'CompanionController@destroy')->name('destroy');
         });
     });
 });
