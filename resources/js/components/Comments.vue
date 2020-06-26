@@ -32,7 +32,7 @@
                     </div>
                     <!-- Comment Box -->
                     <div class="comment-box">
-                        <div class="comment-text">{{comment.comment}}</div>
+                        <div class="comment-text" v-html="comment.comment"></div>
                         <div class="comment-footer">
                             <div class="comment-info">
                        <span class="comment-author">
@@ -289,6 +289,7 @@
         color: #555f77;
         font-size: 15px;
         margin-bottom: 25px;
+        word-wrap: break-word;
     }
 
     .comment .comment-footer {
