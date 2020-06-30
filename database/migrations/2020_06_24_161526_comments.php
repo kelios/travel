@@ -19,6 +19,7 @@ class Comments extends Migration
             $table->text('comment');
             $table->unsignedBigInteger('travel_id');
             $table->unsignedBigInteger('users_id');
+            $table->unsignedBigInteger('reply_id')->nullable();
             $table->timestamps();
 
             $table->foreign('travel_id')

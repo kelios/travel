@@ -155,10 +155,22 @@ class TravelsController extends Controller
                 'travel_image_thumb_url',
                 'travelAddressAdress',
                 'coordsMeTravelArr',
-                'slug'
+                'slug',
+                'id'
             ]);
         });
         return response()->json($travels);
+    }
+
+    public function getTravelComment(IndexTravel $request)
+    {
+        $where = [];
+        if ($request->query('where')) {
+            $where = json_decode($request->query('where'), true);
+        }
+        $travel = $this->travelRepository->getByWhere($where);
+        $travel['comments'] = $travel->getThreadedComments();
+        return response()->json($travel['comments'] );
     }
 
     public function getLast(Request $request)
@@ -171,7 +183,8 @@ class TravelsController extends Controller
                 'publish',
                 'countryName',
                 'travel_image_thumb_url',
-                'slug'
+                'slug',
+                'id'
             ]);
         });
         return response()->json($travels);
@@ -250,6 +263,8 @@ class TravelsController extends Controller
     public function show($slug)
     {
         $travel = $this->travelRepository->getBySlug($slug);
+        $travel['comments'] = $travel->getThreadedComments();
+        $travel['reply'] = '';
         $where = ['id' => $travel->id];
         SEOMeta::setTitle($travel->name);
         SEOMeta::setDescription($travel->meta_description);

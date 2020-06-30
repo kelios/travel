@@ -209,8 +209,27 @@ class TravelRepository implements TravelRepositoryInterface
             'cities',
             'countries',
             'travelAddress',
-            'companion'
-        ])->find($id);
+            'companion',
+            'users'
+        ])->find($id)
+            ->firstOrFail();
+    }
+
+    public function getByWhere($where)
+    {
+        return $this->travel->with([
+            'categories',
+            'transports',
+            'month',
+            'complexity',
+            'overNightStay',
+            'cities',
+            'countries',
+            'travelAddress',
+            'companion',
+            'users'
+        ])->where($where)
+            ->firstOrFail();
     }
 
     public function getBySlug($slug)

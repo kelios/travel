@@ -72,8 +72,8 @@ class CommentRepository implements CommentRepositoryInterface
         $comments = $this->comment;
 
         return $comments
+            ->with('user','replies')
             ->where($where)
-            ->with('user')
             ->orderBy('created_at', 'desc')
             ->paginate(60);
     }

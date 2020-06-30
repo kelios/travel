@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware('auth:api')->get('/user', 'Admin/UsersController@AuthRouteAPI');
 Route::get('search', 'Travels\TravelsController@search');
 Route::get('travels', 'Travels\TravelsController@get');
+Route::get('travelComments', 'Travels\TravelsController@getTravelComment');
 Route::get('travelsLast', 'Travels\TravelsController@getLast');
 Route::get('searchCities', 'LocationController@searchCities');
 

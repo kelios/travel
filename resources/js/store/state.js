@@ -8,6 +8,7 @@ let state = {
         'country': [],
         'url': []
     },
+    travelComments: [],
     optionsCities: [],
     defImageTravel: '/media/metravel.jpg',
 }

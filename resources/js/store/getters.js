@@ -2,6 +2,9 @@ let getters = {
     travels: state => {
         return state.travels
     },
+    travelComments: state => {
+        return state.travelComments
+    },
     lastTravels: state => {
         return state.lastTravels
     },

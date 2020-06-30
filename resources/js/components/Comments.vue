@@ -10,7 +10,8 @@
             </div>
             <form class="form" name="form">
                 <div class="form-row">
-                    <textarea class="input" :placeholder="__('travels.addcomment')" required v-model="message"></textarea>
+                    <textarea class="input" :placeholder="__('travels.addcomment')" required
+                              v-model="message"></textarea>
                     <span class="input" v-if="errorComment" style="color:red">{{errorComment}}</span>
                 </div>
                 <div class="form-row">
@@ -40,6 +41,96 @@
                            </span>
                                 <span class="comment-date">{{ comment.created_at}}</span>
                             </div>
+                            <div class="comment-actions" v-if="user">
+
+                                <ul class="list">
+                                    <li>
+                                        <a v-on:click="openComment(index)">{{__('travels.reply')}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--Reply new comment-->
+                    <div class="comment-form comment-v" v-if="commentBoxs[index]">
+                        <!-- Comment Avatar -->
+                        <div class="comment-avatar">
+                            <img :src="user.user_avatar_thumb_url">
+                        </div>
+                        <form class="form" name="form">
+                            <div class="form-row">
+                                <textarea class="input" :placeholder="__('travels.addcomment')" required
+                                          v-model="message"></textarea>
+                                <span class="input" v-if="errorReply" style="color:red">{{errorReply}}</span>
+                            </div>
+                            <div class="form-row">
+                                <input class="input" placeholder="Name" type="text" disabled :value="user.name">
+                            </div>
+                            <div class="form-row">
+                                <input type="button" class="btn btn-success"
+                                       v-on:click="replyComment(comment.id,index)"
+                                       :value="__('travels.addcomment')">
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <!-- Comment - Reply -->
+                    <div v-if="comment.replies">
+                        <div class="comments" v-for="(replies,index2) in comment.replies">
+                            <div class="comment reply">
+                                <!-- Comment Avatar -->
+                                <div class="comment-avatar">
+                                    <img :src="replies.user.user_avatar_thumb_url">
+                                </div>
+                                <!-- Comment Box -->
+                                <div class="comment-box" style="background: grey;">
+                                    <div class="comment-text" style="color: white">{{replies.comment}}</div>
+                                    <div class="comment-footer">
+                                        <div class="comment-info">
+                                   <span class="comment-author">
+                                           {{replies.user.name}}
+                                       </span>
+                                            <span class="comment-date">{{replies.created_at}}</span>
+                                        </div>
+                                        <div class="comment-actions">
+                                            <ul class="list">
+                                                <li>
+                                                    <a v-on:click="replyCommentBox(index2)">{{__('travels.reply')}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- From -->
+                                <div class="comment-form reply" v-if="replyCommentBoxs[index2]">
+                                    <!-- Comment Avatar -->
+                                    <div class="comment-avatar">
+                                        <img :src="user.user_avatar_thumb_url">
+                                    </div>
+                                    <form class="form" name="form">
+                                        <div class="form-row">
+                                            <textarea class="input" :placeholder="__('travels.addcomment')" required
+                                                      v-model="message"></textarea>
+                                            <span class="input" v-if="errorReply"
+                                                  style="color:red">{{errorReply}}</span>
+                                        </div>
+                                        <div class="form-row">
+                                            <input class="input" placeholder="Name" type="text" disabled
+                                                   :value="user.name">
+                                        </div>
+
+                                        <div class="form-row">
+                                            <input type="button" class="btn btn-success"
+                                                   v-on:click="replyComment(replies.id,index)"
+                                                   :value="__('travels.addcomment')">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -61,6 +152,7 @@
                 commentreplies: [],
                 comments: 0,
                 commentBoxs: [],
+                replyCommentBoxs: [],
                 message: null,
                 commentsData: [],
                 viewcomment: [],
@@ -68,6 +160,12 @@
                 errorComment: null,
                 travelId: this.travel.id,
                 user: this.auth_user,
+                errorReply: null,
+            }
+        },
+        http: {
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         },
         methods: {
@@ -89,7 +187,10 @@
                 }
             },
             openComment(index) {
-                if (this.user.auth) {
+                console.log('openComment');
+                console.log(index);
+                console.log(this.commentBoxs[index]);
+                if (this.user) {
                     if (this.commentBoxs[index]) {
                         Vue.set(this.commentBoxs, index, 0);
                     } else {
@@ -97,7 +198,15 @@
                     }
                 }
             },
-
+            replyCommentBox(index) {
+                if (this.user) {
+                    if (this.replyCommentBoxs[index]) {
+                        Vue.set(this.replyCommentBoxs, index, 0);
+                    } else {
+                        Vue.set(this.replyCommentBoxs, index, 1);
+                    }
+                }
+            },
             saveComment() {
                 if (this.message !== null && this.message != ' ') {
                     this.errorComment = null;
@@ -119,6 +228,48 @@
                     })
                 } else {
                     this.errorComment = "Please enter a comment before saving";
+                }
+            },
+            replyComment(commentId, index) {
+                if (this.message != null && this.message != ' ') {
+                    this.errorReply = null;
+                    axios.post('/comments', {
+                        comment: this.message,
+                        users_id: this.user.id,
+                        travel_id: this.travelId,
+                        reply_id: commentId
+                    }).then(res => {
+                        if (res.data.status) {
+                            console.log('replyComment');
+                            console.log(res.data.commentId);
+                            if (!this.commentsData[index].reply) {
+
+                                this.commentsData[index].replies.push({
+                                    "commentId": res.data.commentId,
+                                    "name": this.user.name,
+                                    "comment": this.message,
+                                    "user": this.user,
+                                    "created_at": new Date().toLocaleDateString()
+                                });
+                                this.commentsData[index].reply = 1;
+                                Vue.set(this.replyCommentBoxs, index, 0);
+                                Vue.set(this.commentBoxs, index, 0);
+                            } else {
+                                this.commentsData[index].replies.push({
+                                    "commentId": res.data.commentId,
+                                    "name": this.user.name,
+                                    "comment": this.message,
+                                    "user": this.user,
+                                    "created_at": new Date().toLocaleDateString()
+                                });
+                                Vue.set(this.replyCommentBoxs, index, 0);
+                                Vue.set(this.commentBoxs, index, 0);
+                            }
+                            this.message = null;
+                        }
+                    });
+                } else {
+                    this.errorReply = "Please enter a comment to save";
                 }
             },
         },
@@ -306,6 +457,7 @@
     .comment .comment-footer a {
         color: #acb4c2;
         text-decoration: none;
+        cursor: pointer;
         -webkit-transition: 350ms color;
         -moz-transition: 350ms color;
         -ms-transition: 350ms color;
@@ -351,3 +503,7 @@
         display: inline !important;
     }
 </style>
+
+
+
+

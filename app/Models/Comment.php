@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use App\Collection\CommentCollection;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 
@@ -14,6 +15,7 @@ class Comment extends Model
         'comment',
         'users_id',
         'travel_id',
+        'reply_id'
     ];
 
 
@@ -39,7 +41,7 @@ class Comment extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'users_id');
+        return $this->belongsTo(User::class, 'users_id');
     }
 
     public function getCreatedAtAttribute($date)
@@ -47,5 +49,14 @@ class Comment extends Model
         return Carbon::parse($date)->format('d.m.Y');
     }
 
+    public function replies()
+    {
+        return $this->hasMany(Comment::class, 'reply_id')->with('user');
+    }
+
+    public function newCollection(array $models = [])
+    {
+        return new CommentCollection($models);
+    }
 }
 

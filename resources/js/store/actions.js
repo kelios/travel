@@ -53,7 +53,21 @@ let actions = {
             .catch(err => {
                 console.log(err)
             })
-    }
+    },
+    GET_TRAVEL_COMMENTS({commit}, data) {
+        let params = {
+            where: data.where,
+        };
+        axios.get('/api/travelComments', {params})
+            .then(res => {
+                {
+                    commit('SET_COMMENTS', res.data);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    },
 }
 
 export default actions

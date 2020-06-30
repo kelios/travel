@@ -49,8 +49,35 @@
 
                 </div>
             </section>
-            <section class="travel-section" id="comment">
-                <comment :auth_user="auth_user" :travel="travel"></comment>
+            <section class="travel-section comments-app" id="comment">
+                <h1>{{__('travels.comment')}}</h1>
+                <div class="comment-form" v-if="auth_user">
+                    <div class="comment-avatar">
+                        <img :src="auth_user.user_avatar_thumb_url">
+                    </div>
+                    <div class="form">
+                        <div class="form-row">
+                    <textarea type="text" class="form-control"
+                              v-model="travel.reply"
+                              :placeholder="__('travels.addcomment')"
+                    ></textarea>
+                        </div>
+                        <div class="form-row">
+                            <input class="input" placeholder="Name" type="text" disabled :value="auth_user.name">
+                        </div>
+                        <div class="form-row">
+                            <input type="button" class="btn btn-success"
+                                   v-on:click="comment(travel)"
+                                   :value="__('travels.addcomment')">
+                        </div>
+                    </div>
+                </div>
+
+                <comment-list v-if="travelComments" :collection="travelComments"
+                              :comments="travelComments.root"
+                              :auth_user="auth_user"
+                              :where="where"
+                ></comment-list>
             </section>
 
         </div>
@@ -58,24 +85,53 @@
 </template>
 
 <script>
+    import CommentList from './CommentList.vue';
+    import {mapGetters} from "vuex";
 
     export default {
         name: 'TravelShowList',
         props: ['travel', 'where', 'auth_user'],
+        data() {
+            return {}
+        },
+        components: {
+            'comment-list': CommentList
+        },
         created() {
+            this.getTravelCommentsData();
         },
         computed: {
-
             getData() {
                 if (Array.isArray(this.data)) {
                     return this.data.join(',');
                 } else {
                     return this.data;
                 }
-            }
-
+            },
+            groupedComments() {
+                return _.chunk(this.travelComments, 15);
+            },
+            ...mapGetters([
+                'travelComments'
+            ])
         },
-        methods: {}
+        methods: {
+            getTravelCommentsData() {
+                this.$store.dispatch('GET_TRAVEL_COMMENTS', {'where': this.where});
+            },
+            comment(travel) {
+                axios.post('/comments', {
+                    comment: travel.reply,
+                    travel_id: travel.id,
+                    users_id: this.auth_user.id
+                }).then(response => {
+                    if (!response.data.error) {
+                        this.travel.reply = '';
+                        this.getTravelCommentsData();
+                    }
+                });
+            }
+        }
     }
 </script>
 

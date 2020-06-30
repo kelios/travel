@@ -27,7 +27,8 @@ class CommentController extends Controller
     public function index($travel_id)
     {
         $where = [
-            'travel_id' => $travel_id
+            'travel_id' => $travel_id,
+            'reply_id' => null
         ];
         $comments = $this->commentRep->getListBy($where);
         return response()->json($comments);

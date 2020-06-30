@@ -228,6 +228,11 @@ class Travel extends Model implements HasMedia
     public function comments()
     {
         return $this->hasMany(Comment::class);
+       // return $this->morphMany(Comment::class)->whereNull('reply_id');
+    }
+
+    public function getThreadedComments(){
+        return $this->comments()->with('user')->orderBy('created_at','desc')->get()->threaded();
     }
 
     public function getTravelAddressAdressAttribute()
