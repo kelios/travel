@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Travels;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Travel\DestroyTravel;
 use App\Models\Travel;
+use App\Models\TravelLike;
 use App\Repositories\CategoryRepository;
 use App\Repositories\MonthRepository;
 use App\Repositories\OverNightStayRepository;
@@ -156,7 +157,8 @@ class TravelsController extends Controller
                 'travelAddressAdress',
                 'coordsMeTravelArr',
                 'slug',
-                'id'
+                'id',
+                'userName',
             ]);
         });
         return response()->json($travels);
@@ -170,7 +172,7 @@ class TravelsController extends Controller
         }
         $travel = $this->travelRepository->getByWhere($where);
         $travel['comments'] = $travel->getThreadedComments();
-        return response()->json($travel['comments'] );
+        return response()->json($travel['comments']);
     }
 
     public function getLast(Request $request)
@@ -377,5 +379,38 @@ class TravelsController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function isLikedByMe($id)
+    {
+        $travel = $this->travelRepository->getById($id);
+        if (TravelLike::whereUserId(Auth::id())->whereTravelId($travel->id)->exists()) {
+            return response(['res' => false]);
+        }
+        return response(['res' => true]);
+    }
+
+    /**
+     * @param $travelId
+     * @return ResponseFactory|Response
+     */
+    public function like($travelId)
+    {
+        $existing_like = TravelLike::withTrashed()->whereTravelId($travelId)->whereUserId(Auth::id())->first();
+        if (is_null($existing_like)) {
+            TravelLike::create([
+                'travel_id' => $travelId,
+                'user_id' => Auth::id()
+            ]);
+            return response(['count' => 1]);
+        } else {
+            if (is_null($existing_like->deleted_at)) {
+                $existing_like->delete();
+                return response(['count' => 0]);
+            } else {
+                $existing_like->restore();
+                return response(['count' => 1]);
+            }
+        }
     }
 }

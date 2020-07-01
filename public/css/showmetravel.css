@@ -1,12 +1,22 @@
 body {
     padding-top: 3.375rem;
     color: #6c757d;
+    margin: auto;
+    align-items: center;
+}
+.travelshowlist {
+    position: relative;
+    height: 88%;
+    overflow-y: scroll;
 }
 
 @media (min-width: 992px) {
     body {
         padding-top: 0;
-        padding-left: 17rem;
+        margin: auto;
+    }
+    .travelshowlist {
+        padding-left: 22rem !important;
     }
 }
 
@@ -14,14 +24,16 @@ body {
     #sideNav {
         text-align: center;
         position: fixed;
-        top: 0;
-        left: 0;
+
         display: flex;
         flex-direction: column;
-        width: 17rem;
+        width: 22rem;
         height: 100vh;
         background: url("/media/slider/8.jpg") center;
         background-size: cover;
+        overflow-y: auto;
+        overflow-x: hidden;
+        z-index: 1000;
     }
 
     #sideNav .navbar-collapse .navbar-nav .nav-item .nav-link {
@@ -35,7 +47,6 @@ body {
 
     #sideNav .navbar-brand {
         display: flex;
-        margin: auto auto 0;
         padding: 0.5rem;
     }
 
@@ -49,7 +60,6 @@ body {
         display: flex;
         align-items: flex-start;
         flex-grow: 0;
-        margin-bottom: auto;
     }
 
     #sideNav .navbar-collapse .navbar-nav {
@@ -70,6 +80,7 @@ body {
 
     #sideNav .navbar-collapse .navbar-nav .nav-item .nav-link {
         display: block;
+        padding: 0.3rem;
     }
 }
 
@@ -102,8 +113,8 @@ section.travel-section {
     align-items: center;
     padding-left: 1rem;
     padding-right: 1rem;
-    padding-top: 2rem;
-    padding-bottom: 5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 section.travel-section.description img {
@@ -148,7 +159,7 @@ section.travel-section .travel-section-content {
 .textmenu {
     color: #222;
     font-family: 'Cousine', monospace;
-    padding-top: 3rem;
+    padding-top: 1rem;
 }
 
 .ulmap {
@@ -180,8 +191,6 @@ section.travel-section .travel-section-content {
 .text-right {
     text-align: right;
 }
-
-
 
 
 .comments-app {
@@ -402,4 +411,48 @@ section.travel-section .travel-section-content {
     list-style: none;
     list-style-type: none;
     display: inline !important;
+}
+
+.likeIcon {
+    background: url('/media/slider/logo_yellow_like.png');
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    cursor: pointer;
+    background-size: cover;
+}
+
+.fa-thumbs-up {
+    cursor: pointer;
+}
+
+#style-2::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #D62929;
+}
+
+.p-t-3 {
+    padding-top: 3rem !important;
+    padding-bottom: 0 !important;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #222 !important;
+    background-color: #ff9f5a !important;
+}
+
+.tab-pane {
+    background-color: #6aaaaa !important;
 }

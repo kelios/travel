@@ -9,6 +9,7 @@
                     <p class="text-truncate">{{ travel.name }}</p>
                 </div>
 
+
                 <div class="d-flex justify-content-between align-items-center">
                     <p>
                         <span>{{travel.countryName}}</span>
@@ -16,17 +17,19 @@
                     </p>
                     <p v-if="!readonly">
                         <span class="badge badge-success" v-if="travel.publish">{{__('main.puplish')}}</span>
-                        <span  class="badge badge-dark" v-else>{{__('main.hide')}}</span>
+                        <span class="badge badge-dark" v-else>{{__('main.hide')}}</span>
                     </p>
                 </div>
+                <div class="small text-right"> {{__('main.author')}} - {{travel.userName}}</div>
                 <div class="d-flex justify-content-between align-items-center">
                     <p>
                         <a :href="'/travels/'+travel.slug">
                             {{__('main.readMore')}}
                         </a>
-
                     </p>
-                    <div class="btn-group-lg">
+
+
+                    <div class="btn-group-sm">
                         <button v-if="!readonly" type="button" class="btn btn-sm btn-warning"
                                 v-on:click="goAction({url: travel.url+'/edit' })">
                             {{__('main.edit')}}
@@ -36,11 +39,9 @@
                                 v-on:click="remove(travel.url)">
                             {{__('main.delete')}}
                         </button>
-
                     </div>
-
-
                 </div>
+
             </div>
         </div>
 

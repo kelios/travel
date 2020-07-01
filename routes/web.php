@@ -25,18 +25,13 @@ Route::post('feedback', 'HomeController@feedback')->name('feedback');
 
 Route::get('users/{user}', ['as' => 'users.edit', 'uses' => 'UserController@edit']);
 Route::post('users/{user}', ['as' => 'users.update', 'uses' => 'UserController@update']);
-Route::get('/travels', 'Travels\TravelsController@index')->name('index');
-Route::get('/travelsby', 'Travels\TravelsController@indexby')->name('indexby');
-Route::get('/travels/{slug}', 'Travels\TravelsController@show')->name('show');
-
 Auth::routes();
 
-Route::get('/{pageId}', function ($pageId) {
-    return view('page', ['pageId' => $pageId]);
-});
-Route::get('comments/{travelId}', 'CommentController@index');
-Route::post('comments', 'CommentController@store');
-Route::post('comments/{commentId}/{type}', 'CommentController@update');
+Route::get('comments/{travelId}', 'CommentController@index')->name('comments');
+Route::post('comments', 'CommentController@store')->name('commentssave');
+
+Route::post('/like/{id}/islikedbyme', 'Travels\TravelsController@isLikedByMe')->name('islikedbyme');
+Route::post('/like/{travelId}', 'Travels\TravelsController@like')->name('like');
 
 Route::get('/location/cities', 'LocationController@getCities')->name('cities');
 Route::get('/location/countries', 'LocationController@getCountries')->name('countries');
@@ -238,7 +233,9 @@ Route::group(['namespace' => 'Travels', 'prefix' => 'travels', 'as' => 'travels.
         Route::post('/', 'TravelsController@store')->name('store');
         Route::post('/bulk-destroy', 'TravelsController@bulkDestroy')->name('bulk-destroy');
         Route::post('/{travel}', 'TravelsController@update')->name('update');
+
         Route::delete('/{travel}', 'TravelsController@destroy')->name('destroy');
+
 
     });
 });
@@ -258,6 +255,10 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+Route::get('/travels', 'Travels\TravelsController@index')->name('index');
+Route::get('/travelsby', 'Travels\TravelsController@indexby')->name('indexby');
+Route::get('/travels/{slug}', 'Travels\TravelsController@show')->name('show');
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {

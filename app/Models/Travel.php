@@ -43,7 +43,7 @@ class Travel extends Model implements HasMedia
         'visa',
         'slug',
         'meta_keywords',
-        'meta_description'
+        'meta_description',
     ];
 
     protected $casts = [
@@ -80,6 +80,8 @@ class Travel extends Model implements HasMedia
         'transportName',
         'overNightStayName',
         'userIds',
+        'userName',
+        'totalLikes'
 
     ];
 
@@ -225,14 +227,30 @@ class Travel extends Model implements HasMedia
         return $this->hasMany(TravelAddress::class);
     }
 
+    public function likes()
+    {
+        return $this->belongsToMany(\App\User::class, 'travel_like');
+    }
+
+    public function travelLike()
+    {
+        return $this->hasMany(TravelLike::class);
+    }
+
+    public function getTotalLikesAttribute()
+    {
+        return $this->travelLike()->count();
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
-       // return $this->morphMany(Comment::class)->whereNull('reply_id');
+        // return $this->morphMany(Comment::class)->whereNull('reply_id');
     }
 
-    public function getThreadedComments(){
-        return $this->comments()->with('user')->orderBy('created_at','desc')->get()->threaded();
+    public function getThreadedComments()
+    {
+        return $this->comments()->with('user')->orderBy('created_at', 'desc')->get()->threaded();
     }
 
     public function getTravelAddressAdressAttribute()
@@ -285,6 +303,15 @@ class Travel extends Model implements HasMedia
     public function getUserIdsAttribute()
     {
         return $this->users()->pluck('users.id')->toArray();
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getUserNameAttribute()
+    {
+        $userName = $this->users()->pluck('users.name')->toArray();
+        return implode(', ', $userName);
     }
 
     public function getCountryNameAttribute()

@@ -31,7 +31,8 @@ class TravelCollection extends ResourceCollection
                 'travel_image_thumb_url' => $item->travel_image_thumb_url,
                 'travelAddressAdress' => $item->travelAddressAdress,
                 'coordsMeTravelArr' => $item->coordsMeTravelArr,
-                'id' => $item->id
+                'id' => $item->id,
+                'userName' => $item->userName,
 
             ];
         })->toArray();

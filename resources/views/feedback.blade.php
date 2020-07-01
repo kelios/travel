@@ -42,5 +42,7 @@
 
 
 @endsection
-
+@section('footer')
+    @include('include.footer')
+@endsection
 

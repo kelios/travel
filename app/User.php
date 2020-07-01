@@ -85,6 +85,9 @@ class User extends Authenticatable implements HasMedia
     public function registerMediaCollections()
     {
         $this->addMediaCollection('userAvatar')
+            ->maxFilesize(20 * 1024 * 1024)
+            ->useDisk('s3')
+            ->singleFile()
             ->accepts('image/*');
     }
 
@@ -124,5 +127,10 @@ class User extends Authenticatable implements HasMedia
                 ->performOnCollections($mediaCollection->getName())
                 ->nonQueued();
         });
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Travel::class, 'travel_like', 'user_id', 'travel_id');
     }
 }

@@ -210,9 +210,9 @@ class TravelRepository implements TravelRepositoryInterface
             'countries',
             'travelAddress',
             'companion',
-            'users'
-        ])->find($id)
-            ->firstOrFail();
+            'users',
+            'travelLike'
+        ])->find($id);
     }
 
     public function getByWhere($where)
@@ -244,7 +244,8 @@ class TravelRepository implements TravelRepositoryInterface
             'countries',
             'travelAddress',
             'companion',
-            'users'
+            'users',
+            'travelLike'
         ])
             ->where('slug', '=', $slug)
             ->firstOrFail();

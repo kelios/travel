@@ -8,8 +8,6 @@
             <b-nav-item class="nav-item" href="#description" v-if="travel.description">
                 {{ __('travels.description') }}
             </b-nav-item>
-
-
             <b-nav-item class="nav-item" href="#plus" v-if="travel.plus">
                 {{ __('travels.plus') }}
             </b-nav-item>

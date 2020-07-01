@@ -23,4 +23,3 @@ Route::get('travels', 'Travels\TravelsController@get');
 Route::get('travelComments', 'Travels\TravelsController@getTravelComment');
 Route::get('travelsLast', 'Travels\TravelsController@getLast');
 Route::get('searchCities', 'LocationController@searchCities');
-

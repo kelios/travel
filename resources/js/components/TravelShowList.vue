@@ -2,7 +2,7 @@
     <b-card-body
         id="nav-scroller"
         ref="content"
-        style="position:relative; height:100%; overflow-y: scroll"
+        class="travelshowlist"
     >
         <section class="travel-section gallery section--demo-2 active" id="gallery" v-if="travel.gallery">
             <div class="container-fluid">
@@ -17,6 +17,31 @@
             <section class="travel-section description" id="description" v-if="travel.description">
                 <div class="travel-section-content">
                     <h2 class="mb-5">{{travel.name}}</h2>
+                    <ul class="list-group list-group-flush textmenu">
+                           <li class="small" v-if="travel.categoryName">
+                            {{ __('travels.categories') }} - {{ travel.categoryName }}
+                        </li>
+
+                        <li class="small" v-if="travel.complexityName">
+                            {{ __('travels.complexity') }} - {{ travel.complexityName }}
+                        </li>
+
+                        <li class="small" v-if="travel.transportName">
+                            {{ __('travels.transports') }} - {{ travel.transportName }}
+                        </li>
+                        <li class="small" v-if="travel.overNightStayName">
+                            {{ __('travels.overNightStay') }} - {{ travel.overNightStayName }}
+                        </li>
+
+                        <li class="small" v-if="travel.budget">
+                            {{ __('travels.budget') }} - {{ travel.budget }}
+                        </li>
+
+                        <li class="small" v-if="travel.number_peoples">
+                            {{ __('travels.number_peoples') }} - {{ travel.number_peoples }}
+                        </li>
+                    </ul>
+                    <hr>
                     <p class="lead mb-0" v-html="travel.description"></p>
                 </div>
             </section>

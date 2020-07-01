@@ -55,7 +55,6 @@
     <!-- Styles -->
     @include('brackets/admin-ui::admin.partials.main-styles')
     @yield('styles')
-
     <link href="{{ asset('css/metravel.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -146,17 +145,15 @@
             </div>
         </div>
     </nav>
-
     <main>
         @yield('content')
     </main>
-</div>
 
+    @yield('footer')
+</div>
+</body>
 
 @include('brackets/admin-ui::admin.partials.wysiwyg-svgs')
 @include('brackets/admin-ui::admin.partials.main-bottom-scripts')
 @yield('bottom-scripts')
-
-</body>
-@include('include.footer')
 </html>

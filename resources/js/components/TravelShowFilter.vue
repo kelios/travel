@@ -1,8 +1,31 @@
 <template>
     <div id="page-top">
-        <div class="navbar fixed-right">
+        <div class="tab-content showTravel" id="pills-tabContent">
+            <div class="tab-pane fade" id="pills-categories" role="tabpanel"
+                 aria-labelledby="nav-categories-tab">
+                {{ travel.categoryName }}
+            </div>
 
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <div class="tab-pane fade" id="pills-complexity" role="tabpanel" aria-labelledby="pills-complexity-tab">
+                {{ travel.complexityName }}
+            </div>
+            <div class="tab-pane fade" id="pills-transport" role="tabpanel" aria-labelledby="pills-transport-tab">
+                {{ travel.transportName }}
+            </div>
+            <div class="tab-pane fade" id="pills-overNightStay" role="tabpanel"
+                 aria-labelledby="pills-overNightStay-tab">
+                {{ travel.overNightStayName }}
+            </div>
+            <div class="tab-pane fade" id="pills-budget" role="tabpanel" aria-labelledby="pills-budget-tab">
+                {{ travel.budget }}
+            </div>
+            <div class="tab-pane fade" id="pills-number_peoples" role="tabpanel"
+                 aria-labelledby="pills-number_peoples-tab">
+                {{ travel.number_peoples }}
+            </div>
+        </div>
+        <div class="navbar fixed-right">
+            <ul class="nav nav-pills mb-3 navleft" id="pills-tab" role="tablist">
                 <li class="nav-item" v-if="travel.categoryName">
                     <a class="nav-link" id="pills-categories-tab"
                        data-toggle="pill" href="#pills-categories" role="tab" aria-controls="pills-home"
@@ -45,42 +68,10 @@
                         {{ __('travels.number_peoples') }}</a>
                 </li>
 
-                <li class="nav-item" v-if="travel.number_days">
-                    <a class="nav-link" id="pills-number_days-tab"
-                       data-toggle="pill" href="#pills-number_days" role="tab" aria-controls="pills-number_peoples"
-                       aria-selected="false">
-                        {{ __('travels.number_days') }}</a>
-                </li>
+
             </ul>
         </div>
 
-        <div class="tab-content showTravel" id="pills-tabContent">
-            <div class="tab-pane fade" id="pills-categories" role="tabpanel"
-                 aria-labelledby="nav-categories-tab">
-                {{ travel.categoryName }}
-            </div>
-
-            <div class="tab-pane fade" id="pills-complexity" role="tabpanel" aria-labelledby="pills-complexity-tab">
-                {{ travel.complexityName }}
-            </div>
-            <div class="tab-pane fade" id="pills-transport" role="tabpanel" aria-labelledby="pills-transport-tab">
-                {{ travel.transportName }}
-            </div>
-            <div class="tab-pane fade" id="pills-overNightStay" role="tabpanel"
-                 aria-labelledby="pills-overNightStay-tab">
-                {{ travel.overNightStayName }}
-            </div>
-            <div class="tab-pane fade" id="pills-budget" role="tabpanel" aria-labelledby="pills-budget-tab">
-                {{ travel.budget }}
-            </div>
-            <div class="tab-pane fade" id="pills-number_peoples" role="tabpanel"
-                 aria-labelledby="pills-number_peoples-tab">
-                {{ travel.number_peoples }}
-            </div>
-            <div class="tab-pane fade" id="pills-number_days" role="tabpanel" aria-labelledby="pills-number_days-tab">
-                {{ travel.number_days }}
-            </div>
-        </div>
     </div>
 </template>
 

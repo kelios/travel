@@ -67,6 +67,7 @@ Vue.component('comments', require('../components/Comments.vue').default);
 Vue.component('comment', require('../components/Comment.vue').default);
 Vue.component('comment-list', require('../components/CommentList.vue').default);
 Vue.component('comment-form', require('../components/CommentForm.vue').default);
+Vue.component('like-component', require('../components/LikeComponent.vue').default);
 
 new Vue({
     mixins: [Admin],

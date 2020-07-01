@@ -1,7 +1,6 @@
-<footer class="footer bg-white">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+<footer class="navbar-fixed-bottom row-fluid p-1">
+    <div class="navbar-inner">
+        <div class="container">
                 <ul class="list-inline mb-2">
                     <li class="list-inline-item">
                         <a href="/about">{{trans('main.about')}}</a>
@@ -36,5 +35,4 @@
                         </div>
                          --}}
         </div>
-    </div>
 </footer>
