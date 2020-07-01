@@ -11,6 +11,7 @@ use \Brackets\Media\HasMedia\HasMediaCollectionsTrait;
 use \Brackets\Media\HasMedia\HasMediaThumbsTrait;
 use \Brackets\Media\HasMedia\ProcessMediaTrait;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\Models\Media;
@@ -79,7 +80,7 @@ class User extends Authenticatable implements HasMedia
 
         return $this->getFirstMediaUrl('userAvatar', 'thumb_150') ?
             $this->getFirstMediaUrl('userAvatar', 'thumb_150')
-            : null;
+            : Config::get('constants.image.defaultCatImage');
     }
 
     public function registerMediaCollections()

@@ -4,7 +4,7 @@
         ref="content"
         class="travelshowlist"
     >
-        <section class="travel-section gallery section--demo-2 active" id="gallery" v-if="travel.gallery">
+        <section class="travel-section gallery section--demo-2" id="gallery" v-if="travel.gallery">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">
@@ -13,7 +13,7 @@
                 </div>
             </div>
         </section>
-        <div class="container-fluid p-0">
+
             <section class="travel-section description" id="description" v-if="travel.description">
                 <div class="travel-section-content">
                     <h2 class="mb-5">{{travel.name}}</h2>
@@ -46,12 +46,12 @@
                 </div>
             </section>
 
-            <section class="travel-section" id="plus" v-if="travel.plus">
+            <section class="travel-section plus" id="plus" v-if="travel.plus">
                 <travel-show-section :data="travel.plus"
                                      :title="__('travels.plus')"></travel-show-section>
             </section>
 
-            <section class="travel-section" id="minus" v-if="travel.minus">
+            <section class="travel-section minus" id="minus" v-if="travel.minus">
                 <travel-show-section :data="travel.minus"
                                      :title="__('travels.minus')"></travel-show-section>
             </section>
@@ -61,7 +61,7 @@
                                      :title="__('travels.recommendation')"></travel-show-section>
             </section>
 
-            <section class="travel-section ulmap" id="map" v-if="travel.travelAddressAdress">
+            <section class="travel-section ul map" id="map" v-if="travel.travelAddressAdress">
                 <div class="travel-section-content">
                     <h2>{{__('travels.map')}}</h2>
                     <map-me-travel :data="true" :where="where"></map-me-travel>
@@ -71,10 +71,9 @@
                             {{travel.coordsMeTravelArr[index]}}
                         </li>
                     </ul>
-
                 </div>
             </section>
-            <section class="travel-section comments-app" id="comment">
+            <section class="travel-section comments-app comment" id="comment">
                 <h1>{{__('travels.comment')}}</h1>
                 <div class="comment-form" v-if="auth_user">
                     <div class="comment-avatar">
@@ -105,7 +104,7 @@
                 ></comment-list>
             </section>
 
-        </div>
+
     </b-card-body>
 </template>
 

@@ -1,7 +1,6 @@
 <template>
     <div>
         <b-nav class="navbar-nav" v-b-scrollspy:nav-scroller>
-
             <b-nav-item class="nav-item" href="#gallery" v-if="travel.gallery">
                 {{ __('travels.gallery') }}
             </b-nav-item>
@@ -23,7 +22,6 @@
             <b-nav-item class="nav-item" href="#comment">
                 {{ __('travels.comment') }}
             </b-nav-item>
-
         </b-nav>
     </div>
 </template>

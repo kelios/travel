@@ -58,7 +58,8 @@ class Category extends Model implements HasMedia
      */
     public function getCategoryImageThumbUrlAttribute(): ?string
     {
-        return $this->getFirstMediaUrl('categoryImage', 'thumb_200') ?: Config::get('constants.image.defaultCatImage');;
+        return $this->getFirstMediaUrl('categoryImage', 'thumb_200') ?:
+            Config::get('constants.image.defaultCatImage');
     }
 
     /* ************************ MEDIA ************************ */
