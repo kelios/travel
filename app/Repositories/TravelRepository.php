@@ -61,7 +61,9 @@ class TravelRepository implements TravelRepositoryInterface
                 $query->whereIn('users.id', [$for_user]);
             });
         }
-        return $travels->whereHas('belTravels')
+        return $travels
+            ->has('countries', '=', '1')
+            ->whereHas('belTravels')
             ->where($where)
             ->orderBy('created_at', 'desc')
             ->paginate(6);

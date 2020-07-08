@@ -207,7 +207,8 @@ class Travel extends Model implements HasMedia
     public function belTravels()
     {
         return $this->belongsToMany(Country::class, 'travel_country', 'travel_id', 'country_id')
-            ->withTimestamps()->where('countries.country_id', 3);
+              ->where('countries.country_id', '=',3)
+              ->withTimestamps();
     }
 
     /**
