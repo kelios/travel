@@ -25,10 +25,15 @@ class WysiwygUploadController extends Controller
      */
     public function upload(Request $request): JsonResponse
     {
-
         if ($request->hasFile('file')) {
-            $path = $request->file('file')->store('', ['disk' => 'uploads']);
-
+            $file = $request->file('file');
+            $imagedMimeTypes = ['image/jpeg', 'image/gif', 'image/png', 'image/bmp', 'image/svg+xml'];
+            $contentType = $file->getClientMimeType();
+            if (in_array($contentType, $imagedMimeTypes)) {
+                $path = $request->file('file')->store('', ['disk' => 'uploads']);
+            } else {
+                $path = $request->file('file')->storeAs('', $file->getClientOriginalName(), ['disk' => 'uploads']);
+            }
             return response()->json(['path' => $path], 200);
         }
 
