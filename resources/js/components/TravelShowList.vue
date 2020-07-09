@@ -61,11 +61,14 @@
                                  :title="__('travels.recommendation')"></travel-show-section>
         </section>
 
-        <section class="travel-section gallery" id="travelRoad" v-if="travel.travelRoad">
+        <section class="travel-section" id="travelRoad" v-if="travel.travelRoad">
             <div class="container-fluid">
+                <h2 class="mb-5">{{__('travels.travelRoad') }} - {{travel.travelRoad.file_name}}</h2>
                 <div class="row">
                     <div class="col-xs-12">
-                        <a :href="travel.travelRoad.url" download depressed small color="primary">{{travel.travelRoad.file_name}}</a>
+                        <a :href="travel.travelRoad.url" download depressed small color="primary">
+                            {{__('travels.travelRoad') }} - {{travel.travelRoad.file_name}}
+                        </a>
                     </div>
                 </div>
             </div>
