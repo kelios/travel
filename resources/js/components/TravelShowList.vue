@@ -14,95 +14,105 @@
             </div>
         </section>
 
-            <section class="travel-section description" id="description" v-if="travel.description">
-                <div class="travel-section-content">
-                    <h2 class="mb-5">{{travel.name}}</h2>
-                    <ul class="list-group list-group-flush textmenu">
-                           <li class="small" v-if="travel.categoryName">
-                            {{ __('travels.categories') }} - {{ travel.categoryName }}
-                        </li>
+        <section class="travel-section description" id="description" v-if="travel.description">
+            <div class="travel-section-content">
+                <h2 class="mb-5">{{travel.name}}</h2>
+                <ul class="list-group list-group-flush textmenu">
+                    <li class="small" v-if="travel.categoryName">
+                        {{ __('travels.categories') }} - {{ travel.categoryName }}
+                    </li>
 
-                        <li class="small" v-if="travel.complexityName">
-                            {{ __('travels.complexity') }} - {{ travel.complexityName }}
-                        </li>
+                    <li class="small" v-if="travel.complexityName">
+                        {{ __('travels.complexity') }} - {{ travel.complexityName }}
+                    </li>
 
-                        <li class="small" v-if="travel.transportName">
-                            {{ __('travels.transports') }} - {{ travel.transportName }}
-                        </li>
-                        <li class="small" v-if="travel.overNightStayName">
-                            {{ __('travels.overNightStay') }} - {{ travel.overNightStayName }}
-                        </li>
+                    <li class="small" v-if="travel.transportName">
+                        {{ __('travels.transports') }} - {{ travel.transportName }}
+                    </li>
+                    <li class="small" v-if="travel.overNightStayName">
+                        {{ __('travels.overNightStay') }} - {{ travel.overNightStayName }}
+                    </li>
 
-                        <li class="small" v-if="travel.budget">
-                            {{ __('travels.budget') }} - {{ travel.budget }}
-                        </li>
+                    <li class="small" v-if="travel.budget">
+                        {{ __('travels.budget') }} - {{ travel.budget }}
+                    </li>
 
-                        <li class="small" v-if="travel.number_peoples">
-                            {{ __('travels.number_peoples') }} - {{ travel.number_peoples }}
-                        </li>
-                    </ul>
-                    <hr>
-                    <p class="lead mb-0" v-html="travel.description"></p>
-                </div>
-            </section>
+                    <li class="small" v-if="travel.number_peoples">
+                        {{ __('travels.number_peoples') }} - {{ travel.number_peoples }}
+                    </li>
+                </ul>
+                <hr>
+                <p class="lead mb-0" v-html="travel.description"></p>
+            </div>
+        </section>
 
-            <section class="travel-section plus" id="plus" v-if="travel.plus">
-                <travel-show-section :data="travel.plus"
-                                     :title="__('travels.plus')"></travel-show-section>
-            </section>
+        <section class="travel-section plus" id="plus" v-if="travel.plus">
+            <travel-show-section :data="travel.plus"
+                                 :title="__('travels.plus')"></travel-show-section>
+        </section>
 
-            <section class="travel-section minus" id="minus" v-if="travel.minus">
-                <travel-show-section :data="travel.minus"
-                                     :title="__('travels.minus')"></travel-show-section>
-            </section>
+        <section class="travel-section minus" id="minus" v-if="travel.minus">
+            <travel-show-section :data="travel.minus"
+                                 :title="__('travels.minus')"></travel-show-section>
+        </section>
 
-            <section class="travel-section" id="recommendation" v-if="travel.recommendation">
-                <travel-show-section :data="travel.recommendation"
-                                     :title="__('travels.recommendation')"></travel-show-section>
-            </section>
+        <section class="travel-section" id="recommendation" v-if="travel.recommendation">
+            <travel-show-section :data="travel.recommendation"
+                                 :title="__('travels.recommendation')"></travel-show-section>
+        </section>
 
-            <section class="travel-section ul map" id="map" v-if="travel.travelAddressAdress">
-                <div class="travel-section-content">
-                    <h2>{{__('travels.map')}}</h2>
-                    <map-me-travel :data="true" :where="where"></map-me-travel>
-                    <ul class="list-group">
-                        <li class="list-group-item" v-for="(address,index) in travel.travelAddressAdress" :key="index">
-                            {{address}}-
-                            {{travel.coordsMeTravelArr[index]}}
-                        </li>
-                    </ul>
-                </div>
-            </section>
-            <section class="travel-section comments-app comment" id="comment">
-                <h1>{{__('travels.comment')}}</h1>
-                <div class="comment-form" v-if="auth_user">
-                    <div class="comment-avatar">
-                        <img :src="auth_user.user_avatar_thumb_url">
+        <section class="travel-section gallery" id="travelRoad" v-if="travel.travelRoad">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <a :href="travel.travelRoad.url" download depressed small color="primary">{{travel.travelRoad.file_name}}</a>
                     </div>
-                    <div class="form">
-                        <div class="form-row">
+                </div>
+            </div>
+        </section>
+
+        <section class="travel-section ul map" id="map" v-if="travel.travelAddressAdress">
+            <div class="travel-section-content">
+                <h2>{{__('travels.map')}}</h2>
+                <map-me-travel :data="true" :where="where"></map-me-travel>
+                <ul class="list-group">
+                    <li class="list-group-item" v-for="(address,index) in travel.travelAddressAdress" :key="index">
+                        {{address}}-
+                        {{travel.coordsMeTravelArr[index]}}
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="travel-section comments-app comment" id="comment">
+            <h1>{{__('travels.comment')}}</h1>
+            <div class="comment-form" v-if="auth_user">
+                <div class="comment-avatar">
+                    <img :src="auth_user.user_avatar_thumb_url">
+                </div>
+                <div class="form">
+                    <div class="form-row">
                     <textarea type="text" class="form-control"
                               v-model="travel.reply"
                               :placeholder="__('travels.addcomment')"
                     ></textarea>
-                        </div>
-                        <div class="form-row">
-                            <input class="input" placeholder="Name" type="text" disabled :value="auth_user.name">
-                        </div>
-                        <div class="form-row">
-                            <input type="button" class="btn btn-success"
-                                   v-on:click="comment(travel)"
-                                   :value="__('travels.addcomment')">
-                        </div>
+                    </div>
+                    <div class="form-row">
+                        <input class="input" placeholder="Name" type="text" disabled :value="auth_user.name">
+                    </div>
+                    <div class="form-row">
+                        <input type="button" class="btn btn-success"
+                               v-on:click="comment(travel)"
+                               :value="__('travels.addcomment')">
                     </div>
                 </div>
+            </div>
 
-                <comment-list v-if="travelComments" :collection="travelComments"
-                              :comments="travelComments.root"
-                              :auth_user="auth_user"
-                              :where="where"
-                ></comment-list>
-            </section>
+            <comment-list v-if="travelComments" :collection="travelComments"
+                          :comments="travelComments.root"
+                          :auth_user="auth_user"
+                          :where="where"
+            ></comment-list>
+        </section>
 
 
     </b-card-body>

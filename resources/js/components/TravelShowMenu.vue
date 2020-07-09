@@ -16,6 +16,9 @@
             <b-nav-item class="nav-item" href="#recommendation" v-if="travel.recommendation">
                 {{ __('travels.recommendation') }}
             </b-nav-item>
+            <b-nav-item class="nav-item" href="#travelRoad" v-if="travel.travelRoad">
+                {{ __('travels.travelRoad') }}
+            </b-nav-item>
             <b-nav-item class="nav-item" href="#map" v-if="travel.travelAddressAdress">
                 {{ __('travels.map') }}
             </b-nav-item>

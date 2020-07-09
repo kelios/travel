@@ -11,7 +11,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Intervention\Image\Facades\Image;
-use Spatie\ImageOptimizer\OptimizerChainFactory;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 

@@ -387,6 +387,17 @@
 
                 </div>
 
+                <hr class="mb-4">
+                <div class="form-group img__container text-center">
+                    <label for="travelRoad"> {{ trans('travels.uploadRoad') }}</label>
+                    <div class="avatar-upload ">
+                        @include('brackets/admin-ui::admin.includes.avatar-uploader', [
+                            'mediaCollection' => app(\App\Models\Travel::class)->getMediaCollection('travelRoad'),
+                            'media' => isset($travel) ? $travel->getThumbs200ForCollection('travelRoad') : null
+                        ])
+                    </div>
+                </div>
+
                 <div class="form-check row"
                      :class="{'has-danger': errors.has('visa'), 'has-success': fields.visa && fields.visa.valid }">
                     <div class="ml-md-auto" :class="isFormLocalized ? 'col-md-8' : 'col-md-10'">

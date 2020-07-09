@@ -19,7 +19,7 @@ Vue.component('travel-form', {
 
     data: function () {
         return {
-            mediaCollections: ['travelMainImage', 'gallery'],
+            mediaCollections: ['travelMainImage', 'gallery','travelRoad'],
             optionsCountries: [],
             optionsCities: [],
             travelAddress: {

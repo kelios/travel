@@ -15,6 +15,10 @@ use Spatie\MediaLibrary\Models\Media;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Arr;
 
+/**
+ * Class Travel
+ * @package App\Models
+ */
 class Travel extends Model implements HasMedia
 {
     use Sluggable;
@@ -81,7 +85,8 @@ class Travel extends Model implements HasMedia
         'overNightStayName',
         'userIds',
         'userName',
-        'totalLikes'
+        'totalLikes',
+        'travelRoad'
 
     ];
 
@@ -120,6 +125,17 @@ class Travel extends Model implements HasMedia
         }
 
         return $res ?? null;
+
+    }
+
+    public function getTravelRoadAttribute()
+    {
+        $travelRoad = $this->getMedia('travelRoad');
+        if (Arr::get($travelRoad, 0)) {
+            $travelRoad['url'] = $travelRoad[0]->getUrl();
+            $travelRoad['file_name'] = $travelRoad[0]->getCustomProperty('name');
+        } else return null;
+        return $travelRoad ?? null;
 
     }
 
@@ -207,8 +223,8 @@ class Travel extends Model implements HasMedia
     public function belTravels()
     {
         return $this->belongsToMany(Country::class, 'travel_country', 'travel_id', 'country_id')
-              ->where('countries.country_id', '=',3)
-              ->withTimestamps();
+            ->where('countries.country_id', '=', 3)
+            ->withTimestamps();
     }
 
     /**
@@ -389,6 +405,9 @@ class Travel extends Model implements HasMedia
             ->useDisk('s3')
             ->accepts('image/*')
             ->singleFile();
+
+        $this->addMediaCollection('travelRoad')
+             ->singleFile();
 
         $this->addMediaCollection('gallery')
             ->maxNumberOfFiles(10)
