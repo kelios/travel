@@ -21,7 +21,10 @@ let mutations = {
     },
     UPDATE_COMMENTS(state, payLoad) {
         state.travelComments.push(payLoad['comments']);
-    }
+    },
+    SET_FRIENDS(state, friends) {
+        state.friends = friends
+    },
 }
 
 export default mutations

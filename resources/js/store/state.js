@@ -11,5 +11,6 @@ let state = {
     travelComments: [],
     optionsCities: [],
     defImageTravel: '/media/metravel.jpg',
+    friends: [],
 }
 export default state

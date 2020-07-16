@@ -135,6 +135,7 @@ class TravelsController extends Controller
 
     public function get(IndexTravel $request)
     {
+
         $where = [];
         if ($request->query('where')) {
             $where = json_decode($request->query('where'), true);
@@ -207,6 +208,7 @@ class TravelsController extends Controller
 
     public function metravel(MeTravel $request)
     {
+        //dd(Auth::user()->getFriendRequests());
         SEOMeta::setTitle(trans('home.metaMainTitle'));
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
@@ -267,6 +269,12 @@ class TravelsController extends Controller
         $travel = $this->travelRepository->getBySlug($slug);
         $travel['comments'] = $travel->getThreadedComments();
         $travel['reply'] = '';
+        $travel['isFriend'] = true;
+        //dd(auth()->user());
+        if (auth()->user()) {
+            $travel['isFriend'] = auth()->user()->isFriendWith(Arr::get($travel->users, 0)) ||
+                auth()->user()->hasSentFriendRequestTo(Arr::get($travel->users, 0));
+        }
         $where = ['id' => $travel->id];
         SEOMeta::setTitle($travel->name);
         SEOMeta::setDescription($travel->meta_description);

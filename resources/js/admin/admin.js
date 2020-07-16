@@ -68,6 +68,13 @@ Vue.component('comment', require('../components/Comment.vue').default);
 Vue.component('comment-list', require('../components/CommentList.vue').default);
 Vue.component('comment-form', require('../components/CommentForm.vue').default);
 Vue.component('like-component', require('../components/LikeComponent.vue').default);
+Vue.component('friend-list', require('../components/FriendList.vue').default);
+Vue.component('friend-card', require('../components/FriendCard.vue').default);
+Vue.component('add-friend', require('../components/AddFriend.vue').default);
+
+Vue.component('passport-clients', require('../components/passport/Clients.vue'));
+Vue.component('passport-authorized-clients', require('../components/passport/AuthorizedClients.vue'));
+Vue.component('passport-personal-access-tokens', require('../components/passport/PersonalAccessTokens.vue'));
 
 new Vue({
     mixins: [Admin],

@@ -13,16 +13,29 @@ use \Brackets\Media\HasMedia\ProcessMediaTrait;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Passport\HasApiTokens;
+use Multicaret\Acquaintances\Status;
+use Multicaret\Acquaintances\Traits\CanBeFollowed;
+use Multicaret\Acquaintances\Traits\CanBeRated;
+use Multicaret\Acquaintances\Traits\CanFollow;
+use Multicaret\Acquaintances\Traits\CanLike;
+use Multicaret\Acquaintances\Traits\CanRate;
+use Multicaret\Acquaintances\Traits\Friendable;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\Models\Media;
 
 class User extends Authenticatable implements HasMedia
 {
+    use HasApiTokens;
     use Notifiable;
     use AutoProcessMediaTrait;
     use HasMediaCollectionsTrait;
     use HasMediaThumbsTrait;
     use ProcessMediaTrait;
+
+    use Friendable;
+    use CanLike;
+    use CanFollow, CanBeFollowed;
 
     /**
      * The attributes that are mass assignable.
@@ -133,5 +146,11 @@ class User extends Authenticatable implements HasMedia
     public function likes()
     {
         return $this->belongsToMany(Travel::class, 'travel_like', 'user_id', 'travel_id');
+    }
+
+    public function getPendingFriendsCount($groupSlug = '')
+    {
+        $friendsCount = $this->findFriendships(Status::PENDING, $groupSlug)->count();
+        return $friendsCount;
     }
 }

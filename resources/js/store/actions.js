@@ -68,6 +68,22 @@ let actions = {
                 console.log(err)
             })
     },
+    GET_FRIENDS({commit}, data) {
+        let params = {
+            page: data.page,
+            where: data.where,
+        };
+        axios.get('/api/friends', {params})
+            .then(res => {
+                {
+                    commit('SET_FRIENDS', res.data);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    },
+
 }
 
 export default actions

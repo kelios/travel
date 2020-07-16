@@ -10,44 +10,11 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Scripts -->
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        (function (m, e, t, r, i, k, a) {
-            m[i] = m[i] || function () {
-                (m[i].a = m[i].a || []).push(arguments)
-            };
-            m[i].l = 1 * new Date();
-            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-        })
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+@if (App::environment('production'))
+    @include('include.analytics')
+@endif
 
-        ym(62803912, "init", {
-            clickmap: true,
-            trackLinks: true,
-            accurateTrackBounce: true,
-            ecommerce: "dataLayer"
-        });
-    </script>
-    <noscript>
-        <div><img src="https://mc.yandex.ru/watch/62803912" style="position:absolute; left:-9999px;" alt=""/></div>
-    </noscript>
-    <!-- /Yandex.Metrika counter -->
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-60089211-2"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-
-        gtag('config', 'UA-60089211-2');
-    </script>
-
-    <!-- Fonts -->
+<!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@100&display=swap" rel="stylesheet">
@@ -125,6 +92,14 @@
 
                                 <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}">
                                     {{ trans('home.editProfile') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('users.allFriends', Auth::user()) }}">
+                                    {{ trans('home.allFriends') }}
+                                    <span class="badge badge-secondary">
+                                        {{ Auth::user()->getFriendRequests()->count() }}
+
+                                    </span>
+
                                 </a>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"

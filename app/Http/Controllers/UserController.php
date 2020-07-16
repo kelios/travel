@@ -40,6 +40,20 @@ class UserController extends Controller
     }
 
     /**
+     * @param User $user
+     * @return Factory|View
+     */
+    public function allFriends(User $user)
+    {
+
+        return view('users.allFriends', [
+            'user' => $user,
+
+        ]);
+    }
+
+
+    /**
      * Update the specified resource in storage.
      *
      * @param UpdateUser $request

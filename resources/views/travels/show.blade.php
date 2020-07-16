@@ -44,17 +44,20 @@
                         <li class="nav-item small">
                             {{ trans('travels.number_days') }} - {{ $travel->number_days }}
                         </li>
-                            <li class="nav-item small">
-                                {{ trans('main.author') }} - {{ $travel->userName }}
-                            </li>
+                        <li class="nav-item small">
+                            {{ trans('main.author') }} - {{ $travel->userName }}
+                            @if (!$travel->isFriend)
+                                <add-friend :travel='@json($travel)'></add-friend>
+                            @endauth
+                        </li>
                     </ul>
                 </div>
             </nav>
 
-                <travel-show-list :where='@json($where)' :travel='@json($travel)'
-                                  :auth_user='@json(Auth::user())'></travel-show-list>
-            </div>
+            <travel-show-list :where='@json($where)' :travel='@json($travel)'
+                              :auth_user='@json(Auth::user())'></travel-show-list>
         </div>
+    </div>
 
 
 @endsection

@@ -159,7 +159,7 @@ class Travel extends Model implements HasMedia
      */
     public function users()
     {
-        return $this->belongsToMany(User::class, 'travel_user')->withTimestamps();
+        return $this->belongsToMany(\App\User::class, 'travel_user')->withTimestamps();
     }
 
     /**

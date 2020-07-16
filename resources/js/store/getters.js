@@ -13,7 +13,10 @@ let getters = {
     },
     optionsCities: state => {
         return state.optionsCities
-    }
+    },
+    friends: state => {
+        return state.friends
+    },
 }
 
 export default getters

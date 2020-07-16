@@ -23,3 +23,7 @@ Route::get('travels', 'Travels\TravelsController@get');
 Route::get('travelComments', 'Travels\TravelsController@getTravelComment');
 Route::get('travelsLast', 'Travels\TravelsController@getLast');
 Route::get('searchCities', 'LocationController@searchCities');
+Route::middleware('auth:api')->get('friends', 'FriendController@getAllFriends');
+Route::middleware('auth:api')->get('friendsPending', 'FriendController@getPendingFriendships');
+Route::middleware('auth:api')->post('sendreqfriends', 'FriendController@sendReqFriends');
+
