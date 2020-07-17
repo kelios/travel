@@ -95,10 +95,11 @@
                                 </a>
                                 <a class="dropdown-item" href="{{ route('users.allFriends', Auth::user()) }}">
                                     {{ trans('home.allFriends') }}
-                                    <span class="badge badge-secondary">
-                                        {{ Auth::user()->getFriendRequests()->count() }}
-
+                                    @if(Auth::user()->accepted_friends_count>0)
+                                        <span class="badge badge-secondary">
+                                        {{ Auth::user()->accepted_friends_count }}
                                     </span>
+                                    @endif
 
                                 </a>
 

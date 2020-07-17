@@ -1,11 +1,14 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <div class="row py-5">
-            <h1>{{ trans('home.allFriends') }}</h1>
-        </div>
-        <div>
-            <friend-list :user='@json(Auth::user())'></friend-list>
+        <div class="card">
+            <div class="card-header">
+                {{ trans('home.allFriends') }}
+            </div>
+
+            <div class="card-body blue">
+                <friend-list :user='@json(Auth::user())'></friend-list>
+            </div>
         </div>
     </div>
 @endsection

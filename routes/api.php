@@ -26,4 +26,7 @@ Route::get('searchCities', 'LocationController@searchCities');
 Route::middleware('auth:api')->get('friends', 'FriendController@getAllFriends');
 Route::middleware('auth:api')->get('friendsPending', 'FriendController@getPendingFriendships');
 Route::middleware('auth:api')->post('sendreqfriends', 'FriendController@sendReqFriends');
+Route::middleware('auth:api')->post('unfriend', 'FriendController@unfriend');
+Route::middleware('auth:api')->post('acceptFriendRequest', 'FriendController@acceptFriendRequest');
+Route::middleware('auth:api')->post('denyFriendRequest', 'FriendController@denyFriendRequest');
 

@@ -45,7 +45,7 @@ class User extends Authenticatable implements HasMedia
     protected $fillable = [
         'name', 'email', 'password',
     ];
-    protected $appends = ['resource_url', 'public_url', 'user_avatar_thumb_url'];
+    protected $appends = ['resource_url', 'public_url', 'user_avatar_thumb_url','accepted_friends_count'];
 
 
     /**
@@ -152,5 +152,11 @@ class User extends Authenticatable implements HasMedia
     {
         $friendsCount = $this->findFriendships(Status::PENDING, $groupSlug)->count();
         return $friendsCount;
+    }
+
+    public function getAcceptedFriendsCountAttribute($groupSlug = '')
+    {
+        $acceptedFriendsCount = $this->getFriendRequests()->count();
+        return $acceptedFriendsCount;
     }
 }

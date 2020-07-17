@@ -2,8 +2,8 @@
     <div class="container">
 
         <div class="card">
-            <div class="card-header">
-                <h3>{{__('user.sendReq')}}</h3>
+            <div class="card-header blue">
+                {{__('user.sendReq')}}
             </div>
             <div v-if="friendsPending" class="col-md-12 col-sm-12" v-for="friendPending in friendsPending">
                 <friend-card v-if="friendPending.recipient.id!=user.id" class="animated fadeIn"
@@ -12,28 +12,38 @@
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">
-                <h3>{{__('user.waitApprove')}}</h3>
+        <div class="card" v-if="user.accepted_friends_count>0">
+            <div class="card-header blue">
+                {{__('user.waitApprove')}}
             </div>
             <div v-if="friendsPending" class="col-md-12 col-sm-12" v-for="friendPending in friendsPending">
                 <friend-card v-if="friendPending.recipient.id==user.id" class="animated fadeIn"
                              :friend="friendPending.sender"
-                             :isAccept="true"></friend-card>
+                             :isAccept="true"
+                             @remove="removeFromFriendsPendingList"
+                >
+
+                </friend-card>
             </div>
         </div>
 
-
-        <pagination :data="friends" @pagination-change-page="getResults"></pagination>
-        <div class="row" v-for="friendEvent in groupedFriends">
-            <div class="col-md-12 col-sm-12" v-for="friend in friendEvent">
-                <friend-card class="animated fadeIn" :readonly="readonly" :friend="friend"
-                             @remove="removeFromList"></friend-card>
+        <div class="card">
+            <div class="card-header blue">
+                {{__('user.friend')}}
             </div>
-            <div class="col w-100"></div>
+            <pagination :data="friends" @pagination-change-page="getResults"></pagination>
+            <div class="" v-for="friendEvent in groupedFriends">
+                <div class="col-md-12 col-sm-12" v-for="friend in friendEvent">
+                    <friend-card class="animated fadeIn"
+                                 @remove="removeFromFriendsList"
+                                 :readonly="readonly"
+                                 :friend="friend"
+                                 isRemove="true"></friend-card>
+                </div>
+                <div class="col w-100"></div>
+            </div>
+            <pagination :data="friends" @pagination-change-page="getResults"></pagination>
         </div>
-        <pagination :data="friends" @pagination-change-page="getResults"></pagination>
-
     </div>
 </template>
 
@@ -62,6 +72,7 @@
         mounted() {
             this.getResults();
             this.getPendingFriends();
+            console.log(this.friends);
             /*  window.Echo.channel('search')
                   .listen('.searchResults', (e) => {
                       this.$store.commit('SET_FRIENDS', e.friends)
@@ -76,7 +87,12 @@
             ])
         },
         methods: {
-            removeFromList(id) {
+            removeFromFriendsPendingList(id) {
+                this.friendsPending = this.friendsPending.filter(friend => friend.sender_id !== id)
+            },
+            removeFromFriendsList(id) {
+                console.log('removeFromFriendsList');
+                console.log(id);
                 this.friends.data = this.friends.data.filter(friend => friend.id !== id)
             },
             getResults(page = 1) {

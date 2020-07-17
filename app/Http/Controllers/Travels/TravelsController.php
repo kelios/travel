@@ -114,7 +114,8 @@ class TravelsController extends Controller
         SEOMeta::setTitle(trans('home.metaMainTitle'));
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
-        $where = ['publish' => 1];
+        $whereSearch = $request->all();
+        $where = array_merge($whereSearch, ['publish' => 1]);
         return view('travels.index', ['where' => $where]);
     }
 
@@ -270,7 +271,6 @@ class TravelsController extends Controller
         $travel['comments'] = $travel->getThreadedComments();
         $travel['reply'] = '';
         $travel['isFriend'] = true;
-        //dd(auth()->user());
         if (auth()->user()) {
             $travel['isFriend'] = auth()->user()->isFriendWith(Arr::get($travel->users, 0)) ||
                 auth()->user()->hasSentFriendRequestTo(Arr::get($travel->users, 0));

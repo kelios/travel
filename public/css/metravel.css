@@ -346,8 +346,13 @@ input:checked + .sumblavam:before {
 .page-link {
     color: #222;
 }
-.pagination li.active a{
+
+.pagination li.active a {
     color: #222 !important;
     background-color: #ff9f5a !important;
+}
+
+.card-header.blue {
+    background-color: #e5f1f1 !important;
 }
 

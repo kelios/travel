@@ -32,6 +32,14 @@
                             </li>
                         @endauth
                         <li class="nav-item small">
+                            <a href="/travels?user_id={{implode(',',$travel->userIds)}}" target="_blank">
+                                {{__('user.seeAllTravel')}}{{ $travel->userName }} >
+                            </a>
+                            @if (!$travel->isFriend && !in_array(auth()->user()->id,$travel->userIds))
+                                <add-friend :travel='@json($travel)'></add-friend>
+                            @endauth
+                        </li>
+                        <li class="nav-item small">
                             {{ $travel->year }}
                             {{ $travel->monthName }}
                         </li>
@@ -44,12 +52,7 @@
                         <li class="nav-item small">
                             {{ trans('travels.number_days') }} - {{ $travel->number_days }}
                         </li>
-                        <li class="nav-item small">
-                            {{ trans('main.author') }} - {{ $travel->userName }}
-                            @if (!$travel->isFriend)
-                                <add-friend :travel='@json($travel)'></add-friend>
-                            @endauth
-                        </li>
+
                     </ul>
                 </div>
             </nav>
