@@ -1,6 +1,6 @@
 <template>
     <div v-if="isShow">
-        +<i :title="labelActionFriend" @click.prevent="sendReqFriend" class="icon-user" aria-hidden="true"></i>
+        +<i :title=__(labelActionFriend) @click.prevent="sendReqFriend" class="icon-user" aria-hidden="true"></i>
     </div>
 </template>
 
@@ -10,7 +10,7 @@
         props: ['travel'],
         data() {
             return {
-                labelActionFriend: 'Добавить в друзья',
+                labelActionFriend: 'user.addFriend',
                 isShow: true,
             }
         },

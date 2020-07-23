@@ -17,7 +17,12 @@
                 <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{$travel->travel_image_thumb_url}}"
                      alt="{{$travel->name}}"/>
                 </span></a>
-                <like-component :travel='@json($travel)'></like-component>
+                <div clas="panel panel-default">
+                    <div class="panel-body">
+                        <like-component :travel='@json($travel)'></like-component>
+                        <favorite-component :travel='@json($travel)'></favorite-component>
+                    </div>
+                </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

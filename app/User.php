@@ -148,6 +148,17 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsToMany(Travel::class, 'travel_like', 'user_id', 'travel_id');
     }
 
+    public function travelsFavorite()
+    {
+        return $this->belongsToMany(Travel::class, 'travel_save', 'user_id', 'travel_id')
+            ->whereNull('travel_save.deleted_at');
+    }
+
+    public function travelsFriend()
+    {
+        return $this->belongsToMany(Travel::class, 'travel_save', 'user_id', 'travel_id');
+    }
+
     public function getPendingFriendsCount($groupSlug = '')
     {
         $friendsCount = $this->findFriendships(Status::PENDING, $groupSlug)->count();

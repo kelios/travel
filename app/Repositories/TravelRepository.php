@@ -38,12 +38,17 @@ class TravelRepository implements TravelRepositoryInterface
     public function getList($where = [])
     {
         $travels = $this->travel;
+
         if (Arr::get($where, 'user_id')) {
             $for_user = Arr::get($where, 'user_id');
             unset($where['user_id']);
             $travels = $travels->whereHas('users', function ($query) use ($for_user) {
                 $query->whereIn('users.id', [$for_user]);
             });
+        }
+        if (is_array(Arr::get($where, 'id'))) {
+            $travels = $travels->whereIn('id', Arr::get($where, 'id'));
+            unset($where['id']);
         }
         return $travels
             ->where($where)

@@ -34,6 +34,9 @@ Route::post('comments', 'CommentController@store')->name('commentssave');
 Route::post('/like/{id}/islikedbyme', 'Travels\TravelsController@isLikedByMe')->name('islikedbyme');
 Route::post('/like/{travelId}', 'Travels\TravelsController@like')->name('like');
 
+Route::post('/save/{id}/isfavoritedbyme', 'Travels\TravelsController@isFavoritedByMe')->name('isfavoritedbyme');
+Route::post('/save/{travelId}', 'Travels\TravelsController@addFavorite')->name('addFavorite');
+
 Route::get('/location/cities', 'LocationController@getCities')->name('cities');
 Route::get('/location/countries', 'LocationController@getCountries')->name('countries');
 Route::get('/location/countriesCities', 'LocationController@getCitiesByCountries')->name('countriesCities');
@@ -228,6 +231,9 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 Route::group(['namespace' => 'Travels', 'prefix' => 'travels', 'as' => 'travels.'], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::get('/metravel', 'TravelsController@metravel')->name('metravel');
+        Route::get('/favoriteTravel', 'TravelsController@favoriteTravel')->name('favoriteTravel');
+        Route::get('/friendtravel', 'TravelsController@friendTravel')->name('friendtravel');
+
         Route::get('/create', 'TravelsController@create')->name('create');
         Route::get('/{slug}/edit', 'TravelsController@edit')->name('edit');
 

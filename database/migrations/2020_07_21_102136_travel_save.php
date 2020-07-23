@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TravelsLike extends Migration
+class TravelSave extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class TravelsLike extends Migration
      */
     public function up()
     {
-        Schema::create('travel_like', function (Blueprint $table) {
+        Schema::create('travel_save', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('travel_id');
             $table->unsignedBigInteger('user_id');
@@ -37,6 +37,6 @@ class TravelsLike extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('travel_like');
+        Schema::dropIfExists('travel_save');
     }
 }

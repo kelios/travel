@@ -68,6 +68,7 @@ Vue.component('comment', require('../components/Comment.vue').default);
 Vue.component('comment-list', require('../components/CommentList.vue').default);
 Vue.component('comment-form', require('../components/CommentForm.vue').default);
 Vue.component('like-component', require('../components/LikeComponent.vue').default);
+Vue.component('favorite-component', require('../components/FavoriteComponent.vue').default);
 Vue.component('friend-list', require('../components/FriendList.vue').default);
 Vue.component('friend-card', require('../components/FriendCard.vue').default);
 Vue.component('add-friend', require('../components/AddFriend.vue').default);

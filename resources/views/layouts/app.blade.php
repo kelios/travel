@@ -63,6 +63,11 @@
                                 {{ trans('home.meTravels') }} <span class="caret"></span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('travels/friendtravel') }}">
+                                {{ trans('home.follower') }} <span class="caret"></span>
+                            </a>
+                        </li>
                     @endauth
                 <!-- Authentication Links -->
                     @guest
@@ -100,7 +105,9 @@
                                         {{ Auth::user()->accepted_friends_count }}
                                     </span>
                                     @endif
-
+                                </a>
+                                <a class="dropdown-item" href="{{ url('travels/favoriteTravel') }}">
+                                    {{ trans('home.saveTravel') }}
                                 </a>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"

@@ -23,7 +23,7 @@
                 <div class="small text-right"> {{__('main.author')}} - {{travel.userName}}</div>
                 <div class="d-flex justify-content-between align-items-center">
                     <p>
-                        <a :href="'/travels/'+travel.slug">
+                        <a :href="'/travels/'+travel.slug" target="_blank">
                             {{__('main.readMore')}}
                         </a>
                     </p>

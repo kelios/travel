@@ -30,6 +30,7 @@ use App\Http\Requests\Travel\UpdateTravel;
 use App\Http\Requests\Travel\MeTravel;
 use App\Events\SearchEvent;
 use Artesaos\SEOTools\Facades\SEOMeta;
+use App\Models\TravelSave;
 
 class TravelsController extends Controller
 {
@@ -215,6 +216,35 @@ class TravelsController extends Controller
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['user_id' => Auth::user()->id];
         return view('travels.metravel', ['where' => $where]);
+    }
+
+    /**
+     * @param MeTravel $request
+     * @return Factory|View
+     */
+    public function favoriteTravel(MeTravel $request)
+    {
+        SEOMeta::setTitle(trans('home.metaMainTitle'));
+        SEOMeta::setDescription(trans('home.metaMainDescription'));
+        SEOMeta::setCanonical('https://metravel.by/');
+        $where = ['id' => Auth::user()->travelsFavorite()->pluck('travels.id')->toArray(),
+            'publish' => 1];
+        return view('travels.index', [
+            'where' => $where,
+            'isFavorite' => true]);
+    }
+
+    public function friendTravel(MeTravel $request)
+    {
+        SEOMeta::setTitle(trans('home.metaMainTitle'));
+        SEOMeta::setDescription(trans('home.metaMainDescription'));
+        SEOMeta::setCanonical('https://metravel.by/');
+        $user_ids = ['id' => Auth::user()->getFriends()->pluck('id')->toArray()];
+        //  dd($user_ids);
+        $where = ['user_id' => $user_ids, 'publish' => 1,];
+        return view('travels.index', [
+            'where' => $where]);
+
     }
 
 
@@ -417,6 +447,40 @@ class TravelsController extends Controller
                 return response(['count' => 0]);
             } else {
                 $existing_like->restore();
+                return response(['count' => 1]);
+            }
+        }
+    }
+
+
+    public function isFavoritedByMe($id)
+    {
+        $travel = $this->travelRepository->getById($id);
+        if (TravelSave::whereUserId(Auth::id())->whereTravelId($travel->id)->exists()) {
+            return response(['res' => false]);
+        }
+        return response(['res' => true]);
+    }
+
+    /**
+     * @param $travelId
+     * @return ResponseFactory|Response
+     */
+    public function addFavorite($travelId)
+    {
+        $existing_favorite = TravelSave::withTrashed()->whereTravelId($travelId)->whereUserId(Auth::id())->first();
+        if (is_null($existing_favorite)) {
+            TravelSave::create([
+                'travel_id' => $travelId,
+                'user_id' => Auth::id()
+            ]);
+            return response(['count' => 1]);
+        } else {
+            if (is_null($existing_favorite->deleted_at)) {
+                $existing_favorite->delete();
+                return response(['count' => 0]);
+            } else {
+                $existing_favorite->restore();
                 return response(['count' => 1]);
             }
         }

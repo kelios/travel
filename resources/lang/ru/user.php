@@ -5,11 +5,12 @@ return [
     'email' => 'E-mail',
     'password' => 'Пароль',
     'password_repeat' => 'Повторите ваш пароль',
-    'sendReq' => 'Отправлен запрос в друзья',
+    'sendReq' => 'Отправлен запрос',
     'waitApprove' => 'Ожидает вашего подтверждения',
     'acceptFriend' => 'Добавить',
     'denyFriendRequest' => 'Отклонить',
-    'friend' => 'Друзья',
-    'unfriend'=>'Удалить из друзей',
-    'seeAllTravel' => 'Все путешествия '
+    'friend' => 'Авторы',
+    'unfriend' => 'Удалить',
+    'seeAllTravel' => 'Все путешествия ',
+    'addFriend' => 'Добавить себе автора'
 ];

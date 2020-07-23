@@ -14,6 +14,7 @@ use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\Models\Media;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Arr;
+use TravelSave;
 
 /**
  * Class Travel
@@ -254,6 +255,16 @@ class Travel extends Model implements HasMedia
         return $this->hasMany(TravelLike::class);
     }
 
+    public function userFavoriteTravel()
+    {
+        return $this->belongsToMany(\App\User::class, 'travel_save');
+    }
+
+    public function travelSave()
+    {
+        return $this->belongsToMany(TravelSave::class);
+    }
+
     public function getTotalLikesAttribute()
     {
         return $this->travelLike()->count();
@@ -407,7 +418,7 @@ class Travel extends Model implements HasMedia
             ->singleFile();
 
         $this->addMediaCollection('travelRoad')
-             ->singleFile();
+            ->singleFile();
 
         $this->addMediaCollection('gallery')
             ->maxNumberOfFiles(10)
