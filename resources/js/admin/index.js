@@ -11,3 +11,4 @@ import './over-night-stay';
 import './travel';
 import './category';
 import './companion';
+import './comment';
