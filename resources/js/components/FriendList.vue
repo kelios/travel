@@ -31,7 +31,7 @@
             <div class="card-header blue">
                 {{__('user.friend')}}
             </div>
-            <pagination :data="friends" @pagination-change-page="getResults"></pagination>
+            <pagination :data="friends" :limit="5" align="center" @pagination-change-page="getResults"></pagination>
             <div class="" v-for="friendEvent in groupedFriends">
                 <div class="col-md-12 col-sm-12" v-for="friend in friendEvent">
                     <friend-card class="animated fadeIn"
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col w-100"></div>
             </div>
-            <pagination :data="friends" @pagination-change-page="getResults"></pagination>
+            <pagination :data="friends" :limit="5" align="center" @pagination-change-page="getResults"></pagination>
         </div>
     </div>
 </template>

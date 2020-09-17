@@ -6,6 +6,7 @@ use Brackets\Media\HasMedia\AutoProcessMediaTrait;
 use Brackets\Media\HasMedia\HasMediaCollectionsTrait;
 use Brackets\Media\HasMedia\HasMediaThumbsTrait;
 use Brackets\Media\HasMedia\ProcessMediaTrait;
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
@@ -27,6 +28,9 @@ class Travel extends Model implements HasMedia
     use HasMediaCollectionsTrait;
     use HasMediaThumbsTrait;
     use ProcessMediaTrait;
+    use Filterable;
+
+
     /**
      * @var string
      */
@@ -90,6 +94,11 @@ class Travel extends Model implements HasMedia
         'travelRoad'
 
     ];
+
+    public function modelFilter()
+    {
+        return $this->provideFilter(\App\ModelFilters\TravelFilter::class);
+    }
 
     /* ************************ ACCESSOR ************************* */
 

@@ -6,6 +6,7 @@ use App\Models\Travel;
 use App\User;
 use App\Repositories\Interfaces\TravelRepositoryInterface;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Config;
 
 /**
  * Class TravelRepository
@@ -35,7 +36,11 @@ class TravelRepository implements TravelRepositoryInterface
         return $this->travel->all();
     }
 
-    public function getList($where = [])
+    /**
+     * @param array $where
+     * @return mixed
+     */
+    public function getList($where = [], $request)
     {
         $travels = $this->travel;
 
@@ -51,11 +56,16 @@ class TravelRepository implements TravelRepositoryInterface
             unset($where['id']);
         }
         return $travels
-            ->where($where)
+            ->filter($where)
+           // ->where($where)
             ->orderBy('created_at', 'desc')
-            ->paginate(6);
+            ->paginate(Config::get('constants.showListTravel.count'));
     }
 
+    /**
+     * @param array $where
+     * @return mixed
+     */
     public function getListBy($where = [])
     {
         $travels = $this->travel;
@@ -71,14 +81,23 @@ class TravelRepository implements TravelRepositoryInterface
             ->whereHas('belTravels')
             ->where($where)
             ->orderBy('created_at', 'desc')
-            ->paginate(6);
+            ->paginate(Config::get('constants.showListTravel.count'));
     }
 
+    /**
+     * @param array $where
+     * @return mixed
+     */
     public function getLast($where = [])
     {
         return $this->travel->where('publish', 1)->orderBy('id', 'desc')->take(3)->get();
     }
 
+    /**
+     * @param $search
+     * @param array $where
+     * @return mixed
+     */
     public function search($search, $where = [])
     {
         $searchTravel = $this->travel;
@@ -99,8 +118,8 @@ class TravelRepository implements TravelRepositoryInterface
                 ->orWhere('recommendation', 'like', '%' . $search . '%')
                 ->orWhere('plus', 'like', '%' . $search . '%')
                 ->orWhere('minus', 'like', '%' . $search . '%');
-        });
-        return $searchTravel->paginate(6);
+        })
+            ->paginate(Config::get('constants.showListTravel.count'));
     }
 
     /**
@@ -117,6 +136,10 @@ class TravelRepository implements TravelRepositoryInterface
             ->paginate(500);
     }
 
+    /**
+     * @param array $columns
+     * @return mixed
+     */
     public function get($columns = [])
     {
         return $this->travel->get($columns);
@@ -140,6 +163,9 @@ class TravelRepository implements TravelRepositoryInterface
         return $this->travel->save();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function users()
     {
         return $this->travel->users();
@@ -177,6 +203,9 @@ class TravelRepository implements TravelRepositoryInterface
         return $this->travel->complexity();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function companion()
     {
         return $this->travel->companion();
@@ -190,21 +219,34 @@ class TravelRepository implements TravelRepositoryInterface
         return $this->travel->overNightStay();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function cities()
     {
         return $this->travel->cities();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function countries()
     {
         return $this->travel->countries();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function travelAddress()
     {
         return $this->travel->travelAddress();
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     */
     public function getById($id)
     {
         return $this->travel->with([
@@ -222,6 +264,10 @@ class TravelRepository implements TravelRepositoryInterface
         ])->find($id);
     }
 
+    /**
+     * @param $where
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     */
     public function getByWhere($where)
     {
         return $this->travel->with([
@@ -239,6 +285,10 @@ class TravelRepository implements TravelRepositoryInterface
             ->firstOrFail();
     }
 
+    /**
+     * @param $slug
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model
+     */
     public function getBySlug($slug)
     {
         return $this->travel->with([

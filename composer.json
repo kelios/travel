@@ -27,7 +27,8 @@
         "multicaret/laravel-acquaintances": "^3.3",
         "nao-pon/flysystem-google-drive": "~1.1",
         "pusher/pusher-php-server": "~3.0",
-        "spatie/laravel-backup": "^6.11"
+        "spatie/laravel-backup": "^6.11",
+        "tucker-eric/eloquentfilter": "^2.4"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

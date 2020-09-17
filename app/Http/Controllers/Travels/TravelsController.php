@@ -147,7 +147,7 @@ class TravelsController extends Controller
             $travels = $this->travelRepository->getListBy($where);
 
         } else {
-            $travels = $this->travelRepository->getList($where);
+            $travels = $this->travelRepository->getList($where,$request);
         }
         $travels->getCollection()->transform(function ($value) {
             return $value->only([
@@ -210,7 +210,6 @@ class TravelsController extends Controller
 
     public function metravel(MeTravel $request)
     {
-        //dd(Auth::user()->getFriendRequests());
         SEOMeta::setTitle(trans('home.metaMainTitle'));
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');

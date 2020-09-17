@@ -51,6 +51,7 @@ Vue.use(Lang, {
     },
 });
 Vue.component('search-me-travel', require('../components/SearchMeTravel.vue').default);
+Vue.component('search-extended-travel', require('../components/SearchExtendedTravel.vue').default);
 Vue.component('travel-last', require('../components/TravelLast.vue').default);
 Vue.component('travel-list', require('../components/TravelList.vue').default);
 Vue.component('travel-card', require('../components/TravelCard.vue').default);
