@@ -203,7 +203,7 @@ class TravelsController extends Controller
         }
         $travels = $this->travelRepository->search($query, $where);
         //broadcast search results with Pusher channels
-        event(new SearchEvent($travels));
+        event(new SearchEvent($travels, [], $query));
         return response()->json("ok");
     }
 
@@ -221,7 +221,7 @@ class TravelsController extends Controller
         $travels = $this->travelRepository->searchExtended($query, $where);
         $travels->appends($where)->links();
         //broadcast search results with Pusher channels
-        event(new SearchEvent($travels,$where));
+        event(new SearchEvent($travels, $where));
         return response()->json("ok");
     }
 

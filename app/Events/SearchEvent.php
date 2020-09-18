@@ -16,16 +16,18 @@ class SearchEvent implements ShouldBroadcastNow
 
     public $travels;
     public $where;
+    public $query;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($travels, $where)
+    public function __construct($travels, $where = [], $query = '')
     {
         $this->travels = $travels;
         $this->where = $where;
+        $this->query = $query;
     }
 
     public function broadcastAs()
@@ -50,7 +52,8 @@ class SearchEvent implements ShouldBroadcastNow
     {
         return [
             'travels' => new TravelCollection($this->travels),
-            'where' => $this->where
+            'where' => $this->where,
+            'query' => $this->query
         ];
     }
 }

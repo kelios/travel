@@ -40,7 +40,8 @@
             },
             ...mapGetters([
                 'travels',
-                'where'
+                'where',
+                'query'
             ])
         },
         methods: {

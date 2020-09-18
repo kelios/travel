@@ -27,7 +27,6 @@
         props: ['travels', 'where'],
         data: function () {
             return {
-                query: '',
                 countries: [],
                 optionsCountries: []
             }
@@ -62,7 +61,6 @@
                 this.where['countries'] = this.countries.map(function (value) {
                     return value.country_id
                 });
-                console.log(this.where);
                 this.$store.dispatch('SEARCH_EXTENDED_TRAVELS', {'query': this.query, 'where': this.where})
             }
         }

@@ -20,6 +20,9 @@ let getters = {
     where: state => {
         return state.where
     },
+    query: state => {
+        return state.query
+    },
 }
 
 export default getters

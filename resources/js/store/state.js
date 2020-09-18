@@ -1,6 +1,7 @@
 let state = {
     travels: {},
     where: [],
+    query: '',
     lastTravels: {},
     travelAddress: {
         'address': [],

@@ -28,6 +28,10 @@ let mutations = {
     SET_WHERE(state, where) {
         state.where = where
     },
+    SET_QUERY(state, query) {
+        state.query = query
+    },
+
 }
 
 export default mutations

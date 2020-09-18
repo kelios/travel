@@ -108,7 +108,7 @@ class TravelRepository implements TravelRepositoryInterface
             });
         }
         if ($where) {
-            $searchTravel = $searchTravel->where($where);
+            $searchTravel = $searchTravel->filter($where);
         }
 
         return $searchTravel->where(function ($query) use ($search) {
@@ -118,6 +118,7 @@ class TravelRepository implements TravelRepositoryInterface
                 ->orWhere('plus', 'like', '%' . $search . '%')
                 ->orWhere('minus', 'like', '%' . $search . '%');
         })
+            ->orderBy('created_at', 'desc')
             ->paginate(Config::get('constants.showListTravel.count'));
     }
 
@@ -139,8 +140,7 @@ class TravelRepository implements TravelRepositoryInterface
         if ($where) {
             $searchTravel = $searchTravel->filter($where);
         }
-       // $searchTravel->appends($where)->links();
-        return $searchTravel->paginate(Config::get('constants.showListTravel.count'));
+        return $searchTravel->orderBy('created_at', 'desc')->paginate(Config::get('constants.showListTravel.count'));
     }
 
     /**
