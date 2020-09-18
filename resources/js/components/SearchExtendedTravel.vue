@@ -59,16 +59,11 @@
 
             },
             searchTravels() {
-                console.log('this.countries');
-                console.log(this.countries);
-                console.log('this.where');
-                this.where['countries'] = this.countries.filter(
-                    function (country) {
-                        return country.country_id
-                    }
-                );
+                this.where['countries'] = this.countries.map(function (value) {
+                    return value.country_id
+                });
                 console.log(this.where);
-                this.$store.dispatch('SEARCH_TRAVELS', {'query': this.query, 'where': this.where})
+                this.$store.dispatch('SEARCH_EXTENDED_TRAVELS', {'query': this.query, 'where': this.where})
             }
         }
 

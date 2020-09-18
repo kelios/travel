@@ -25,6 +25,9 @@ let mutations = {
     SET_FRIENDS(state, friends) {
         state.friends = friends
     },
+    SET_WHERE(state, where) {
+        state.where = where
+    },
 }
 
 export default mutations

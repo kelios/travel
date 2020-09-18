@@ -91,8 +91,6 @@
                 this.friendsPending = this.friendsPending.filter(friend => friend.sender_id !== id)
             },
             removeFromFriendsList(id) {
-                console.log('removeFromFriendsList');
-                console.log(id);
                 this.friends.data = this.friends.data.filter(friend => friend.id !== id)
             },
             getResults(page = 1) {

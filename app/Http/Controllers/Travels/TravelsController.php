@@ -131,13 +131,12 @@ class TravelsController extends Controller
         SEOMeta::setTitle(trans('home.metaMainTitle'));
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
-        $where = ['publish' => 1, 'belTravels' => 'true'];
+        $where = ['publish' => 1, 'countries' => [3]];
         return view('travels.index', ['where' => $where]);
     }
 
     public function get(IndexTravel $request)
     {
-
         $where = [];
         if ($request->query('where')) {
             $where = json_decode($request->query('where'), true);
@@ -147,7 +146,7 @@ class TravelsController extends Controller
             $travels = $this->travelRepository->getListBy($where);
 
         } else {
-            $travels = $this->travelRepository->getList($where,$request);
+            $travels = $this->travelRepository->getList($where, $request);
         }
         $travels->getCollection()->transform(function ($value) {
             return $value->only([
@@ -205,6 +204,24 @@ class TravelsController extends Controller
         $travels = $this->travelRepository->search($query, $where);
         //broadcast search results with Pusher channels
         event(new SearchEvent($travels));
+        return response()->json("ok");
+    }
+
+    /**
+     * @param IndexTravel $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function searchExtended(IndexTravel $request)
+    {
+        $query = $request->query('query');
+        $where = [];
+        if ($request->query('where')) {
+            $where = json_decode($request->query('where'), true);
+        }
+        $travels = $this->travelRepository->searchExtended($query, $where);
+        $travels->appends($where)->links();
+        //broadcast search results with Pusher channels
+        event(new SearchEvent($travels,$where));
         return response()->json("ok");
     }
 

@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        <pagination :data="travels" :limit="5" align="center"   size="small" @pagination-change-page="getResults"></pagination>
+        <pagination :data="travels" :limit="5" align="center" size="small"
+                    @pagination-change-page="getResults"></pagination>
         <div class="row" v-for="travelsEvent in groupedTravels">
             <div class="col-md-6 col-sm-6" v-for="travel in travelsEvent">
                 <travel-card class="animated fadeIn" :readonly="readonly" :travel="travel"
@@ -8,7 +9,8 @@
             </div>
             <div class="col w-100"></div>
         </div>
-        <pagination :data="travels" :limit="6" align="center"  size="small" @pagination-change-page="getResults"></pagination>
+        <pagination :data="travels" :limit="6" align="center" size="small"
+                    @pagination-change-page="getResults"></pagination>
     </div>
 </template>
 
@@ -19,7 +21,7 @@
 
     export default {
         name: 'TravelList',
-        props: ['readonly', 'where'],
+        props: ['readonly'],
         components: {
             travel,
             pagination
@@ -28,7 +30,8 @@
             this.getResults();
             window.Echo.channel('search')
                 .listen('.searchResults', (e) => {
-                    this.$store.commit('SET_TRAVELS', e.travels)
+                    this.$store.commit('SET_TRAVELS', e.travels);
+                    this.$store.commit('SET_WHERE', e.where)
                 })
         },
         computed: {
@@ -36,7 +39,8 @@
                 return _.chunk(this.travels.data, 6);
             },
             ...mapGetters([
-                'travels'
+                'travels',
+                'where'
             ])
         },
         methods: {

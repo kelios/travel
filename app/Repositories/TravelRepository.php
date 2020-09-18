@@ -57,7 +57,7 @@ class TravelRepository implements TravelRepositoryInterface
         }
         return $travels
             ->filter($where)
-           // ->where($where)
+            // ->where($where)
             ->orderBy('created_at', 'desc')
             ->paginate(Config::get('constants.showListTravel.count'));
     }
@@ -78,8 +78,7 @@ class TravelRepository implements TravelRepositoryInterface
         }
         return $travels
             ->has('countries', '=', '1')
-            ->whereHas('belTravels')
-            ->where($where)
+            ->filter($where)
             ->orderBy('created_at', 'desc')
             ->paginate(Config::get('constants.showListTravel.count'));
     }
@@ -112,7 +111,7 @@ class TravelRepository implements TravelRepositoryInterface
             $searchTravel = $searchTravel->where($where);
         }
 
-        $searchTravel = $searchTravel->where(function ($query) use ($search) {
+        return $searchTravel->where(function ($query) use ($search) {
             return $query->where('name', 'like', '%' . $search . '%')
                 ->orWhere('description', 'like', '%' . $search . '%')
                 ->orWhere('recommendation', 'like', '%' . $search . '%')
@@ -120,6 +119,28 @@ class TravelRepository implements TravelRepositoryInterface
                 ->orWhere('minus', 'like', '%' . $search . '%');
         })
             ->paginate(Config::get('constants.showListTravel.count'));
+    }
+
+    /**
+     * @param $search
+     * @param array $where
+     * @return mixed
+     */
+    public function searchExtended($search, $where = [])
+    {
+        $searchTravel = $this->travel;
+        if (Arr::get($where, 'user_id')) {
+            $for_user = Arr::get($where, 'user_id');
+            unset($where['user_id']);
+            $searchTravel = $searchTravel->whereHas('users', function ($query) use ($for_user) {
+                $query->whereIn('users.id', [$for_user]);
+            });
+        }
+        if ($where) {
+            $searchTravel = $searchTravel->filter($where);
+        }
+       // $searchTravel->appends($where)->links();
+        return $searchTravel->paginate(Config::get('constants.showListTravel.count'));
     }
 
     /**

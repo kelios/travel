@@ -13,6 +13,20 @@ let actions = {
             console.log(err)
         })
     },
+    SEARCH_EXTENDED_TRAVELS({commit}, data) {
+        let params = {
+            query: data.query,
+            where: data.where,
+        };
+        axios.get(`/api/searchextended`, {params})
+            .then(res => {
+                if (res.data === 'ok')
+                    console.log('request sent successfully')
+
+            }).catch(err => {
+            console.log(err)
+        })
+    },
     SEARCH_CITIES({commit}, data) {
         let params = {
             query: data.query,

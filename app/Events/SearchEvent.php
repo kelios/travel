@@ -15,15 +15,17 @@ class SearchEvent implements ShouldBroadcastNow
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $travels;
+    public $where;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($travels)
+    public function __construct($travels, $where)
     {
         $this->travels = $travels;
+        $this->where = $where;
     }
 
     public function broadcastAs()
@@ -48,6 +50,7 @@ class SearchEvent implements ShouldBroadcastNow
     {
         return [
             'travels' => new TravelCollection($this->travels),
+            'where' => $this->where
         ];
     }
 }

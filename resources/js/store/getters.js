@@ -17,6 +17,9 @@ let getters = {
     friends: state => {
         return state.friends
     },
+    where: state => {
+        return state.where
+    },
 }
 
 export default getters
