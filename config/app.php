@@ -179,6 +179,7 @@ return [
         App\Providers\RepositoryServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         EloquentFilter\ServiceProvider::class,
+        Tohidplus\Translation\TranslationServiceProvider::class,
 
 
     ],

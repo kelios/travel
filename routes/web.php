@@ -31,10 +31,10 @@ Auth::routes();
 Route::get('comments/{travelId}', 'CommentController@index')->name('comments');
 Route::post('comments', 'CommentController@store')->name('commentssave');
 
-Route::post('/like/{id}/islikedbyme', 'Travels\TravelsController@isLikedByMe')->name('islikedbyme');
+Route::get('/like/{id}/islikedbyme', 'Travels\TravelsController@isLikedByMe')->name('islikedbyme');
 Route::post('/like/{travelId}', 'Travels\TravelsController@like')->name('like');
 
-Route::post('/save/{id}/isfavoritedbyme', 'Travels\TravelsController@isFavoritedByMe')->name('isfavoritedbyme');
+Route::get('/save/{id}/isfavoritedbyme', 'Travels\TravelsController@isFavoritedByMe')->name('isfavoritedbyme');
 Route::post('/save/{travelId}', 'Travels\TravelsController@addFavorite')->name('addFavorite');
 
 Route::get('/location/cities', 'LocationController@getCities')->name('cities');

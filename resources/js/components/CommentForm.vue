@@ -7,7 +7,7 @@
             <div class="form-row">
                     <textarea type="text" class="form-control"
                               v-model="content"
-                              :placeholder="__('travels.addcomment')"
+                              :placeholder="translate('travels.addcomment')"
                     ></textarea>
             </div>
             <div class="form-row">
@@ -16,7 +16,7 @@
             <div class="form-row">
                 <input type="button" class="btn btn-success"
                        v-on:click="replyTo(comment)"
-                       :value="__('travels.addcomment')">
+                       :value="translate('travels.addcomment')">
             </div>
         </div>
     </div>

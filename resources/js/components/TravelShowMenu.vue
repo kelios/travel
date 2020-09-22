@@ -1,29 +1,29 @@
 <template>
     <div>
         <b-nav class="navbar-nav" v-b-scrollspy:nav-scroller>
-            <b-nav-item class="nav-item" href="#gallery" v-if="travel.gallery">
-                {{ __('travels.gallery') }}
+            <b-nav-item class="nav-item" href="#gallery" v-if="travel_menu.gallery">
+                {{ translate('travels.gallery') }}
             </b-nav-item>
-            <b-nav-item class="nav-item" href="#description" v-if="travel.description">
-                {{ __('travels.description') }}
+            <b-nav-item class="nav-item" href="#description" v-if="travel_menu.description">
+                {{ translate('travels.description') }}
             </b-nav-item>
-            <b-nav-item class="nav-item" href="#plus" v-if="travel.plus">
-                {{ __('travels.plus') }}
+            <b-nav-item class="nav-item" href="#plus" v-if="travel_menu.plus">
+                {{ translate('travels.plus') }}
             </b-nav-item>
-            <b-nav-item class="nav-item" href="#minus" v-if="travel.minus">
-                {{ __('travels.minus') }}
+            <b-nav-item class="nav-item" href="#minus" v-if="travel_menu.minus">
+                {{ translate('travels.minus') }}
             </b-nav-item>
-            <b-nav-item class="nav-item" href="#recommendation" v-if="travel.recommendation">
-                {{ __('travels.recommendation') }}
+            <b-nav-item class="nav-item" href="#recommendation" v-if="travel_menu.recommendation">
+                {{ translate('travels.recommendation') }}
             </b-nav-item>
-            <b-nav-item class="nav-item" href="#travelRoad" v-if="travel.travelRoad">
-                {{ __('travels.travelRoad') }}
+            <b-nav-item class="nav-item" href="#travelRoad" v-if="travel_menu.travelRoad">
+                {{ translate('travels.travelRoad') }}
             </b-nav-item>
-            <b-nav-item class="nav-item" href="#map" v-if="travel.travelAddressAdress">
-                {{ __('travels.map') }}
+            <b-nav-item class="nav-item" href="#map" v-if="travel_menu.travelAddressAdress">
+                {{ translate('travels.map') }}
             </b-nav-item>
-            <b-nav-item class="nav-item" href="#comment">
-                {{ __('travels.comment') }}
+            <b-nav-item class="nav-item" href="#comment" >
+                {{ translate('travels.comment') }}
             </b-nav-item>
         </b-nav>
     </div>
@@ -33,10 +33,15 @@
 
     export default {
         name: 'TravelShowMenu',
-        props: ['travel','auth_user'],
+        props: ['travel_menu','auth_user'],
         created() {
+            console.log(this.travel_menu);
         },
-        computed: {
+        mounted() {
+            console.log(this.travel_menu);
+        },
+       /* computed: {
+
             getData() {
                 if (Array.isArray(this.data)) {
                     return this.data.join(',');
@@ -45,11 +50,7 @@
                 }
             }
 
-        },
+        },*/
         methods: {}
     }
 </script>
-
-<style scoped>
-
-</style>

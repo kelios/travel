@@ -1,13 +1,14 @@
 <template>
     <div class="container">
         <div class="input-group mb-3">
-            <input v-model="query" type="text" class="form-control" :placeholder="__('main.TravelPlaceholder')"
+            <input v-model="query" type="text" class="form-control" :placeholder="translate('main.TravelPlaceholder')"
                    aria-label="Travel title or description"
                    aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button class="btn btn-primary" @click="searchTravels" @keyup.enter="searchTravels" type="button">
-                    {{__('main.search')}}
+               <!-- <button class="btn btn-primary" @click="searchTravels" @keyup.enter="searchTravels" type="button">
+                    {{translate('main.search')}}
                 </button>
+                -->
             </div>
         </div>
     </div>

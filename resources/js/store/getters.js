@@ -23,6 +23,9 @@ let getters = {
     query: state => {
         return state.query
     },
+    travel: state => {
+        return state.travel
+    },
 }
 
 export default getters

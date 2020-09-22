@@ -8,7 +8,7 @@
                 <label
                     class="form-label"
                     for="feedback-name"
-                >{{__('main.name')}}:*</label>
+                >{{translate('main.name')}}:*</label>
                 <input
                     class="form-control"
                     v-model="nameField"
@@ -32,7 +32,7 @@
                 <label
                     class="form-label"
                     for="feedback-body"
-                >{{__('main.comment')}}:*</label>
+                >{{translate('main.comment')}}:*</label>
                 <textarea
                     class="form-control"
                     resize="false"
@@ -42,7 +42,7 @@
                 />
             </div>
             <p v-if="success" class="text-success text-center">
-                {{__('main.sendFeedbackSuccess')}}
+                {{translate('main.sendFeedbackSuccess')}}
             </p>
             <p v-if="errors_feedback" class="text-danger text-center">
                 {{ errors_feedback }}
@@ -57,10 +57,10 @@
                     class="spinner-border spinner-border-sm"
                     role="status"
                 >
-                    <span class="sr-only">{{__('main.loading')}}...</span>
+                    <span class="sr-only">{{translate('main.loading')}}...</span>
                 </div>
                 <div v-else>
-                    {{__('main.send')}}
+                    {{translate('main.send')}}
                 </div>
             </button>
         </form>

@@ -3,7 +3,7 @@
 
         <div class="card">
             <div class="card-header blue">
-                {{__('user.sendReq')}}
+                {{translate('user.sendReq')}}
             </div>
             <div v-if="friendsPending" class="col-md-12 col-sm-12" v-for="friendPending in friendsPending">
                 <friend-card v-if="friendPending.recipient.id!=user.id" class="animated fadeIn"
@@ -14,7 +14,7 @@
 
         <div class="card" v-if="user.accepted_friends_count>0">
             <div class="card-header blue">
-                {{__('user.waitApprove')}}
+                {{translate('user.waitApprove')}}
             </div>
             <div v-if="friendsPending" class="col-md-12 col-sm-12" v-for="friendPending in friendsPending">
                 <friend-card v-if="friendPending.recipient.id==user.id" class="animated fadeIn"
@@ -29,7 +29,7 @@
 
         <div class="card">
             <div class="card-header blue">
-                {{__('user.friend')}}
+                {{translate('user.friend')}}
             </div>
             <pagination :data="friends" :limit="5" align="center" @pagination-change-page="getResults"></pagination>
             <div class="" v-for="friendEvent in groupedFriends">

@@ -21,7 +21,7 @@
 
     export default {
         name: 'TravelList',
-        props: ['readonly'],
+        props: ['readonly','filter'],
         components: {
             travel,
             pagination
@@ -31,7 +31,7 @@
             window.Echo.channel('search')
                 .listen('.searchResults', (e) => {
                     this.$store.commit('SET_TRAVELS', e.travels);
-                    this.$store.commit('SET_WHERE', e.where)
+                    this.$store.commit('SET_WHERE', e.filter)
                 })
         },
         computed: {
@@ -49,7 +49,7 @@
                 this.travels.data = this.travels.data.filter(travel => travel.id !== id)
             },
             getResults(page = 1) {
-                this.$store.dispatch('GET_TRAVELS', {'page': page, 'where': this.where});
+                this.$store.dispatch('GET_TRAVELS', {'page': page, 'where': this.filter});
             }
         },
     }

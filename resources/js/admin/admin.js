@@ -13,11 +13,10 @@ import VModal from 'vue-js-modal';
 import Vue from 'vue';
 import VueAgile from 'vue-agile'
 import BootstrapVue from 'bootstrap-vue';
-import Lang from 'laravel-vue-lang';
 import {ToggleButton} from 'vue-js-toggle-button'
 import './app-components/bootstrap';
 import './index';
-import VueResource from "vue-resource"
+import VueResource from "vue-resource";
 
 import 'craftable/dist/ui';
 
@@ -43,13 +42,6 @@ Vue.use(BootstrapVue);
 Vue.use(VueAgile)
 Vue.component('ToggleButton', ToggleButton)
 
-Vue.use(Lang, {
-    locale: 'ru',
-    fallback: 'en',
-    ignore: {
-        fr: ['validation'],
-    },
-});
 Vue.component('search-me-travel', require('../components/SearchMeTravel.vue').default);
 Vue.component('search-extended-travel', require('../components/SearchExtendedTravel.vue').default);
 Vue.component('travel-last', require('../components/TravelLast.vue').default);
@@ -77,7 +69,7 @@ Vue.component('add-friend', require('../components/AddFriend.vue').default);
 Vue.component('passport-clients', require('../components/passport/Clients.vue'));
 Vue.component('passport-authorized-clients', require('../components/passport/AuthorizedClients.vue'));
 Vue.component('passport-personal-access-tokens', require('../components/passport/PersonalAccessTokens.vue'));
-
+Vue.prototype.translate=require('./../VueTranslation/Translation').default.translate;
 new Vue({
     mixins: [Admin],
     el: '#app',

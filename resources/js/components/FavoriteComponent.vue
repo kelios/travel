@@ -7,7 +7,7 @@
 <script>
     export default {
         name: "FavoriteComponent",
-        props: ['travel'],
+        props: ['travel_id'],
         data() {
             return {
                 labelFavorite: ''
@@ -18,7 +18,7 @@
         },
         methods: {
             isFavoritedByMe() {
-                axios.post('/save/' + this.travel.id + '/isfavoritedbyme')
+                axios.get('/save/' + this.travel_id + '/isfavoritedbyme')
                     .then(response => {
                         if (response.data.res) {
                             this.labelFavorite = 'Сохранить маршрут';
@@ -29,7 +29,7 @@
                     .catch()
             },
             savePost() {
-                axios.post('/save/' + this.travel.id)
+                axios.post('/save/' + this.travel_id)
                     .then(response => {
                         if (response.data.count > 0) {
                             this.labelFavorite = 'Удалить из маршрутов';

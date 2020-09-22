@@ -30,42 +30,42 @@
                     <a class="nav-link" id="pills-categories-tab"
                        data-toggle="pill" href="#pills-categories" role="tab" aria-controls="pills-home"
                        aria-selected="false">
-                        {{ __('travels.categories') }}</a>
+                        {{ translate('travels.categories') }}</a>
                 </li>
 
                 <li class="nav-item" v-if="travel.complexityName">
                     <a class=" nav-link" id="pills-complexity-tab"
                        data-toggle="pill" href="#pills-complexity" role="tab" aria-controls="pills-complexity"
                        aria-selected="false">
-                        {{ __('travels.complexity') }}</a>
+                        {{ translate('travels.complexity') }}</a>
                 </li>
 
                 <li class="nav-item" v-if="travel.transportName">
                     <a class=" nav-link" id="pills-transport-tab"
                        data-toggle="pill" href="#pills-transport" role="tab" aria-controls="pills-transport"
                        aria-selected="false">
-                        {{ __('travels.transports') }}</a>
+                        {{ translate('travels.transports') }}</a>
                 </li>
 
                 <li class="nav-item" v-if="travel.overNightStay">
                     <a class=" nav-link" id="pills-overNightStay-tab"
                        data-toggle="pill" href="#pills-overNightStay" role="tab" aria-controls="pills-overNightStay"
                        aria-selected="true">
-                        {{ __('travels.overNightStay') }}</a>
+                        {{ translate('travels.overNightStay') }}</a>
                 </li>
 
                 <li class="nav-item" v-if="travel.budget">
                     <a class=" nav-link" id="pills-budget-tab"
                        data-toggle="pill" href="#pills-budget" role="tab" aria-controls="pills-budget"
                        aria-selected="false">
-                        {{ __('travels.budget') }}</a>
+                        {{ translate('travels.budget') }}</a>
                 </li>
 
                 <li class="nav-item" v-if="travel.number_peoples">
                     <a class=" nav-link" id="pills-number_peoples-tab"
                        data-toggle="pill" href="#pills-number_peoples" role="tab" aria-controls="pills-number_peoples"
                        aria-selected="false">
-                        {{ __('travels.number_peoples') }}</a>
+                        {{ translate('travels.number_peoples') }}</a>
                 </li>
 
 

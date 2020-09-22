@@ -16,15 +16,15 @@
                         <span v-if="travel.cityName"> - {{travel.cityName}}</span>
                     </p>
                     <p v-if="!readonly">
-                        <span class="badge badge-success" v-if="travel.publish">{{__('main.puplish')}}</span>
-                        <span class="badge badge-dark" v-else>{{__('main.hide')}}</span>
+                        <span class="badge badge-success" v-if="travel.publish">{{translate('main.puplish')}}</span>
+                        <span class="badge badge-dark" v-else>{{translate('main.hide')}}</span>
                     </p>
                 </div>
-                <div class="small text-right"> {{__('main.author')}} - {{travel.userName}}</div>
+                <div class="small text-right"> {{translate('main.author')}} - {{travel.userName}}</div>
                 <div class="d-flex justify-content-between align-items-center">
                     <p>
                         <a :href="'/travels/'+travel.slug" target="_blank">
-                            {{__('main.readMore')}}
+                            {{translate('main.readMore')}}
                         </a>
                     </p>
 
@@ -32,12 +32,12 @@
                     <div class="btn-group-sm">
                         <button v-if="!readonly" type="button" class="btn btn-sm btn-warning"
                                 v-on:click="goAction({url: travel.url+'/edit' })">
-                            {{__('main.edit')}}
+                            {{translate('main.edit')}}
                         </button>
 
                         <button v-if="!readonly" type="button" class="btn btn-sm btn-danger"
                                 v-on:click="remove(travel.url)">
-                            {{__('main.delete')}}
+                            {{translate('main.delete')}}
                         </button>
                     </div>
                 </div>

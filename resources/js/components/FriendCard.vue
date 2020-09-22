@@ -9,23 +9,23 @@
 
             <div v-if="isAccept" class="input-group-append">
                 <button v-on:click="acceptFriendRequest(friend.id)" type="button" class="btn btn-primary">
-                    {{__('user.acceptFriend')}}
+                    {{translate('user.acceptFriend')}}
                 </button>
                 <button v-on:click="denyFriendRequest(friend.id)" type="button" class="btn btn-primary">
-                    {{__('user.denyFriendRequest')}}
+                    {{translate('user.denyFriendRequest')}}
                 </button>
             </div>
 
             <div v-if="isRemove" class="input-group-append">
                 <button v-on:click="unfriend(friend.id)" type="button" class="btn btn-primary">
-                    {{__('user.unfriend')}}
+                    {{translate('user.unfriend')}}
                 </button>
             </div>
         </div>
 
         <div class="form-group row">
             <a :href="'/travels?user_id='+friend.id" target="_blank">
-                {{__('user.seeAllTravel')}}{{ friend.name }} >
+                {{translate('user.seeAllTravel')}}{{ friend.name }} >
             </a>
         </div>
 

@@ -97,7 +97,20 @@ let actions = {
                 console.log(err)
             })
     },
-
+    GET_TRAVEL({commit}, data) {
+        let params = {
+            id: data.travel_id,
+        };
+        axios.get('/api/travel', {params})
+            .then(res => {
+                {
+                    commit('SET_TRAVEL', res.data);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    },
 }
 
 export default actions

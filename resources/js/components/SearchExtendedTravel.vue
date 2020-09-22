@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="input-group mb-3">
+        <div class="ctive-pink-3 active-pink-4 mb-4">
 
             <multiselect
                 :options="optionsCountries"
@@ -8,15 +8,15 @@
                 v-model="countries"
                 track-by="country_id"
                 label="local_name"
-                :tag-placeholder=" __('travels.countries')"
-                :placeholder="__('travels.Select countries') ">
+                :tag-placeholder=" translate('travels.countries')"
+                :placeholder="translate('travels.Search countries') ">
             </multiselect>
-
-            <div class="input-group-append">
+        </div>
+            <div class="input-group-append mb-4">
                 <button class="btn btn-primary" @click="searchTravels" @keyup.enter="searchTravels" type="button">
-                    {{__('main.search')}}
+                    {{translate('main.search')}}
                 </button>
-            </div>
+
         </div>
     </div>
 </template>

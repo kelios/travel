@@ -27,7 +27,6 @@
     "dependencies": {
         "bootstrap-vue": "^2.15.0",
         "laravel-echo": "^1.8.0",
-        "laravel-vue-lang": "^3.0.0-alpha",
         "laravel-vue-pagination": "^2.3.1",
         "leaflet": "^1.6.0",
         "pusher-js": "^6.0.3",

@@ -6,7 +6,7 @@
             <div class="album py-5 ">
                 <search-me-travel :where='@json($where)'></search-me-travel>
                 <search-extended-travel :where='@json($where)'></search-extended-travel>
-                <travel-list :readonly="true" :where='@json($where)'
+                <travel-list :readonly="true" :filter='@json($where)'
                              :isFavorite='@json($isFavorite ?? '')'></travel-list>
             </div>
             <section class="text-center">

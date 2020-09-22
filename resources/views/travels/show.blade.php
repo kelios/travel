@@ -8,7 +8,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light bg-light" id="sideNav">
                 <div class="collapse navbar-collapse p-t-3" id="navbarSupportedContent">
-                    <travel-show-menu :travel='@json($travel)'
+                    <travel-show-menu :travel_menu='@json($travelMenu)'
                                       :auth_user='@json(Auth::user())'
                     ></travel-show-menu>
                 </div>
@@ -17,12 +17,15 @@
                 <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{$travel->travel_image_thumb_url}}"
                      alt="{{$travel->name}}"/>
                 </span></a>
-                <div clas="panel panel-default">
-                    <div class="panel-body">
-                        <like-component :travel='@json($travel)'></like-component>
-                        <favorite-component :travel='@json($travel)'></favorite-component>
+                @if (auth()->user())
+                    <div clas="panel panel-default">
+                        <div class="panel-body">
+                            <like-component :travel_id='@json($travel->id)'
+                                            :total_likes='@json($travel->totalLikes)'></like-component>
+                            <favorite-component :travel_id='@json($travel->id)'></favorite-component>
+                        </div>
                     </div>
-                </div>
+                @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,7 +41,7 @@
                         @endauth
                         <li class="nav-item small">
                             <a href="/travels?user_id={{implode(',',$travel->userIds)}}" target="_blank">
-                                {{__('user.seeAllTravel')}}{{ $travel->userName }} >
+                                {{ trans('user.alltravel')}} {{ $travel->userName }} >
                             </a>
                             @if (!$travel->isFriend && !in_array(auth()->user()->id,$travel->userIds))
                                 <add-friend :travel='@json($travel)'></add-friend>
@@ -62,7 +65,7 @@
                 </div>
             </nav>
 
-            <travel-show-list :where='@json($where)' :travel='@json($travel)'
+            <travel-show-list :where='@json($where)' :travel_id='@json($travel->id)'
                               :auth_user='@json(Auth::user())'></travel-show-list>
         </div>
     </div>

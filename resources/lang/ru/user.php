@@ -11,6 +11,6 @@ return [
     'denyFriendRequest' => 'Отклонить',
     'friend' => 'Авторы',
     'unfriend' => 'Удалить',
-    'seeAllTravel' => 'Все путешествия ',
+    'alltravel' => 'Все путешествия ',
     'addFriend' => 'Добавить себе автора'
 ];

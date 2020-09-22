@@ -321,16 +321,38 @@ class TravelsController extends Controller
             $travel['isFriend'] = auth()->user()->isFriendWith(Arr::get($travel->users, 0)) ||
                 auth()->user()->hasSentFriendRequestTo(Arr::get($travel->users, 0));
         }
+
         $where = ['id' => $travel->id];
         SEOMeta::setTitle($travel->name);
         SEOMeta::setDescription($travel->meta_description);
         SEOMeta::addMeta('travel:published_time', $travel->created_at->toW3CString(), 'property');
         SEOMeta::addKeyword($travel->meta_keywords);
+        $travelMenu = [
+            'gallery' => (boolean)$travel['gallery'],
+            'description' => (boolean)$travel['description'],
+            'plus' => (boolean)$travel['plus'],
+            'minus' => (boolean)$travel['minus'],
+            'recommendation' => (boolean)$travel['recommendation'],
+            'travelRoad' => (boolean)$travel['travelRoad'],
+            'travelAddressAdress' => (boolean)$travel['travelAddressAdress'],
+        ];
         return view('travels.show', [
             'travel' => $travel,
+            'travelMenu' => $travelMenu,
             'where' => $where
         ]);
     }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function findById(\Illuminate\Http\Request $request)
+    {
+        $travel = $this->travelRepository->getById($request->id);
+        return response()->json($travel);
+    }
+
 
     /**
      * Update the specified resource in storage.

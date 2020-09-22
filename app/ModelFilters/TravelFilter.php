@@ -14,6 +14,11 @@ class TravelFilter extends ModelFilter
      */
     public $relations = [];
 
+    public function id($id)
+    {
+        return $this->where('id',$id);
+    }
+
     /**
      * @param $ids
      * @return TravelFilter|\Illuminate\Database\Eloquent\Builder

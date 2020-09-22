@@ -31,6 +31,9 @@ let mutations = {
     SET_QUERY(state, query) {
         state.query = query
     },
+    SET_TRAVEL(state, travel) {
+        state.travel = travel
+    },
 
 }
 

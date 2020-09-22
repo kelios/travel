@@ -19,26 +19,26 @@
                 <h2 class="mb-5">{{travel.name}}</h2>
                 <ul class="list-group list-group-flush textmenu">
                     <li class="small" v-if="travel.categoryName">
-                        {{ __('travels.categories') }} - {{ travel.categoryName }}
+                        {{ translate('travels.categories') }} - {{ travel.categoryName }}
                     </li>
 
                     <li class="small" v-if="travel.complexityName">
-                        {{ __('travels.complexity') }} - {{ travel.complexityName }}
+                        {{ translate('travels.complexity') }} - {{ travel.complexityName }}
                     </li>
 
                     <li class="small" v-if="travel.transportName">
-                        {{ __('travels.transports') }} - {{ travel.transportName }}
+                        {{ translate('travels.transports') }} - {{ travel.transportName }}
                     </li>
                     <li class="small" v-if="travel.overNightStayName">
-                        {{ __('travels.overNightStay') }} - {{ travel.overNightStayName }}
+                        {{ translate('travels.overNightStay') }} - {{ travel.overNightStayName }}
                     </li>
 
                     <li class="small" v-if="travel.budget">
-                        {{ __('travels.budget') }} - {{ travel.budget }}
-                    </li>
+                        {{ translate('travels.budget') }} - {{ travel.budget }}
+
 
                     <li class="small" v-if="travel.number_peoples">
-                        {{ __('travels.number_peoples') }} - {{ travel.number_peoples }}
+                        {{ translate('travels.number_peoples') }} - {{ travel.number_peoples }}
                     </li>
                 </ul>
                 <hr>
@@ -48,26 +48,26 @@
 
         <section class="travel-section plus" id="plus" v-if="travel.plus">
             <travel-show-section :data="travel.plus"
-                                 :title="__('travels.plus')"></travel-show-section>
+                                 :title="translate('travels.plus')"></travel-show-section>
         </section>
 
         <section class="travel-section minus" id="minus" v-if="travel.minus">
             <travel-show-section :data="travel.minus"
-                                 :title="__('travels.minus')"></travel-show-section>
+                                 :title="translate('travels.minus')"></travel-show-section>
         </section>
 
         <section class="travel-section" id="recommendation" v-if="travel.recommendation">
             <travel-show-section :data="travel.recommendation"
-                                 :title="__('travels.recommendation')"></travel-show-section>
+                                 :title="translate('travels.recommendation')"></travel-show-section>
         </section>
 
         <section class="travel-section" id="travelRoad" v-if="travel.travelRoad">
             <div class="container-fluid">
-                <h2 class="mb-5">{{__('travels.travelRoad') }} - {{travel.travelRoad.file_name}}</h2>
+                <h2 class="mb-5">{{translate('travels.travelRoad') }} - {{travel.travelRoad.file_name}}</h2>
                 <div class="row">
                     <div class="col-xs-12">
                         <a :href="travel.travelRoad.url" download depressed small color="primary">
-                            {{__('travels.travelRoad') }} - {{travel.travelRoad.file_name}}
+                            {{translate('travels.travelRoad') }} - {{travel.travelRoad.file_name}}
                         </a>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
 
         <section class="travel-section ul map" id="map" v-if="travel.travelAddressAdress">
             <div class="travel-section-content">
-                <h2>{{__('travels.map')}}</h2>
+                <h2>{{translate('travels.map')}}</h2>
                 <map-me-travel :data="true" :where="where"></map-me-travel>
                 <ul class="list-group">
                     <li class="list-group-item" v-for="(address,index) in travel.travelAddressAdress" :key="index">
@@ -87,7 +87,7 @@
             </div>
         </section>
         <section class="travel-section comments-app comment" id="comment">
-            <h1>{{__('travels.comment')}}</h1>
+            <h1>{{translate('travels.comment')}}</h1>
             <div class="comment-form" v-if="auth_user">
                 <div class="comment-avatar">
                     <img :src="auth_user.user_avatar_thumb_url">
@@ -96,7 +96,7 @@
                     <div class="form-row">
                     <textarea type="text" class="form-control"
                               v-model="travel.reply"
-                              :placeholder="__('travels.addcomment')"
+                              :placeholder="translate('travels.addcomment')"
                     ></textarea>
                     </div>
                     <div class="form-row">
@@ -105,7 +105,7 @@
                     <div class="form-row">
                         <input type="button" class="btn btn-success"
                                v-on:click="comment(travel)"
-                               :value="__('travels.addcomment')">
+                               :value="translate('travels.addcomment')">
                     </div>
                 </div>
             </div>
@@ -127,7 +127,7 @@
 
     export default {
         name: 'TravelShowList',
-        props: ['travel', 'where', 'auth_user'],
+        props: ['travel_id', 'where', 'auth_user'],
         data() {
             return {}
         },
@@ -135,6 +135,8 @@
             'comment-list': CommentList
         },
         created() {
+            this.getTravelData();
+
             this.getTravelCommentsData();
         },
         computed: {
@@ -149,12 +151,16 @@
                 return _.chunk(this.travelComments, 15);
             },
             ...mapGetters([
-                'travelComments'
+                'travelComments',
+                'travel'
             ])
         },
         methods: {
             getTravelCommentsData() {
                 this.$store.dispatch('GET_TRAVEL_COMMENTS', {'where': this.where});
+            },
+            getTravelData() {
+                this.$store.dispatch('GET_TRAVEL', {'travel_id': this.travel_id});
             },
             comment(travel) {
                 axios.post('/comments', {

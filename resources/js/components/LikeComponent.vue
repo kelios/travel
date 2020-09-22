@@ -8,19 +8,19 @@
 <script>
     export default {
         name: "LikeComponent",
-        props: ['travel'],
+        props: ['travel_id', 'total_likes'],
         data() {
             return {
-                totallike: this.travel.totalLikes ?? 0,
+                totallike: this.total_likes ?? 0,
                 labelLike: ''
             }
         },
         mounted() {
-            this.isLikedByMe();
+              this.isLikedByMe();
         },
         methods: {
             isLikedByMe() {
-                axios.post('/like/' + this.travel.id + '/islikedbyme')
+                axios.get('/like/' + this.travel_id + '/islikedbyme')
                     .then(response => {
                         if (response.data.res) {
                             this.labelLike = 'Понравилось';
@@ -31,7 +31,7 @@
                     .catch()
             },
             likePost() {
-                axios.post('/like/' + this.travel.id)
+                axios.post('/like/' + this.travel_id)
                     .then(response => {
                         if (response.data.count > 0) {
                             this.totallike++;
