@@ -25,7 +25,7 @@
 
         <div class="form-group row">
             <a :href="'/travels?user_id='+friend.id" target="_blank">
-                {{translate('user.seeAllTravel')}}{{ friend.name }} >
+                {{translate('user.alltravel')}}{{ friend.name }} >
             </a>
         </div>
 

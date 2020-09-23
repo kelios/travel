@@ -169,3 +169,16 @@ $factory->define(App\Models\Comment::class, static function (Faker\Generator $fa
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Comment::class, static function (Faker\Generator $faker) {
+    return [
+        'comment' => $faker->text(),
+        'travel_id' => $faker->sentence,
+        'users_id' => $faker->sentence,
+        'reply_id' => $faker->sentence,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
