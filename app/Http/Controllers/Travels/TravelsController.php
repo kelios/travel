@@ -255,9 +255,9 @@ class TravelsController extends Controller
         SEOMeta::setTitle(trans('home.metaMainTitle'));
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
-        $user_ids = ['id' => Auth::user()->getFriends()->pluck('id')->toArray()];
-        //  dd($user_ids);
-        $where = ['user_id' => $user_ids, 'publish' => 1,];
+        $user_ids = Auth::user()->getFriends()->pluck('id')->toArray();
+       // dd($user_ids);
+        $where = ['users' => $user_ids, 'publish' => 1,];
         return view('travels.index', [
             'where' => $where]);
 

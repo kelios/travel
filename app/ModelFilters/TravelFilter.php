@@ -33,6 +33,19 @@ class TravelFilter extends ModelFilter
 
     /**
      * @param $ids
+     * @return TravelFilter|\Illuminate\Database\Eloquent\Builder
+     */
+    public function users($ids=[])
+    {
+
+        return $this->whereHas('users', function ($query) use ($ids) {
+            return $query->whereIn('users.user_id', $ids);
+        });
+
+    }
+
+    /**
+     * @param $ids
      * @return TravelFilter|\Illuminate\Database\Eloquent\Builders
      */
     public function cities($ids)
