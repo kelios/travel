@@ -14,9 +14,22 @@ class TravelFilter extends ModelFilter
      */
     public $relations = [];
 
+    /**
+     * @param $id
+     * @return TravelFilter
+     */
     public function id($id)
     {
-        return $this->where('id',$id);
+        return $this->where('id', $id);
+    }
+
+    /**
+     * @param $status
+     * @return TravelFilter
+     */
+    public function publish($status)
+    {
+        return $this->where('publish', $status);
     }
 
     /**
@@ -35,7 +48,7 @@ class TravelFilter extends ModelFilter
      * @param $ids
      * @return TravelFilter|\Illuminate\Database\Eloquent\Builder
      */
-    public function users($ids=[])
+    public function users($ids = [])
     {
 
         return $this->whereHas('users', function ($query) use ($ids) {
