@@ -25,6 +25,7 @@ Route::get('travel', 'Travels\TravelsController@findById');
 Route::get('travelComments', 'Travels\TravelsController@getTravelComment');
 Route::get('travelsLast', 'Travels\TravelsController@getLast');
 Route::get('searchCities', 'LocationController@searchCities');
+Route::get('getFiltersTravel', 'Travels\TravelsController@getFiltersTravel');
 Route::middleware('auth:api')->get('friends', 'FriendController@getAllFriends');
 Route::middleware('auth:api')->get('friendsPending', 'FriendController@getPendingFriendships');
 Route::middleware('auth:api')->post('sendreqfriends', 'FriendController@sendReqFriends');

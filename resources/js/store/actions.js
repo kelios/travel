@@ -111,6 +111,20 @@ let actions = {
                 console.log(err)
             })
     },
+    GET_FILTER_TRAVEL({commit}, data) {
+        let params = {
+
+        };
+        axios.get('/api/getFiltersTravel', {params})
+            .then(res => {
+                {
+                    commit('SET_FILTER_TRAVEL', res.data);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    },
 }
 
 export default actions

@@ -72,11 +72,6 @@
         mounted() {
             this.getResults();
             this.getPendingFriends();
-            console.log(this.friends);
-            /*  window.Echo.channel('search')
-                  .listen('.searchResults', (e) => {
-                      this.$store.commit('SET_FRIENDS', e.friends)
-                  })*/
         },
         computed: {
             groupedFriends() {

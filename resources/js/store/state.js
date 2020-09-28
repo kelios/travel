@@ -3,6 +3,7 @@ let state = {
     travel: {},
     where: [],
     query: '',
+    filtersTravel:[],
     lastTravels: {},
     travelAddress: {
         'address': [],

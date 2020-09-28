@@ -34,6 +34,9 @@ let mutations = {
     SET_TRAVEL(state, travel) {
         state.travel = travel
     },
+    SET_FILTER_TRAVEL(state, filtersTravel) {
+        state.filtersTravel = filtersTravel
+    },
 
 }
 

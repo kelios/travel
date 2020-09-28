@@ -26,6 +26,9 @@ let getters = {
     travel: state => {
         return state.travel
     },
+    filtersTravel: state => {
+        return state.filtersTravel
+    },
 }
 
 export default getters
