@@ -118,7 +118,9 @@ class TravelsController extends Controller
         $whereSearch = $request->all();
         $where = array_merge($whereSearch, ['publish' => 1]);
         $filter_hide = ['countries' => true];
-        return view('travels.index', ['where' => $where, 'filter_hide' => $filter_hide]);
+        return view('travels.index', ['where' => $where,
+                'filter_hide' => $filter_hide]
+        );
     }
 
     /**
@@ -134,7 +136,8 @@ class TravelsController extends Controller
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['publish' => 1, 'countries' => [3]];
         $filter_hide = ['countries' => false];
-        return view('travels.index', ['where' => $where, 'filter_hide' => $filter_hide]);
+        return view('travels.index', ['where' => $where,
+            'filter_hide' => $filter_hide]);
     }
 
     public function get(IndexTravel $request)
@@ -247,8 +250,10 @@ class TravelsController extends Controller
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['id' => Auth::user()->travelsFavorite()->pluck('travels.id')->toArray(),
             'publish' => 1];
+        $filter_hide = ['countries' => true];
         return view('travels.index', [
             'where' => $where,
+            'filter_hide' => $filter_hide,
             'isFavorite' => true]);
     }
 
@@ -259,8 +264,11 @@ class TravelsController extends Controller
         SEOMeta::setCanonical('https://metravel.by/');
         $user_ids = Auth::user()->getFriends()->pluck('id')->toArray();
         $where = ['users' => $user_ids, 'publish' => 1,];
+        $filter_hide = ['countries' => true];
         return view('travels.index', [
-            'where' => $where]);
+            'where' => $where,
+            'filter_hide' => $filter_hide
+        ]);
 
     }
 
@@ -272,15 +280,15 @@ class TravelsController extends Controller
      */
     public function create(IndexTravel $request)
     {
-       // dd($this->getFiltersTravel($request));
+        // dd($this->getFiltersTravel($request));
         return view('travels.create',
             $this->getFiltersTravel($request)
-            /*   'categories' => $this->categoryRepository->all(),
-               'transports' => $this->transportRepository->all(),
-               'month' => $this->monthRepository->all(),
-               'complexity' => $this->complexityRepository->all(),
-               'overNightStay' => $this->overNightStayRepository->all(),
-               'companion' => $this->companionRepository->all(),*/
+        /*   'categories' => $this->categoryRepository->all(),
+           'transports' => $this->transportRepository->all(),
+           'month' => $this->monthRepository->all(),
+           'complexity' => $this->complexityRepository->all(),
+           'overNightStay' => $this->overNightStayRepository->all(),
+           'companion' => $this->companionRepository->all(),*/
         );
     }
 
@@ -539,7 +547,7 @@ class TravelsController extends Controller
             'companion' => $this->companionRepository->all()
         ];
         if ($request->ajax()) {
-             return response()->json($filtersTravel);
+            return response()->json($filtersTravel);
         } else {
             return $filtersTravel;
         }
