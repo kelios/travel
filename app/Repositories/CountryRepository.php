@@ -30,7 +30,7 @@ class CountryRepository implements TravelRelationRepositoryInterface
      */
     public function all()
     {
-        return $this->country->all();
+        return $this->country->orderBy('title_' . $this->getLocale(), 'asc')->get();
     }
 
     /**
@@ -38,7 +38,7 @@ class CountryRepository implements TravelRelationRepositoryInterface
      */
     public function allhastravels()
     {
-        return $this->country->has('travels')->limit(500)->get();
+        return $this->country->has('travels')->orderBy('title_' . $this->getLocale(), 'asc')->get();
     }
 
 
@@ -66,6 +66,14 @@ class CountryRepository implements TravelRelationRepositoryInterface
     public function travels()
     {
         return $this->country->travels();
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->country->locale;
     }
 
 }

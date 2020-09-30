@@ -14,7 +14,7 @@ class Country extends Model
      *
      * @var string
      */
-    protected $locale = "en";
+    public $locale = "en";
 
     protected $table = 'countries';
 
@@ -72,6 +72,7 @@ class Country extends Model
      */
     public function setLocale($locale)
     {
+
         $locale = str_replace('_', '-', strtolower($locale));
         if (Str::startsWith($locale, 'en')) {
             $locale = 'en';
