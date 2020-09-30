@@ -39,6 +39,7 @@ Route::post('/save/{travelId}', 'Travels\TravelsController@addFavorite')->name('
 
 Route::get('/location/cities', 'LocationController@getCities')->name('cities');
 Route::get('/location/countries', 'LocationController@getCountries')->name('countries');
+Route::get('/location/countriesforsearch', 'LocationController@getCountriesForSearch')->name('countriesforsearch');
 Route::get('/location/countriesCities', 'LocationController@getCitiesByCountries')->name('countriesCities');
 Route::get('/travels/markers', 'TravelAddressController@getMarkers')->name('markers');
 

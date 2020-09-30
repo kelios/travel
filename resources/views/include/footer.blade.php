@@ -1,7 +1,8 @@
 <footer class="navbar-fixed-bottom row-fluid p-1">
     <div class="navbar-inner">
         <div class="container">
-                <ul class="list-inline mb-2">
+            <div class="row">
+                <ul class="col list-inline mb-0">
                     <li class="list-inline-item">
                         <a href="/about">{{trans('main.about')}}</a>
                     </li>
@@ -10,29 +11,24 @@
                         <a href="/contact">{{trans('main.contact')}}</a>
                     </li>
                 </ul>
-                <p class="text-muted small mb-4 mb-lg-0">&copy; MeTravel 2020.</p>
+                <ul class="col text-right list-inline mb-2">
+                    <li class="list-inline-item mr-3">
+                        <a href="https://vk.com/public197468951">
+                            <i class="fa fa-vk fa-2x fa-fw"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item mr-3">
+                        <a href="https://www.instagram.com/metravelby/" target="_blank">
+                            <i class="fa fa-instagram  fa-2x fa-fw"></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            {{--
-                        <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-                            <ul class="list-inline mb-0">
+            <p class="text-muted small mb-4 mb-lg-0">&copy; MeTravel 2020.</p>
 
-                                <li class="list-inline-item mr-3">
-                                    <a href="#">
-                                        <i class="fab fa-facebook fa-2x fa-fw"></i>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item mr-3">
-                                    <a href="#">
-                                        <i class="fab fa-twitter-square fa-2x fa-fw"></i>
-                                    </a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#">
-                                        <i class="fab fa-instagram fa-2x fa-fw"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                         --}}
+
         </div>
+
+
+    </div>
 </footer>

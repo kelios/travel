@@ -1,6 +1,11 @@
 <template>
     <div class="container">
+        <div class="input-group-append mb-4">
+            <button class="btn btn-primary" @click="searchTravels" @keyup.enter="searchTravels" type="button">
+                {{translate('main.search')}}
+            </button>
 
+        </div>
         <div class="active-pink-3 active-pink-4 mb-4">
 
             <multiselect
@@ -173,7 +178,7 @@
         methods: {
             getCountries() {
                 let vm = this;
-                axios.get('/location/countries')
+                axios.get('/location/countriesforsearch')
                     .then(function (response) {
                         vm.optionsCountries = response.data;
                     })

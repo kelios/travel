@@ -34,6 +34,16 @@ class CountryRepository implements TravelRelationRepositoryInterface
     }
 
     /**
+     * @return Country[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function allhastravels()
+    {
+        return $this->country->has('travels')->limit(500)->get();
+    }
+
+
+
+    /**
      * @param $attr
      * @return Country
      */

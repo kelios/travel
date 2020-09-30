@@ -91,7 +91,7 @@ class Country extends Model
      */
     public function travels()
     {
-        return $this->belongsToMany(Travel::class);
+        return $this->belongsToMany(Travel::class, 'travel_country','country_id', 'travel_id')->withTimestamps();
     }
 
 

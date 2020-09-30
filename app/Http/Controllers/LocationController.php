@@ -30,6 +30,12 @@ class LocationController extends BaseController
         return response()->json($countries, 200);
     }
 
+    public function getCountriesForSearch(Request $request)
+    {
+        $countries = $this->countryRep->allhastravels();
+        return response()->json($countries, 200);
+    }
+
     /**
      * @param Request $request
      * @return JsonResponse
