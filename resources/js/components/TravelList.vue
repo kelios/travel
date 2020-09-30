@@ -49,7 +49,7 @@
                 this.travels.data = this.travels.data.filter(travel => travel.id !== id)
             },
             getResults(page = 1) {
-                this.$store.dispatch('GET_TRAVELS', {'page': page, 'where': this.where});
+                this.$store.dispatch('GET_TRAVELS', {'page': page, 'where': Object.assign(this.filter,this.where)});
             }
         },
     }
