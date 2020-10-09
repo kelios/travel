@@ -14,9 +14,13 @@ body {
     body {
         padding-top: 0;
         margin: auto;
+        width:100%; overflow-x:hidden
     }
     .travelshowlist {
         padding-left: 22rem !important;
+        width:100%;
+        overflow-x:hidden;
+        font-size: 14px;
     }
 }
 
@@ -180,6 +184,22 @@ section.travel-section .travel-section-content {
 
 .gallery .fa-chevron-left:before {
     content: "\003C";
+}
+
+@media screen and (max-width: 600px) {
+    .gallery .fa-chevron-right:before {
+        visibility: hidden;
+        display: none;
+    }
+    .gallery .fa-chevron-left:before {
+        visibility: hidden;
+        display: none;
+    }
+    .travelshowlist {
+        width:100%;
+        overflow-x:hidden;
+        font-size: 14px;
+    }
 }
 
 .btn-success {
@@ -355,7 +375,7 @@ section.travel-section .travel-section-content {
 
 .comment .comment-footer {
     color: #acb4c2;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .comment .comment-footer:after {
