@@ -3,6 +3,7 @@ body {
     margin: auto;
     align-items: center;
 }
+
 .travelshowlist {
     position: relative;
     height: 88%;
@@ -13,14 +14,17 @@ body {
     body {
         padding-top: 0;
         margin: auto;
-        width:100%; overflow-x:hidden
+        width: 100%;
+        overflow-x: hidden
     }
+
     .travelshowlist {
         padding-left: 22rem !important;
-        width:100%;
-        overflow-x:hidden;
+        width: 100%;
+        overflow-x: hidden;
         font-size: 14px;
     }
+
 }
 
 @media (min-width: 992px) {
@@ -190,14 +194,21 @@ section.travel-section .travel-section-content {
         visibility: hidden;
         display: none;
     }
+
     .gallery .fa-chevron-left:before {
         visibility: hidden;
         display: none;
     }
+
     .travelshowlist {
-        width:100%;
-        overflow-x:hidden;
+        width: 100%;
+        overflow-x: hidden;
         font-size: 14px;
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        padding: .25rem !important;
     }
 }
 

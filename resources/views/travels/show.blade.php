@@ -6,7 +6,7 @@
 @section('content')
     <div class="showtravel">
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light" id="sideNav">
+            <nav class="navbar navbar-expand-lg navbar-light" id="sideNav">
                 <div class="collapse navbar-collapse p-t-3" id="navbarSupportedContent">
                     <travel-show-menu :travel_menu='@json($travelMenu)'
                                       :auth_user='@json(Auth::user())'
