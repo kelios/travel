@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Message;
 use App\Models\Travel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -45,7 +46,7 @@ class User extends Authenticatable implements HasMedia
     protected $fillable = [
         'name', 'email', 'password',
     ];
-    protected $appends = ['resource_url', 'public_url', 'user_avatar_thumb_url','accepted_friends_count'];
+    protected $appends = ['resource_url', 'public_url', 'user_avatar_thumb_url', 'accepted_friends_count'];
 
 
     /**
@@ -146,6 +147,21 @@ class User extends Authenticatable implements HasMedia
     public function likes()
     {
         return $this->belongsToMany(Travel::class, 'travel_like', 'user_id', 'travel_id');
+    }
+
+    public function messages()
+    {
+        return $this->belongsToMany(Message::class);
+    }
+
+    public function recipientMessages()
+    {
+        return $this->hasMany(Message::class, 'recipient_id');
+    }
+
+    public function sent()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
     }
 
     public function travelsFavorite()

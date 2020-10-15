@@ -20,9 +20,19 @@
                 @if (auth()->user())
                     <div clas="panel panel-default">
                         <div class="panel-body">
+
                             <like-component :travel_id='@json($travel->id)'
                                             :total_likes='@json($travel->totalLikes)'></like-component>
-                            <favorite-component :travel_id='@json($travel->id)'></favorite-component>
+                            <div class="row">
+                                <favorite-component :travel_id='@json($travel->id)'></favorite-component>
+                                <message-component :travel_id='@json($travel->id)'
+                                                   :recipient_id='@json(implode(',',$travel->userIds))'
+                                                   :auth_user='@json(Auth::user())'
+                                                   :travel_user_name='@json($travel->userName)'
+                                >
+
+                                </message-component>
+                            </div>
                         </div>
                     </div>
                 @endif

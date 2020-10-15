@@ -1,5 +1,5 @@
 <template>
-    <div class="col">
+    <div class="col-md">
         <i :title="labelFavorite" @click.prevent="savePost" class="fa fa-save" aria-hidden="true"></i>
     </div>
 </template>

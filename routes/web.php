@@ -314,3 +314,19 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
+        Route::prefix('messages')->name('messages/')->group(static function() {
+            Route::get('/',                                             'MessagesController@index')->name('index');
+            Route::get('/create',                                       'MessagesController@create')->name('create');
+            Route::post('/',                                            'MessagesController@store')->name('store');
+            Route::get('/{message}/edit',                               'MessagesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'MessagesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{message}',                                   'MessagesController@update')->name('update');
+            Route::delete('/{message}',                                 'MessagesController@destroy')->name('destroy');
+        });
+    });
+});

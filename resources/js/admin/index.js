@@ -12,3 +12,4 @@ import './travel';
 import './category';
 import './companion';
 import './comment';
+import './message';

@@ -65,6 +65,9 @@ Vue.component('favorite-component', require('../components/FavoriteComponent.vue
 Vue.component('friend-list', require('../components/FriendList.vue').default);
 Vue.component('friend-card', require('../components/FriendCard.vue').default);
 Vue.component('add-friend', require('../components/AddFriend.vue').default);
+Vue.component('message-component', require('../components/MessageComponent.vue').default);
+Vue.component('message-modal', require('../components/MessageModal.vue').default);
+Vue.component('modal', require('../components/Modal.vue').default);
 
 Vue.component('passport-clients', require('../components/passport/Clients.vue'));
 Vue.component('passport-authorized-clients', require('../components/passport/AuthorizedClients.vue'));

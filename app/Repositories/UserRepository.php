@@ -68,4 +68,13 @@ class UserRepository implements TravelRelationRepositoryInterface
         return $this->user->travels();
     }
 
+    public function sendMessageTo($recipient, $message, $subject)
+    {
+        return $this->user->sent()->create([
+            'body' => $message,
+            'subject' => $subject,
+            'sent_to_id' => $recipient,
+        ]);
+    }
+
 }

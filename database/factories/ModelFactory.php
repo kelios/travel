@@ -182,3 +182,17 @@ $factory->define(App\Models\Comment::class, static function (Faker\Generator $fa
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Message::class, static function (Faker\Generator $faker) {
+    return [
+        'messages' => $faker->text(),
+        'travel_id' => $faker->sentence,
+        'sender_id' => $faker->sentence,
+        'recipient_id' => $faker->sentence,
+        'is_read' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

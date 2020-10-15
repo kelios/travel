@@ -1,5 +1,5 @@
 <template>
-    <div class="col">
+    <div class="col-md">
         <i :title="labelLike" @click.prevent="likePost" class="fa fa-thumbs-up" aria-hidden="true"></i>
         ({{ totallike }})
     </div>
