@@ -4,13 +4,13 @@
 
         <div class="container">
             <div class="row">
-                <div class="col">
+                <div class="col-md">
                     <div class="album py-5 ">
                         <search-extended-travel :filter_hide='@json($filter_hide)'
                                                 :where='@json($where)'></search-extended-travel>
                     </div>
                 </div>
-                <div class="col-9">
+                <div class="col-md-9">
                     <div class="album py-5 ">
                         <search-me-travel :where='@json($where)'></search-me-travel>
 
