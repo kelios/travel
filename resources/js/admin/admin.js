@@ -68,11 +68,14 @@ Vue.component('add-friend', require('../components/AddFriend.vue').default);
 Vue.component('message-component', require('../components/MessageComponent.vue').default);
 Vue.component('message-modal', require('../components/MessageModal.vue').default);
 Vue.component('modal', require('../components/Modal.vue').default);
+Vue.component('message-list', require('../components/MessageList.vue').default);
 
 Vue.component('passport-clients', require('../components/passport/Clients.vue'));
 Vue.component('passport-authorized-clients', require('../components/passport/AuthorizedClients.vue'));
 Vue.component('passport-personal-access-tokens', require('../components/passport/PersonalAccessTokens.vue'));
 Vue.prototype.translate=require('./../VueTranslation/Translation').default.translate;
+Vue.prototype.authUserId=document.head.querySelector("meta[name='user-id']").content;
+
 new Vue({
     mixins: [Admin],
     el: '#app',

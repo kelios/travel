@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="user-id" content="{{ Auth::user()->id }}">
     <link rel="icon" href="{{ URL::to('/favicon.ico')}}" type="image/x-icon">
 {!! SEO::generate(true) !!}
 <!-- CSRF Token -->
@@ -103,6 +104,14 @@
                                     @if(Auth::user()->accepted_friends_count>0)
                                         <span class="badge badge-secondary">
                                         {{ Auth::user()->accepted_friends_count }}
+                                    </span>
+                                    @endif
+                                </a>
+                                <a class="dropdown-item" href="{{ route('users.allMessages', Auth::user()) }}">
+                                    {{ trans('home.allMessages') }}
+                                    @if(Auth::user()->unreadMessagesCount()>0)
+                                        <span class="badge badge-secondary">
+                                        {{ Auth::user()->unreadMessagesCount() }}
                                     </span>
                                     @endif
                                 </a>

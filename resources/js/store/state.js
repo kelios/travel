@@ -3,7 +3,7 @@ let state = {
     travel: {},
     where: [],
     query: '',
-    filtersTravel:[],
+    filtersTravel: [],
     lastTravels: {},
     travelAddress: {
         'address': [],
@@ -16,5 +16,6 @@ let state = {
     optionsCities: [],
     defImageTravel: '/media/metravel.jpg',
     friends: {},
+    messages: {},
 }
 export default state

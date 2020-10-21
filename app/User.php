@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Message;
 use App\Models\Travel;
+use Cmgmyr\Messenger\Traits\Messagable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -37,6 +38,8 @@ class User extends Authenticatable implements HasMedia
     use Friendable;
     use CanLike;
     use CanFollow, CanBeFollowed;
+
+    use Messagable;
 
     /**
      * The attributes that are mass assignable.
@@ -154,7 +157,7 @@ class User extends Authenticatable implements HasMedia
         return $this->belongsToMany(Message::class);
     }
 
-    public function recipientMessages()
+    public function recieved()
     {
         return $this->hasMany(Message::class, 'recipient_id');
     }

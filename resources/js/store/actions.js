@@ -97,6 +97,21 @@ let actions = {
                 console.log(err)
             })
     },
+    GET_MESSAGES({commit}, data) {
+        let params = {
+            page: data.page,
+            where: data.where,
+        };
+        axios.get('/api/messages', {params})
+            .then(res => {
+                {
+                    commit('SET_MESSAGES', res.data);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    },
     GET_TRAVEL({commit}, data) {
         let params = {
             id: data.travel_id,

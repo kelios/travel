@@ -25,6 +25,7 @@ Route::post('feedback', 'HomeController@feedback')->name('feedback');
 
 Route::get('users/{user}', 'UserController@edit')->name('users.edit');
 Route::get('allFriends/{user}', 'UserController@allFriends')->name('users.allFriends');
+Route::get('allMessages/{user}', 'UserController@allMessages')->name('users.allMessages');
 Route::post('users/{user}', ['as' => 'users.update', 'uses' => 'UserController@update']);
 Auth::routes();
 

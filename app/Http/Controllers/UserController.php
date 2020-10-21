@@ -52,6 +52,19 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * @param User $user
+     * @return Factory|View
+     */
+    public function allMessages(User $user)
+    {
+
+        return view('users.allMessages', [
+            'user' => $user,
+
+        ]);
+    }
+
 
     /**
      * Update the specified resource in storage.

@@ -17,6 +17,9 @@ let getters = {
     friends: state => {
         return state.friends
     },
+    messages: state => {
+        return state.messages
+    },
     where: state => {
         return state.where
     },

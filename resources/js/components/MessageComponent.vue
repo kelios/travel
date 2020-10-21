@@ -14,7 +14,6 @@
 </template>
 
 <script>
-    import UserProfileModal from './MessageModal.vue'
 
     export default {
         name: "MessageComponent",
@@ -29,7 +28,6 @@
         },
         methods: {
             showModal: function (id) {
-                this.getMessages();
                 return this.activeModal === id
             },
             toggleModal: function (id) {
@@ -39,33 +37,6 @@
                 }
                 this.activeModal = id
             },
-            getMessages: function () {
-                axios.get('/api/messages/' + this.recipient_id)
-                    .then(response => {
-                        console.log(response.data);
-                        if (response.data.res) {
-
-                        } else {
-
-                        }
-                    })
-                    .catch()
-            },
-            likePost() {
-                axios.post('/like/' + this.travel_id)
-                    .then(response => {
-                        if (response.data.count > 0) {
-                            this.totallike++;
-                            this.labelLike = 'Убрать понравилось';
-
-                        } else {
-                            this.totallike--;
-                            this.labelLike = 'Понравилось';
-                        }
-                    })
-                    .catch()
-            },
-
         },
     }
 </script>

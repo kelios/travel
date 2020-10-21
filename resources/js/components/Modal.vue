@@ -63,6 +63,11 @@
         margin: 20px 0;
     }
 
+    .list-message{
+        overflow-y: auto;
+        height: 50%;
+    }
+
     /*
      * The following styles are auto-applied to elements with
      * transition="modal" when their visibility is toggled

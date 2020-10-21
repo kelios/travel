@@ -196,3 +196,16 @@ $factory->define(App\Models\Message::class, static function (Faker\Generator $fa
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Message::class, static function (Faker\Generator $faker) {
+    return [
+        'thread_id' => $faker->randomNumber(5),
+        'user_id' => $faker->randomNumber(5),
+        'body' => $faker->text(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        'deleted_at' => null,
+        
+        
+    ];
+});

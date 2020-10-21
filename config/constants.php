@@ -5,5 +5,8 @@ return [
     ],
     'showListTravel' => [
         'count' => 6
+    ],
+    'showListMessage' => [
+        'count' => 100
     ]
 ];
