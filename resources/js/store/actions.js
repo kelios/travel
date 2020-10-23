@@ -112,6 +112,20 @@ let actions = {
                 console.log(err)
             })
     },
+    GET_MESSAGES_BETWEEN({commit}, data) {
+        let params = {
+            page: data.page,
+        };
+        axios.get('/api/messages/'+data.where['id'], {params})
+            .then(res => {
+                {
+                    commit('SET_MESSAGES_BETWEEN', res.data);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    },
     GET_TRAVEL({commit}, data) {
         let params = {
             id: data.travel_id,
@@ -127,13 +141,26 @@ let actions = {
             })
     },
     GET_FILTER_TRAVEL({commit}, data) {
-        let params = {
-
-        };
+        let params = {};
         axios.get('/api/getFiltersTravel', {params})
             .then(res => {
                 {
                     commit('SET_FILTER_TRAVEL', res.data);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    },
+    GET_USERS_MESSAGES({commit}, data) {
+        let params = {
+            page: data.page,
+            where: data.where,
+        };
+        axios.get('/api/messagesUsers/', {params})
+            .then(res => {
+                {
+                    commit('SET_USERS_MESSAGES', res.data);
                 }
             })
             .catch(err => {

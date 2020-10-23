@@ -40,6 +40,12 @@ let mutations = {
     SET_FILTER_TRAVEL(state, filtersTravel) {
         state.filtersTravel = filtersTravel
     },
+    SET_MESSAGES_BETWEEN(state, messagesBetween) {
+        state.messagesBetween = messagesBetween
+    },
+    SET_USERS_MESSAGES(state, usersMessages) {
+        state.usersMessages = usersMessages
+    },
 
 }
 

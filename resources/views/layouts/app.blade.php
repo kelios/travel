@@ -3,17 +3,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="user-id" content="{{ Auth::user()->id }}">
+    @if(Auth::user())
+        <meta name="user-id" content="{{ Auth::user()->id }}">
+        <meta name="user-name" content="{{ Auth::user()->name}}">
+        <meta name="user-avatar-thumb-url" content="{{ Auth::user()->user_avatar_thumb_url }}">
+    @endif
     <link rel="icon" href="{{ URL::to('/favicon.ico')}}" type="image/x-icon">
-{!! SEO::generate(true) !!}
+    {!! SEO::generate(true) !!}
 <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Scripts -->
-@if (App::environment('production'))
-    @include('include.analytics')
-@endif
+    @if (App::environment('production'))
+        @include('include.analytics')
+    @endif
 
 <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -21,13 +25,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@100&display=swap" rel="stylesheet">
 
     <!-- Styles -->
+
     @include('brackets/admin-ui::admin.partials.main-styles')
     @yield('styles')
     <link href="{{ asset('css/metravel.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id="app">
-    <nav class="navbar bg-white navbar-expand-md navbar-light shadow-sm">
+    <nav class="navbar bg-white navbar-expand-md navbar-light shadow-sm zindex2">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Me Travel') }}
@@ -103,16 +108,16 @@
                                     {{ trans('home.allFriends') }}
                                     @if(Auth::user()->accepted_friends_count>0)
                                         <span class="badge badge-secondary">
-                                        {{ Auth::user()->accepted_friends_count }}
-                                    </span>
+                                    {{ Auth::user()->accepted_friends_count }}
+                                </span>
                                     @endif
                                 </a>
                                 <a class="dropdown-item" href="{{ route('users.allMessages', Auth::user()) }}">
                                     {{ trans('home.allMessages') }}
                                     @if(Auth::user()->unreadMessagesCount()>0)
                                         <span class="badge badge-secondary">
-                                        {{ Auth::user()->unreadMessagesCount() }}
-                                    </span>
+                                    {{ Auth::user()->unreadMessagesCount() }}
+                                </span>
                                     @endif
                                 </a>
                                 <a class="dropdown-item" href="{{ url('travels/favoriteTravel') }}">
@@ -121,7 +126,7 @@
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                 document.getElementById('logout-form').submit();">
                                     {{ trans('home.logout') }}
                                 </a>
 

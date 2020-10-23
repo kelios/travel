@@ -38,7 +38,7 @@ class MessageController extends Controller
     public function list()
     {
         $messages = Thread::forUser(Auth::id())->latest('updated_at')
-            ->with('messages', 'users')
+            ->with('messagesLatest', 'users')
             ->paginate(Config::get('constants.showListMessage.count'));
         return response()->json($messages);
     }
@@ -49,10 +49,20 @@ class MessageController extends Controller
     public function get(int $recipientId)
     {
         $messages = Thread::Between([Auth::id(), $recipientId])
-            ->with('messagesLatest')
-            ->latest('updated_at')
+            ->firstOrFail()
+            ->messagesLatest()
             ->paginate(Config::get('constants.showListMessage.count'));
+
         return response()->json($messages, 200);
+    }
+
+    public function getUsers()
+    {
+        $thread = Thread::forUser(Auth::id())->latest('updated_at')
+            ->with('users')
+            ->get();
+        // $users = $thread->pluck('users')->flatten()->unique('id');
+        return response()->json($thread);
     }
 
 
@@ -71,7 +81,6 @@ class MessageController extends Controller
         $sanitized = $request->all();
         $thread = Thread::Between([Auth::id(), array_get($sanitized, 'recipient_id')])->first();
         $isNew = false;
-        //dd($thread->id);
         if (!$thread) {
             $isNew = true;
             $thread = Thread::create([

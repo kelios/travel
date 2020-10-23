@@ -356,3 +356,50 @@ input:checked + .sumblavam:before {
     background-color: #e5f1f1 !important;
 }
 
+.sidebar {
+    margin-left: 0 !important;
+}
+
+.b-sidebar.topmetravel {
+    z-index: 40;
+    padding-right: 1rem;
+    width: 15rem;
+}
+
+.zindex2 {
+    z-index: 2 !important;
+}
+
+.paddingtop3 {
+    padding-top: 7rem;
+    z-index: 40;
+}
+
+@media (max-width: 600px) {
+    .b-sidebar.topmetravel {
+        width: 100% !important;
+    }
+
+    .showForMenu {
+        display: block !important;
+    }
+}
+
+.page-item.pagination-page-nav.active {
+    z-index: 0;
+}
+
+.showForMenu {
+    display: none;
+}
+
+.scroll {
+    max-height: 450px;
+    overflow-y: auto;
+}
+.padding30{
+    padding:30px;
+}
+
+
+

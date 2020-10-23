@@ -32,6 +32,12 @@ let getters = {
     filtersTravel: state => {
         return state.filtersTravel
     },
+    messagesBetween: state => {
+        return state.messagesBetween
+    },
+    usersMessages: state => {
+        return state.usersMessages
+    }
 }
 
 export default getters

@@ -12,6 +12,15 @@ use Illuminate\Database\Eloquent\Builder;
 class Thread extends \Cmgmyr\Messenger\Models\Thread
 {
     /**
+     * @return int
+     */
+
+    public function getUnreadMessageForAuthUserAttribute()
+    {
+        return $this->userUnreadMessagesCount(Auth::id());
+    }
+
+    /**
      * Messages relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

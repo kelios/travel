@@ -69,12 +69,17 @@ Vue.component('message-component', require('../components/MessageComponent.vue')
 Vue.component('message-modal', require('../components/MessageModal.vue').default);
 Vue.component('modal', require('../components/Modal.vue').default);
 Vue.component('message-list', require('../components/MessageList.vue').default);
+Vue.component('message-send', require('../components/MessageSend.vue').default);
 
 Vue.component('passport-clients', require('../components/passport/Clients.vue'));
 Vue.component('passport-authorized-clients', require('../components/passport/AuthorizedClients.vue'));
 Vue.component('passport-personal-access-tokens', require('../components/passport/PersonalAccessTokens.vue'));
-Vue.prototype.translate=require('./../VueTranslation/Translation').default.translate;
-Vue.prototype.authUserId=document.head.querySelector("meta[name='user-id']").content;
+Vue.prototype.translate = require('./../VueTranslation/Translation').default.translate;
+if (document.head.querySelector("meta[name='user-id']")) {
+    Vue.prototype.authUserId = document.head.querySelector("meta[name='user-id']").content;
+    Vue.prototype.authUserName = document.head.querySelector("meta[name='user-name']").content;
+    Vue.prototype.authUserAvatar = document.head.querySelector("meta[name='user-avatar-thumb-url']").content;
+}
 
 new Vue({
     mixins: [Admin],

@@ -17,5 +17,7 @@ let state = {
     defImageTravel: '/media/metravel.jpg',
     friends: {},
     messages: {},
+    messagesBetween: {},
+    usersMessages: null
 }
 export default state

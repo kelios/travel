@@ -7,6 +7,6 @@ return [
         'count' => 6
     ],
     'showListMessage' => [
-        'count' => 100
+        'count' => 1000
     ]
 ];
