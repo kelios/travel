@@ -48,11 +48,12 @@ class MessageController extends Controller
      */
     public function get(int $recipientId)
     {
-        $messages = Thread::Between([Auth::id(), $recipientId])
-            ->firstOrFail()
-            ->messagesLatest()
-            ->paginate(Config::get('constants.showListMessage.count'));
-
+        $thread = Thread::Between([Auth::id(), $recipientId])->first();
+        if ($thread) {
+            $messages = $thread->messagesLatest()->paginate(Config::get('constants.showListMessage.count'));
+        } else {
+            $messages = Thread::Between([Auth::id(), $recipientId])->paginate(Config::get('constants.showListMessage.count'));
+        }
         return response()->json($messages, 200);
     }
 

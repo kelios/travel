@@ -88,9 +88,9 @@
         </section>
         <section class="travel-section comments-app comment" id="comment">
             <h1>{{translate('travels.comment')}}</h1>
-            <div class="comment-form" v-if="auth_user">
+            <div class="comment-form" v-if="authUserId">
                 <div class="comment-avatar">
-                    <img :src="auth_user.user_avatar_thumb_url">
+                    <img :src="authUserAvatar">
                 </div>
                 <div class="form">
                     <div class="form-row">
@@ -100,7 +100,7 @@
                     ></textarea>
                     </div>
                     <div class="form-row">
-                        <input class="input" placeholder="Name" type="text" disabled :value="auth_user.name">
+                        <input class="input" placeholder="Name" type="text" disabled :value="authUserName">
                     </div>
                     <div class="form-row">
                         <input type="button" class="btn btn-success"
@@ -112,7 +112,6 @@
 
             <comment-list v-if="travelComments" :collection="travelComments"
                           :comments="travelComments.root"
-                          :auth_user="auth_user"
                           :where="where"
             ></comment-list>
         </section>
@@ -127,7 +126,7 @@
 
     export default {
         name: 'TravelShowList',
-        props: ['travel_id', 'where', 'auth_user'],
+        props: ['travel_id', 'where'],
         data() {
             return {}
         },
@@ -166,7 +165,7 @@
                 axios.post('/comments', {
                     comment: travel.reply,
                     travel_id: travel.id,
-                    users_id: this.auth_user.id
+                    users_id: this.authUserId
                 }).then(response => {
                     if (!response.data.error) {
                         this.travel.reply = '';

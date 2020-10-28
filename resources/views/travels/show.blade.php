@@ -8,9 +8,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light" id="sideNav">
                 <div class="collapse navbar-collapse p-t-3" id="navbarSupportedContent">
-                    <travel-show-menu :travel_menu='@json($travelMenu)'
-                                      :auth_user='@json(Auth::user())'
-                    ></travel-show-menu>
+                    <travel-show-menu :travel_menu='@json($travelMenu)'></travel-show-menu>
                 </div>
                 <a class="navbar-brand js-scroll-trigger" href="#page-top"
                 >            <span class="d-none d-lg-block">
@@ -22,15 +20,15 @@
                         <div class="panel-body">
 
                             <like-component :travel_id='@json($travel->id)'
-                                            :total_likes='@json($travel->totalLikes)'></like-component>
+                                            :total_likes='@json($travel->totalLikes)'>
+
+                            </like-component>
                             <div class="row">
                                 <favorite-component :travel_id='@json($travel->id)'></favorite-component>
                                 <message-component :travel_id='@json($travel->id)'
                                                    :recipient_id='@json(implode(',',$travel->userIds))'
-                                                   :auth_user='@json(Auth::user())'
                                                    :travel_user_name='@json($travel->userName)'
                                 >
-
                                 </message-component>
                             </div>
                         </div>
@@ -75,8 +73,7 @@
                 </div>
             </nav>
 
-            <travel-show-list :where='@json($where)' :travel_id='@json($travel->id)'
-                              :auth_user='@json(Auth::user())'></travel-show-list>
+            <travel-show-list :where='@json($where)' :travel_id='@json($travel->id)'></travel-show-list>
         </div>
     </div>
 

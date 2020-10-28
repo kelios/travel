@@ -33,24 +33,7 @@
 
     export default {
         name: 'TravelShowMenu',
-        props: ['travel_menu','auth_user'],
-        created() {
-            console.log(this.travel_menu);
-        },
-        mounted() {
-            console.log(this.travel_menu);
-        },
-       /* computed: {
-
-            getData() {
-                if (Array.isArray(this.data)) {
-                    return this.data.join(',');
-                } else {
-                    return this.data;
-                }
-            }
-
-        },*/
+        props: ['travel_menu'],
         methods: {}
     }
 </script>

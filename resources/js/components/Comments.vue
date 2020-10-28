@@ -146,7 +146,7 @@
     import axios from 'axios';
 
     export default {
-        props: ['auth_user', 'travel'],
+        props: ['travel'],
         data() {
             return {
                 commentreplies: [],
@@ -159,7 +159,7 @@
                 show: [],
                 errorComment: null,
                 travelId: this.travel.id,
-                user: this.auth_user,
+                user: this.authUserId,
                 errorReply: null,
             }
         },
@@ -187,9 +187,6 @@
                 }
             },
             openComment(index) {
-                console.log('openComment');
-                console.log(index);
-                console.log(this.commentBoxs[index]);
                 if (this.user) {
                     if (this.commentBoxs[index]) {
                         Vue.set(this.commentBoxs, index, 0);
@@ -240,8 +237,7 @@
                         reply_id: commentId
                     }).then(res => {
                         if (res.data.status) {
-                            console.log('replyComment');
-                            console.log(res.data.commentId);
+
                             if (!this.commentsData[index].reply) {
 
                                 this.commentsData[index].replies.push({

@@ -5,7 +5,6 @@
            aria-hidden="true"></i>
         <message-modal
             :show="showModal(travel_id)"
-            :auth_user="auth_user"
             :recipient_id="recipient_id"
             :travel_id="travel_id"
             :travel_user_name="travel_user_name"
@@ -17,7 +16,7 @@
 
     export default {
         name: "MessageComponent",
-        props: ['travel_id', 'recipient_id', 'auth_user', 'travel_user_name'],
+        props: ['travel_id', 'recipient_id', 'travel_user_name'],
         data() {
             return {
                 activeModal: 0,

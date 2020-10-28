@@ -37,7 +37,7 @@
         name: "FriendCard",
         props: ['friend', 'isAccept', 'isRemove'],
         mounted() {
-            console.log(this.friend);
+
         },
         methods: {
             acceptFriendRequest(id) {

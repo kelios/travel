@@ -12,10 +12,10 @@
                             <div v-if="usersMessages" v-for="thread in usersMessages">
                                 <div v-for="user in thread.users">
                                     <b-list-group-item :href="'#usermess'+user.id" v-if="user.id != authUserId"
-                                                       v-on:click="getCorrespondence(1,user.id,user.name)">
+                                                       v-on:click="setUser(user.id,user.name)">
                                         <img class="avatar-photo" :src="user.user_avatar_thumb_url">
                                         {{ user.name }}
-                                        <span v-if = "thread.unreadMessageForAuthUser" class="badge badge-secondary">
+                                        <span v-if="thread.unreadMessageForAuthUser" class="badge badge-secondary">
                                         {{thread.unreadMessageForAuthUser }}
                                     </span>
                                     </b-list-group-item>
@@ -32,28 +32,11 @@
                             {{userName}}
                         </div>
                         <b-button v-b-toggle.sidebar-no-header>{{translate('user.toogle_user_mes')}}</b-button>
-
                     </div>
-
-                    <message-send :messagesBetween="messagesBetween"
-                                  :recipient_id="showMessageUser">
-                    </message-send>
-
+                    <message-send v-if="usersMessages.length" v-bind:recipient_id="showMessageUser"></message-send>
                     <div class="card-body scroll">
-                        <pagination :data="messagesBetween" :limit="4" align="center"
-                                    @pagination-change-page="getMes"></pagination>
-                        <div v-if="messagesBetween.data" v-for="mes in messagesBetween.data">
-                            <div v-if="mes.user_id == authUserId" class="alert alert-primary text-right">
-                                {{mes.body}}
-                            </div>
-                            <div v-if="mes.user_id != authUserId" class="alert alert-dark text-left ">
-                                {{mes.body}}
-                            </div>
-                        </div>
-
-                        <pagination :data="messagesBetween" :limit="4" align="center"
-                                    @pagination-change-page="getMes"></pagination>
-
+                        <div v-if="usersMessages.length==0">{{translate('user.nomessage')}}</div>
+                        <message-between-list v-bind:recipient_id="showMessageUser"></message-between-list>
                     </div>
                 </div>
             </b-col>
@@ -86,11 +69,16 @@
         },
         watch: {
             usersMessages: function (newUser, oldUser) {
-                if (oldUser == null) {
+
+                if (oldUser == null || Object.keys(this.usersMessages).length !== 0) {
                     if (this.usersMessages[0].users[0].id != this.authUserId) {
-                        this.getCorrespondence(1, this.usersMessages[0].users[0].id, this.usersMessages[0].users[0].name);
-                    }else{
-                        this.getCorrespondence(1, this.usersMessages[0].users[1].id, this.usersMessages[0].users[1].name);
+                        this.userName = this.usersMessages[0].users[0].name;
+                        this.showMessageUser = this.usersMessages[0].users[0].id;
+                    } else {
+
+                        this.userName = this.usersMessages[0].users[1].name;
+                        this.showMessageUser = this.usersMessages[0].users[1].id;
+
                     }
                 }
             }
@@ -104,30 +92,16 @@
 
         },
         methods: {
-            getResults(page = 1) {
-                this.$store.dispatch('GET_MESSAGES', {'page': page, 'where': this.where});
-            },
             getUsers(page = 1) {
                 this.$store.dispatch('GET_USERS_MESSAGES', {'page': page, 'where': this.where});
             },
-            getMes(page = 1) {
-                this.getCorrespondence(page, this.showMessageUser, this.userName);
-            },
-            getCorrespondence(page = 1, idUser = '', userName = '') {
+            setUser(idUser = '', userName = '') {
                 if (idUser) {
                     this.userName = userName;
                     this.showMessageUser = idUser;
-                    this.where['id'] = idUser;
                 }
-                this.$store.dispatch('GET_MESSAGES_BETWEEN', {'page': page, 'where': this.where});
             },
-            isMobile() {
-                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                    return true
-                } else {
-                    return false
-                }
-            }
+
 
         },
     }

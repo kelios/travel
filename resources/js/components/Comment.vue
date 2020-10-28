@@ -12,10 +12,10 @@
                            </span>
                     <span class="comment-date">{{ comment.created_at}}</span>
                 </div>
-                <a v-if="auth_user" @click="replyToComment = comment">{{translate('travels.reply')}}</a>
-                <comment-form :where="where" :auth_user="auth_user" v-if="replyToComment == comment"
+                <a v-if="authUserId" @click="replyToComment = comment">{{translate('travels.reply')}}</a>
+                <comment-form :where="where" v-if="replyToComment == comment"
                               :comment="comment"></comment-form>
-                <comment-list :auth_user="auth_user" v-if="collection[comment.id]" v-bind:comments="collection[comment.id]"
+                <comment-list v-if="collection[comment.id]" v-bind:comments="collection[comment.id]"
                               v-bind:collection="collection"></comment-list>
             </div>
         </div>
@@ -27,7 +27,7 @@
     import CommentForm from './CommentForm.vue';
 
     export default {
-        props: ['comment', 'collection', 'auth_user', 'where'],
+        props: ['comment', 'collection', 'where'],
         name: "Comment",
         data() {
             return {

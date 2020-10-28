@@ -1,7 +1,7 @@
 <template>
     <div class="comment-form">
         <div class="comment-avatar">
-            <img :src="auth_user.user_avatar_thumb_url">
+            <img :src="authUserAvatar">
         </div>
         <div class="form">
             <div class="form-row">
@@ -11,7 +11,7 @@
                     ></textarea>
             </div>
             <div class="form-row">
-                <input class="input" placeholder="Name" type="text" disabled :value="auth_user.name">
+                <input class="input" placeholder="Name" type="text" disabled :value="authUserName">
             </div>
             <div class="form-row">
                 <input type="button" class="btn btn-success"
@@ -25,7 +25,7 @@
 <script>
     export default {
         name: "CommentForm",
-        props: ['comment', 'auth_user', 'where'],
+        props: ['comment', 'where'],
         data() {
             return {
                 content: ''
@@ -37,7 +37,7 @@
                     comment: this.content,
                     travel_id: comment.travel_id,
                     reply_id: comment.id,
-                    users_id: this.auth_user.id
+                    users_id: this.authUserId
                 }).then(response => {
                     this.content = '';
                     if (!response.data.error) {

@@ -27,21 +27,13 @@
 <script>
     export default {
         name: "MessageSend",
-        props: ['messagesBetween', 'recipient_id'],
+        props: ['recipient_id'],
         data() {
             return {
-                content: '',
-                newMes: this.messagesBetween
+                content: ''
             }
         },
-
-        mounted() {
-            console.log(this.recipient_id);
-            console.log(this.messagesBetween);
-            console.log(this.newMes);
-        },
         methods: {
-
             sendTo() {
                 axios.post('/api/messages', {
                     message: this.content,
@@ -49,13 +41,11 @@
                     recipient_id: this.recipient_id,
                     sender_id: this.authUserId
                 }).then(response => {
-                    var mes = {};
-                    mes.messages_latest = [];
-                    mes.messages_latest.push({
-                        'user_id': this.authUserId,
+                    this.$store.commit('SET_MESSAGES_BETWEEN_NEW', {
+                        'user_id': parseInt(this.authUserId),
                         'body': this.content
                     });
-                    this.newMes.data.unshift(mes);
+
                     this.content = '';
                     if (!response.data.error) {
                         this.content = '';

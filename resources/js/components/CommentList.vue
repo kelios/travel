@@ -4,7 +4,6 @@
                  v-bind:comment="comment"
                  v-bind:collection="collection"
                  v-bind:key="comment.id"
-                 :auth_user="auth_user"
                  :where="where"
         ></comment>
     </div>
@@ -13,7 +12,7 @@
 <script>
     export default {
         name: "CommentList",
-        props: ['collection', 'comments', 'auth_user', 'where'],
+        props: ['collection', 'comments', 'where'],
         computed: {},
     }
 </script>

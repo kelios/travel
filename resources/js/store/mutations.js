@@ -43,6 +43,10 @@ let mutations = {
     SET_MESSAGES_BETWEEN(state, messagesBetween) {
         state.messagesBetween = messagesBetween
     },
+    SET_MESSAGES_BETWEEN_NEW(state, messagesBetweenNew) {
+        state.messagesBetween.data.unshift(messagesBetweenNew);
+        //state.messagesBetween = messagesBetween
+    },
     SET_USERS_MESSAGES(state, usersMessages) {
         state.usersMessages = usersMessages
     },

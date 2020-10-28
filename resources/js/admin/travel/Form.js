@@ -146,11 +146,6 @@ Vue.component('travel-form', {
             this.travelAddress.country.push(item.country_id);
             this.travelAddress.city.push(item.id);
             let search = [item.local_name, item.region_local_name, item.country_title_en].filter(Boolean).join(", ");
-            console.log(search);
-            console.log(item.local_name);
-            console.log(item.region_local_name);
-            console.log(item.area_local_name);
-            console.log(item.country_title_en);
             this.gecodingAddress({
                     q: search
                 },
@@ -174,8 +169,6 @@ Vue.component('travel-form', {
             }).then(function (response) {
                 if (response.data[0]) {
                     let latlng = {};
-
-                    console.log(param);
                     latlng.lat = response.data[0].lat;
                     latlng.lng = response.data[0].lon;
 
