@@ -12,7 +12,9 @@
                             <div v-if="usersMessages" v-for="thread in usersMessages">
                                 <div v-for="user in thread.users">
                                     <b-list-group-item :href="'#usermess'+user.id" v-if="user.id != authUserId"
-                                                       v-on:click="setUser(user.id,user.name)">
+                                                       v-on:click="setUser(user.id,user.name,
+                                                       thread.unreadMessageForAuthUser,
+                                                       thread.id)">
                                         <img class="avatar-photo" :src="user.user_avatar_thumb_url">
                                         {{ user.name }}
                                         <span v-if="thread.unreadMessageForAuthUser" class="badge badge-secondary">
@@ -95,12 +97,19 @@
             getUsers(page = 1) {
                 this.$store.dispatch('GET_USERS_MESSAGES', {'page': page, 'where': this.where});
             },
-            setUser(idUser = '', userName = '') {
+            setUser(idUser = '', userName = '', unreadMessageCount = 0, threadId) {
                 if (idUser) {
                     this.userName = userName;
                     this.showMessageUser = idUser;
                 }
+                if (unreadMessageCount && threadId) {
+                    this.markUsRead(threadId);
+                }
             },
+            markUsRead(threadId) {
+                axios.put('/api/messages/markUsRead/' + threadId).then(response => {
+                });
+            }
 
 
         },

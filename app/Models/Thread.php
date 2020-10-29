@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Cmgmyr\Messenger\Models\Models;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class Message
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Thread extends \Cmgmyr\Messenger\Models\Thread
 {
+    protected $appends = ['unreadMessageForAuthUser'];
     /**
      * @return int
      */

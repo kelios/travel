@@ -7,10 +7,12 @@ use App\Repositories\MessageRepository;
 use Carbon\Carbon;
 use App\Models\Thread;
 use App\Models\Participant;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Class MessageController
@@ -54,6 +56,7 @@ class MessageController extends Controller
         } else {
             $messages = Thread::Between([Auth::id(), $recipientId])->paginate(Config::get('constants.showListMessage.count'));
         }
+        // dd($thread->unreadMessageForAuthUser);
         return response()->json($messages, 200);
     }
 
@@ -62,8 +65,25 @@ class MessageController extends Controller
         $thread = Thread::forUser(Auth::id())->latest('updated_at')
             ->with('users')
             ->get();
+        // dd($thread[0]->unreadMessageForAuthUser);
         // $users = $thread->pluck('users')->flatten()->unique('id');
         return response()->json($thread);
+    }
+
+    /**
+     * @param $idThread
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function markUsRead($idThread)
+    {
+        try {
+            $thread = \Cmgmyr\Messenger\Models\Thread::findOrFail($idThread);
+        } catch (ModelNotFoundException $e) {
+            Session::flash('error_message', 'The thread with ID: ' . $idThread . ' was not found.');
+            return response()->json('error', '200');
+        }
+        $thread->markAsRead(Auth::id());
+        return response()->json('ok', '200');
     }
 
 
