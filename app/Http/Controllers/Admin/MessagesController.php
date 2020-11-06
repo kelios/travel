@@ -10,6 +10,7 @@ use App\Http\Requests\Admin\Message\StoreMessage;
 use App\Http\Requests\Admin\Message\UpdateMessage;
 use App\Models\Message;
 use Brackets\AdminListing\Facades\AdminListing;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -37,10 +38,10 @@ class MessagesController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'travel_id', 'sender_id', 'recipient_id', 'is_read'],
+            ['id', 'thread_id', 'user_id'],
 
             // set columns to searchIn
-            ['id', 'messages']
+            ['id', 'body']
         );
 
         if ($request->ajax()) {
@@ -177,7 +178,10 @@ class MessagesController extends Controller
             collect($request->data['ids'])
                 ->chunk(1000)
                 ->each(static function ($bulkChunk) {
-                    Message::whereIn('id', $bulkChunk)->delete();
+                    DB::table('messages')->whereIn('id', $bulkChunk)
+                        ->update([
+                            'deleted_at' => Carbon::now()->format('Y-m-d H:i:s')
+                    ]);
 
                     // TODO your code goes here
                 });

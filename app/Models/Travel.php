@@ -130,8 +130,11 @@ class Travel extends Model implements HasMedia
             if (Storage::disk('s3')->exists($image->getPath())) {
                 Storage::disk('s3')->delete($image->getPath());
             }
+         //   dd($image);
+           // $res[$key]=$image;
             $res[$key]['url'] = $image->getUrl('detail_hd');
             $res[$key]['title'] = $this->name;
+
         }
 
         return $res ?? null;

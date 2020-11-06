@@ -25,7 +25,7 @@ class IndexMessage extends FormRequest
     public function rules(): array
     {
         return [
-            'orderBy' => 'in:id,travel_id,sender_id,recipient_id,is_read|nullable',
+            'orderBy' => 'in:id,thread_id,user_id|nullable',
             'orderDirection' => 'in:asc,desc|nullable',
             'search' => 'string|nullable',
             'page' => 'integer|nullable',

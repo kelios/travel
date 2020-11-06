@@ -2,7 +2,7 @@
     <div class="col-md-8 order-md-1">
         <div class="card ">
             <div class="card-body">
-
+                <input type="hidden" v-model="form.id">
                 <div class="form-group "
                      :class="{'has-danger': errors.has('name'), 'has-success': fields.name && fields.name.valid }">
                     <label for="name">{{ trans('travels.name') }}</label>

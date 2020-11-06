@@ -26,6 +26,7 @@ Route::get('travelComments', 'Travels\TravelsController@getTravelComment');
 Route::get('travelsLast', 'Travels\TravelsController@getLast');
 Route::get('searchCities', 'LocationController@searchCities');
 Route::get('getFiltersTravel', 'Travels\TravelsController@getFiltersTravel');
+Route::middleware('auth:api')->post('travels/save', 'Travels\TravelsController@save');
 Route::middleware('auth:api')->get('messages/{id}', 'MessageController@get');
 Route::middleware('auth:api')->get('messagesUsers', 'MessageController@getUsers');
 Route::middleware('auth:api')->post('messages', 'MessageController@store');

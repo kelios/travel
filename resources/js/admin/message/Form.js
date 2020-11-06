@@ -5,11 +5,9 @@ Vue.component('message-form', {
     data: function() {
         return {
             form: {
-                messages:  '' ,
-                travel_id:  '' ,
-                sender_id:  '' ,
-                recipient_id:  '' ,
-                is_read:  false ,
+                thread_id:  '' ,
+                user_id:  '' ,
+                body:  '' ,
                 
             }
         }

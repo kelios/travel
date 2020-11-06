@@ -280,15 +280,8 @@ class TravelsController extends Controller
      */
     public function create(IndexTravel $request)
     {
-        // dd($this->getFiltersTravel($request));
         return view('travels.create',
             $this->getFiltersTravel($request)
-        /*   'categories' => $this->categoryRepository->all(),
-           'transports' => $this->transportRepository->all(),
-           'month' => $this->monthRepository->all(),
-           'complexity' => $this->complexityRepository->all(),
-           'overNightStay' => $this->overNightStayRepository->all(),
-           'companion' => $this->companionRepository->all(),*/
         );
     }
 
@@ -364,91 +357,6 @@ class TravelsController extends Controller
         return response()->json($travel);
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param UpdateTravel $request
-     * @param Travel $travel
-     * @return array|RedirectResponse|Redirector
-     */
-    public function update(UpdateTravel $request, Travel $travel)
-    {
-        // Sanitize input
-        $sanitized = $request->getSanitized();
-        $relations = [
-            'categories' => 'id',
-            'transports' => 'id',
-            'month' => 'id',
-            'complexity' => 'id',
-            'companion' => 'id',
-            'over_night_stay' => 'id',
-            'countries' => 'country_id',
-            'cities' => 'city_id',
-        ];
-        foreach ($relations as $relation => $publickey) {
-            $sanitized[$relation . 'Ids'] = $request->getRelationIds($relation, $publickey);
-        }
-        $travelAddr = $request->getRelationAddress();
-        // Store the Travel
-        $travel->fill($sanitized);
-        $travel->update($sanitized);
-        $travel->users()->sync(auth()->user()->id);
-        foreach ($relations as $relation => $publickey) {
-            $relationFormat = str_replace('_', '', $relation);
-            $travel->$relationFormat()->sync($sanitized[$relation . 'Ids']);
-        }
-        $travel->travelAddress()->delete();
-        $travel->travelAddress()->createMany($travelAddr);
-
-        if ($request->ajax()) {
-            return ['redirect' => url('/travels/metravel'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
-        }
-        return redirect()->back();
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param StoreTravel $request
-     * @return array|RedirectResponse|Redirector
-     */
-    public function store(StoreTravel $request)
-    {
-        // Sanitize input
-        $sanitized = $request->getSanitized();
-        $relations = [
-            'categories' => 'id',
-            'transports' => 'id',
-            'month' => 'id',
-            'complexity' => 'id',
-            'companion' => 'id',
-            'over_night_stay' => 'id',
-            'countries' => 'country_id',
-            'cities' => 'city_id',
-        ];
-        foreach ($relations as $relation => $publickey) {
-            $sanitized[$relation . 'Ids'] = $request->getRelationIds($relation, $publickey);
-        }
-
-        $travelAddr = $request->getRelationAddress();
-        // Store the Travel
-        $this->travelRepository->fill($sanitized);
-        $this->travelRepository->save();
-        $this->travelRepository->users()->sync(auth()->user()->id);
-        foreach ($relations as $relation => $publickey) {
-            $relationFormat = str_replace('_', '', $relation);
-            $this->travelRepository->$relationFormat()->sync($sanitized[$relation . 'Ids']);
-        }
-        $this->travelRepository->travelAddress()->delete();
-        $this->travelRepository->travelAddress()->createMany($travelAddr);
-
-        if ($request->ajax()) {
-            return ['redirect' => url('/travels/metravel'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
-        }
-
-        return redirect('travels');
-    }
 
     /**
      * @param DestroyTravel $request
@@ -551,7 +459,164 @@ class TravelsController extends Controller
         } else {
             return $filtersTravel;
         }
+    }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param UpdateTravel $request
+     * @param Travel $travel
+     * @return array|RedirectResponse|Redirector
+     */
+    public function update(UpdateTravel $request, Travel $travel)
+    {
+        // Sanitize input
+        $sanitized = $request->getSanitized();
+        $relations = [
+            'categories' => 'id',
+            'transports' => 'id',
+            'month' => 'id',
+            'complexity' => 'id',
+            'companion' => 'id',
+            'over_night_stay' => 'id',
+            'countries' => 'country_id',
+            'cities' => 'city_id',
+        ];
+        foreach ($relations as $relation => $publickey) {
+            $sanitized[$relation . 'Ids'] = $request->getRelationIds($relation, $publickey);
+        }
+        $travelAddr = $request->getRelationAddress();
+        // Store the Travel
+        $this->saveTravel($sanitized, $relations, $travelAddr, $travel);
+        /* $travel->fill($sanitized);
+         $travel->update($sanitized);
+         $travel->users()->sync(auth()->user()->id);
+         foreach ($relations as $relation => $publickey) {
+             $relationFormat = str_replace('_', '', $relation);
+             $travel->$relationFormat()->sync($sanitized[$relation . 'Ids']);
+         }
+         $travel->travelAddress()->delete();
+         $travel->travelAddress()->createMany($travelAddr);*/
 
+        if ($request->ajax()) {
+            return ['redirect' => url('/travels/metravel'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+        }
+        return redirect()->back();
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param StoreTravel $request
+     * @return array|RedirectResponse|Redirector
+     */
+    public function store(StoreTravel $request)
+    {
+        // Sanitize input
+        $sanitized = $request->getSanitized();
+        $relations = [
+            'categories' => 'id',
+            'transports' => 'id',
+            'month' => 'id',
+            'complexity' => 'id',
+            'companion' => 'id',
+            'over_night_stay' => 'id',
+            'countries' => 'country_id',
+            'cities' => 'city_id',
+        ];
+        foreach ($relations as $relation => $publickey) {
+            $sanitized[$relation . 'Ids'] = $request->getRelationIds($relation, $publickey);
+        }
+
+        $travelAddr = $request->getRelationAddress();
+        $travelId = array_get($sanitized, 'id');
+
+        if ($travelId) {
+            $travel = $this->travelRepository->getById($travelId);
+        } else {
+            $travel = $this->travelRepository;
+        }
+
+        // Store the Travel
+        $this->saveTravel($sanitized, $relations, $travelAddr, $travel);
+        /* $this->travelRepository->fill($sanitized);
+         $this->travelRepository->save();
+         $this->travelRepository->users()->sync(auth()->user()->id);
+         foreach ($relations as $relation => $publickey) {
+             $relationFormat = str_replace('_', '', $relation);
+             $this->travelRepository->$relationFormat()->sync($sanitized[$relation . 'Ids']);
+         }
+         $this->travelRepository->travelAddress()->delete();
+         $this->travelRepository->travelAddress()->createMany($travelAddr);*/
+
+        if ($request->ajax()) {
+            return ['redirect' => url('/travels/metravel'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
+        }
+
+        return redirect('travels');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param StoreTravel $request
+     * @return array|RedirectResponse|Redirector
+     */
+    public function save(StoreTravel $request)
+    {
+        // Sanitize input
+        $sanitized = $request->getSanitized();
+        $relations = [
+            'categories' => 'id',
+            'transports' => 'id',
+            'month' => 'id',
+            'complexity' => 'id',
+            'companion' => 'id',
+            'over_night_stay' => 'id',
+            'countries' => 'country_id',
+            'cities' => 'city_id',
+        ];
+        if (array_get($sanitized, 'name')) {
+            foreach ($relations as $relation => $publickey) {
+                $sanitized[$relation . 'Ids'] = $request->getRelationIds($relation, $publickey);
+            }
+
+            $travelAddr = $request->getRelationAddress();
+            $travelId = array_get($sanitized, 'id');
+
+            if ($travelId) {
+                $travel = $this->travelRepository->getById($travelId);
+            } else {
+                $travel = $this->travelRepository;
+            }
+
+            $this->saveTravel($sanitized, $relations, $travelAddr, $travel);
+            if (!$travelId) {
+                $travelId = $travel->travel->id;
+            }
+            return response(['id' => $travelId], 200);
+        } else {
+            return response(['res' => 'noname', 'id' => ''], 200);
+        }
+    }
+
+    /**
+     * @param $sanitized
+     * @param $relations
+     * @param $travel
+     */
+    public function saveTravel($sanitized, $relations,$travelAddr, $travel)
+    {
+        // Store the Travel
+        $travel->fill($sanitized);
+        $travel->save();
+        $travel->users()->sync(auth()->user()->id);
+
+        foreach ($relations as $relation => $publickey) {
+            $relationFormat = str_replace('_', '', $relation);
+            $travel->$relationFormat()->sync($sanitized[$relation . 'Ids']);
+        }
+        $travel->travelAddress()->delete();
+        $travel->travelAddress()->createMany($travelAddr);
     }
 }

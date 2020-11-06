@@ -19,6 +19,7 @@ let state = {
     messages: {},
     messagesBetween: {data: {}},
     usersMessages: {},
-    messagesBetweenNew: {}
+    messagesBetweenNew: {},
+    travelId:''
 }
 export default state

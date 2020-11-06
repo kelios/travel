@@ -37,6 +37,9 @@ let getters = {
     },
     usersMessages: state => {
         return state.usersMessages
+    },
+    travelId: state => {
+        return state.travelId
     }
 }
 

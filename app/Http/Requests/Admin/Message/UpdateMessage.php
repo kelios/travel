@@ -26,11 +26,9 @@ class UpdateMessage extends FormRequest
     public function rules(): array
     {
         return [
-            'messages' => ['sometimes', 'string'],
-            'travel_id' => ['nullable', 'string'],
-            'sender_id' => ['sometimes', 'string'],
-            'recipient_id' => ['sometimes', 'string'],
-            'is_read' => ['sometimes', 'boolean'],
+            'thread_id' => ['sometimes', 'integer'],
+            'user_id' => ['sometimes', 'integer'],
+            'body' => ['sometimes', 'string'],
             
         ];
     }

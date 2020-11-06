@@ -1,6 +1,7 @@
 import AppForm from '../app-components/Form/AppForm';
 import L from "leaflet";
 import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue2-leaflet";
+import {mapGetters} from "vuex";
 
 const ENDPOINTREVERSE = 'https://nominatim.openstreetmap.org/reverse';
 const ENDPOINTSEARCH = 'https://nominatim.openstreetmap.org/search?';
@@ -11,15 +12,22 @@ Vue.component('travel-form', {
     mounted() {
         this.init();
         this.getCountries();
+        this.autoSave();
         window.Echo.channel('searchCity')
             .listen('.searchResultsCity', (e) => {
                 this.optionsCities = e.cities;
             })
     },
+    computed: {
+        ...mapGetters([
+            'travelId'
+        ]),
+
+    },
 
     data: function () {
         return {
-            mediaCollections: ['travelMainImage', 'gallery','travelRoad'],
+            mediaCollections: ['travelMainImage', 'gallery', 'travelRoad'],
             optionsCountries: [],
             optionsCities: [],
             travelAddress: {
@@ -73,12 +81,31 @@ Vue.component('travel-form', {
     },
     methods: {
         init: function () {
+            if (this.form.id) {
+                this.$store.commit('SET_TRAVEL_ID', this.form.id);
+            }
             this.travelAddress.address = this.form.travelAddressAdress;
             this.travelAddress.meCoord = this.form.coordsMeTravel;
             this.travelAddress.city = this.form.travelAddressCity;
             this.travelAddress.country = this.form.travelAddressCountry;
             this.selectedCountiesIds = this.form.countryIds;
             this.selectedCountriesCode = this.form.countriesCode ?? [];
+        },
+        autoSave() {
+            setInterval(() => {
+                this.save();
+            }, 300000)
+        },
+        save(event) {
+            var form = document.getElementById('travelForm');
+            let formData = new FormData(form);
+            console.log(this.form.id);
+            if (!this.form.id) {
+                this.form.id = this.travelId;
+            }
+            /** don't work autosave gallery not action**/
+            this.form.gallery = [];
+            this.$store.dispatch('AUTO_SAVE_TRAVEL', this.form)
         },
         getCountries() {
             let vm = this;
@@ -120,22 +147,6 @@ Vue.component('travel-form', {
                     false, true);
             }
         },
-        /*getCities: function () {
-            let self = this;
-            if (this.selectedCountiesIds.length > 0) {
-                axios.get('/location/countriesCities', {
-                    params: {
-                        country_id: this.selectedCountiesIds
-                    }
-                }).then(function (response) {
-                    this.optionsCities = response.data;
-                }.bind(this));
-            } else {
-                this.optionsCities = [];
-                this.form.cities = [];
-                //  this.form.coordsMeTravel = [];
-            }
-        },*/
         onClick(e) {
             let coordOnClick = e.latlng;
             this.travelAddress.meCoord.push(coordOnClick);

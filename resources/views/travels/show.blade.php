@@ -25,11 +25,14 @@
                             </like-component>
                             <div class="row">
                                 <favorite-component :travel_id='@json($travel->id)'></favorite-component>
-                                <message-component :travel_id='@json($travel->id)'
-                                                   :recipient_id='@json(implode(',',$travel->userIds))'
-                                                   :travel_user_name='@json($travel->userName)'
-                                >
-                                </message-component>
+                                @if (auth()->user()->id!=$travel->userIds[0])
+                                    <message-component
+                                        :travel_id='@json($travel->id)'
+                                        :recipient_id='@json(implode(',',$travel->userIds))'
+                                        :travel_user_name='@json($travel->userName)'
+                                    >
+                                    </message-component>
+                                @endif
                             </div>
                         </div>
                     </div>

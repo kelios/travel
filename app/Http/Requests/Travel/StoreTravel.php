@@ -18,6 +18,7 @@ class StoreTravel extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => ['nullable', 'integer'],
             'name' => ['nullable', 'string'],
             'budget' => ['nullable', 'integer'],
             'year' => ['nullable', 'integer'],
@@ -28,11 +29,9 @@ class StoreTravel extends FormRequest
             'recommendation' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
             'publish' => ['nullable', 'boolean'],
-            'visa' => ['nullable', 'boolean'],
             'slug' => ['nullable', 'string'],
             'meta_keywords' => ['nullable', 'string'],
             'meta_description' => ['nullable', 'string'],
-
         ];
     }
 
@@ -70,14 +69,14 @@ class StoreTravel extends FormRequest
     public function getRelationAddress()
     {
         $data = [];
-        $travelAddress = $this->get('travelAddressAdress');
-        $travelAddressCountry = $this->get('travelAddressCountry');
-        $travelAddressCity = $this->get('travelAddressCity');
-        $coordsMeTravel = $this->get('coordsMeTravel');
+        $travelAddress = $this->get('travelAddressAdress', []);
+        $travelAddressCountry = $this->get('travelAddressCountry', []);
+        $travelAddressCity = $this->get('travelAddressCity', []);
+        $coordsMeTravel = $this->get('coordsMeTravel', []);
         foreach ($travelAddress as $key => $value) {
             $data[$key]['address'] = $value;
-            $data[$key]['coord'] = implode(',',  Arr::get($coordsMeTravel,$key,[]));
-            $data[$key]['city_id'] = Arr::get($travelAddressCity,$key) != '-1' ? Arr::get( $travelAddressCity,$key) : null;
+            $data[$key]['coord'] = implode(',', Arr::get($coordsMeTravel, $key, []));
+            $data[$key]['city_id'] = Arr::get($travelAddressCity, $key) != '-1' ? Arr::get($travelAddressCity, $key) : null;
             $data[$key]['country_id'] = $travelAddressCountry[$key];
         }
         return $data;

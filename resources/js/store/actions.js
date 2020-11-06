@@ -116,7 +116,7 @@ let actions = {
         let params = {
             page: data.page,
         };
-        axios.get('/api/messages/'+data.where['id'], {params})
+        axios.get('/api/messages/' + data.where['id'], {params})
             .then(res => {
                 {
                     commit('SET_MESSAGES_BETWEEN', res.data);
@@ -167,6 +167,14 @@ let actions = {
                 console.log(err)
             })
     },
+    AUTO_SAVE_TRAVEL({commit}, dataTravel) {
+        axios.post('/api/travels/save', dataTravel
+        ).then(response => {
+            if (!response.data.error) {
+                commit('SET_TRAVEL_ID', response.data.id);
+            }
+        });
+    }
 }
 
 export default actions

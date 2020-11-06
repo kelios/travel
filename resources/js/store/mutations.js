@@ -50,6 +50,9 @@ let mutations = {
     SET_USERS_MESSAGES(state, usersMessages) {
         state.usersMessages = usersMessages
     },
+    SET_TRAVEL_ID(state, travelId) {
+        state.travelId = travelId
+    },
 
 }
 

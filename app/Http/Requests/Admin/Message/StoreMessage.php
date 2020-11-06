@@ -26,11 +26,9 @@ class StoreMessage extends FormRequest
     public function rules(): array
     {
         return [
-            'messages' => ['required', 'string'],
-            'travel_id' => ['nullable', 'string'],
-            'sender_id' => ['required', 'string'],
-            'recipient_id' => ['required', 'string'],
-            'is_read' => ['required', 'boolean'],
+            'thread_id' => ['required', 'integer'],
+            'user_id' => ['required', 'integer'],
+            'body' => ['required', 'string'],
             
         ];
     }

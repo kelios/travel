@@ -17,7 +17,7 @@ class TravelRepository implements TravelRepositoryInterface
     /**
      * @var Travel
      */
-    private $travel;
+    public $travel;
 
     /**
      * TravelRepository constructor.
