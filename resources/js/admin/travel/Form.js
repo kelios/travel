@@ -99,7 +99,6 @@ Vue.component('travel-form', {
         save(event) {
             var form = document.getElementById('travelForm');
             let formData = new FormData(form);
-            console.log(this.form.id);
             if (!this.form.id) {
                 this.form.id = this.travelId;
             }
