@@ -32,6 +32,7 @@
         },
         methods: {
             searchTravels() {
+                this.$store.commit('SET_QUERY', this.query)
                 this.$store.dispatch('SEARCH_TRAVELS', {'query':this.query,'where':this.where})
             }
         }

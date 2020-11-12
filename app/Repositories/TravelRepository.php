@@ -40,7 +40,7 @@ class TravelRepository implements TravelRepositoryInterface
      * @param array $where
      * @return mixed
      */
-    public function getList($where = [], $request)
+    public function getList($where = [], $search = '')
     {
         $travels = $this->travel;
 
@@ -55,6 +55,15 @@ class TravelRepository implements TravelRepositoryInterface
             $travels = $travels->whereIn('id', Arr::get($where, 'id'));
             unset($where['id']);
         }
+        if ($search) {
+            $travels = $travels->where(function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%')
+                    ->orWhere('recommendation', 'like', '%' . $search . '%')
+                    ->orWhere('plus', 'like', '%' . $search . '%')
+                    ->orWhere('minus', 'like', '%' . $search . '%');
+            });
+        }
         return $travels
             ->filter($where)
             // ->where($where)
@@ -66,7 +75,7 @@ class TravelRepository implements TravelRepositoryInterface
      * @param array $where
      * @return mixed
      */
-    public function getListBy($where = [])
+    public function getListBy($where = [], $search = '')
     {
         $travels = $this->travel;
         if (Arr::get($where, 'user_id')) {
@@ -74,6 +83,15 @@ class TravelRepository implements TravelRepositoryInterface
             unset($where['user_id']);
             $travels = $travels->whereHas('users', function ($query) use ($for_user) {
                 $query->whereIn('users.id', [$for_user]);
+            });
+        }
+        if ($search) {
+            $travels = $travels->where(function ($query) use ($search) {
+                return $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%')
+                    ->orWhere('recommendation', 'like', '%' . $search . '%')
+                    ->orWhere('plus', 'like', '%' . $search . '%')
+                    ->orWhere('minus', 'like', '%' . $search . '%');
             });
         }
         return $travels

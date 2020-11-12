@@ -327,6 +327,75 @@ return [
 
         ],
     ],
+    'article' => [
+        'title' => 'Новости/Акции',
+
+        'actions' => [
+            'index' => 'Статьи',
+            'create' => 'Новая статья',
+            'edit' => 'Редактировать статью :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Название',
+            'description' => 'Описание',
+            'article_type_id' => 'Тип',
+            'publish' => 'Статус',
+
+        ],
+    ],
+
+    'article-type' => [
+        'title' => 'Тип Статьи',
+        'select'=> 'Выберите тип статьи',
+
+        'actions' => [
+            'index' => 'Добавить',
+            'create' => 'Создать',
+            'edit' => 'Редактировать :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Название',
+            'status' => 'Статус',
+
+        ],
+    ],
+
+    'comment' => [
+        'title' => 'Комментарии',
+
+        'actions' => [
+            'index' => 'Добавить',
+            'create' => 'Создать',
+            'edit' => 'Редактировать :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'comment' => 'Комментарий',
+            'travel_id' => 'Название путешествия',
+            'users_id' => 'Имя пользователя'
+
+        ],
+    ],
+    'message' => [
+        'title' => 'Сообщения',
+
+        'actions' => [
+            'index' => 'Добавить',
+            'create' => 'Создать',
+            'edit' => 'Редактировать :name',
+        ],
+
+        'columns' => [
+            'id' => '№',
+            'body' => 'Сообщение'
+
+        ],
+    ],
 
     // Do not delete me :) I'm used for auto-generation
 ];

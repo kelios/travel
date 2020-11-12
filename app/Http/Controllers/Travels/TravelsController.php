@@ -146,12 +146,16 @@ class TravelsController extends Controller
         if ($request->query('where')) {
             $where = json_decode($request->query('where'), true);
         }
+        $query = '';
+        if ($request->query('query')) {
+            $query = $request->query('query');
+        }
         if (Arr::get($where, 'belTravels')) {
             unset($where['belTravels']);
-            $travels = $this->travelRepository->getListBy($where);
+            $travels = $this->travelRepository->getListBy($where, $query);
 
         } else {
-            $travels = $this->travelRepository->getList($where, $request);
+            $travels = $this->travelRepository->getList($where, $query);
         }
         $travels->getCollection()->transform(function ($value) {
             return $value->only([
@@ -605,7 +609,7 @@ class TravelsController extends Controller
      * @param $relations
      * @param $travel
      */
-    public function saveTravel($sanitized, $relations,$travelAddr, $travel)
+    public function saveTravel($sanitized, $relations, $travelAddr, $travel)
     {
         // Store the Travel
         $travel->fill($sanitized);

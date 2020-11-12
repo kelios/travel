@@ -13,6 +13,23 @@ let actions = {
             console.log(err)
         })
     },
+    GET_TRAVELS({commit}, data) {
+        let params = {
+            page: data.page,
+            where: data.where,
+            query: data.query,
+        };
+        axios.get('/api/travels', {params})
+            .then(res => {
+                {
+                    commit('SET_TRAVELS', res.data);
+                    commit('SET_MAP_DATA', res.data);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    },
     SEARCH_EXTENDED_TRAVELS({commit}, data) {
         let params = {
             query: data.query,
@@ -40,22 +57,6 @@ let actions = {
             }).catch(err => {
             console.log(err)
         })
-    },
-    GET_TRAVELS({commit}, data) {
-        let params = {
-            page: data.page,
-            where: data.where,
-        };
-        axios.get('/api/travels', {params})
-            .then(res => {
-                {
-                    commit('SET_TRAVELS', res.data);
-                    commit('SET_MAP_DATA', res.data);
-                }
-            })
-            .catch(err => {
-                console.log(err)
-            })
     },
     GET_LAST_TRAVELS({commit}, data) {
         axios.get('/api/travelsLast')

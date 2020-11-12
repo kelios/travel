@@ -80,6 +80,7 @@ Vue.component('travel-form', {
         }
     },
     methods: {
+
         init: function () {
             if (this.form.id) {
                 this.$store.commit('SET_TRAVEL_ID', this.form.id);
@@ -152,14 +153,17 @@ Vue.component('travel-form', {
             this.getAddress(coordOnClick);
         },
         setMarkerCity: function (item) {
+            /*removecity in coord*/
+            /*
             this.travelAddress.address.push(item.local_name);
             this.travelAddress.country.push(item.country_id);
             this.travelAddress.city.push(item.id);
+
             let search = [item.local_name, item.region_local_name, item.country_title_en].filter(Boolean).join(", ");
             this.gecodingAddress({
                     q: search
                 },
-                true, true);
+                true, true);*/
         },
         removeCity: function (item) {
             let indexCity = this.travelAddress.address.findIndex(function (value, index, arr) {

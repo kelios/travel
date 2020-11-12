@@ -330,3 +330,34 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
+        Route::prefix('articles')->name('articles/')->group(static function() {
+            Route::get('/',                                             'ArticleController@index')->name('index');
+            Route::get('/create',                                       'ArticleController@create')->name('create');
+            Route::post('/',                                            'ArticleController@store')->name('store');
+            Route::get('/{article}/edit',                               'ArticleController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'ArticleController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{article}',                                   'ArticleController@update')->name('update');
+            Route::delete('/{article}',                                 'ArticleController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
+        Route::prefix('article-types')->name('article-types/')->group(static function() {
+            Route::get('/',                                             'ArticleTypeController@index')->name('index');
+            Route::get('/create',                                       'ArticleTypeController@create')->name('create');
+            Route::post('/',                                            'ArticleTypeController@store')->name('store');
+            Route::get('/{articleType}/edit',                           'ArticleTypeController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'ArticleTypeController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{articleType}',                               'ArticleTypeController@update')->name('update');
+            Route::delete('/{articleType}',                             'ArticleTypeController@destroy')->name('destroy');
+        });
+    });
+});

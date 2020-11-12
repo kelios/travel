@@ -13,3 +13,5 @@ import './category';
 import './companion';
 import './comment';
 import './message';
+import './article';
+import './article-type';
