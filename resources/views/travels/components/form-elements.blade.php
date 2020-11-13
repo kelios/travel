@@ -187,7 +187,7 @@
                 <hr class="mb-4">
                 <div class="form-group img__container text-center">
                     <label for="avatar"> {{ trans('travels.uploadCover') }}</label>
-                    <div class="avatar-upload ">
+                    <div class="avatar-upload">
                         @include('brackets/admin-ui::admin.includes.avatar-uploader', [
                             'mediaCollection' => app(\App\Models\Travel::class)->getMediaCollection('travelMainImage'),
                             'media' => isset($travel) ? $travel->getThumbs200ForCollection('travelMainImage') : null

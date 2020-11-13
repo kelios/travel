@@ -60,20 +60,11 @@
                 <ul class="navbar-nav ml-auto">
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('travels/create') }}">
+                            <a class="nav-link text-orange" href="{{ url('travels/create') }}">
                                 {{ trans('home.addTravels') }} <span class="caret"></span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('travels/metravel') }}">
-                                {{ trans('home.meTravels') }} <span class="caret"></span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('travels/friendtravel') }}">
-                                {{ trans('home.follower') }} <span class="caret"></span>
-                            </a>
-                        </li>
+
                     @endauth
                 <!-- Authentication Links -->
                     @guest
@@ -90,6 +81,7 @@
                             </li>
                         @endif
                     @else
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -104,14 +96,7 @@
                                 <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}">
                                     {{ trans('home.editProfile') }}
                                 </a>
-                                <a class="dropdown-item" href="{{ route('users.allFriends', Auth::user()) }}">
-                                    {{ trans('home.allFriends') }}
-                                    @if(Auth::user()->accepted_friends_count>0)
-                                        <span class="badge badge-secondary">
-                                    {{ Auth::user()->accepted_friends_count }}
-                                </span>
-                                    @endif
-                                </a>
+
                                 <a class="dropdown-item" href="{{ route('users.allMessages', Auth::user()) }}">
                                     {{ trans('home.allMessages') }}
                                     @if(Auth::user()->unreadMessagesCount()>0)
@@ -120,6 +105,25 @@
                                 </span>
                                     @endif
                                 </a>
+
+                                <a class="dropdown-item" href="{{ url('travels/metravel') }}">
+                                    {{ trans('home.meTravels') }} <span class="caret"></span>
+                                </a>
+
+                                <a class="dropdown-item" href="{{ route('users.allFriends', Auth::user()) }}">
+                                    {{ trans('home.allFriends') }}
+                                    @if(Auth::user()->accepted_friends_count>0)
+                                        <span class="badge badge-secondary">
+                                    {{ Auth::user()->accepted_friends_count }}
+                                </span>
+                                    @endif
+                                </a>
+
+                                <a class="dropdown-item" href="{{ url('travels/friendtravel') }}">
+                                    {{ trans('home.follower') }} <span class="caret"></span>
+                                </a>
+
+
                                 <a class="dropdown-item" href="{{ url('travels/favoriteTravel') }}">
                                     {{ trans('home.saveTravel') }}
                                 </a>

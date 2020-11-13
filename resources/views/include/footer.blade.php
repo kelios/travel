@@ -8,8 +8,13 @@
                     </li>
                     <li class="list-inline-item">&sdot;</li>
                     <li class="list-inline-item">
+                        <a href="/articles">{{trans('main.newandaction')}}</a>
+                    </li>
+                    <li class="list-inline-item">&sdot;</li>
+                    <li class="list-inline-item">
                         <a href="/contact">{{trans('main.contact')}}</a>
                     </li>
+
                 </ul>
                 <ul class="col text-right list-inline mb-2">
                     <li class="list-inline-item mr-3">

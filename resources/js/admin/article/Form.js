@@ -2,9 +2,6 @@ import AppForm from '../app-components/Form/AppForm';
 
 Vue.component('article-form', {
     mixins: [AppForm],
-    mounted() {
-        console.log(this.form);
-    },
     data: function () {
         return {
             form: {
@@ -13,7 +10,8 @@ Vue.component('article-form', {
                 article_type_id: '',
                 articleType: [],
                 publish: false,
-            }
+            },
+            mediaCollections: ['articleImage']
         }
     },
 });

@@ -397,9 +397,19 @@ input:checked + .sumblavam:before {
     max-height: 450px;
     overflow-y: auto;
 }
-.padding30{
-    padding:30px;
+
+.padding30 {
+    padding: 30px;
 }
 
+.dropzone .dz-preview .dz-image {
+    z-index: 1 !important;
+}
 
+.vue-js-switch .v-switch-core .v-switch-button[data-v-25adc6c0] {
+    z-index: 1 !important;
+}
 
+.text-orange {
+    color: #ff9f5a !important
+}

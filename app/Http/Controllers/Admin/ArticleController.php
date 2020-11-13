@@ -128,8 +128,8 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         $this->authorize('admin.article.edit', $article);
-        $article = $article->with('articleType')->first();
-         $articleType = $this->articleTypeRepository->all();
+        $article->load('articleType');
+        $articleType = $this->articleTypeRepository->all();
 
         return view('admin.article.edit', [
             'article' => $article,
