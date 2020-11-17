@@ -49,12 +49,6 @@
                 this.travels.data = this.travels.data.filter(travel => travel.id !== id)
             },
             getResults(page = 1) {
-                console.log('filter');
-                console.log(this.filter);
-                console.log('where');
-                console.log(this.where);
-                console.log('query');
-                console.log(this.query);
                 this.$store.dispatch('GET_TRAVELS', {'page': page, 'query':this.query, 'where': Object.assign(this.filter,this.where)});
             }
         },

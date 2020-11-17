@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Article;
 use App\Repositories\Interfaces\TravelRelationRepositoryInterface;
+use Illuminate\Support\Facades\Config;
 
 /**
  * Class ArticleRepository
@@ -32,6 +33,17 @@ class ArticleRepository implements TravelRelationRepositoryInterface
     }
 
     /**
+     * @return Article[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getList()
+    {
+        return $this->article
+            ->with('articleType')
+            ->where('publish', 1)
+            ->paginate(Config::get('constants.showListArticle.count'));
+    }
+
+    /**
      * @param $attr
      * @return Article
      */
@@ -54,6 +66,17 @@ class ArticleRepository implements TravelRelationRepositoryInterface
     public function travels()
     {
         return $this->article->travels();
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function getById($id)
+    {
+        return $this->article->with([
+            'articleType'
+        ])->find($id);
     }
 
 }

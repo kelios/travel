@@ -9,7 +9,6 @@
                     <p class="text-truncate">{{ travel.name }}</p>
                 </div>
 
-
                 <div class="d-flex justify-content-between align-items-center">
                     <p>
                         <span>{{travel.countryName}}</span>

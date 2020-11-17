@@ -26,7 +26,6 @@ class Article extends Model implements HasMedia
         'description',
         'article_type_id',
         'publish',
-
     ];
 
 

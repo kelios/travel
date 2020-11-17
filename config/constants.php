@@ -8,5 +8,8 @@ return [
     ],
     'showListMessage' => [
         'count' => 1000
-    ]
+    ],
+    'showListArticle' => [
+        'count' => 6
+    ],
 ];

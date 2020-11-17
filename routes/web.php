@@ -18,7 +18,7 @@ Route::get('/mysitemap', 'SiteMapController@setSiteMap')->name('mysitemap');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/articles', 'ArticleController@index')->name('articles');
-Route::get('/article/{id}', 'ArticleController@show')->name('articleshow');
+Route::get('/articles/{id}', 'ArticleController@show')->name('articleshow');
 
 Route::post('/admin/wysiwyg-media', 'WysiwygUploadController@uploads3')->name('brackets/admin-ui::wysiwyg-upload');
 Route::post('upload', 'WysiwygUploadController@upload')->name('brackets/media::upload');

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Repositories\ArticleTypeRepository;
 use App\Repositories\ArticleRepository;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Facades\Config;
 use Illuminate\View\View;
 
 class ArticleController extends Controller
@@ -27,8 +29,12 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = $this->articleRepository->all();
-        $articles->load('articleType');
+        SEOMeta::setTitle(trans('home.metaMainTitle'));
+        SEOMeta::setDescription(trans('home.metaMainDescription'));
+        SEOMeta::setCanonical('https://metravel.by/');
+        $articles = $this->articleRepository->getList();
+
+        // dd($articles[0]);
         return view('article.index', ['articles' => $articles]);
     }
 
@@ -36,10 +42,10 @@ class ArticleController extends Controller
      * @param Article $article
      * @return Factory|View
      */
-    public function show(Article $article)
+    public function show($id)
     {
+        $article = $this->articleRepository->getById($id);
         return view('article.show', ['article' => $article]);
-        // TODO your code goes here
     }
 
 
