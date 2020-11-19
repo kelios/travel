@@ -31,6 +31,10 @@ class CommentsController extends Controller
      */
     public function index(IndexComment $request)
     {
+        if (!$request['orderBy']) {
+            $request['orderBy'] = 'id';
+            $request['orderDirection'] = 'desc';
+        }
         // create and AdminListing instance for a specific model and
         $data = AdminListing::create(Comment::class)->processRequestAndGet(
             // pass the request with params

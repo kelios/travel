@@ -31,6 +31,10 @@ class UsersController extends Controller
      */
     public function index(IndexUser $request)
     {
+        if (!$request['orderBy']) {
+            $request['orderBy'] = 'id';
+            $request['orderDirection'] = 'desc';
+        }
         // create and AdminListing instance for a specific model and
         $data = AdminListing::create(User::class)->processRequestAndGet(
         // pass the request with params

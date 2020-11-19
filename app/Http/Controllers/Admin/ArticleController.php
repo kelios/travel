@@ -190,6 +190,10 @@ class ArticleController extends Controller
      */
     public function bulkDestroy(BulkDestroyArticle $request): Response
     {
+        if (!$request['orderBy']) {
+            $request['orderBy'] = 'id';
+            $request['orderDirection'] = 'desc';
+        }
         DB::transaction(static function () use ($request) {
             collect($request->data['ids'])
                 ->chunk(1000)

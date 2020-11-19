@@ -32,6 +32,10 @@ class MessagesController extends Controller
      */
     public function index(IndexMessage $request)
     {
+        if (!$request['orderBy']) {
+            $request['orderBy'] = 'id';
+            $request['orderDirection'] = 'desc';
+        }
         // create and AdminListing instance for a specific model and
         $data = AdminListing::create(Message::class)->processRequestAndGet(
             // pass the request with params
