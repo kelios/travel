@@ -109,11 +109,10 @@ class Travel extends Model implements HasMedia
     {
         $image = $this->getMedia('travelMainImage');
         if (Arr::get($image, 0)) {
-            if (Storage::disk('s3')->exists($image[0]->getPath())) {
-                Storage::disk('s3')->delete($image[0]->getPath());
+            if (Storage::disk(env('APP_STORAGE_DISK', 'local'))->exists($image[0]->getPath())) {
+                Storage::disk(env('APP_STORAGE_DISK', 'local'))->delete($image[0]->getPath());
             }
         }
-
         $travelImageThumbUrl = $this->getFirstMediaUrl('travelMainImage', 'thumb_200');
         if (!$travelImageThumbUrl) {
             $travelImageThumbUrl = Arr::get($this->categories, 0) ? $this->categories[0]->category_image_thumb_url : Config::get('constants.image.defaultCatImage');
@@ -127,11 +126,9 @@ class Travel extends Model implements HasMedia
     {
         $images = $this->getMedia('gallery');
         foreach ($images as $key => $image) {
-            if (Storage::disk('s3')->exists($image->getPath())) {
-                Storage::disk('s3')->delete($image->getPath());
+            if (Storage::disk(env('APP_STORAGE_DISK', 'local'))->exists($image->getPath())) {
+                Storage::disk(env('APP_STORAGE_DISK', 'local'))->delete($image->getPath());
             }
-         //   dd($image);
-           // $res[$key]=$image;
             $res[$key]['url'] = $image->getUrl('detail_hd');
             $res[$key]['title'] = $this->name;
 
@@ -425,7 +422,7 @@ class Travel extends Model implements HasMedia
     {
         $this->addMediaCollection('travelMainImage')
             ->maxFilesize(20 * 1024 * 1024)
-            ->useDisk('s3')
+            ->useDisk(env('APP_STORAGE_DISK', 'local'))
             ->accepts('image/*')
             ->singleFile();
 
@@ -435,7 +432,7 @@ class Travel extends Model implements HasMedia
         $this->addMediaCollection('gallery')
             ->maxNumberOfFiles(10)
             ->maxFilesize(20 * 1024 * 1024)
-            ->useDisk('s3')
+            ->useDisk(env('APP_STORAGE_DISK', 'local'))
             ->accepts('image/*')
             ->onlyKeepLatest(10);
 

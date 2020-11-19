@@ -15,3 +15,5 @@ yarn-error.log
 /.idea
 database/city
 /storage/uploads/
+/public/media/
+

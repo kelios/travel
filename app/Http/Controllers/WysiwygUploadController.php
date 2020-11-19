@@ -58,7 +58,7 @@ class WysiwygUploadController extends Controller
         // generate path that it will be saved to
         $name = $temporaryFile->getClientOriginalName();
         $savedPath = Config::get('wysiwyg-media.media_folder') . '/' . time() . $name;
-        $s3 = Storage::disk('s3');
+        $s3 = Storage::disk(env('APP_STORAGE_DISK', 'local'));
 
         // create directory in which we will be uploading into
         if (!File::isDirectory(Config::get('wysiwyg-media.media_folder'))) {
@@ -81,7 +81,7 @@ class WysiwygUploadController extends Controller
         $wysiwygMedia = WysiwygMedia::create(['file_path' => $savedPath]);
         // return image's path to use in wysiwyg
         return response()->json([
-            'file' => Storage::disk('s3')->url($savedPath),
+            'file' => Storage::disk(env('APP_STORAGE_DISK', 'local'))->url($savedPath),
             'mediaId' => $wysiwygMedia->id,
             'success' => true
         ]);
