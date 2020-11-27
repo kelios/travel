@@ -15,7 +15,8 @@
                         <span v-if="travel.cityName"> - {{travel.cityName}}</span>
                     </p>
                     <p v-if="!readonly">
-                        <span class="badge badge-success" v-if="travel.publish">{{translate('main.puplish')}}</span>
+                        <span class="badge badge-success" v-if="travel.publish && travel.moderation">{{translate('main.puplish')}}</span>
+                        <span class="badge badge-dark" v-else-if="travel.publish && !travel.moderation">{{translate('main.moderationhide')}}</span>
                         <span class="badge badge-dark" v-else>{{translate('main.hide')}}</span>
                     </p>
                 </div>

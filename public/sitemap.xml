@@ -4,55 +4,547 @@
 	<url>
 	<loc>http://travel.vm:8012</loc>
 		<priority>1.0</priority>
-		<lastmod>2020-06-24T14:55:23+00:00</lastmod>
+		<lastmod>2020-11-26T13:41:11+00:00</lastmod>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
 	<loc>http://travel.vm:8012/travels</loc>
 		<priority>1.0</priority>
-		<lastmod>2020-06-24T14:55:23+00:00</lastmod>
+		<lastmod>2020-11-26T13:41:11+00:00</lastmod>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
 	<loc>http://travel.vm:8012/about</loc>
 		<priority>1.0</priority>
-		<lastmod>2020-06-24T14:55:23+00:00</lastmod>
+		<lastmod>2020-11-26T13:41:11+00:00</lastmod>
 		<changefreq>daily</changefreq>
 	</url>
 	<url>
-	<loc>http://travel.vm:8012/travels/test</loc>
+	<loc>http://travel.vm:8012/travels/test-travel</loc>
 		<priority>1.0</priority>
-		<lastmod>2020-06-18T16:44:08+00:00</lastmod>
+		<lastmod>2020-11-26T13:41:01+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/marshrut-na-odin-den-k-ozeram-kozemu-i-myastro</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-11-24T08:41:53+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/marshrut-na-odin-den-dvorcovo-parkovyy-kompleks-slacvinskih-memorialnyy-kompleks-partizanskoy-brigady-razgrom-usadebnyy-dom-potockih-1</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-11-23T13:49:06+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/ruiny-onufrievskogo-monastyrya</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-11-20T07:49:44+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/usadba-trabutishki-i-poseshchenie-ozer-ilginiya-bolduk-i-karasik</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-11-20T14:35:44+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/grodno-avgustovskiy-kanal-1</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-11-16T18:25:51+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/belarus-progulka-k-ozeru-hotomlya-i-poiski-ozer-ovsishcheskoe-srednee-i-pustoe-1</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-11-10T09:55:31+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/marshrut-na-oden-usadba-linovo-dvorec-potockih-usadba-puzynov</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-11-09T13:47:57+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/belarus-kryzh-monicha</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-11-06T13:45:54+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/marshrut-na-odin-den-usadba-vavzheckih-rodnik-lazenki-usadba-plyaterov-ges-druzhba-narodov</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-11-03T14:39:18+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/marshrut-na-odin-den-v-bonifaciev-les-na-mertvoe-chernoe-i-goluboe-ozero</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-11-02T14:10:18+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/progulochnyy-marshrut-na-odin-den-vdol-reki-pripyat</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-27T09:48:08+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/marshrut-na-odin-den-grodnenskie-forty-4-i-6</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-26T13:55:28+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/marshrut-na-odin-den-v-vitebskuyu-oblast-progulka-vdol-dnepra-s-poseshcheniem-lesnogo-istochnika-10km-i-kupel-celitelya-panteleymona</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-20T09:28:39+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/marshrut-odin-den-poseshchenie-ozer-i-istochnikov-barkovshchina-dolzhina-vechele-lepelskoe</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-19T09:28:42+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/lyublyu-moy-gorod</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-11-07T18:09:47+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/latviya-riga-i-yurmala-v-oktyabre</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-14T16:45:36+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/pohod-na-lesnoe-ozero-gremyachee-10km-i-rodnik-kipyachka</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-12T12:59:52+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/ektropa-v-gidrologicheskom-zakaznike-korytenskiy-moh</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-12T11:55:15+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/italiya-tivoli-villa-adriana</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-09T12:14:32+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/italiya-rimskie-kanikuly</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-09T12:14:24+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/belarus-velomarshrut-30km-ot-chasovni-1809-v-d-golynka-do-usadebnogo-doma-novickih-v-soveykah</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-06T10:32:01+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/marshrut-na-odin-den-pochtovaya-stanciya-usadebnyy-dom-makshickih-cerkov-svyatogo-ili-osintorf</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-05T10:19:01+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/gruziya-vodopad-mahunceti</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-06T17:14:40+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/gruziya-peshchera-sataplia</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-06T17:13:26+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/gruziya-krepost-gonio</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-06T17:12:12+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/gruziya-mcheta</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-06T17:10:21+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/gruziya-tbilisi-batumi</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-06T17:08:00+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/egipet-safari-po-pustyne</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-01T14:08:23+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/egipet-luksor-dendera</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-01T14:08:16+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/egipet-puteshestvie-po-pustyne-i-ne-tolko</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-01T14:08:08+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/liniya-stalina</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-30T13:48:39+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/indiya-vodopad-dudshagar</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-30T12:01:17+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/indiya-iz-kalanguta-peshkom-na-plyazh-vagator</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-30T12:01:26+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/indiya-hampi</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-30T12:01:35+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/indiya-puteshestvie-v-drugoy-mir</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-30T12:01:12+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/velomarshrut-na-1-den-30-km-vdol-reki-viliya</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-29T11:04:16+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/marshrut-na-odin-den-ekotropa-elnya-dvorcovo-parkovyy-komleks-nitoslavskih-usadebno-parkovyy-kompleks-shadurskih</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-28T09:35:43+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/chto-posmotret-v-polocke</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-25T12:37:16+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/marshrut-na-dva-dnya-novyy-sverzhen-nesvizh-mir</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-24T12:38:22+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/lida-lidskiy-zamok</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-24T09:52:59+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/grishany-pochtovaya-stanciya</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-23T15:09:37+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/vitebsk-chto-mozhno-posmotret</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-23T14:28:43+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/velomarshrut-15-km-na-lesnoe-ozero-dikoe</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-22T12:33:54+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/marshrut-na-odin-den-novospassk-krevo-zatoplennyy-karer-usadebnyy-dom-hreptovichey-odrovonzh-boruny-golshany</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-21T14:46:06+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/albaniya-morskaya-ekskursiya-v-nacionalnyy-park-karaburun-sazan</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-10T12:19:52+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/albaniya-dostoprimechatelnosti-vlera-zamok-kanina-kalaja-e-kanines-starinnaya-mechet-muradie-i-nasledie-envera-hodzhi</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-10T10:21:45+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/albaniya-velomarshrut-vler-monastyr-zvernec</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-11T09:09:38+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/albaniya-dostoprimechatelnosti-orikuma-castle-of-gjon-bocari-i-cerkov-marmiroy</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-09T12:23:16+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/albaniya-appaloniya-drevniy-gorod</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-08T14:08:29+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/albaniya-vler-gorod-dvuh-morey</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-11T09:09:54+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/velomarshrut-2-dnya-doty-pervoy-mirovoy-usadebnyy-park-potockih-repihovo-usadebnyy-dom-kotlubaev-dvorec-bohvicey</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-08-19T13:17:11+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/marshrut-na-odin-den-v-grodnenskuyu-oblast-usadba-grobovskih-usadba-svyatopolk-chetvertinskih-usadebno-parkovyy-kompleks-laskovichey-usadba-hodkevichey</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-08-13T14:50:36+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/marshrut-odnogo-dnya-mogilev-usadba-grafskogo-roda-tolstyh-byhovskiy-zamok-gidrologicheskiy-pamyatnik-kaskad-krinic</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-08-12T15:37:06+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/smolevud-put-v-skazku</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-08-12T13:18:40+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/begoml-cerkov-vseh-svyatyh</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-08-07T14:24:52+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/veloprogulka-na-dachu-canavy</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-08-07T13:38:13+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/niderlandy-amstredam-volendam</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-08-07T13:04:56+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/otdyh-v-usadbe-asavy-kostel-devy-marii-usadebno-parkovyy-komleks-domeykov</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-08-06T10:19:21+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/ukraina-lvov-mukachevo-uzhgorod</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-08-05T13:52:54+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/stankovo-otlichnyy-variant-dlya-progulki-na-vyhodnye-starinnyy-park-s-vekovymi-derevyami</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-08-03T17:17:17+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/ekotropa-v-minskoy-oblasti-rodniki-svyatye-krinicy</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-08-03T16:23:57+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/polsha-suvalki-elblong-gdansk-leba</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-07-28T11:01:52+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/polsha-varshava-zakopane-morskoe-oko-krakov</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-07-27T15:33:24+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/velomarshrut-na-1-den-logoysk-rodnik-svyatogo-yuriya</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-07-20T20:36:32+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/velomarshrut-na-1-den-sarochanskie-ozera</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-07-20T12:08:36+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/ispaniya-rondo-malaga-peshchera-pileta-i-ushchele-el-chorro</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-07-15T10:11:27+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/ispaniya-madrid-muzey-prado-i-hrustalnyy-dvorec</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-07-10T15:35:19+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/velomarshrut-402-lisya-gora-na-2-dnya-liniya-molotova-i-avgustovskiy-kanal</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-10-09T12:50:47+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/barselona-i-park-razvlecheniy-port-aventura-v-mae</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-07-10T15:36:42+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/pokrovskiy-rodnik-krugloe-ozero-i-dnepr</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-07-01T17:17:04+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/ozero-glubokoe-samoe-prozrachnoe-ozero-v-belarusi</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-07-01T16:09:16+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/ispaniya-barselona-madrid-rondo-toledo-braselona</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-07-15T10:17:29+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/po-norvegii-na-mashine-oslo-bergen-larvik-sandeford</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-06-23T12:44:28+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/berlin-poznan-minsk</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-06-22T19:51:46+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/shveciya-stokgolm</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-09-30T16:38:20+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/daniya-ribe-srednevekovyy-gorod-mayak-ruberga-knude</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-06-22T12:58:13+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/norvegiya-voshozhdenie-na-yazyk-trollya-trolltunga</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-06-22T09:38:45+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/litva-shveciya-norvegiya-daniya-germaniya-polsha</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-06-23T16:52:17+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/turciya-stambul</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-06-19T14:56:34+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/polsha-lodz</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-06-19T10:38:00+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/ekzamen-po-strelbe</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-06-30T20:46:07+00:00</lastmod>
+		<changefreq>weekly</changefreq>
+	</url>
+	<url>
+	<loc>http://travel.vm:8012/travels/chehiya-karlovy-vary-praga-loket</loc>
+		<priority>1.0</priority>
+		<lastmod>2020-06-19T10:35:24+00:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>http://travel.vm:8012/travels/germaniya-drezden-bashtay</loc>
 		<priority>1.0</priority>
-		<lastmod>2020-06-17T21:11:53+00:00</lastmod>
+		<lastmod>2020-06-19T10:35:41+00:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>http://travel.vm:8012/travels/avstriya</loc>
 		<priority>1.0</priority>
-		<lastmod>2020-06-17T20:20:17+00:00</lastmod>
+		<lastmod>2020-06-19T10:35:57+00:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>http://travel.vm:8012/travels/polsha-germaniya-chehiya-avstriya</loc>
 		<priority>1.0</priority>
-		<lastmod>2020-06-23T16:50:52+00:00</lastmod>
+		<lastmod>2020-06-23T16:54:16+00:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>http://travel.vm:8012/travels/mogilev</loc>
 		<priority>1.0</priority>
-		<lastmod>2020-06-17T13:10:12+00:00</lastmod>
+		<lastmod>2020-07-20T20:45:16+00:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
 	<loc>http://travel.vm:8012/travels/grodno</loc>
 		<priority>1.0</priority>
-		<lastmod>2020-06-15T19:36:11+00:00</lastmod>
+		<lastmod>2020-09-16T09:03:23+00:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
@@ -106,7 +598,7 @@
 	<url>
 	<loc>http://travel.vm:8012/travels/narovlya-dvorcovo-parkovyy-kompleks-gorvattov</loc>
 		<priority>1.0</priority>
-		<lastmod>2020-06-11T18:43:04+00:00</lastmod>
+		<lastmod>2020-07-27T14:47:53+00:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
@@ -142,7 +634,7 @@
 	<url>
 	<loc>http://travel.vm:8012/travels/usadba-zavishey-kuhtichi</loc>
 		<priority>1.0</priority>
-		<lastmod>2020-06-10T16:17:09+00:00</lastmod>
+		<lastmod>2020-08-04T13:20:00+00:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
@@ -178,7 +670,7 @@
 	<url>
 	<loc>http://travel.vm:8012/travels/test-new</loc>
 		<priority>1.0</priority>
-		<lastmod>2020-06-08T09:26:31+00:00</lastmod>
+		<lastmod>2020-07-20T12:10:50+00:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 	<url>
@@ -190,7 +682,7 @@
 	<url>
 	<loc>http://travel.vm:8012/travels/dominikana</loc>
 		<priority>1.0</priority>
-		<lastmod>2020-06-08T12:29:44+00:00</lastmod>
+		<lastmod>2020-06-18T19:26:33+00:00</lastmod>
 		<changefreq>weekly</changefreq>
 	</url>
 </urlset>

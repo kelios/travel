@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\Travel\IndexTravel;
 use App\Http\Requests\Admin\Travel\StoreTravel;
 use App\Http\Requests\Admin\Travel\UpdateTravel;
 use App\Models\Travel;
+use App\Repositories\TravelRepository;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -22,6 +23,15 @@ use Illuminate\View\View;
 
 class TravelsController extends Controller
 {
+    /**
+     * @var TravelRepository
+     */
+    private $travelRepository;
+
+    public function __construct(TravelRepository $travelRepository)
+    {
+        $this->travelRepository = $travelRepository;
+    }
 
     /**
      * Display a listing of the resource.
@@ -37,16 +47,15 @@ class TravelsController extends Controller
         }
         // create and AdminListing instance for a specific model and
         $data = AdminListing::create(Travel::class)->processRequestAndGet(
-            // pass the request with params
+        // pass the request with params
             $request,
 
             // set columns to query
-            ['id', 'name', 'budget', 'number_peoples', 'number_days', 'publish', 'visa'],
+            ['id', 'name', 'publish', 'moderation','sitemap','slug'],
 
             // set columns to searchIn
             ['id', 'name', 'minus', 'plus', 'recommendation', 'description']
         );
-
         if ($request->ajax()) {
             if ($request->has('bulk')) {
                 return [
@@ -62,8 +71,8 @@ class TravelsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @throws AuthorizationException
      * @return Factory|View
+     * @throws AuthorizationException
      */
     public function create()
     {
@@ -97,8 +106,8 @@ class TravelsController extends Controller
      * Display the specified resource.
      *
      * @param Travel $travel
-     * @throws AuthorizationException
      * @return void
+     * @throws AuthorizationException
      */
     public function show(Travel $travel)
     {
@@ -111,12 +120,14 @@ class TravelsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Travel $travel
-     * @throws AuthorizationException
      * @return Factory|View
+     * @throws AuthorizationException
      */
-    public function edit(Travel $travel)
+    public function edit($slug)
     {
+        $travel = $this->travelRepository->getBySlug($slug);
         $this->authorize('admin.travel.edit', $travel);
+        $travel->coordsMeTravel = $travel->travelAddress->pluck('coords')->toArray();
 
 
         return view('admin.travel.edit', [
@@ -154,8 +165,8 @@ class TravelsController extends Controller
      *
      * @param DestroyTravel $request
      * @param Travel $travel
-     * @throws Exception
      * @return ResponseFactory|RedirectResponse|Response
+     * @throws Exception
      */
     public function destroy(DestroyTravel $request, Travel $travel)
     {
@@ -172,10 +183,10 @@ class TravelsController extends Controller
      * Remove the specified resources from storage.
      *
      * @param BulkDestroyTravel $request
-     * @throws Exception
      * @return Response|bool
+     * @throws Exception
      */
-    public function bulkDestroy(BulkDestroyTravel $request) : Response
+    public function bulkDestroy(BulkDestroyTravel $request): Response
     {
         DB::transaction(static function () use ($request) {
             collect($request->data['ids'])

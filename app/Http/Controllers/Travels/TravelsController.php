@@ -116,7 +116,7 @@ class TravelsController extends Controller
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
         $whereSearch = $request->all();
-        $where = array_merge($whereSearch, ['publish' => 1]);
+        $where = array_merge($whereSearch, ['publish' => 1, 'moderation' => 1]);
         $filter_hide = ['countries' => true];
         return view('travels.index', ['where' => $where,
                 'filter_hide' => $filter_hide]
@@ -134,7 +134,7 @@ class TravelsController extends Controller
         SEOMeta::setTitle(trans('home.metaMainTitle'));
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
-        $where = ['publish' => 1, 'countries' => [3]];
+        $where = ['publish' => 1, 'countries' => [3], 'moderation' => 1];
         $filter_hide = ['countries' => false];
         return view('travels.index', ['where' => $where,
             'filter_hide' => $filter_hide]);
@@ -162,6 +162,7 @@ class TravelsController extends Controller
                 'name',
                 'url',
                 'publish',
+                'moderation',
                 'countryName',
                 'cityName',
                 'travel_image_thumb_url',
@@ -194,6 +195,7 @@ class TravelsController extends Controller
                 'name',
                 'url',
                 'publish',
+                'moderation',
                 'countryName',
                 'travel_image_thumb_url',
                 'slug',
@@ -253,7 +255,9 @@ class TravelsController extends Controller
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['id' => Auth::user()->travelsFavorite()->pluck('travels.id')->toArray(),
-            'publish' => 1];
+            'publish' => 1,
+            'moderation' => 1,
+        ];
         $filter_hide = ['countries' => true];
         return view('travels.index', [
             'where' => $where,
@@ -267,7 +271,7 @@ class TravelsController extends Controller
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
         $user_ids = Auth::user()->getFriends()->pluck('id')->toArray();
-        $where = ['users' => $user_ids, 'publish' => 1,];
+        $where = ['users' => $user_ids, 'publish' => 1,'moderation' => 1];
         $filter_hide = ['countries' => true];
         return view('travels.index', [
             'where' => $where,

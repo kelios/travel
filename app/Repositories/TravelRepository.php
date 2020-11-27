@@ -107,7 +107,7 @@ class TravelRepository implements TravelRepositoryInterface
      */
     public function getLast($where = [])
     {
-        return $this->travel->where('publish', 1)->orderBy('id', 'desc')->take(3)->get();
+        return $this->travel->where('publish', 1)->where('moderation', 1)->orderBy('id', 'desc')->take(3)->get();
     }
 
     /**

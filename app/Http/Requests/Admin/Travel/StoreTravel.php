@@ -35,16 +35,20 @@ class StoreTravel extends FormRequest
             'recommendation' => ['required', 'string'],
             'description' => ['required', 'string'],
             'publish' => ['required', 'boolean'],
+            'moderation' => ['nullable', 'boolean'],
+            'sitemap' => ['nullable', 'boolean'],
             'visa' => ['required', 'boolean'],
-            
+            'meta_description' => ['sometimes', 'string'],
+            'meta_keywords' => ['sometimes', 'string'],
+
         ];
     }
 
     /**
-    * Modify input data
-    *
-    * @return array
-    */
+     * Modify input data
+     *
+     * @return array
+     */
     public function getSanitized(): array
     {
         $sanitized = $this->validated();

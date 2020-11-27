@@ -29,7 +29,7 @@ class HomeController extends Controller
         SEOMeta::setTitle(trans('home.metaMainTitle'));
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
-        $where = ['publish' => 1];
+        $where = ['publish' => 1, 'moderation' => 1];
         return view('welcome', ['where' => $where]);
     }
 
@@ -38,7 +38,7 @@ class HomeController extends Controller
         SEOMeta::setTitle(trans('home.metaMainTitle'));
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
-        $where = ['publish' => 1];
+        $where = ['publish' => 1, 'moderation' => 1];
         return view('about', ['where' => $where]);
     }
 
@@ -47,7 +47,7 @@ class HomeController extends Controller
         SEOMeta::setTitle(trans('home.metaMainTitle'));
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
-        $where = ['publish' => 1];
+        $where = ['publish' => 1, 'moderation' => 1];
         return view('feedback', ['where' => $where]);
     }
 

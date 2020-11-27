@@ -314,8 +314,11 @@ return [
             'recommendation' => 'Recommendation',
             'description' => 'Description',
             'publish' => 'Publish',
+            'moderation' => 'Прошел модерацию',
+            'sitemap' => 'Добавить в sitemap',
             'visa' => 'Visa',
-
+            'meta_description' => 'Meta description',
+            'meta_keywords' => 'meta keywords',
         ],
     ],
 

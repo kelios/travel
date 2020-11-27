@@ -53,10 +53,14 @@ class Travel extends Model implements HasMedia
         'slug',
         'meta_keywords',
         'meta_description',
+        'sitemap',
+        'moderation',
     ];
 
     protected $casts = [
         'publish' => 'boolean',
+        'sitemap' => 'boolean',
+        'moderation' => 'boolean',
     ];
 
     /**
@@ -70,7 +74,8 @@ class Travel extends Model implements HasMedia
     /**
      * @var array
      */
-    protected $appends = ['resource_url',
+    protected $appends = [
+        'resource_url',
         'url',
         'travelAddressAdress',
         'travelAddressCity',
@@ -151,7 +156,7 @@ class Travel extends Model implements HasMedia
 
     public function getResourceUrlAttribute()
     {
-        return url('/admin/travels/' . $this->getKey());
+        return url('/admin/travels/' . $this->slug);
     }
 
     public function getUrlAttribute()
@@ -475,18 +480,16 @@ class Travel extends Model implements HasMedia
     {
         return ['slug' => ['source' => 'name']];
     }
+    /*
+        public function setMetaKeywordsAttribute($value)
+        {
+            $this->attributes['meta_keywords'] = mb_strimwidth('metravel, travel, путешествия, ' .
+                $this->countryName . ', ' . $this->cityName . ', ' . $this->name, 0, 255);
+        }
 
-    public function setMetaKeywordsAttribute($value)
-    {
-        $this->attributes['meta_keywords'] = mb_strimwidth('metravel, travel, путешествия, ' .
-            $this->countryName . ', ' . $this->cityName . ', ' . $this->name, 0, 255);
-    }
-
-    public function setMetaDescriptionAttribute($value)
-    {
-        $this->attributes['meta_description'] = mb_strimwidth('metravel, travel, путешествия, выбрать место для отдыха,' .
-            $this->countryName . ', ' . $this->cityName . ', ' . $this->name . ', ' . $this->categoryName, 0, 255);
-    }
-
-
+        public function setMetaDescriptionAttribute($value)
+        {
+            $this->attributes['meta_description'] = mb_strimwidth('metravel, travel, путешествия, выбрать место для отдыха,' .
+                $this->countryName . ', ' . $this->cityName . ', ' . $this->name . ', ' . $this->categoryName, 0, 255);
+        }*/
 }

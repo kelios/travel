@@ -32,6 +32,24 @@ class TravelFilter extends ModelFilter
         return $this->where('publish', $status);
     }
 
+    /**
+     * @param $moderation
+     * @return TravelFilter
+     */
+    public function moderation($moderation)
+    {
+        return $this->where('moderation', $moderation);
+    }
+
+    /**
+     * @param $sitemap
+     * @return TravelFilter
+     */
+    public function sitemap($sitemap)
+    {
+        return $this->where('sitemap', $sitemap);
+    }
+
 
     public function year($year)
     {

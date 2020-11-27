@@ -20,8 +20,8 @@ class SiteMapController extends Controller
         $sitemap->add(URL::to('/travels'), Carbon::parse('now'), '1.0', 'daily');
         $sitemap->add(URL::to('/about'), Carbon::parse('now'), '1.0', 'daily');
 
-        // get all posts from db
-        $travels = DB::table('travels')->orderBy('created_at', 'desc')->get();
+        // get all travel from db
+        $travels = DB::table('travels')->where('sitemap', 1)->orderBy('created_at', 'desc')->get();
 
         // add every travel to the sitemap
         foreach ($travels as $travel) {

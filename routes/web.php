@@ -223,7 +223,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::get('/', 'TravelsController@index')->name('index');
             Route::get('/create', 'TravelsController@create')->name('create');
             Route::post('/', 'TravelsController@store')->name('store');
-            Route::get('/{travel}/edit', 'TravelsController@edit')->name('edit');
+            Route::get('/{slug}/edit', 'TravelsController@edit')->name('edit');
             Route::post('/bulk-destroy', 'TravelsController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{travel}', 'TravelsController@update')->name('update');
             Route::delete('/{travel}', 'TravelsController@destroy')->name('destroy');

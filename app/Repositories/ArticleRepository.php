@@ -40,6 +40,7 @@ class ArticleRepository implements TravelRelationRepositoryInterface
         return $this->article
             ->with('articleType')
             ->where('publish', 1)
+            ->where('moderation', 1)
             ->paginate(Config::get('constants.showListArticle.count'));
     }
 

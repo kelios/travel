@@ -13,6 +13,13 @@
                       :action="action" novalidate>
                     <div class="card-header">
                         {{ trans('travels.editTravels') }}
+                        @if($travel->publish)
+                                @if($travel->moderation)
+                                    <span class="badge badge-success">({{trans('main.moderation')}})</span>
+                                @else
+                                    <span class="badge badge-dark">({{trans('main.moderationhide')}})</span>
+                                @endif
+                        @endif
                         <div class="float-right">
                             <a href="{{ $travel->url }}" target="_blank">
                                 {{trans('main.preShow')}}

@@ -35,8 +35,12 @@ class UpdateTravel extends FormRequest
             'recommendation' => ['sometimes', 'string'],
             'description' => ['sometimes', 'string'],
             'publish' => ['sometimes', 'boolean'],
+            'moderation' => ['nullable', 'boolean'],
+            'sitemap' => ['nullable', 'boolean'],
             'visa' => ['sometimes', 'boolean'],
-            
+            'meta_description' => ['sometimes', 'string'],
+            'meta_keywords' => ['sometimes', 'string'],
+
         ];
     }
 

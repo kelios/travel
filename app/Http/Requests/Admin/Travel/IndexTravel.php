@@ -25,7 +25,7 @@ class IndexTravel extends FormRequest
     public function rules(): array
     {
         return [
-            'orderBy' => 'in:id,name,budget,number_peoples,number_days,publish,visa|nullable',
+            'orderBy' => 'in:id,name,budget,number_peoples,number_days,publish,visa,moderation,sitemap|nullable',
             'orderDirection' => 'in:asc,desc|nullable',
             'search' => 'string|nullable',
             'page' => 'integer|nullable',
