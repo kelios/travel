@@ -15,3 +15,4 @@ import './comment';
 import './message';
 import './article';
 import './article-type';
+import './travel-like';

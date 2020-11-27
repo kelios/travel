@@ -8,9 +8,9 @@ use Brackets\Media\HasMedia\HasMediaThumbsTrait;
 use Brackets\Media\HasMedia\ProcessMediaTrait;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Image\Exceptions\InvalidManipulation;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Support\Facades\Config;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Category extends Model implements HasMedia
 {
@@ -33,7 +33,7 @@ class Category extends Model implements HasMedia
 
     ];
 
-    protected $appends = ['resource_url','category_image_thumb_url'];
+    protected $appends = ['resource_url', 'category_image_thumb_url'];
 
     /* ************************ ACCESSOR ************************* */
 
@@ -66,10 +66,10 @@ class Category extends Model implements HasMedia
     /**
      * Register media collections
      */
-    public function registerMediaCollections()
+    public function registerMediaCollections(): void
     {
         $this->addMediaCollection('categoryImage')
-            ->maxFilesize(10*1024*1024)
+            ->maxFilesize(10 * 1024 * 1024)
             ->accepts('image/*');
     }
 
@@ -79,7 +79,7 @@ class Category extends Model implements HasMedia
      * @param Media|null $media
      * @throws InvalidManipulation
      */
-    public function registerMediaConversions(Media $media = null)
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->autoRegisterThumb200();
 

@@ -1,4 +1,5 @@
 <?php
+namespace Database\Factories;
 
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(Brackets\AdminAuth\Models\AdminUser::class, function (Faker\Generator $faker) {
@@ -165,8 +166,8 @@ $factory->define(App\Models\Comment::class, static function (Faker\Generator $fa
         'reply_id' => $faker->sentence,
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
-        
-        
+
+
     ];
 });
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
@@ -178,8 +179,8 @@ $factory->define(App\Models\Comment::class, static function (Faker\Generator $fa
         'reply_id' => $faker->sentence,
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
-        
-        
+
+
     ];
 });
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
@@ -192,8 +193,8 @@ $factory->define(App\Models\Message::class, static function (Faker\Generator $fa
         'is_read' => $faker->boolean(),
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
-        
-        
+
+
     ];
 });
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
@@ -205,8 +206,8 @@ $factory->define(App\Models\Message::class, static function (Faker\Generator $fa
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
         'deleted_at' => null,
-        
-        
+
+
     ];
 });
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
@@ -218,8 +219,8 @@ $factory->define(App\Models\Article::class, static function (Faker\Generator $fa
         'publish' => $faker->boolean(),
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
-        
-        
+
+
     ];
 });
 /** @var  \Illuminate\Database\Eloquent\Factory $factory */
@@ -227,6 +228,18 @@ $factory->define(App\Models\ArticleType::class, static function (Faker\Generator
     return [
         'name' => $faker->firstName,
         'status' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+
+
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\TravelLike::class, static function (Faker\Generator $faker) {
+    return [
+        'travel_id' => $faker->sentence,
+        'user_id' => $faker->sentence,
+        'deleted_at' => null,
         'created_at' => $faker->dateTime,
         'updated_at' => $faker->dateTime,
         

@@ -9,15 +9,15 @@ use Brackets\Media\HasMedia\ProcessMediaTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 use Spatie\Image\Exceptions\InvalidManipulation;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Article extends Model implements HasMedia
 {
-    use AutoProcessMediaTrait;
-    use HasMediaCollectionsTrait;
-    use HasMediaThumbsTrait;
-    use ProcessMediaTrait;
+      use AutoProcessMediaTrait;
+      use HasMediaCollectionsTrait;
+      use HasMediaThumbsTrait;
+      use ProcessMediaTrait;
 
     protected $table = 'article';
 
@@ -64,7 +64,7 @@ class Article extends Model implements HasMedia
     /**
      * Register media collections
      */
-    public function registerMediaCollections()
+    public function registerMediaCollections(): void
     {
         $this->addMediaCollection('articleImage')
             ->maxFilesize(10 * 1024 * 1024)
@@ -77,7 +77,7 @@ class Article extends Model implements HasMedia
      * @param Media|null $media
      * @throws InvalidManipulation
      */
-    public function registerMediaConversions(Media $media = null)
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->autoRegisterThumb200();
 

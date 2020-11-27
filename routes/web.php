@@ -363,3 +363,19 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
+        Route::prefix('travel-likes')->name('travel-likes/')->group(static function() {
+            Route::get('/',                                             'TravelLikeController@index')->name('index');
+            Route::get('/create',                                       'TravelLikeController@create')->name('create');
+            Route::post('/',                                            'TravelLikeController@store')->name('store');
+            Route::get('/{travelLike}/edit',                            'TravelLikeController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'TravelLikeController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{travelLike}',                                'TravelLikeController@update')->name('update');
+            Route::delete('/{travelLike}',                              'TravelLikeController@destroy')->name('destroy');
+        });
+    });
+});

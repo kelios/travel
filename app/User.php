@@ -23,13 +23,14 @@ use Multicaret\Acquaintances\Traits\CanFollow;
 use Multicaret\Acquaintances\Traits\CanLike;
 use Multicaret\Acquaintances\Traits\CanRate;
 use Multicaret\Acquaintances\Traits\Friendable;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class User extends Authenticatable implements HasMedia
 {
     use HasApiTokens;
     use Notifiable;
+
     use AutoProcessMediaTrait;
     use HasMediaCollectionsTrait;
     use HasMediaThumbsTrait;
@@ -100,7 +101,7 @@ class User extends Authenticatable implements HasMedia
             : Config::get('constants.image.defaultCatImage');
     }
 
-    public function registerMediaCollections()
+    public function registerMediaCollections(): void
     {
         $this->addMediaCollection('userAvatar')
             ->maxFilesize(20 * 1024 * 1024)
@@ -109,7 +110,7 @@ class User extends Authenticatable implements HasMedia
             ->accepts('image/*');
     }
 
-    public function registerMediaConversions(Media $media = null)
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->autoRegisterThumb200();
 

@@ -11,11 +11,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Image\Exceptions\InvalidManipulation;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Arr;
 use TravelSave;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * Class Travel
@@ -24,11 +24,12 @@ use TravelSave;
 class Travel extends Model implements HasMedia
 {
     use Sluggable;
+    use Filterable;
+
     use AutoProcessMediaTrait;
     use HasMediaCollectionsTrait;
     use HasMediaThumbsTrait;
     use ProcessMediaTrait;
-    use Filterable;
 
 
     /**
@@ -423,7 +424,7 @@ class Travel extends Model implements HasMedia
     /**
      * Register media collections
      */
-    public function registerMediaCollections()
+    public function registerMediaCollections(): void
     {
         $this->addMediaCollection('travelMainImage')
             ->maxFilesize(20 * 1024 * 1024)
@@ -449,7 +450,7 @@ class Travel extends Model implements HasMedia
      * @param Media|null $media
      * @throws InvalidManipulation
      */
-    public function registerMediaConversions(Media $media = null)
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->autoRegisterThumb200();
         $this->addMediaConversion('detail_hd')

@@ -1,6 +1,9 @@
 <div class="row">
+
     <div class="col-md-8 order-md-1">
+
         <div class="card ">
+
             <div class="card-body">
                 <input type="hidden" v-model="form.id">
                 <div class="form-group "
@@ -170,9 +173,9 @@
     <div class="col-md-4 order-md-2 mb-4">
 
         <div class="card ">
-            <span class="card-body">
-                    <div class="form-check row"
-                         :class="{'has-danger': errors.has('publish'), 'has-success': fields.publish && fields.publish.valid }">
+            <div class="card-body">
+                <div class="form-check row"
+                     :class="{'has-danger': errors.has('publish'), 'has-success': fields.publish && fields.publish.valid }">
                     <div class="ml-md-auto" :class="isFormLocalized ? 'col-md-8' : 'col-md-10'">
                         <toggle-button
                             id="publish"
@@ -186,8 +189,8 @@
                         />
                     </div>
                 </div>
-                    <hr class="mb-4">
-                    <div class="form-group img__container text-center">
+                <hr class="mb-4">
+                <div class="form-group img__container text-center">
                     <label for="avatar"> {{ trans('travels.uploadCover') }}</label>
                     <div class="avatar-upload">
                         @include('brackets/admin-ui::admin.includes.avatar-uploader', [
@@ -196,7 +199,7 @@
                         ])
                     </div>
                 </div>
-                    <div class="form-group row ">
+                <div class="form-group row ">
                     <label for="cities"> {{ trans('travels.selectedAddress') }}</label>
                     <ul class="list-group">
                         <li class="list-group-item" v-for="(meCoords,index) in travelAddress.meCoord">
@@ -212,10 +215,10 @@
                         </li>
                     </ul>
                 </div>
-                    <hr class="mb-4">
+                <hr class="mb-4">
 
-                    <div class="form-group row align-items-center"
-                         :class="{'has-danger': errors.has('categories'), 'has-success': fields.categories && fields.categories.valid }">
+                <div class="form-group row align-items-center"
+                     :class="{'has-danger': errors.has('categories'), 'has-success': fields.categories && fields.categories.valid }">
                     <label for="categories">{{ trans('travels.categories') }}</label>
 
                     <multiselect
@@ -233,8 +236,8 @@
                 </div>
 
 
-                    <div class="form-group row align-items-center"
-                         :class="{'has-danger': errors.has('transports'), 'has-success': fields.transports && fields.transports.valid }">
+                <div class="form-group row align-items-center"
+                     :class="{'has-danger': errors.has('transports'), 'has-success': fields.transports && fields.transports.valid }">
                     <label for="transports">{{ trans('travels.transports') }}</label>
 
                     <multiselect
@@ -252,8 +255,8 @@
                     </div>
                 </div>
 
-                    <div class="form-group row align-items-center"
-                         :class="{'has-danger': errors.has('month'), 'has-success': fields.month && fields.month.valid }">
+                <div class="form-group row align-items-center"
+                     :class="{'has-danger': errors.has('month'), 'has-success': fields.month && fields.month.valid }">
                     <label for="month">{{ trans('travels.month') }}</label>
                     <multiselect
                         :options="{{$month->toJson()}}"
@@ -270,8 +273,8 @@
                     </div>
                 </div>
 
-                    <div class="form-group row align-items-center"
-                         :class="{'has-danger': errors.has('year'), 'has-success': fields.year && fields.year.valid }">
+                <div class="form-group row align-items-center"
+                     :class="{'has-danger': errors.has('year'), 'has-success': fields.year && fields.year.valid }">
                     <label for="year">{{ trans('travels.year') }}</label>
 
                     <input type="text" v-model="form.year" v-validate="'integer'" @input="validate($event)"
@@ -284,8 +287,8 @@
                     </div>
                 </div>
 
-                    <div class="form-group row align-items-center"
-                         :class="{'has-danger': errors.has('complexity'), 'has-success': fields.complexity && fields.complexity.valid }">
+                <div class="form-group row align-items-center"
+                     :class="{'has-danger': errors.has('complexity'), 'has-success': fields.complexity && fields.complexity.valid }">
                     <label for="complexity">{{ trans('travels.complexity') }}</label>
 
 
@@ -304,8 +307,8 @@
                     </div>
                 </div>
 
-                    <div class="form-group row align-items-center"
-                         :class="{'has-danger': errors.has('companion'), 'has-success': fields.companion && fields.companion.valid }">
+                <div class="form-group row align-items-center"
+                     :class="{'has-danger': errors.has('companion'), 'has-success': fields.companion && fields.companion.valid }">
                     <label for="companion">{{ trans('travels.companion') }}</label>
 
 
@@ -325,8 +328,8 @@
                 </div>
 
 
-                    <div class="form-group row align-items-center"
-                         :class="{'has-danger': errors.has('overNightStay'), 'has-success': fields.overNightStay && fields.overNightStay.valid }">
+                <div class="form-group row align-items-center"
+                     :class="{'has-danger': errors.has('overNightStay'), 'has-success': fields.overNightStay && fields.overNightStay.valid }">
                     <label for="overNightStay">{{ trans('travels.overNightStay') }}</label>
 
                     <multiselect
@@ -345,8 +348,8 @@
                 </div>
 
 
-                    <div class="form-group row align-items-center"
-                         :class="{'has-danger': errors.has('budget'), 'has-success': fields.budget && fields.budget.valid }">
+                <div class="form-group row align-items-center"
+                     :class="{'has-danger': errors.has('budget'), 'has-success': fields.budget && fields.budget.valid }">
                     <label for="budget">{{ trans('travels.budget') }}</label>
 
                     <input type="text" v-model="form.budget" v-validate="'integer'" @input="validate($event)"
@@ -360,8 +363,8 @@
                 </div>
 
 
-                    <div class="form-group row align-items-center"
-                         :class="{'has-danger': errors.has('number_peoples'), 'has-success': fields.number_peoples && fields.number_peoples.valid }">
+                <div class="form-group row align-items-center"
+                     :class="{'has-danger': errors.has('number_peoples'), 'has-success': fields.number_peoples && fields.number_peoples.valid }">
                     <label for="number_peoples">{{ trans('travels.number_peoples') }}</label>
 
                     <input type="text" v-model="form.number_peoples" v-validate="'integer'"
@@ -376,8 +379,8 @@
                 </div>
 
 
-                    <div class="form-group row align-items-center"
-                         :class="{'has-danger': errors.has('number_days'), 'has-success': fields.number_days && fields.number_days.valid }">
+                <div class="form-group row align-items-center"
+                     :class="{'has-danger': errors.has('number_days'), 'has-success': fields.number_days && fields.number_days.valid }">
                     <label for="number_days">{{ trans('travels.number_days') }}</label>
 
                     <input type="text" v-model="form.number_days" v-validate="'integer'" @input="validate($event)"
@@ -390,8 +393,8 @@
 
                 </div>
 
-                    <hr class="mb-4">
-                    <div class="form-group img__container text-center">
+                <hr class="mb-4">
+                <div class="form-group img__container text-center">
                     <label for="travelRoad"> {{ trans('travels.uploadRoad') }}</label>
                     <div class="avatar-upload ">
                         @include('brackets/admin-ui::admin.includes.avatar-uploader', [
@@ -401,8 +404,8 @@
                     </div>
                 </div>
 
-                    <div class="form-check row"
-                         :class="{'has-danger': errors.has('visa'), 'has-success': fields.visa && fields.visa.valid }">
+                <div class="form-check row"
+                     :class="{'has-danger': errors.has('visa'), 'has-success': fields.visa && fields.visa.valid }">
                     <div class="ml-md-auto" :class="isFormLocalized ? 'col-md-8' : 'col-md-10'">
                         <input class="form-check-input" id="visa" type="checkbox" v-model="form.visa"
                                v-validate="''"
@@ -417,9 +420,7 @@
                         </div>
                     </div>
                 </div>
-
-
+            </div>
         </div>
     </div>
-</div>
 </div>
