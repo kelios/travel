@@ -29,7 +29,7 @@
            :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.travel.columns.meta_description') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <div>
-            <wysiwyg v-model="form.meta_description" v-validate="'required'" id="meta_description"
+            <wysiwyg v-model="form.meta_description" v-validate="" id="meta_description"
                      name="meta_description" :config="mediaWysiwygConfig"></wysiwyg>
         </div>
         <div v-if="errors.has('meta_description')" class="form-control-feedback form-text" v-cloak>@{{
@@ -44,7 +44,7 @@
            :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.travel.columns.meta_keywords') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <div>
-            <wysiwyg v-model="form.meta_keywords" v-validate="'required'" id="meta_keywords" name="meta_keywords"
+            <wysiwyg v-model="form.meta_keywords" v-validate="" id="meta_keywords" name="meta_keywords"
                      :config="mediaWysiwygConfig"></wysiwyg>
         </div>
         <div v-if="errors.has('meta_keywords')" class="form-control-feedback form-text" v-cloak>@{{
@@ -104,7 +104,7 @@
            :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.travel.columns.minus') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <div>
-            <wysiwyg v-model="form.minus" v-validate="'required'" id="minus" name="minus"
+            <wysiwyg v-model="form.minus" v-validate="" id="minus" name="minus"
                      :config="mediaWysiwygConfig"></wysiwyg>
         </div>
         <div v-if="errors.has('minus')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('minus') }}
@@ -118,7 +118,7 @@
            :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.travel.columns.plus') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <div>
-            <wysiwyg v-model="form.plus" v-validate="'required'" id="plus" name="plus"
+            <wysiwyg v-model="form.plus" v-validate="" id="plus" name="plus"
                      :config="mediaWysiwygConfig"></wysiwyg>
         </div>
         <div v-if="errors.has('plus')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('plus') }}</div>
@@ -131,7 +131,7 @@
            :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.travel.columns.recommendation') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <div>
-            <wysiwyg v-model="form.recommendation" v-validate="'required'" id="recommendation" name="recommendation"
+            <wysiwyg v-model="form.recommendation" v-validate="" id="recommendation" name="recommendation"
                      :config="mediaWysiwygConfig"></wysiwyg>
         </div>
         <div v-if="errors.has('recommendation')" class="form-control-feedback form-text" v-cloak>@{{
@@ -146,7 +146,7 @@
            :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.travel.columns.description') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <div>
-            <wysiwyg v-model="form.description" v-validate="'required'" id="description" name="description"
+            <wysiwyg v-model="form.description" v-validate="" id="description" name="description"
                      :config="mediaWysiwygConfig"></wysiwyg>
         </div>
         <div v-if="errors.has('description')" class="form-control-feedback form-text" v-cloak>@{{
