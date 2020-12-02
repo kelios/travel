@@ -18,7 +18,7 @@
                 <div class="col-lg-6 order-lg-1 my-auto showcase-text">
                     <h2> {{trans('main.aboutTitle')}}</h2>
                     <p class="lead mb-0">
-                        {{trans('main.aboutText')}}
+                        {!! trans('main.aboutText')!!}
                         <a href="mailto:info@metravel.by">info@metravel.by</a>
                     </p>
                 </div>
