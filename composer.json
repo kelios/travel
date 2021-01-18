@@ -29,6 +29,7 @@
         "nao-pon/flysystem-google-drive": "~1.1",
         "pusher/pusher-php-server": "^4.0",
         "spatie/laravel-backup": "^6.11",
+        "spatie/laravel-cookie-consent": "^2.12",
         "tohidplus/laravel-vue-translation": "^2.0",
         "tucker-eric/eloquentfilter": "^2.4"
     },

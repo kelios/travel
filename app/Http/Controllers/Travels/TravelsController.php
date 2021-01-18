@@ -271,7 +271,7 @@ class TravelsController extends Controller
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
         $user_ids = Auth::user()->getFriends()->pluck('id')->toArray();
-        $where = ['users' => $user_ids, 'publish' => 1,'moderation' => 1];
+        $where = ['users' => $user_ids, 'publish' => 1, 'moderation' => 1];
         $filter_hide = ['countries' => true];
         return view('travels.index', [
             'where' => $where,
@@ -308,6 +308,7 @@ class TravelsController extends Controller
         SEOMeta::setDescription($travel->meta_description);
         SEOMeta::addMeta('travel:published_time', $travel->created_at->toW3CString(), 'property');
         SEOMeta::addKeyword($travel->meta_keywords);
+
         return view('travels.edit', [
             'travel' => $travel,
             'categories' => $this->categoryRepository->all(),
@@ -496,15 +497,6 @@ class TravelsController extends Controller
         $travelAddr = $request->getRelationAddress();
         // Store the Travel
         $this->saveTravel($sanitized, $relations, $travelAddr, $travel);
-        /* $travel->fill($sanitized);
-         $travel->update($sanitized);
-         $travel->users()->sync(auth()->user()->id);
-         foreach ($relations as $relation => $publickey) {
-             $relationFormat = str_replace('_', '', $relation);
-             $travel->$relationFormat()->sync($sanitized[$relation . 'Ids']);
-         }
-         $travel->travelAddress()->delete();
-         $travel->travelAddress()->createMany($travelAddr);*/
 
         if ($request->ajax()) {
             return ['redirect' => url('/travels/metravel'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
@@ -547,15 +539,6 @@ class TravelsController extends Controller
 
         // Store the Travel
         $this->saveTravel($sanitized, $relations, $travelAddr, $travel);
-        /* $this->travelRepository->fill($sanitized);
-         $this->travelRepository->save();
-         $this->travelRepository->users()->sync(auth()->user()->id);
-         foreach ($relations as $relation => $publickey) {
-             $relationFormat = str_replace('_', '', $relation);
-             $this->travelRepository->$relationFormat()->sync($sanitized[$relation . 'Ids']);
-         }
-         $this->travelRepository->travelAddress()->delete();
-         $this->travelRepository->travelAddress()->createMany($travelAddr);*/
 
         if ($request->ajax()) {
             return ['redirect' => url('/travels/metravel'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];

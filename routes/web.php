@@ -22,6 +22,7 @@ Route::get('/articles/{id}', 'ArticleController@show')->name('articleshow');
 
 Route::post('/admin/wysiwyg-media', 'WysiwygUploadController@uploads3')->name('brackets/admin-ui::wysiwyg-upload');
 Route::post('upload', 'WysiwygUploadController@upload')->name('brackets/media::upload');
+Route::post('upload-crop', 'WysiwygUploadController@uploadCrop')->name('brackets/media::upload-crop');
 
 Route::post('feedback', 'HomeController@feedback')->name('feedback');
 

@@ -2,6 +2,7 @@
         ref="{{ $mediaCollection->getName() }}_uploader"
         :collection="'{{ $mediaCollection->getName() }}'"
         :url="'{{ route('brackets/media::upload') }}'"
+
         @if($mediaCollection->getMaxNumberOfFiles())
         :max-number-of-files="{{ $mediaCollection->getMaxNumberOfFiles() }}"
         @endif

@@ -31,7 +31,10 @@
     <link href="{{ asset('css/metravel.css') }}" rel="stylesheet">
 </head>
 <body>
+
+@include('cookieConsent::index')
 <div id="app">
+
     <nav class="navbar bg-white navbar-expand-md navbar-light shadow-sm zindex2">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -146,6 +149,7 @@
             </div>
         </div>
     </nav>
+
     <main>
         @yield('content')
     </main>

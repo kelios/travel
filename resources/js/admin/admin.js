@@ -71,6 +71,7 @@ Vue.component('modal', require('../components/Modal.vue').default);
 Vue.component('message-list', require('../components/MessageList.vue').default);
 Vue.component('message-between-list', require('../components/MessageBetweenList.vue').default);
 Vue.component('message-send', require('../components/MessageSend.vue').default);
+Vue.component('upload-image-drag', require('../components/UploadImageDrag.vue').default);
 
 Vue.component('passport-clients', require('../components/passport/Clients.vue'));
 Vue.component('passport-authorized-clients', require('../components/passport/AuthorizedClients.vue'));

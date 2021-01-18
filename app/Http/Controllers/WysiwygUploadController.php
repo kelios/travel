@@ -43,6 +43,32 @@ class WysiwygUploadController extends Controller
     /**
      * @param Request $request
      * @return JsonResponse
+     * @throws AuthorizationException
+     */
+    public function uploadCrop(Request $request): JsonResponse
+    {
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $imagedMimeTypes = ['image/jpeg', 'image/gif', 'image/png', 'image/bmp', 'image/svg+xml'];
+            $contentType = $file->getClientMimeType();
+            if (in_array($contentType, $imagedMimeTypes)) {
+                $path = $request->file('file')->store('', ['disk' => 'uploads']);
+            } else {
+                $path = $request->file('file')->storeAs('', $file->getClientOriginalName(), ['disk' => 'uploads']);
+            }
+           // dd($file);
+            return response()->json([
+                'path' => $path,
+
+            ], 200);
+        }
+
+        return response()->json(trans('brackets/media::media.file.not_provided'), 422);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
      */
     public function uploads3(Request $request)
     {

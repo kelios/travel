@@ -76,6 +76,7 @@ Vue.component('travel-form', {
                 travelAddressCity: [],
                 travelAddressCountry: [],
                 travelAddressAdress: [],
+                travelMainImage: [],
             }
         }
     },
@@ -91,6 +92,27 @@ Vue.component('travel-form', {
             this.travelAddress.country = this.form.travelAddressCountry;
             this.selectedCountiesIds = this.form.countryIds;
             this.selectedCountriesCode = this.form.countriesCode ?? [];
+        },
+        getPostData: function getPostData() {
+            var _this3 = this;
+
+            if (this.mediaCollections) {
+                this.mediaCollections.forEach(function (collection, index, arr) {
+                    if (_this3.form[collection]) {
+                        console.warn("MediaUploader warning: Media input must have a unique name, '" + collection + "' is already defined in regular inputs.");
+                    }
+
+                    if (_this3.$refs[collection + '_uploader']) {
+                        _this3.form[collection] = _this3.$refs[collection + '_uploader'].getFiles();
+                    }
+                    if (_this3.$refs[collection + '_uploadercrop']) {
+                        _this3.form[collection] = _this3.$refs[collection + '_uploadercrop'].getFilesDrag();
+                    }
+                });
+            }
+            this.form['wysiwygMedia'] = this.wysiwygMedia;
+
+            return this.form;
         },
         autoSave() {
             setInterval(() => {

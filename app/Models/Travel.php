@@ -85,6 +85,7 @@ class Travel extends Model implements HasMedia
         'countriesCode',
         'travel_image_thumb_url',
         'gallery',
+        'travelMainImage',
         'coordMeTravel',
         'coordsMeTravelArr',
         'countryName',
@@ -97,8 +98,7 @@ class Travel extends Model implements HasMedia
         'userIds',
         'userName',
         'totalLikes',
-        'travelRoad'
-
+        'travelRoad',
     ];
 
     public function modelFilter()
@@ -137,16 +137,24 @@ class Travel extends Model implements HasMedia
             }
             $res[$key]['url'] = $image->getUrl('detail_hd');
             $res[$key]['title'] = $this->name;
-
         }
-
         return $res ?? null;
-
     }
 
     public function getTravelRoadAttribute()
     {
         $travelRoad = $this->getMedia('travelRoad');
+        if (Arr::get($travelRoad, 0)) {
+            $travelRoad['url'] = $travelRoad[0]->getUrl();
+            $travelRoad['file_name'] = $travelRoad[0]->getCustomProperty('name');
+        } else return null;
+        return $travelRoad ?? null;
+
+    }
+
+    public function getTravelMainImageAttribute()
+    {
+        $travelRoad = $this->getMedia('travelMainImage');
         if (Arr::get($travelRoad, 0)) {
             $travelRoad['url'] = $travelRoad[0]->getUrl();
             $travelRoad['file_name'] = $travelRoad[0]->getCustomProperty('name');
@@ -441,7 +449,6 @@ class Travel extends Model implements HasMedia
             ->useDisk(env('APP_STORAGE_DISK', 'local'))
             ->accepts('image/*')
             ->onlyKeepLatest(10);
-
     }
 
     /**

@@ -51,6 +51,7 @@ return [
     'addcomment' => 'Добавить комментарий',
     'reply' => 'Ответить',
     'uploadRoad' => 'Загрузить маршрут (.kml,.kmz или .gpx)',
+    'removeCover' => 'Удалить фотографию',
     'travelRoad' => 'Скачать маршрут',
     'Search countries' => 'Выберите страны',
 

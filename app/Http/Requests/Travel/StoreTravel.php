@@ -33,6 +33,8 @@ class StoreTravel extends FormRequest
             'slug' => ['nullable', 'string'],
             'meta_keywords' => ['nullable', 'string'],
             'meta_description' => ['nullable', 'string'],
+            //images
+            'pathToFile'=>['nullable','string']
         ];
     }
 

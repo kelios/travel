@@ -191,13 +191,21 @@
                 </div>
                 <hr class="mb-4">
                 <div class="form-group img__container text-center">
-                    <label for="avatar"> {{ trans('travels.uploadCover') }}</label>
-                    <div class="avatar-upload">
-                        @include('brackets/admin-ui::admin.includes.avatar-uploader', [
-                            'mediaCollection' => app(\App\Models\Travel::class)->getMediaCollection('travelMainImage'),
-                            'media' => isset($travel) ? $travel->getThumbs200ForCollection('travelMainImage') : null
-                        ])
-                    </div>
+                    <upload-image-drag
+                        :travelsrc="'{{isset($travel) ? $travel->travelImageThumbUrl : '/media/nomainfoto.png'}}'"
+                        :media="'{{ isset($travel) ? $travel->getThumbs200ForCollection('travelMainImage') : null}}'"
+                        :collection= '@json(app(\App\Models\Travel::class)->getMediaCollection('travelMainImage')->getName() )'
+                        :uploaded-images="{{ isset($travel) ? $travel->getThumbs200ForCollection('travelMainImage')->toJson() : '[]'}}"
+                        :max-number-of-files="{{app(\App\Models\Travel::class)->getMediaCollection('travelMainImage')->getMaxNumberOfFiles()
+                            ? app(\App\Models\Travel::class)->getMediaCollection('travelMainImage')->getMaxNumberOfFiles() : 20}}"
+                        :max-file-size-in-mb="{{app(\App\Models\Travel::class)->getMediaCollection('travelMainImage')->getMaxFileSize() ?
+                                                round((app(\App\Models\Travel::class)->getMediaCollection('travelMainImage')->getMaxFileSize()/1024/1024), 2)
+                                                : 20}}"
+                        :accepted-file-types="'{{ app(\App\Models\Travel::class)->getMediaCollection('travelMainImage')->getAcceptedFileTypes() ?implode(',', app(\App\Models\Travel::class)->getMediaCollection('travelMainImage')->getAcceptedFileTypes()) : null}}'"
+                        :url="'{{ route('brackets/media::upload-crop') }}'"
+                        ref="travelMainImage_uploadercrop"
+                    >
+                    </upload-image-drag>
                 </div>
                 <div class="form-group row ">
                     <label for="cities"> {{ trans('travels.selectedAddress') }}</label>
@@ -420,6 +428,8 @@
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
