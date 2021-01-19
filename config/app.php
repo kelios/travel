@@ -164,6 +164,7 @@ return [
         Khsing\World\WorldServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
+        Spatie\CookieConsent\CookieConsentServiceProvider::class,
         /*
          * Package Service Providers...
          */
