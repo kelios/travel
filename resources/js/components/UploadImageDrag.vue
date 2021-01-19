@@ -24,7 +24,7 @@
             <div class="single_image last_padding">
                 <img class="rounded-circle" :src="imgDataUrl" style="max-width:200px">
                 <div class="image_overlay">
-                    <a v-on:click="onFileDelete()" >{{ translate('travels.removeCover') }}</a>
+                    <a v-on:click="onFileDelete()">{{ translate('travels.removeCover') }}</a>
                 </div>
 
             </div>
@@ -72,6 +72,9 @@
         methods: {
             getFilesDrag() {
                 return this.mutableDragUploadedImages;
+            },
+            clearFilesDrag() {
+                this.mutableDragUploadedImages = [];
             },
             onFileDelete: function onFileDelete(file, error, xhr) {
                 this.mutableDragUploadedImages = this.uploadedImages;

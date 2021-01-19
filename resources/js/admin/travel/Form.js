@@ -22,7 +22,6 @@ Vue.component('travel-form', {
         ...mapGetters([
             'travelId'
         ]),
-
     },
 
     data: function () {
@@ -53,6 +52,7 @@ Vue.component('travel-form', {
             selectedCountriesCode: [],
             selectedCountiesIds: [],
             form: {
+                id:'',
                 name: '',
                 categories: [],
                 transports: [],
@@ -107,11 +107,15 @@ Vue.component('travel-form', {
                     }
                     if (_this3.$refs[collection + '_uploadercrop']) {
                         _this3.form[collection] = _this3.$refs[collection + '_uploadercrop'].getFilesDrag();
+                        _this3.$refs[collection + '_uploadercrop'].clearFilesDrag();
+
                     }
                 });
             }
             this.form['wysiwygMedia'] = this.wysiwygMedia;
-
+            if(this.travelId && !this.form['id']){
+                this.form['id'] = this.travelId;
+            }
             return this.form;
         },
         autoSave() {
@@ -120,13 +124,7 @@ Vue.component('travel-form', {
             }, 300000)
         },
         save(event) {
-            var form = document.getElementById('travelForm');
-            let formData = new FormData(form);
-            if (!this.form.id) {
-                this.form.id = this.travelId;
-            }
-            /** don't work autosave gallery not action**/
-            this.form.gallery = [];
+            this.getPostData();
             this.$store.dispatch('AUTO_SAVE_TRAVEL', this.form)
         },
         getCountries() {
