@@ -113,16 +113,21 @@ class Travel extends Model implements HasMedia
      */
     public function getTravelImageThumbUrlAttribute(): ?string
     {
+        $travelImageThumbUrl = '';
         $image = $this->getMedia('travelMainImage');
+
         if (Arr::get($image, 0)) {
             if (Storage::disk(env('APP_STORAGE_DISK', 'local'))->exists($image[0]->getPath())) {
                 Storage::disk(env('APP_STORAGE_DISK', 'local'))->delete($image[0]->getPath());
             }
+            $travelImageThumbUrl  = $image[0]->getUrl('thumb_200');
+        //   dd( $image[0]->getUrl('thumb_200'));
         }
-        $travelImageThumbUrl = $this->getFirstMediaUrl('travelMainImage', 'thumb_200');
-        if (!$travelImageThumbUrl) {
+      //  $travelImageThumbUrl = $this->getFirstMediaUrl('travelMainImage', 'thumb_200');
+
+    /*    if (!$travelImageThumbUrl) {
             $travelImageThumbUrl = Arr::get($this->categories, 0) ? $this->categories[0]->category_image_thumb_url : Config::get('constants.image.defaultCatImage');
-        }
+        }*/
         return $travelImageThumbUrl
             ?: Config::get('constants.image.defaultCatImage');
 

@@ -78,10 +78,10 @@
             },
             onFileDelete: function onFileDelete(file, error, xhr) {
                 this.mutableDragUploadedImages = this.uploadedImages;
-                if (this.mutableDragUploadedImages[0]) {
-                    this.mutableDragUploadedImages[0]['action'] = 'delete';
-                    this.imgDataUrl = '/media/nomainfoto.png';
-                }
+                this.mutableDragUploadedImages.forEach(function (field, key) {
+                        field['action'] = 'delete';
+                });
+                this.imgDataUrl = '/media/nomainfoto.png';
             },
             toggleShow() {
                 this.show = !this.show;

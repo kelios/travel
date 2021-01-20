@@ -80,7 +80,6 @@ class WysiwygUploadController extends Controller
             ]);
         }
 
-
         // generate path that it will be saved to
         $name = $temporaryFile->getClientOriginalName();
         $savedPath = Config::get('wysiwyg-media.media_folder') . '/' . time() . $name;
