@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "@babel/polyfill": "^7.12.1",
+        "babel-polyfill": "^6.26.0",
         "bootstrap-vue": "^2.19.0",
         "laravel-echo": "^1.9.0",
         "laravel-vue-pagination": "^2.3.1",
