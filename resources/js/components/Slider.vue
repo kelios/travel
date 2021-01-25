@@ -1,7 +1,9 @@
 <template>
 
 
-    <swiper class="swiper" :options="swiperOption">
+    <swiper class="swiper" :options="swiperOption" style=" max-height: 630px;
+                            min-height: 350px;
+                            ">
 
         <swiper-slide v-for="(slide, index) in slides" :key="index">
 
@@ -10,7 +12,7 @@
                 :src="slide.url"
                 :class="slide-index"
                 style=" max-height: 630px;
-                min-height: 350px;
+                            min-height: 350px;
                             display:block;
                             margin:auto;
                             "
