@@ -499,4 +499,13 @@ section.travel-section .travel-section-content {
 
 .swiper-wrapper {
     height: auto !important;
+    background: black;
+}
+
+.swiper-slide {
+    background: black;
+}
+
+.swiper-slide-active {
+    background: black;
 }

@@ -2,18 +2,26 @@
 
 
     <swiper class="swiper" :options="swiperOption">
+
         <swiper-slide v-for="(slide, index) in slides" :key="index">
+
             <img
                 :srcset="slide.srcset "
                 :src="slide.url"
                 :class="slide-index"
-                style="max-height: 600px"
+                style=" max-height: 630px;
+                            display:block;
+                            margin:auto;
+                            "
             >
+
         </swiper-slide>
+
 
         <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
         <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
         <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+
     </swiper>
 
 
@@ -44,8 +52,5 @@
 
 <style lang="scss" scoped>
 
-    .swiper-container.swiper-wrapper {
-        height: inherit !important;
-    }
 </style>
 

@@ -5,7 +5,7 @@
         class="travelshowlist"
     >
         <section class="travel-section gallery section--demo-2" id="gallery" v-if="travel.gallery">
-            <div class="container">
+            <div >
                 <slider :slides='travel.gallery'></slider>
             </div>
 
