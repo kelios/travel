@@ -10,6 +10,7 @@
                 :src="slide.url"
                 :class="slide-index"
                 style=" max-height: 630px;
+                min-height: 350px;
                             display:block;
                             margin:auto;
                             "
