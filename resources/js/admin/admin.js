@@ -85,7 +85,7 @@ Vue.component('passport-authorized-clients', require('../components/passport/Aut
 Vue.component('passport-personal-access-tokens', require('../components/passport/PersonalAccessTokens.vue'));
 Vue.prototype.translate = require('./../VueTranslation/Translation').default.translate;
 if (document.head.querySelector("meta[name='user-id']")) {
-    Vue.prototype.authUserId = document.head.querySelector("meta[name='user-id']").content;
+    Vue.prototype.authUserId = document.head.querySelector("meta[name='user-id']").content || '';
     Vue.prototype.authUserName = document.head.querySelector("meta[name='user-name']").content;
     Vue.prototype.authUserAvatar = document.head.querySelector("meta[name='user-avatar-thumb-url']").content;
 }

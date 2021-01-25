@@ -123,7 +123,7 @@
 
     export default {
         name: 'TravelShowList',
-        props: ['travel_id', 'where'],
+        props: ['travel_id', 'where','authUserId'],
         data() {
             return {}
         },
