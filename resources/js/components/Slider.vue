@@ -1,7 +1,8 @@
 <template>
 
 
-    <swiper class="swiper" :options="swiperOption" style=" max-height: 630px;
+    <swiper class="swiper" :options="swiperOption" style="
+                            max-height: 630px;
                             min-height: 350px;
                             ">
 

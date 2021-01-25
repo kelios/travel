@@ -504,6 +504,7 @@ section.travel-section .travel-section-content {
 
 .swiper-slide {
     background: black;
+    height: auto;
 }
 
 .swiper-slide-active {
