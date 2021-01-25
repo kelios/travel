@@ -1,26 +1,51 @@
 <template>
 
-    <agile :autoplay-speed="15000" :speed="600">
-        <img v-for="(slide, index) in slides" :key="index" :src="slide.url" class="slide"/>
-        <template slot="prevButton">
-            <i class="fas fa-chevron-left"></i>
-        </template>
-        <template slot="nextButton">
-            <i class="fas fa-chevron-right"></i>
-        </template>
-    </agile>
+
+    <swiper class="swiper" :options="swiperOption">
+        <swiper-slide v-for="(slide, index) in slides" :key="index">
+            <img
+                :srcset="slide.srcset "
+                :src="slide.url"
+                :class="slide-index"
+                style="max-height: 600px"
+            >
+        </swiper-slide>
+
+        <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
+        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+    </swiper>
+
 
 </template>
 
-
 <script>
-    import {VueAgile} from 'vue-agile'
-
     export default {
-        components: {
-            VueAgile
+        data() {
+            return {
+                swiperOption: {
+                    spaceBetween: 30,
+                    effect: 'fade',
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev'
+                    }
+                }
+            }
         },
-        props: ['slides'],
 
+        props: ['slides'],
     }
 </script>
+
+<style lang="scss" scoped>
+
+    .swiper-container.swiper-wrapper {
+        height: inherit !important;
+    }
+</style>
+

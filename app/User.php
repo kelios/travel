@@ -91,8 +91,8 @@ class User extends Authenticatable implements HasMedia
 
         $image = $this->getMedia('userAvatar');
         if (Arr::get($image, 0)) {
-            if (Storage::disk(env('APP_STORAGE_DISK', 'local'))->exists($image[0]->getPath())) {
-                Storage::disk(env('APP_STORAGE_DISK', 'local'))->delete($image[0]->getPath());
+            if (Storage::disk(env('APP_STORAGE_DISK', 'public'))->exists($image[0]->getPath())) {
+                Storage::disk(env('APP_STORAGE_DISK', 'public'))->delete($image[0]->getPath());
             }
         }
 
@@ -105,7 +105,7 @@ class User extends Authenticatable implements HasMedia
     {
         $this->addMediaCollection('userAvatar')
             ->maxFilesize(20 * 1024 * 1024)
-            ->useDisk(env('APP_STORAGE_DISK', 'local'))
+            ->useDisk(env('APP_STORAGE_DISK', 'public'))
             ->singleFile()
             ->accepts('image/*');
     }

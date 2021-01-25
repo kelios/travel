@@ -17,6 +17,9 @@ import {ToggleButton} from 'vue-js-toggle-button'
 import './app-components/bootstrap';
 import './index';
 import VueResource from "vue-resource";
+import ResponsiveImage from 'vue-media-library-image';
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
 
 import 'craftable/dist/ui';
 
@@ -39,8 +42,12 @@ Vue.use(VueQuillEditor);
 Vue.use(Notifications);
 Vue.use(VueCookie);
 Vue.use(BootstrapVue);
-Vue.use(VueAgile)
-Vue.component('ToggleButton', ToggleButton)
+Vue.use(VueAgile);
+Vue.component('ToggleButton', ToggleButton);
+
+Vue.use(VueAwesomeSwiper);
+
+Vue.use(ResponsiveImage);
 
 Vue.component('search-me-travel', require('../components/SearchMeTravel.vue').default);
 Vue.component('search-extended-travel', require('../components/SearchExtendedTravel.vue').default);

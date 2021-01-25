@@ -72,6 +72,7 @@ class WysiwygUploadController extends Controller
      */
     public function uploads3(Request $request)
     {
+
         // get image from request and check validity
         $temporaryFile = $request->file('fileToUpload');
         if (!$temporaryFile->isFile() || !in_array($temporaryFile->getMimeType(), ['image/png', 'image/jpeg', 'image/gif', 'image/svg+xml'])) {
@@ -83,7 +84,7 @@ class WysiwygUploadController extends Controller
         // generate path that it will be saved to
         $name = $temporaryFile->getClientOriginalName();
         $savedPath = Config::get('wysiwyg-media.media_folder') . '/' . time() . $name;
-        $s3 = Storage::disk(env('APP_STORAGE_DISK', 'local'));
+        $s3 = Storage::disk(env('APP_STORAGE_DISK', 'public'));
 
         // create directory in which we will be uploading into
         if (!File::isDirectory(Config::get('wysiwyg-media.media_folder'))) {
@@ -104,9 +105,10 @@ class WysiwygUploadController extends Controller
         // OptimizerChainFactory::create()->optimize(Storage::disk('s3')->url($savedPath));
         // create related model
         $wysiwygMedia = WysiwygMedia::create(['file_path' => $savedPath]);
+
         // return image's path to use in wysiwyg
         return response()->json([
-            'file' => Storage::disk(env('APP_STORAGE_DISK', 'local'))->url($savedPath),
+            'file' => Storage::disk(env('APP_STORAGE_DISK', 'public'))->url($savedPath),
             'mediaId' => $wysiwygMedia->id,
             'success' => true
         ]);

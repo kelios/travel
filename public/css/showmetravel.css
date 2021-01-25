@@ -190,7 +190,12 @@ section.travel-section .travel-section-content {
 }
 
 @media screen and (max-width: 600px) {
-    .gallery .fa-chevron-right:before {
+    .gallery .swiper-button-next {
+        visibility: hidden;
+        display: none;
+    }
+
+    .gallery .swiper-button-prev {
         visibility: hidden;
         display: none;
     }
@@ -209,6 +214,11 @@ section.travel-section .travel-section-content {
     .card-body {
         flex: 1 1 auto;
         padding: .25rem !important;
+    }
+
+    .gallery .fa-chevron-right:before {
+        visibility: hidden;
+        display: none;
     }
 }
 
@@ -485,4 +495,8 @@ section.travel-section .travel-section-content {
 
 .tab-pane {
     background-color: #6aaaaa !important;
+}
+
+.swiper-wrapper {
+    height: auto !important;
 }

@@ -76,7 +76,7 @@
                 </div>
             </nav>
 
-            <travel-show-list :where='@json($where)' :travel_id='@json($travel->id)'></travel-show-list>
+                <travel-show-list :where='@json($where)' :travel_id='@json($travel->id)'></travel-show-list>
         </div>
     </div>
 

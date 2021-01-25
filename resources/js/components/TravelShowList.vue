@@ -5,13 +5,10 @@
         class="travelshowlist"
     >
         <section class="travel-section gallery section--demo-2" id="gallery" v-if="travel.gallery">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <slider :slides='travel.gallery'></slider>
-                    </div>
-                </div>
+            <div class="container">
+                <slider :slides='travel.gallery'></slider>
             </div>
+
         </section>
 
         <section class="travel-section description" id="description" v-if="travel.description">

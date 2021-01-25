@@ -117,17 +117,11 @@ class Travel extends Model implements HasMedia
         $image = $this->getMedia('travelMainImage');
 
         if (Arr::get($image, 0)) {
-            if (Storage::disk(env('APP_STORAGE_DISK', 'local'))->exists($image[0]->getPath())) {
-                Storage::disk(env('APP_STORAGE_DISK', 'local'))->delete($image[0]->getPath());
+            if (Storage::disk(env('APP_STORAGE_DISK', 'public'))->exists($image[0]->getPath())) {
+                Storage::disk(env('APP_STORAGE_DISK', 'public'))->delete($image[0]->getPath());
             }
-            $travelImageThumbUrl  = $image[0]->getUrl('thumb_200');
-        //   dd( $image[0]->getUrl('thumb_200'));
+            $travelImageThumbUrl = $image[0]->getUrl('thumb_200');
         }
-      //  $travelImageThumbUrl = $this->getFirstMediaUrl('travelMainImage', 'thumb_200');
-
-    /*    if (!$travelImageThumbUrl) {
-            $travelImageThumbUrl = Arr::get($this->categories, 0) ? $this->categories[0]->category_image_thumb_url : Config::get('constants.image.defaultCatImage');
-        }*/
         return $travelImageThumbUrl
             ?: Config::get('constants.image.defaultCatImage');
 
@@ -137,9 +131,10 @@ class Travel extends Model implements HasMedia
     {
         $images = $this->getMedia('gallery');
         foreach ($images as $key => $image) {
-            if (Storage::disk(env('APP_STORAGE_DISK', 'local'))->exists($image->getPath())) {
-                Storage::disk(env('APP_STORAGE_DISK', 'local'))->delete($image->getPath());
+            if (Storage::disk(env('APP_STORAGE_DISK', 'public'))->exists($image->getPath())) {
+                Storage::disk(env('APP_STORAGE_DISK', 'public'))->delete($image->getPath());
             }
+            $res[$key]['srcset'] = $image->getSrcset('detail_hd');
             $res[$key]['url'] = $image->getUrl('detail_hd');
             $res[$key]['title'] = $this->name;
         }
@@ -441,17 +436,18 @@ class Travel extends Model implements HasMedia
     {
         $this->addMediaCollection('travelMainImage')
             ->maxFilesize(20 * 1024 * 1024)
-            ->useDisk(env('APP_STORAGE_DISK', 'local'))
+            ->useDisk(env('APP_STORAGE_DISK', 'public'))
             ->accepts('image/*')
             ->singleFile();
 
         $this->addMediaCollection('travelRoad')
+            ->useDisk(env('APP_STORAGE_DISK', 'public'))
             ->singleFile();
 
         $this->addMediaCollection('gallery')
             ->maxNumberOfFiles(10)
             ->maxFilesize(20 * 1024 * 1024)
-            ->useDisk(env('APP_STORAGE_DISK', 'local'))
+            ->useDisk(env('APP_STORAGE_DISK', 'public'))
             ->accepts('image/*')
             ->onlyKeepLatest(10);
     }
@@ -464,13 +460,16 @@ class Travel extends Model implements HasMedia
      */
     public function registerMediaConversions(Media $media = null): void
     {
-        $this->autoRegisterThumb200();
-        $this->addMediaConversion('detail_hd')
-            ->width(1024)
-            ->optimize()
-            ->performOnCollections('gallery')
-            ->nonQueued();
-
+          $this->autoRegisterThumb200();
+          $this->addMediaConversion('detail_hd')
+              ->quality(80)
+              ->width(1080)
+              ->height(1080)
+              ->fit('crop', 1080, 1080)
+              ->optimize()
+              ->withResponsiveImages()
+              ->performOnCollections('gallery')
+              ->nonQueued();
     }
 
     /**

@@ -340,6 +340,7 @@ class TravelsController extends Controller
         SEOMeta::setDescription($travel->meta_description);
         SEOMeta::addMeta('travel:published_time', $travel->created_at->toW3CString(), 'property');
         SEOMeta::addKeyword($travel->meta_keywords);
+
         $travelMenu = [
             'gallery' => (boolean)$travel['gallery'],
             'description' => (boolean)$travel['description'],
