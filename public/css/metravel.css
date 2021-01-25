@@ -1,0 +1,475 @@
+body {
+    margin: 0;
+    font-family: 'Bad Script', cursive !important;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.6;
+    color: #212529;
+    background-color: #ffffff !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Bad Script', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+}
+
+a {
+    color: #4b7c6f;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+label {
+    font-family: 'Jost', sans-serif;
+    color: #222;
+}
+
+.label-white label {
+    color: #ffffff;
+}
+
+.logoimg {
+    height: 30px;
+}
+
+.card-header {
+    background: #ff9f5a !important;
+    color: #222;
+}
+
+.card-footer {
+    background: #ff9f5a !important;
+    color: #222;
+}
+
+.card-body.blue {
+    background: #6aaaaa !important;
+}
+
+.btn-primary, .btn-info {
+    background-color: #6aaaaa;
+    border-color: #6aaaaa;
+    color: #222;
+}
+
+small {
+    color: #222 !important;
+}
+
+.multiselect__tag {
+    background: #ff9f5a !important;
+    color: #222 !important;
+}
+
+.multiselect__tag-icon {
+    background: #ff9f5a !important;
+    color: #222 !important;
+}
+
+.multiselect__tag-icon:after {
+    color: #222 !important;
+}
+
+
+.fixed-top-2 {
+    margin-top: 3.4rem;
+}
+
+.fixed-left-2 {
+    margin-left: 17rem;
+}
+
+.tab-content.showTravel {
+    border: none !important;
+}
+
+/*!
+ * Start Bootstrap - Landing Page v5.0.7 (https://startbootstrap.com/template-overviews/landing-page)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-landing-page/blob/master/LICENSE)
+ */
+
+
+.home-quote {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+}
+
+.home-quote blockquote {
+    font-family: 'Bad Script', cursive;
+    font-size: 25px;
+    font-style: italic;
+    max-width: 100%;
+    margin: 0.25em 0;
+    padding: 0.25em 0 0.35em 40px;
+    line-height: 1.45;
+    position: relative;
+    color: #f1f5ee;
+}
+
+.home-quote blockquote:before {
+    display: block;
+    content: "\201C";
+    font-size: 70px;
+    position: absolute;
+    left: -15px;
+    top: -20px;
+    color: #ffffff;
+}
+
+.home-quote blockquote:after {
+    display: block;
+    content: "\201d";
+    font-size: 70px;
+    position: absolute;
+    right: -15px;
+    color: #ffffff;
+}
+
+.home-quote blockquote cite {
+    color: #f1f5ee;
+    font-size: 18px;
+    display: block;
+    margin-top: 10px;
+}
+
+.home-quote blockquote cite:before {
+    content: "\2014\2009";
+}
+
+.reg-header {
+    font-family: Georgia, serif;
+    font-size: 25px;
+    font-style: italic;
+    color: #f1f5ee;
+}
+
+.reg-text {
+    font-family: Georgia, serif;
+    font-size: 13px;
+    color: #f1f5ee;
+}
+
+header.masthead {
+    position: relative;
+    background-color: #343a40;
+    background: url("/media/slider/about.jpg") no-repeat center center;
+    background-size: cover;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+}
+
+header.masthead .overlay {
+    position: absolute;
+    background-color: #212529;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+}
+
+header.masthead h1 {
+    font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+    header.masthead {
+        padding-top: 12rem;
+        padding-bottom: 12rem;
+    }
+
+    header.masthead h1 {
+        font-size: 3rem;
+    }
+}
+
+.showcase .showcase-text {
+    padding: 3rem;
+}
+
+.showcase .showcase-img {
+    min-height: 30rem;
+    background: no-repeat center right;
+    background-size: contain;
+}
+
+@media (min-width: 768px) {
+    .showcase .showcase-text {
+        padding: 7rem;
+    }
+}
+
+.features-icons {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+.features-icons .features-icons-item {
+    max-width: 20rem;
+}
+
+.features-icons .features-icons-item .features-icons-icon {
+    height: 7rem;
+}
+
+.features-icons .features-icons-item .features-icons-icon i {
+    font-size: 4.5rem;
+}
+
+.features-icons .features-icons-item:hover .features-icons-icon i {
+    font-size: 5rem;
+}
+
+.testimonials {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.testimonials .testimonial-item {
+    max-width: 18rem;
+}
+
+.testimonials .testimonial-item img {
+    max-width: 12rem;
+    box-shadow: 0px 5px 5px 0px #adb5bd;
+}
+
+.call-to-action {
+    position: relative;
+    background-color: #343a40;
+    background: url("/media/slider/about.jpg") no-repeat center center;
+    background-size: cover;
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+.call-to-action .overlay {
+    position: absolute;
+    background-color: #212529;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+}
+
+footer.footer {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.perekluchatel {
+    position: relative;
+    display: inline-block;
+    width: 98px;
+    height: 49px;
+}
+
+.perekluchatel input {
+    display: none;
+}
+
+.sumblavam {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #2f2c2c;
+    transition: .4s;
+    border: 1px solid #b5afaf;;
+    box-shadow: 0px 1px 5px 1px rgba(179, 173, 173, 0.69), 0px 3px 13px 4px rgba(255, 243, 243, 0.95);
+}
+
+.sumblavam:before {
+    position: absolute;
+    content: "";
+    height: 40px;
+    width: 38px;
+    left: 3px;
+    bottom: 3.8px;
+    background-color: #e7ebec;
+    transition: .4s;
+}
+
+input:checked + .sumblavam {
+    background-color: #10c110;
+}
+
+input:focus + .sumblavam {
+    box-shadow: 0 0 1px #00FF00;
+}
+
+input:checked + .sumblavam:before {
+    transform: translateX(52px);
+}
+
+.sumblavam.alemen {
+    border-radius: 34px;
+}
+
+.sumblavam.alemen:before {
+    border-radius: 50%;
+}
+
+.list-inline {
+    padding-left: 0;
+    list-style: none;
+}
+
+.list-inline-item {
+    display: inline-block;
+}
+
+.list-inline-item:not(:last-child) {
+    margin-right: 0.5rem;
+}
+
+.initialism {
+    font-size: 90%;
+    text-transform: uppercase;
+}
+
+.multiselect__element {
+    font-size: 14px;
+}
+
+.page-link {
+    color: #222;
+}
+
+.pagination li.active a {
+    color: #222 !important;
+    background-color: #ff9f5a !important;
+}
+
+.card-header.blue {
+    background-color: #e5f1f1 !important;
+}
+
+.sidebar {
+    margin-left: 0 !important;
+}
+
+.b-sidebar.topmetravel {
+    z-index: 40;
+    padding-right: 1rem;
+    width: 15rem;
+}
+
+.zindex2 {
+    z-index: 2 !important;
+}
+
+.paddingtop3 {
+    padding-top: 7rem;
+    z-index: 40;
+}
+
+@media (max-width: 600px) {
+    .b-sidebar.topmetravel {
+        width: 100% !important;
+    }
+
+    .showForMenu {
+        display: block !important;
+    }
+}
+
+.page-item.pagination-page-nav.active {
+    z-index: 0;
+}
+
+.showForMenu {
+    display: none;
+}
+
+.scroll {
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+.padding30 {
+    padding: 30px;
+}
+
+.dropzone .dz-preview .dz-image {
+    z-index: 1 !important;
+}
+
+.vue-js-switch .v-switch-core .v-switch-button[data-v-25adc6c0] {
+    z-index: 1 !important;
+}
+
+.text-orange {
+    color: #ff9f5a !important
+}
+
+.textimg {
+    cursor: pointer;
+}
+
+.single_image {
+    margin-right: 3px;
+    position: relative;
+    transition: all 1s;
+}
+
+.single_image img {
+    width: 100%;
+
+}
+
+.single_image:hover div.image_overlay {
+    opacity: 1;
+}
+
+.image_overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(106, 170, 170, .9);
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transition: all 1s;
+
+}
+
+.image_overlay a {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: grey;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: center;
+}
+
+.js-cookie-consent {
+    position: relative;
+    background: #6aaaaa;
+    text-align: center;
+    padding: 10px;
+}
+.js-cookie-consent-agree{
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
