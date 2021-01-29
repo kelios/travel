@@ -6,6 +6,7 @@
 .env
 .env_uploads3local
 .env.backup
+.env_prod
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
