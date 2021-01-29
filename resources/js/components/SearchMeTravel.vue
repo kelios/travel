@@ -5,23 +5,30 @@
                    aria-label="Travel title or description"
                    aria-describedby="basic-addon2">
             <div class="input-group-append">
-               <!-- <button class="btn btn-primary" @click="searchTravels" @keyup.enter="searchTravels" type="button">
-                    {{translate('main.search')}}
-                </button>
-                -->
+                <!-- <button class="btn btn-primary" @click="searchTravels" @keyup.enter="searchTravels" type="button">
+                     {{translate('main.search')}}
+                 </button>
+                 -->
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+
     export default {
         name: "SearchMeTravel",
-        props: ['travels','where'],
+        props: ['travels', 'where'],
         data: function () {
             return {
                 query: '',
             }
+        },
+        computed: {
+            ...mapGetters([
+                'perPage'
+            ])
         },
         watch: {
             query: {
@@ -33,7 +40,11 @@
         methods: {
             searchTravels() {
                 this.$store.commit('SET_QUERY', this.query)
-                this.$store.dispatch('SEARCH_TRAVELS', {'query':this.query,'where':this.where})
+                this.$store.dispatch('SEARCH_TRAVELS', {
+                    'query': this.query,
+                    'perPage': this.perPage,
+                    'where': this.where
+                })
             }
         }
 

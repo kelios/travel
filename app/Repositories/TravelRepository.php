@@ -40,10 +40,9 @@ class TravelRepository implements TravelRepositoryInterface
      * @param array $where
      * @return mixed
      */
-    public function getList($where = [], $search = '')
+    public function getList($perPage, $where = [], $search = '')
     {
         $travels = $this->travel;
-
         if (Arr::get($where, 'user_id')) {
             $for_user = Arr::get($where, 'user_id');
             unset($where['user_id']);
@@ -64,18 +63,19 @@ class TravelRepository implements TravelRepositoryInterface
                     ->orWhere('minus', 'like', '%' . $search . '%');
             });
         }
+
         return $travels
             ->filter($where)
             // ->where($where)
             ->orderBy('created_at', 'desc')
-            ->paginate(Config::get('constants.showListTravel.count'));
+            ->paginate($perPage);
     }
 
     /**
      * @param array $where
      * @return mixed
      */
-    public function getListBy($where = [], $search = '')
+    public function getListBy($perPage, $where = [], $search = '')
     {
         $travels = $this->travel;
         if (Arr::get($where, 'user_id')) {
@@ -98,7 +98,7 @@ class TravelRepository implements TravelRepositoryInterface
             ->has('countries', '=', '1')
             ->filter($where)
             ->orderBy('created_at', 'desc')
-            ->paginate(Config::get('constants.showListTravel.count'));
+            ->paginate($perPage);
     }
 
     /**
@@ -115,7 +115,7 @@ class TravelRepository implements TravelRepositoryInterface
      * @param array $where
      * @return mixed
      */
-    public function search($search, $where = [])
+    public function search($perPage, $search, $where = [])
     {
         $searchTravel = $this->travel;
         if (Arr::get($where, 'user_id')) {
@@ -137,7 +137,7 @@ class TravelRepository implements TravelRepositoryInterface
                 ->orWhere('minus', 'like', '%' . $search . '%');
         })
             ->orderBy('created_at', 'desc')
-            ->paginate(Config::get('constants.showListTravel.count'));
+            ->paginate($perPage);
     }
 
     /**
@@ -145,7 +145,7 @@ class TravelRepository implements TravelRepositoryInterface
      * @param array $where
      * @return mixed
      */
-    public function searchExtended($search, $where = [])
+    public function searchExtended($perPage, $search, $where = [])
     {
         $searchTravel = $this->travel;
         if (Arr::get($where, 'user_id')) {
@@ -158,7 +158,8 @@ class TravelRepository implements TravelRepositoryInterface
         if ($where) {
             $searchTravel = $searchTravel->filter($where);
         }
-        return $searchTravel->orderBy('created_at', 'desc')->paginate(Config::get('constants.showListTravel.count'));
+        return $searchTravel->orderBy('created_at', 'desc')
+            ->paginate($perPage);
     }
 
     /**

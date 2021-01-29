@@ -171,7 +171,8 @@
         },
         computed: {
             ...mapGetters([
-                'filtersTravel'
+                'filtersTravel',
+                'perPage'
             ])
         },
 
@@ -222,7 +223,10 @@
 
                 this.where['year'] = this.year;
 
-                this.$store.dispatch('SEARCH_EXTENDED_TRAVELS', {'query': this.query, 'where': this.where})
+                this.$store.dispatch('SEARCH_EXTENDED_TRAVELS', {
+                    'query': this.query,
+                    'perPage': this.perPage, 'where': this.where
+                })
             }
         }
 

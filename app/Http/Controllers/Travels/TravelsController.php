@@ -22,6 +22,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use Illuminate\View\View;
 use App\Http\Requests\Travel\IndexTravel;
@@ -150,12 +151,16 @@ class TravelsController extends Controller
         if ($request->query('query')) {
             $query = $request->query('query');
         }
+        $perPage = Config::get('constants.showListTravel.count');
+        if ($request->query('perPage')) {
+            $perPage = json_decode($request->query('perPage'), true);
+        }
         if (Arr::get($where, 'belTravels')) {
             unset($where['belTravels']);
-            $travels = $this->travelRepository->getListBy($where, $query);
+            $travels = $this->travelRepository->getListBy($perPage, $where, $query);
 
         } else {
-            $travels = $this->travelRepository->getList($where, $query);
+            $travels = $this->travelRepository->getList($perPage, $where, $query);
         }
         $travels->getCollection()->transform(function ($value) {
             return $value->only([
@@ -212,7 +217,11 @@ class TravelsController extends Controller
         if ($request->query('where')) {
             $where = json_decode($request->query('where'), true);
         }
-        $travels = $this->travelRepository->search($query, $where);
+        $perPage = Config::get('constants.showListTravel.count');
+        if ($request->query('perPage')) {
+            $perPage = json_decode($request->query('perPage'), true);
+        }
+        $travels = $this->travelRepository->search($perPage, $query, $where);
         //broadcast search results with Pusher channels
         event(new SearchEvent($travels, [], $query));
         return response()->json("ok");
@@ -229,7 +238,12 @@ class TravelsController extends Controller
         if ($request->query('where')) {
             $where = json_decode($request->query('where'), true);
         }
-        $travels = $this->travelRepository->searchExtended($query, $where);
+        $perPage = Config::get('constants.showListTravel.count');
+        if ($request->query('perPage')) {
+            $perPage = json_decode($request->query('perPage'), true);
+        }
+
+        $travels = $this->travelRepository->searchExtended($perPage, $query, $where);
         $travels->appends($where)->links();
         //broadcast search results with Pusher channels
         event(new SearchEvent($travels, $where));

@@ -3,6 +3,7 @@ let actions = {
         let params = {
             query: data.query,
             where: data.where,
+            perPage: data.perPage,
         };
         axios.get(`/api/search`, {params})
             .then(res => {
@@ -16,6 +17,7 @@ let actions = {
     GET_TRAVELS({commit}, data) {
         let params = {
             page: data.page,
+            perPage: data.perPage,
             where: data.where,
             query: data.query,
         };
@@ -34,6 +36,7 @@ let actions = {
         let params = {
             query: data.query,
             where: data.where,
+            perPage: data.perPage,
         };
         axios.get(`/api/searchextended`, {params})
             .then(res => {

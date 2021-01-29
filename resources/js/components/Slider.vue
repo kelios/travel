@@ -2,8 +2,7 @@
 
 
     <swiper class="swiper" :options="swiperOption" style="
-                            max-height: 630px;
-                            min-height: 350px;
+                            max-height: 650px;
                             ">
 
         <swiper-slide v-for="(slide, index) in slides" :key="index">
@@ -12,8 +11,7 @@
                 :srcset="slide.srcset "
                 :src="slide.url"
                 :class="slide-index"
-                style=" max-height: 630px;
-                            min-height: 350px;
+                style=" max-height: 650px;
                             display:block;
                             margin:auto;
                             "

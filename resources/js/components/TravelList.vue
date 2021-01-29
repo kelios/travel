@@ -1,7 +1,16 @@
 <template>
     <div class="container">
-        <pagination :data="travels" :limit="5" align="center" size="small"
-                    @pagination-change-page="getResults"></pagination>
+        <div class="row pb-2" v-if="groupedTravels.length">
+            <div class="col-2">
+                <select-per-page @getRes="getResults"></select-per-page>
+            </div>
+            <div class="col-10">
+                <pagination :data="travels" :limit="5" align="right" size="small"
+                            @pagination-change-page="getResults"></pagination>
+            </div>
+
+        </div>
+
         <div class="row" v-for="travelsEvent in groupedTravels">
             <div class="col-md-6 col-sm-6" v-for="travel in travelsEvent">
                 <travel-card class="animated fadeIn" :readonly="readonly" :travel="travel"
@@ -9,8 +18,16 @@
             </div>
             <div class="col w-100"></div>
         </div>
-        <pagination :data="travels" :limit="6" align="center" size="small"
-                    @pagination-change-page="getResults"></pagination>
+        <div class="row pb-2" v-if="groupedTravels.length">
+            <div class="col-2">
+                <select-per-page @getRes="getResults"></select-per-page>
+            </div>
+            <div class="col-10" >
+                <pagination :data="travels" :limit="6" align="right" size="small"
+                            @pagination-change-page="getResults"></pagination>
+
+            </div>
+        </div>
     </div>
 </template>
 
@@ -21,7 +38,7 @@
 
     export default {
         name: 'TravelList',
-        props: ['readonly','filter'],
+        props: ['readonly', 'filter'],
         components: {
             travel,
             pagination
@@ -41,7 +58,8 @@
             ...mapGetters([
                 'travels',
                 'where',
-                'query'
+                'query',
+                'perPage'
             ])
         },
         methods: {
@@ -49,7 +67,12 @@
                 this.travels.data = this.travels.data.filter(travel => travel.id !== id)
             },
             getResults(page = 1) {
-                this.$store.dispatch('GET_TRAVELS', {'page': page, 'query':this.query, 'where': Object.assign(this.filter,this.where)});
+                this.$store.dispatch('GET_TRAVELS', {
+                    'page': page,
+                    'query': this.query,
+                    'where': Object.assign(this.filter, this.where),
+                    'perPage':this.perPage
+                });
             }
         },
     }
