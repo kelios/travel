@@ -25,3 +25,4 @@ public/js
 public/vendor
 public/css/
 /public/sitemap.xml
+/composer.lock
