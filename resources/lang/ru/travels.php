@@ -43,6 +43,7 @@ return [
     'countries' => 'Страны',
     'Select countries' => 'Страны которые вы посетили',
     'uploadCover' => 'Загрузите главное фото вашего путешествия',
+    'uploadImage' => 'Загрузите фото',
     'gallery' => 'Галерея',
     'map' => 'Карта',
     'max_number_of_files' => 'Максимальное количество фото :maxNumberOfFiles',

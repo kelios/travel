@@ -4,6 +4,7 @@
 /storage/*.key
 /vendor
 .env
+.env_uploads3local
 .env.backup
 .phpunit.result.cache
 Homestead.json
@@ -22,3 +23,4 @@ public/images/vendor
 public/js
 public/vendor
 public/css/
+/public/sitemap.xml
