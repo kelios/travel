@@ -217,6 +217,12 @@
                                        v-on:click="removeMarker(travelAddress.address[index],meCoords,index)">
                                         <i class="fa fa-trash-o"></i>
                                     </a>
+                                    <a class="btn btn-sm btn-warning"
+                                       title="{{trans('travels.uploadImage')}}"
+                                       v-on:click="uploadImage(travelAddress.address[index],meCoords,index)">
+                                        <i class="fa fa-upload"></i>
+                                    </a>
+
                                 </li>
                             </ul>
                         </li>
