@@ -42,6 +42,30 @@
                     </div>
                 </div>
 
+                <div class="d-flex justify-content-xl-center">
+
+                    <ShareNetwork
+                        network="vk"
+                        :url="travel.url"
+                        :title="travel.name"
+                        :description="travel.description"
+                        :media="travel.travel_image_thumb_url"
+                    >
+                        <i class="fa fa-vk"></i>
+                    </ShareNetwork>
+
+                    <ShareNetwork
+                        network="facebook"
+                        :url="travel.url"
+                        :title="travel.name"
+                        :description="travel.description"
+                        :media="travel.travel_image_thumb_url"
+                    >
+                        <i class="fa fa-share fa-facebook fa-x fa-fw"></i>
+                    </ShareNetwork>
+
+                </div>
+
             </div>
         </div>
 

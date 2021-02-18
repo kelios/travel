@@ -20,6 +20,7 @@ import VueResource from "vue-resource";
 import ResponsiveImage from 'vue-media-library-image';
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
+import VueSocialSharing from 'vue-social-sharing'
 
 import 'craftable/dist/ui';
 
@@ -46,6 +47,7 @@ Vue.use(VueAgile);
 Vue.component('ToggleButton', ToggleButton);
 
 Vue.use(VueAwesomeSwiper);
+Vue.use(VueSocialSharing);
 
 Vue.use(ResponsiveImage);
 
