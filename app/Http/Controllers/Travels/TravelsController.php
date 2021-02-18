@@ -596,7 +596,7 @@ class TravelsController extends Controller
             } else {
                 $travel = $this->travelRepository;
             }
-            $this->saveTravel($sanitized, $relations, $travelAddr, $travel, $request);
+            $this->saveTravel($sanitized, $relations, $travelAddr, $travel);
             if (!$travelId) {
                 $travelId = $travel->travel->id;
                 $travelAddressIds = $travel->travel->travelAddressIds;
@@ -614,7 +614,7 @@ class TravelsController extends Controller
      * @param $relations
      * @param $travel
      */
-    public function saveTravel($sanitized, $relations, $travelAddr, $travel, $request)
+    public function saveTravel($sanitized, $relations, $travelAddr, $travel)
     {
         // Store the Travel
         $travel->fill($sanitized);
@@ -632,7 +632,7 @@ class TravelsController extends Controller
         }
 
         $ids = Arr::pluck($travelAddr, 'id');
-        foreach ($travel->travelAddress as $oldAddr) {
+        foreach ($travel->travelAddress() as $oldAddr) {
             if (!in_array($oldAddr->id, $ids)) {
                 $currentTravelAddr = $travel->travelAddress()->findOrFail($oldAddr->id);
                 $currentTravelAddr->delete();
