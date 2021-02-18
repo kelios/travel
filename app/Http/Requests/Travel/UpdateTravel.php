@@ -71,14 +71,29 @@ class UpdateTravel extends FormRequest
     {
         $data = [];
         $travelAddress = $this->get('travelAddressAdress');
+        $travelAddressIds = $this->get('travelAddressIds');
         $travelAddressCountry = $this->get('travelAddressCountry');
         $travelAddressCity = $this->get('travelAddressCity');
         $coordsMeTravel = $this->get('coordsMeTravel');
+        $travelImageAddress = $this->get('travelImageAddress');
         foreach ($travelAddress as $key => $value) {
+            $data[$key]['id'] = Arr::get($travelAddressIds, $key, '');
             $data[$key]['address'] = $value;
             $data[$key]['coord'] = implode(',', Arr::get($coordsMeTravel, $key, []));
             $data[$key]['city_id'] = Arr::get($travelAddressCity, $key) != '-1' ? Arr::get($travelAddressCity, $key) : null;
             $data[$key]['country_id'] = Arr::get($travelAddressCountry, $key);
+            $data[$key]['travelAddrMedia'] = Arr::get($travelImageAddress, $key);
+        }
+        return $data;
+    }
+
+    public function getRelationMedia()
+    {
+        $data = [];
+        $travelImageAddress = $this->get('travelImageAddress');
+        $travelAddressIds = $this->get('travelAddressIds');
+        foreach ($travelAddressIds as $key => $value) {
+            $data[$value] = array_get($travelImageAddress, $key, []);
         }
         return $data;
     }

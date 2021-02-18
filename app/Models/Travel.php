@@ -81,6 +81,7 @@ class Travel extends Model implements HasMedia
         'travelAddressAdress',
         'travelAddressCity',
         'travelAddressCountry',
+        'travelAddressIds',
         'countryIds',
         'countriesCode',
         'travel_image_thumb_url',
@@ -309,6 +310,11 @@ class Travel extends Model implements HasMedia
         return $this->travelAddress()->pluck('address');
     }
 
+    public function getTravelAddressIdsAttribute()
+    {
+        return $this->travelAddress()->pluck('id');
+    }
+
     public function getTravelAddressCityAttribute()
     {
         return $this->travelAddress()->pluck('city_id');
@@ -460,16 +466,16 @@ class Travel extends Model implements HasMedia
      */
     public function registerMediaConversions(Media $media = null): void
     {
-          $this->autoRegisterThumb200();
-          $this->addMediaConversion('detail_hd')
-              ->quality(80)
-              ->width(1080)
-              ->height(1080)
-              ->fit('crop', 1080, 1080)
-              ->optimize()
-              ->withResponsiveImages()
-              ->performOnCollections('gallery')
-              ->nonQueued();
+        $this->autoRegisterThumb200();
+        $this->addMediaConversion('detail_hd')
+            ->quality(80)
+            ->width(1080)
+            ->height(1080)
+            ->fit('crop', 1080, 1080)
+            ->optimize()
+            ->withResponsiveImages()
+            ->performOnCollections('gallery')
+            ->nonQueued();
     }
 
     /**

@@ -20,7 +20,8 @@ let state = {
     messagesBetween: {data: {}},
     usersMessages: {},
     messagesBetweenNew: {},
-    travelId:'',
-    perPage:6
+    travelId: '',
+    travelAddressIds: [],
+    perPage: 6
 }
 export default state

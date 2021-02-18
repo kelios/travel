@@ -53,6 +53,9 @@ let mutations = {
     SET_TRAVEL_ID(state, travelId) {
         state.travelId = travelId
     },
+    SET_TRAVEL_ADDRESS_IDS(state, travelAddressIds) {
+        state.travelAddressIds = travelAddressIds
+    },
     SET_PERPAGE(state, perPage) {
         state.perPage = perPage
     },

@@ -56,10 +56,8 @@ class WysiwygUploadController extends Controller
             } else {
                 $path = $request->file('file')->storeAs('', $file->getClientOriginalName(), ['disk' => 'uploads']);
             }
-           // dd($file);
             return response()->json([
                 'path' => $path,
-
             ], 200);
         }
 

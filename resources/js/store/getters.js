@@ -41,6 +41,9 @@ let getters = {
     travelId: state => {
         return state.travelId
     },
+    travelAddressIds: state => {
+        return state.travelAddressIds
+    },
     perPage: state => {
         return state.perPage
     }

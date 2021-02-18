@@ -191,9 +191,10 @@
                 <hr class="mb-4">
                 <div class="form-group img__container text-center">
                     <upload-image-drag
+                        :nametitle="'{{trans('travels.uploadCover')}}'"
                         :travelsrc="'{{isset($travel) ? $travel->travelImageThumbUrl : '/media/nomainfoto.png'}}'"
                         :media="'{{ isset($travel) ? $travel->getThumbs200ForCollection('travelMainImage') : null}}'"
-                        :collection= '@json(app(\App\Models\Travel::class)->getMediaCollection('travelMainImage')->getName() )'
+                        :collection='@json(app(\App\Models\Travel::class)->getMediaCollection('travelMainImage')->getName() )'
                         :uploaded-images="{{ isset($travel) ? $travel->getThumbs200ForCollection('travelMainImage')->toJson() : '[]'}}"
                         :max-number-of-files="{{app(\App\Models\Travel::class)->getMediaCollection('travelMainImage')->getMaxNumberOfFiles()
                             ? app(\App\Models\Travel::class)->getMediaCollection('travelMainImage')->getMaxNumberOfFiles() : 20}}"
@@ -209,19 +210,38 @@
                 <div class="form-group row ">
                     <label for="cities"> {{ trans('travels.selectedAddress') }}</label>
                     <ul class="list-group">
-                        <li class="list-group-item" v-for="(meCoords,index) in travelAddress.meCoord">
+
+                        <li class="list-group-item" v-for="(meCoords,index) in travelAddress.meCoord" :key="index">
                             <ul class="list-group">
-                                <li class="list-group-item">@{{ travelAddress.address[index] }}-@{{meCoords}}
+                                <li class="list-group-item">
+                                    <div class="form-group img__container text-center">
+
+                                        <upload-image-drag
+                                            :nametitle="'{{trans('travels.uploadImage')}}'"
+                                            :travelsrc="travelAddress.travelImageThumbUrl[index]"
+                                            :media="travelAddress.thumbs200Collection[index]"
+                                            :collection='@json(app(\App\Models\TravelAddress::class)->getMediaCollection('travelImageAddress')->getName() )'
+                                            :uploaded-images="travelAddress.thumbs200Collection[index] || []"
+                                            :max-number-of-files="{{app(\App\Models\TravelAddress::class)->getMediaCollection('travelImageAddress')->getMaxNumberOfFiles()
+                                                                    ? app(\App\Models\TravelAddress::class)->getMediaCollection('travelImageAddress')->getMaxNumberOfFiles() : 20}}"
+                                            :max-file-size-in-mb="{{app(\App\Models\TravelAddress::class)->getMediaCollection('travelImageAddress')->getMaxFileSize() ?
+                                                round((app(\App\Models\TravelAddress::class)->getMediaCollection('travelImageAddress')->getMaxFileSize()/1024/1024), 2)
+                                                : 20}}"
+                                            :accepted-file-types="'{{ app(\App\Models\TravelAddress::class)->getMediaCollection('travelImageAddress')->getAcceptedFileTypes() ?
+                                            implode(',', app(\App\Models\TravelAddress::class)->getMediaCollection('travelImageAddress')->getAcceptedFileTypes()) : null}}'"
+                                            :url="'{{ route('brackets/media::upload-crop') }}'"
+                                            ref="travelImageAddress_uploadercropArr"
+                                        >
+                                        </upload-image-drag>
+                                    </div>
+                                    <hr class="mb-4">
+                                    @{{ travelAddress.address[index] }}-@{{meCoords}}
                                     <input type="hidden" v-model="travelAddress.address">
                                     <a class="btn btn-sm btn-danger"
-                                       v-on:click="removeMarker(travelAddress.address[index],meCoords,index)">
+                                       v-on:click="removeMarker(travelAddress.address[index],index)">
                                         <i class="fa fa-trash-o"></i>
                                     </a>
-                                    <a class="btn btn-sm btn-warning"
-                                       title="{{trans('travels.uploadImage')}}"
-                                       v-on:click="uploadImage(travelAddress.address[index],meCoords,index)">
-                                        <i class="fa fa-upload"></i>
-                                    </a>
+
 
                                 </li>
                             </ul>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a class="btn btn-warning" @click="toggleShow">{{ translate('travels.uploadCover') }}</a>
+        <a class="btn btn-warning" @click="toggleShow">{{nametitle}}</a>
         <input type="hidden" name="collection" :value="collection">
         <my-upload field="file"
                    @crop-success="cropSuccess"
@@ -46,16 +46,16 @@
             'max-file-size-in-mb',
             'accepted-file-types',
             'url',
+            'nametitle'
         ],
         data() {
             return {
                 show: false,
                 params: {
-                    collection: 'travelMainImage',
+                    collection: this.collection,
                 },
                 imgDataUrl: this.travelsrc, // the datebase64 url of created image
                 mutableDragUploadedImages: [],
-                travelMainImage: [],
                 headers: {
                     'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 }
@@ -77,11 +77,13 @@
                 this.mutableDragUploadedImages = [];
             },
             onFileDelete: function onFileDelete(file, error, xhr) {
-                this.mutableDragUploadedImages = this.uploadedImages;
-                this.mutableDragUploadedImages.forEach(function (field, key) {
-                        field['action'] = 'delete';
-                });
+                let files = this.uploadedImages;
                 this.imgDataUrl = '/media/nomainfoto.png';
+
+                files.forEach(function (field, key) {
+                    field['action'] = 'delete';
+                });
+                this.mutableDragUploadedImages = files;
             },
             toggleShow() {
                 this.show = !this.show;
@@ -97,28 +99,11 @@
                         collection_name: this.collection,
                         path: jsonData.path,
                         action: 'add',
-                        meta_data: {
-                            /*   name: '',
-                               file_name: '',
-                               width: _this2.$refs[this.collection].width,
-                               height: _this2.$refs[this.collection].height*/
+                         meta_data: {
+
                         }
                     });
                 }
-                // console.log('this.mutableDragUploadedImages');
-                // console.log(this.mutableDragUploadedImages);
-                /* _this.mutableUploadedImages.forEach(function (field, key) {
-
-                     _this.manuallyAddFile({
-                         name: file['name'],
-                         size: file['size'],
-                         type: file['type'],
-                         url: file['url']
-                     }, file['thumb_url'], false, false, {
-                         dontSubstractMaxFiles: false,
-                         addToFiles: true
-                     });
-                 });*/
             },
             cropSuccess(imgDataUrl, field) {
                 this.imgDataUrl = imgDataUrl;

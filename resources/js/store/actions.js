@@ -176,6 +176,7 @@ let actions = {
         ).then(response => {
             if (!response.data.error) {
                 commit('SET_TRAVEL_ID', response.data.id);
+                commit('SET_TRAVEL_ADDRESS_IDS', response.data.travelAddressIds);
             }
         });
     }

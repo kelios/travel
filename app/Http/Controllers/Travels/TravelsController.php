@@ -318,11 +318,13 @@ class TravelsController extends Controller
         $travel = $this->travelRepository->getBySlug($slug);
         $travel->coordsMeTravel = $travel->travelAddress->pluck('coords')->toArray();
 
+        $travel->travelImageThumbUrlArr = $travel->travelAddress->pluck('travelImageThumbUrl')->toArray();
+        $travel->thumbs200ForCollectionArr = $travel->travelAddress->pluck('thumbs200Collection')->toArray();
+
         SEOMeta::setTitle($travel->name);
         SEOMeta::setDescription($travel->meta_description);
         SEOMeta::addMeta('travel:published_time', $travel->created_at->toW3CString(), 'property');
         SEOMeta::addKeyword($travel->meta_keywords);
-
         return view('travels.edit', [
             'travel' => $travel,
             'categories' => $this->categoryRepository->all(),
@@ -545,7 +547,6 @@ class TravelsController extends Controller
 
         $travelAddr = $request->getRelationAddress();
         $travelId = array_get($sanitized, 'id');
-
         if ($travelId) {
             $travel = $this->travelRepository->getById($travelId);
         } else {
@@ -595,14 +596,16 @@ class TravelsController extends Controller
             } else {
                 $travel = $this->travelRepository;
             }
-
-            $this->saveTravel($sanitized, $relations, $travelAddr, $travel);
+            $this->saveTravel($sanitized, $relations, $travelAddr, $travel, $request);
             if (!$travelId) {
                 $travelId = $travel->travel->id;
+                $travelAddressIds = $travel->travel->travelAddressIds;
+            } else {
+                $travelAddressIds = $travel->travelAddressIds;
             }
-            return response(['id' => $travelId], 200);
+            return response(['id' => $travelId, 'travelAddressIds' => $travelAddressIds], 200);
         } else {
-            return response(['res' => 'noname', 'id' => ''], 200);
+            return response(['res' => 'noname', 'id' => '', 'travelAddressIds' => []], 200);
         }
     }
 
@@ -611,18 +614,35 @@ class TravelsController extends Controller
      * @param $relations
      * @param $travel
      */
-    public function saveTravel($sanitized, $relations, $travelAddr, $travel)
+    public function saveTravel($sanitized, $relations, $travelAddr, $travel, $request)
     {
         // Store the Travel
         $travel->fill($sanitized);
         $travel->save();
-        $travel->users()->sync(auth()->user()->id);
+        foreach ($travelAddr as $addr) {
+            if (!array_get($addr, 'id')) {
+                $travelAddrNew = $travel->travelAddress()->create($addr);
+                $addr['id'] = $travelAddrNew->id;
+                $travelAddrNew->processMedia(collect(['travelImageAddress' => $addr['travelAddrMedia']]));
+            } else {
+                $currentTravelAddr = $travel->travelAddress()->findOrFail(array_get($addr, 'id'));
+                $currentTravelAddr->save();
+                $currentTravelAddr->processMedia(collect(['travelImageAddress' => $addr['travelAddrMedia']]));
+            }
+        }
 
+        $ids = Arr::pluck($travelAddr, 'id');
+        foreach ($travel->travelAddress as $oldAddr) {
+            if (!in_array($oldAddr->id, $ids)) {
+                $currentTravelAddr = $travel->travelAddress()->findOrFail($oldAddr->id);
+                $currentTravelAddr->delete();
+            }
+        }
+
+        $travel->users()->sync(auth()->user()->id);
         foreach ($relations as $relation => $publickey) {
             $relationFormat = str_replace('_', '', $relation);
             $travel->$relationFormat()->sync($sanitized[$relation . 'Ids']);
         }
-        $travel->travelAddress()->delete();
-        $travel->travelAddress()->createMany($travelAddr);
     }
 }

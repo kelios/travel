@@ -29,8 +29,10 @@
            :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.travel.columns.meta_description') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <div>
-            <wysiwyg v-model="form.meta_description" v-validate="" id="meta_description"
-                     name="meta_description" :config="mediaWysiwygConfig"></wysiwyg>
+            <textarea  class="form-control" v-model="form.meta_description" v-validate="'max:255'"
+                      id="meta_description"
+                      name="meta_description">
+            </textarea>
         </div>
         <div v-if="errors.has('meta_description')" class="form-control-feedback form-text" v-cloak>@{{
             errors.first('meta_description') }}
@@ -44,8 +46,8 @@
            :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.travel.columns.meta_keywords') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <div>
-            <wysiwyg v-model="form.meta_keywords" v-validate="" id="meta_keywords" name="meta_keywords"
-                     :config="mediaWysiwygConfig"></wysiwyg>
+            <textarea  class="form-control" v-model="form.meta_keywords" v-validate="'max:255'" id="meta_keywords" name="meta_keywords"
+                     > </textarea>
         </div>
         <div v-if="errors.has('meta_keywords')" class="form-control-feedback form-text" v-cloak>@{{
             errors.first('meta_keywords') }}

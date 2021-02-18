@@ -20,20 +20,24 @@ Vue.component('travel-form', {
     },
     computed: {
         ...mapGetters([
-            'travelId'
+            'travelId',
+            'travelAddressIds'
         ]),
     },
 
     data: function () {
         return {
-            mediaCollections: ['travelMainImage', 'gallery', 'travelRoad'],
+            mediaCollections: ['travelMainImage', 'gallery', 'travelRoad', 'travelImageAddress'],
             optionsCountries: [],
             optionsCities: [],
             travelAddress: {
+                'id': [],
                 'address': [],
                 'meCoord': [],
                 'city': [],
-                'country': []
+                'country': [],
+                'travelImageThumbUrl': [],
+                'thumbs200Collection': [],
             },
             where: [],
             query: '',
@@ -52,7 +56,7 @@ Vue.component('travel-form', {
             selectedCountriesCode: [],
             selectedCountiesIds: [],
             form: {
-                id:'',
+                id: '',
                 name: '',
                 categories: [],
                 transports: [],
@@ -73,10 +77,13 @@ Vue.component('travel-form', {
                 visa: false,
                 coordsMeTravel: [],
                 countryIds: [],
+                travelAddressIds: [],
                 travelAddressCity: [],
                 travelAddressCountry: [],
                 travelAddressAdress: [],
-                travelMainImage: [],
+                thumbs200ForCollectionArr: [],
+                travelImageThumbUrlArr: [],
+                travelImageAddress: []
             }
         }
     },
@@ -86,10 +93,14 @@ Vue.component('travel-form', {
             if (this.form.id) {
                 this.$store.commit('SET_TRAVEL_ID', this.form.id);
             }
+            this.travelAddress.id = this.form.travelAddressIds;
             this.travelAddress.address = this.form.travelAddressAdress;
             this.travelAddress.meCoord = this.form.coordsMeTravel;
             this.travelAddress.city = this.form.travelAddressCity;
             this.travelAddress.country = this.form.travelAddressCountry;
+            this.travelAddress.thumbs200Collection = this.form.thumbs200ForCollectionArr;
+            this.travelAddress.travelImageThumbUrl = this.form.travelImageThumbUrlArr;
+
             this.selectedCountiesIds = this.form.countryIds;
             this.selectedCountriesCode = this.form.countriesCode ?? [];
         },
@@ -103,6 +114,16 @@ Vue.component('travel-form', {
                     if (_this3.$refs[collection + '_uploader']) {
                         _this3.form[collection] = _this3.$refs[collection + '_uploader'].getFiles();
                     }
+
+                    if (Array.isArray(_this3.$refs[collection + '_uploadercropArr'])) {
+                        let uploadedImage = [];
+                        _this3.$refs[collection + '_uploadercropArr'].forEach((upload, index) => {
+                            uploadedImage.push(upload.getFilesDrag());
+                            upload.clearFilesDrag();
+                        });
+                        _this3.form[collection] = uploadedImage;
+                    }
+
                     if (_this3.$refs[collection + '_uploadercrop']) {
                         _this3.form[collection] = _this3.$refs[collection + '_uploadercrop'].getFilesDrag();
                         _this3.$refs[collection + '_uploadercrop'].clearFilesDrag();
@@ -111,15 +132,19 @@ Vue.component('travel-form', {
                 });
             }
             this.form['wysiwygMedia'] = this.wysiwygMedia;
-            if(this.travelId && !this.form['id']){
+            if (this.travelId && !this.form['id']) {
                 this.form['id'] = this.travelId;
+            }
+            if (typeof this.travelAddressIds !== 'undefined' && this.travelAddressIds > 0) {
+                this.form['travelAddressIds'] = this.travelAddressIds;
+                this.travelAddress.id = this.travelAddressIds;
             }
             return this.form;
         },
         autoSave() {
             setInterval(() => {
                 this.save();
-            }, 300000)
+                  }, 300000)
         },
         save(event) {
             this.getPostData();
@@ -268,10 +293,12 @@ Vue.component('travel-form', {
                 return value.country_id != item.country_id;
             });
         },
-        removeMarker: function (address, latlng, index) {
+        removeMarker: function (address, index) {
             this.form.cities = this.form.cities.filter(function (value, index, arr) {
                 return (value.local_name != address);
             });
+            this.$delete(this.travelAddress.id, index);
+            this.$store.commit('SET_TRAVEL_ADDRESS_IDS', this.travelAddress.id);
             this.$delete(this.travelAddress.meCoord, index);
             this.$delete(this.travelAddress.address, index);
             this.$delete(this.travelAddress.city, index);
