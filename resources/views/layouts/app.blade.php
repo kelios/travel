@@ -17,6 +17,7 @@
     <!-- Scripts -->
     @if (App::environment('production'))
         @include('include.analytics')
+        <script data-ad-client="ca-pub-9752617241777308" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     @endif
 
 <!-- Fonts -->
