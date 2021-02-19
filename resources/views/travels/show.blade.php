@@ -43,6 +43,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav textmenu ">
                         @auth
+                            <li><i title="{{trans('main.read')}}" class="fa fa-book"></i>({{$travel->countUnicIpView}})</li>
                             <li>
                                 @if (in_array(auth()->user()->id,$travel->userIds))
                                     <a target="_blank" href="{{url($travel->url.'/edit')}}">{{trans('main.edit')}}</a>

@@ -59,4 +59,5 @@ return [
     'newandaction' => 'Новости/Розыгрыши',
     'moderation' => 'Одобрено',
     'moderationhide' => 'Ожидает модерации',
+    'read'=>'Прочитано'
 ];

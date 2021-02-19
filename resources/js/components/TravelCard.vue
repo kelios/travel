@@ -20,7 +20,9 @@
                         <span class="badge badge-dark" v-else>{{translate('main.hide')}}</span>
                     </p>
                 </div>
-                <div class="small text-right"> {{translate('main.author')}} - {{travel.userName}}</div>
+                <div class="small text-right"> {{translate('main.author')}} - {{travel.userName}}
+                    <i class="fa fa-book" :title="translate('main.read')"></i>({{travel.countUnicIpView}})
+                </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <p>
                         <a :href="'/travels/'+travel.slug" target="_blank">
@@ -63,6 +65,7 @@
                     >
                         <i class="fa fa-share fa-facebook fa-x fa-fw"></i>
                     </ShareNetwork>
+
 
                 </div>
 

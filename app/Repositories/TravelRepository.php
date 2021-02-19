@@ -270,6 +270,14 @@ class TravelRepository implements TravelRepositoryInterface
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
+    public function views()
+    {
+        return $this->travel->views();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function countries()
     {
         return $this->travel->countries();
@@ -300,7 +308,8 @@ class TravelRepository implements TravelRepositoryInterface
             'travelAddress',
             'companion',
             'users',
-            'travelLike'
+            'travelLike',
+            'views'
         ])->find($id);
     }
 
@@ -320,7 +329,8 @@ class TravelRepository implements TravelRepositoryInterface
             'countries',
             'travelAddress',
             'companion',
-            'users'
+            'users',
+            'views'
         ])->where($where)
             ->firstOrFail();
     }
@@ -342,7 +352,8 @@ class TravelRepository implements TravelRepositoryInterface
             'travelAddress',
             'companion',
             'users',
-            'travelLike'
+            'travelLike',
+            'views'
         ])
             ->where('slug', '=', $slug)
             ->firstOrFail();

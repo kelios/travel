@@ -100,6 +100,7 @@ class Travel extends Model implements HasMedia
         'userName',
         'totalLikes',
         'travelRoad',
+        'countUnicIpView'
     ];
 
     public function modelFilter()
@@ -269,6 +270,11 @@ class Travel extends Model implements HasMedia
         return $this->hasMany(TravelAddress::class);
     }
 
+    public function views()
+    {
+        return $this->hasMany(TravelView::class);
+    }
+
     public function likes()
     {
         return $this->belongsToMany(\App\User::class, 'travel_like');
@@ -293,6 +299,13 @@ class Travel extends Model implements HasMedia
     {
         return $this->travelLike()->count();
     }
+
+    public function getCountUnicIpViewAttribute()
+    {
+        return $this->views()->distinct('ip')->count();
+    }
+
+
 
     public function comments()
     {

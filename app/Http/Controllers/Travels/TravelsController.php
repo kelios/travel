@@ -15,6 +15,7 @@ use App\Repositories\TravelRepository;
 use App\Repositories\CityRepository;
 use App\Repositories\CountryRepository;
 use App\Repositories\CompanionRepository;
+use App\Repositories\TravelViewRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -91,7 +92,8 @@ class TravelsController extends Controller
                                 OverNightStayRepository $overNightStayRepository,
                                 cityRepository $cityRepository,
                                 countryRepository $countryRepository,
-                                CompanionRepository $companionRepository
+                                CompanionRepository $companionRepository,
+                                TravelViewRepository $travelViewRepository
     )
     {
         $this->travelRepository = $travelRepository;
@@ -103,6 +105,8 @@ class TravelsController extends Controller
         $this->cityRepository = $cityRepository;
         $this->countryRepository = $countryRepository;
         $this->companionRepository = $companionRepository;
+        $this->travelViewRepository = $travelViewRepository;
+
     }
 
     /**
@@ -176,6 +180,7 @@ class TravelsController extends Controller
                 'slug',
                 'id',
                 'userName',
+                'countUnicIpView'
             ]);
         });
         return response()->json($travels);
@@ -352,6 +357,8 @@ class TravelsController extends Controller
         }
 
         $where = ['id' => $travel->id];
+
+        $this->travelViewRepository->map($travel);
         SEOMeta::setTitle($travel->name);
         SEOMeta::setDescription($travel->meta_description);
         SEOMeta::addMeta('travel:published_time', $travel->created_at->toW3CString(), 'property');
