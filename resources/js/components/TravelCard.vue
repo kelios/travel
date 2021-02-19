@@ -21,12 +21,13 @@
                     </p>
                 </div>
                 <div class="small text-right"> {{translate('main.author')}} - {{travel.userName}}
-                    <i class="fa fa-book" :title="translate('main.read')"></i>({{travel.countUnicIpView}})
+
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <p>
                         <a :href="'/travels/'+travel.slug" target="_blank">
                             {{translate('main.readMore')}}
+                            <i class="fa fa-book" :title="translate('main.read')"></i>({{travel.countUnicIpView}})
                         </a>
                     </p>
 
