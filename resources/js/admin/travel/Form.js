@@ -12,6 +12,7 @@ Vue.component('travel-form', {
     mounted() {
         this.init();
         this.getCountries();
+        this.getUsers();
         this.autoSave();
         window.Echo.channel('searchCity')
             .listen('.searchResultsCity', (e) => {
@@ -29,6 +30,7 @@ Vue.component('travel-form', {
         return {
             mediaCollections: ['travelMainImage', 'gallery', 'travelRoad', 'travelImageAddress'],
             optionsCountries: [],
+            optionsUsers: [],
             optionsCities: [],
             travelAddress: {
                 'id': [],
@@ -155,6 +157,17 @@ Vue.component('travel-form', {
             axios.get('/location/countries')
                 .then(function (response) {
                     vm.optionsCountries = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+        },
+        getUsers() {
+            let vm = this;
+            axios.get('/api/users')
+                .then(function (response) {
+                    vm.optionsUsers = response.data;
                 })
                 .catch(function (error) {
                     console.log(error);

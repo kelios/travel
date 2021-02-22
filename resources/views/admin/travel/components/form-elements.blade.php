@@ -23,6 +23,27 @@
     </div>
 </div>
 
+<div class="form-group "
+     :class="{'has-danger': errors.has('users'), 'has-success': fields.users && fields.users.valid }">
+    <label for="users">{{ trans('travels.users') }}</label>
+
+
+    <multiselect
+        :options="optionsUsers"
+        :multiple="true"
+        v-model="form.users"
+        track-by="user_id"
+        label="name"
+        tag-placeholder="{{ trans('travels.users') }}"
+        placeholder="{{ trans('travels.Select users') }}">
+    </multiselect>
+
+    <div v-if="errors.has('users')" class="form-control-feedback form-text" v-cloak>@{{
+        errors.first('users') }}
+    </div>
+</div>
+
+
 <div class="form-group row align-items-center"
      :class="{'has-danger': errors.has('meta_description'), 'has-success': fields.meta_description && fields.meta_description.valid }">
     <label for="meta_description" class="col-form-label text-md-right"

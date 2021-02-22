@@ -38,4 +38,5 @@ Route::middleware('auth:api')->post('sendreqfriends', 'FriendController@sendReqF
 Route::middleware('auth:api')->post('unfriend', 'FriendController@unfriend');
 Route::middleware('auth:api')->post('acceptFriendRequest', 'FriendController@acceptFriendRequest');
 Route::middleware('auth:api')->post('denyFriendRequest', 'FriendController@denyFriendRequest');
+Route::middleware('auth:api')->get('users', 'UserController@getAllUsers');
 

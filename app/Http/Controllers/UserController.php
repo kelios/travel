@@ -12,16 +12,23 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use App\Http\Requests\User\UpdateUser;
+use App\Repositories\UserRepository;
 
 class UserController extends Controller
 {
+    /**
+     * @var UserRepository
+     */
+    protected $userRep;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserRepository $userRep)
     {
+        $this->userRep = $userRep;
         $this->middleware('auth');
     }
 
@@ -89,6 +96,12 @@ class UserController extends Controller
         }
 
         return redirect('/travels');
+    }
+
+    public function getAllUsers(Request $request)
+    {
+        $users = $this->userRep->all();
+        return response()->json($users, 200);
     }
 
 

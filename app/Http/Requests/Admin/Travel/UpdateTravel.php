@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\Travel;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
@@ -40,8 +41,26 @@ class UpdateTravel extends FormRequest
             'visa' => ['nullable', 'boolean'],
             'meta_description' => ['nullable', 'string'],
             'meta_keywords' => ['nullable', 'string'],
+            'users'
 
         ];
+    }
+
+    /**
+     * @param $keyEntity
+     * @param string $searchKey
+     * @return array|null
+     */
+    public function getRelationIds($keyEntity, $searchKey = 'id')
+    {
+        if ($this->has($keyEntity) && !is_null($this->get($keyEntity))) {
+            $data = [];
+            foreach ($this->get($keyEntity) as $entity) {
+                $data[] = Arr::get($entity, $searchKey);
+            }
+            return $data;
+        }
+        return null;
     }
 
     /**

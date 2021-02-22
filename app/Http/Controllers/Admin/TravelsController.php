@@ -146,10 +146,15 @@ class TravelsController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
-
+        $relations = [
+            'users' => 'id',
+        ];
+        foreach ($relations as $relation => $publickey) {
+            $sanitized[$relation . 'Ids'] = $request->getRelationIds($relation, $publickey);
+        }
         // Update changed values Travel
         $travel->update($sanitized);
-
+        $travel->users()->sync($sanitized['usersIds'][0]);
         if ($request->ajax()) {
             return [
                 'redirect' => url('admin/travels'),
