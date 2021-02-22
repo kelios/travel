@@ -12,25 +12,19 @@
     {!! SEO::generate(true) !!}
 <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Styles -->
+    @include('brackets/admin-ui::admin.partials.main-styles')
+    @yield('styles')
+    <link href="{{ asset('css/metravel.css') }}" rel="stylesheet">
+    <!-- Fonts -->
+    <link   href="https://fonts.googleapis.com/css2?family=Jost:wght@100&display=swap" rel="stylesheet">
+    <link   href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
     <!-- Scripts -->
     @if (App::environment('production'))
         @include('include.analytics')
         <script data-ad-client="ca-pub-9752617241777308" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     @endif
-
-
-<!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@100&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
-
-    @include('brackets/admin-ui::admin.partials.main-styles')
-    @yield('styles')
-    <link href="{{ asset('css/metravel.css') }}" rel="stylesheet">
 </head>
 <body>
 
