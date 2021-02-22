@@ -24,7 +24,7 @@ a {
     background-color: transparent;
 }
 @font-face {
-    font-display: swap;
+    font-display: swap !important;
 }
 
 label {

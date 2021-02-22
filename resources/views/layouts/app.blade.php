@@ -20,6 +20,7 @@
         <script data-ad-client="ca-pub-9752617241777308" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     @endif
 
+    <link href="{{ asset('css/metravel.css') }}" rel="stylesheet">
 <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
@@ -29,7 +30,7 @@
 
     @include('brackets/admin-ui::admin.partials.main-styles')
     @yield('styles')
-    <link href="{{ asset('css/metravel.css') }}" rel="stylesheet">
+
 </head>
 <body>
 
