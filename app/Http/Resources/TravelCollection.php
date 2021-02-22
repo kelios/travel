@@ -34,6 +34,7 @@ class TravelCollection extends ResourceCollection
                // 'coordsMeTravelArr' => $item->coordsMeTravelArr,
                 'id' => $item->id,
                 'userName' => $item->userName,
+                'countUnicIpView'=>$item->countUnicIpView
 
             ];
         })->toArray();

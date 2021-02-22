@@ -42,14 +42,35 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav textmenu ">
+                        <li><i title="{{trans('main.read')}}" class="fa fa-book"></i>({{$travel->countUnicIpView}})</li>
                         @auth
-                            <li><i title="{{trans('main.read')}}" class="fa fa-book"></i>({{$travel->countUnicIpView}})</li>
                             <li>
                                 @if (in_array(auth()->user()->id,$travel->userIds))
                                     <a target="_blank" href="{{url($travel->url.'/edit')}}">{{trans('main.edit')}}</a>
                                 @endif
                             </li>
                         @endauth
+                        <li>
+                            <Share-Network
+                                network="vk"
+                                :url='@json($travel->url)'
+                                :title='@json($travel->name)'
+                                :description='@json($travel->description)'
+                                :media='@json($travel->travel_image_thumb_url)'
+                            >
+                                <i class="fa fa-vk"></i>
+                            </Share-Network>
+
+                            <Share-Network
+                                network="facebook"
+                                :url='@json($travel->url)'
+                                :title='@json($travel->name)'
+                                :description='@json($travel->description)'
+                                :media='@json($travel->travel_image_thumb_url)'
+                            >
+                                <i class="fa fa-share fa-facebook fa-x fa-fw"></i>
+                            </Share-Network>
+                        </li>
                         <li class="nav-item small">
                             <a href="/travels?user_id={{implode(',',$travel->userIds)}}" target="_blank">
                                 {{ trans('user.alltravel')}} {{ $travel->userName }} >
