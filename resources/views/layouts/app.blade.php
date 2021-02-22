@@ -13,13 +13,7 @@
 <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <!-- Styles -->
-    @include('brackets/admin-ui::admin.partials.main-styles')
-    @yield('styles')
-    <link href="{{ asset('css/metravel.css') }}" rel="stylesheet">
-    <!-- Fonts -->
-    <link   href="https://fonts.googleapis.com/css2?family=Jost:wght@100&display=swap" rel="stylesheet">
-    <link   href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+
     <!-- Scripts -->
     @if (App::environment('production'))
         @include('include.analytics')
@@ -27,7 +21,12 @@
     @endif
 </head>
 <body>
-
+<!-- Styles -->
+<link href="{{ mix('/css/admin.css') }}" rel="stylesheet">
+<link href="{{ asset('css/metravel.css') }}" rel="stylesheet">
+<!-- Fonts -->
+<link   href="https://fonts.googleapis.com/css2?family=Jost:wght@100&display=swap" rel="stylesheet">
+<link   href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
 @include('cookieConsent::index')
 <div id="app">
 
