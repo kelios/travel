@@ -626,6 +626,16 @@ class TravelsController extends Controller
         // Store the Travel
         $travel->fill($sanitized);
         $travel->save();
+        $ids = Arr::pluck($travelAddr, 'id');
+        if($travel->travelAddress()->exists()) {
+            foreach ($travel->travelAddress as $oldAddr) {
+                if (!in_array($oldAddr->id, $ids)) {
+                    $currentTravelAddr = $travel->travelAddress()->findOrFail($oldAddr->id);
+                    $currentTravelAddr->delete();
+                }
+            }
+        }
+
         foreach ($travelAddr as $addr) {
             if (!array_get($addr, 'id')) {
                 $travelAddrNew = $travel->travelAddress()->create($addr);
@@ -637,16 +647,8 @@ class TravelsController extends Controller
                 $currentTravelAddr->processMedia(collect(['travelImageAddress' => $addr['travelAddrMedia']]));
             }
         }
+//dd($travel->travelAddress()->exists());
 
-        $ids = Arr::pluck($travelAddr, 'id');
-        if($travel->travelAddress()->exists()) {
-            foreach ($travel->travelAddress as $oldAddr) {
-                if (!in_array($oldAddr->id, $ids)) {
-                    $currentTravelAddr = $travel->travelAddress()->findOrFail($oldAddr->id);
-                    $currentTravelAddr->delete();
-                }
-            }
-        }
 
         $travel->users()->sync(auth()->user()->id);
         foreach ($relations as $relation => $publickey) {
