@@ -639,7 +639,7 @@ class TravelsController extends Controller
         }
 
         $ids = Arr::pluck($travelAddr, 'id');
-        foreach ($travel->travelAddress() as $oldAddr) {
+        foreach ($travel->travelAddress as $oldAddr) {
             if (!in_array($oldAddr->id, $ids)) {
                 $currentTravelAddr = $travel->travelAddress()->findOrFail($oldAddr->id);
                 $currentTravelAddr->delete();
