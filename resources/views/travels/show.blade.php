@@ -51,25 +51,23 @@
                             </li>
                         @endauth
                         <li>
-                            <Share-Network
+                            <share-network
                                 network="vk"
                                 :url='@json($travel->url)'
                                 :title='@json($travel->name)'
-                                :description='@json($travel->description)'
                                 :media='@json($travel->travel_image_thumb_url)'
                             >
                                 <i class="fa fa-vk"></i>
-                            </Share-Network>
+                            </share-network>
 
-                            <Share-Network
+                            <share-network
                                 network="facebook"
                                 :url='@json($travel->url)'
                                 :title='@json($travel->name)'
-                                :description='@json($travel->description)'
                                 :media='@json($travel->travel_image_thumb_url)'
                             >
                                 <i class="fa fa-share fa-facebook fa-x fa-fw"></i>
-                            </Share-Network>
+                            </share-network>
                         </li>
                         <li class="nav-item small">
                             <a href="/travels?user_id={{implode(',',$travel->userIds)}}" target="_blank">
