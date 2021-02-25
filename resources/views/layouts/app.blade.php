@@ -18,15 +18,14 @@
     @if (App::environment('production'))
         @include('include.analytics')
         <script data-ad-client="ca-pub-9752617241777308" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
     @endif
 </head>
 <body>
 <!-- Styles -->
-<link href="{{ mix('/css/admin.css') }}" rel="stylesheet">
 <link href="{{ asset('css/metravel.css') }}" rel="stylesheet">
+
 <!-- Fonts -->
-<link   href="https://fonts.googleapis.com/css2?family=Jost:wght@100&display=swap" rel="stylesheet">
-<link   href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
 @include('cookieConsent::index')
 <div id="app">
 
