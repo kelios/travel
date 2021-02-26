@@ -14,6 +14,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="preload" as="font" href="/fonts/bad-script-v9-latin/BadScript-Regular.ttf">
+    <link rel="preload" as="font" href="/fonts/vendor/font-awesome/fontawesome-webfont.woff2">
     <!-- Scripts -->
     @if (App::environment('production'))
         @include('include.analytics')
