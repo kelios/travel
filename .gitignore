@@ -24,6 +24,10 @@ public/images/vendor
 public/js
 public/vendor
 public/css/
+public/bundle/
+/public/bundle/
+public/mix-manifest.json
+/public/mix-manifest.json
 /public/sitemap.xml
 /composer.lock
 /package-lock.json

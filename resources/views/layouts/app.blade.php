@@ -10,7 +10,7 @@
     @endif
     <link rel="icon" href="{{ URL::to('/favicon.ico')}}" type="image/x-icon">
     {!! SEO::generate(true) !!}
-<!-- CSRF Token -->
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="preload" as="font" href="/fonts/bad-script-v9-latin/BadScript-Regular.ttf" type="font/ttf" crossorigin="anonymous">
@@ -19,13 +19,11 @@
     @if (App::environment('production'))
         @include('include.analytics')
         <script data-ad-client="ca-pub-9752617241777308" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
     @endif
+    <!-- Styles -->
+    <link href="{{ mix('/css/metravel.min.css') }}" rel="stylesheet">
 </head>
 <body>
-<!-- Styles -->
-<link href="{{ asset('css/metravel.css') }}" rel="stylesheet">
-
 <!-- Fonts -->
 @include('cookieConsent::index')
 <div id="app">
@@ -154,6 +152,6 @@
 </body>
 
 @include('brackets/admin-ui::admin.partials.wysiwyg-svgs')
-@include('brackets/admin-ui::admin.partials.main-bottom-scripts')
-@yield('bottom-scripts')
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+<script src="{{ mix('/js/admin.js') }}"></script>
 </html>
