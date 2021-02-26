@@ -34,7 +34,7 @@
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Me Travel') }}
-                <img class="logoimg" src="/media/slider/logo_yellow.png">
+                <img width="27"  height ="30" class="logoimg" src="/media/slider/logo_yellow.png">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
