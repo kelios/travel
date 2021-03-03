@@ -42,7 +42,9 @@ class TravelAddress extends Model implements HasMedia
         'lng',
         'coords',
         'travelImageAddress',
-        'thumbs200Collection'
+        'travelImageThumbUrl',
+        'thumbs200Collection',
+        'ImagesAddress'
     ];
 
     /* ************************ ACCESSOR ************************* */
@@ -59,6 +61,16 @@ class TravelAddress extends Model implements HasMedia
             return [
                 'lat' => Arr::get($coords, 0),
                 'lng' => Arr::get($coords, 1)
+            ];
+        } else {
+            return [];
+        }
+    }
+
+    public function getImagesAddressAttribute(){
+        if ($this->travelImageThumbUrl) {
+            return [
+                $this->travelImageThumbUrl
             ];
         } else {
             return [];
@@ -91,7 +103,7 @@ class TravelAddress extends Model implements HasMedia
             $travelImageThumbUrl = $image[0]->getUrl('thumb_200');
         }
         return $travelImageThumbUrl
-            ?: Config::get('constants.image.defaultCatImage');
+            ?: '';
 
     }
 

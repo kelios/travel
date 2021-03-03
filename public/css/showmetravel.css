@@ -124,6 +124,12 @@ section.travel-section {
     padding-bottom: 1rem;
 }
 
+section.travel-section .mapPreview {
+    max-width: 200px !important;
+    max-height: 200px !important;
+    float: left;
+}
+
 section.travel-section.description img {
     padding: 0.25rem;
     background-color: #fff;

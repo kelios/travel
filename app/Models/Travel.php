@@ -89,6 +89,7 @@ class Travel extends Model implements HasMedia
         'travelMainImage',
         'coordMeTravel',
         'coordsMeTravelArr',
+        'imageMeTravelArr',
         'countryName',
         'cityName',
         'categoryName',
@@ -128,6 +129,8 @@ class Travel extends Model implements HasMedia
             ?: Config::get('constants.image.defaultCatImage');
 
     }
+
+
 
     public function getGalleryAttribute()
     {
@@ -341,6 +344,11 @@ class Travel extends Model implements HasMedia
     public function getCoordsMeTravelArrAttribute()
     {
         return $this->travelAddress()->pluck('coord')->toArray();
+    }
+
+    public function getImageMeTravelArrAttribute()
+    {
+        return $this->travelAddress()->get()->pluck('TravelImageThumbUrl')->toArray();
     }
 
     /**

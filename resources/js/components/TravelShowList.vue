@@ -5,7 +5,7 @@
         class="travelshowlist"
     >
         <section class="travel-section gallery section--demo-2" id="gallery" v-if="travel.gallery">
-            <div >
+            <div>
                 <slider :slides='travel.gallery'></slider>
             </div>
 
@@ -77,8 +77,11 @@
                 <map-me-travel :data="true" :where="where"></map-me-travel>
                 <ul class="list-group">
                     <li class="list-group-item" v-for="(address,index) in travel.travelAddressAdress" :key="index">
-                        {{address}}-
-                        {{travel.coordsMeTravelArr[index]}}
+
+                                <img  v-if="travel.imageMeTravelArr[index]" class="mapPreview img-responsive img-thumbnail"
+                                     :src="travel.imageMeTravelArr[index]">
+                        {{index+1}}) {{address}}-
+                                {{travel.coordsMeTravelArr[index]}}
                     </li>
                 </ul>
             </div>
@@ -123,7 +126,7 @@
 
     export default {
         name: 'TravelShowList',
-        props: ['travel_id', 'where','authUserId'],
+        props: ['travel_id', 'where', 'authUserId'],
         data() {
             return {}
         },
