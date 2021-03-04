@@ -115,11 +115,11 @@
             ></comment-list>
         </section>
 
-        <section class="travel-section">
+        <section class="travel-section" id="nearTravels">
             <travel-near></travel-near>
         </section>
 
-        <section class="travel-section">
+        <section class="travel-section" >
             <h1>{{translate('travels.popularTravels')}}</h1>
             <travel-popular></travel-popular>
         </section>

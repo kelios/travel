@@ -25,6 +25,9 @@
             <b-nav-item class="nav-item" href="#comment" >
                 {{ translate('travels.comment') }}
             </b-nav-item>
+            <b-nav-item class="nav-item" href="#nearTravels" >
+                {{translate('travels.nearTravels')}}
+            </b-nav-item>
         </b-nav>
     </div>
 </template>
