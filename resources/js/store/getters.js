@@ -46,7 +46,13 @@ let getters = {
     },
     perPage: state => {
         return state.perPage
-    }
+    },
+    popularTravels: state => {
+        return state.popularTravels
+    },
+    nearTravels: state => {
+        return state.nearTravels
+    },
 }
 
 export default getters

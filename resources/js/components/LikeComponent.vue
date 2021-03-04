@@ -16,11 +16,11 @@
             }
         },
         mounted() {
-              this.isLikedByMe();
+            this.isLikedByMe();
         },
         methods: {
-            isLikedByMe() {
-                axios.get('/like/' + this.travel_id + '/islikedbyme')
+            async isLikedByMe() {
+                 axios.get('/like/' + this.travel_id + '/islikedbyme')
                     .then(response => {
                         if (response.data.res) {
                             this.labelLike = 'Понравилось';

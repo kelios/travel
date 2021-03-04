@@ -42,7 +42,6 @@
                 <p class="lead mb-0" v-html="travel.description"></p>
             </div>
         </section>
-
         <section class="travel-section plus" id="plus" v-if="travel.plus">
             <travel-show-section :data="travel.plus"
                                  :title="translate('travels.plus')"></travel-show-section>
@@ -57,7 +56,6 @@
             <travel-show-section :data="travel.recommendation"
                                  :title="translate('travels.recommendation')"></travel-show-section>
         </section>
-
         <section class="travel-section" id="travelRoad" v-if="travel.travelRoad">
             <div class="container-fluid">
                 <h2 class="mb-5">{{translate('travels.travelRoad') }} - {{travel.travelRoad.file_name}}</h2>
@@ -78,14 +76,15 @@
                 <ul class="list-group">
                     <li class="list-group-item" v-for="(address,index) in travel.travelAddressAdress" :key="index">
 
-                                <img  v-if="travel.imageMeTravelArr[index]" class="mapPreview img-responsive img-thumbnail"
-                                     :src="travel.imageMeTravelArr[index]">
+                        <img v-if="travel.imageMeTravelArr[index]" class="mapPreview img-responsive img-thumbnail"
+                             :src="travel.imageMeTravelArr[index]">
                         {{index+1}}) {{address}}-
-                                {{travel.coordsMeTravelArr[index]}}
+                        {{travel.coordsMeTravelArr[index]}}
                     </li>
                 </ul>
             </div>
         </section>
+
         <section class="travel-section comments-app comment" id="comment">
             <h1>{{translate('travels.comment')}}</h1>
             <div class="comment-form" v-if="authUserId">
@@ -104,7 +103,7 @@
                     </div>
                     <div class="form-row">
                         <input type="button" class="btn btn-success"
-                               v-on:click="comment(travel)"
+                               v-on:click="comment(travel.reply,travel.id)"
                                :value="translate('travels.addcomment')">
                     </div>
                 </div>
@@ -114,6 +113,15 @@
                           :comments="travelComments.root"
                           :where="where"
             ></comment-list>
+        </section>
+
+        <section class="travel-section">
+            <travel-near></travel-near>
+        </section>
+
+        <section class="travel-section">
+            <h1>{{translate('travels.popularTravels')}}</h1>
+            <travel-popular></travel-popular>
         </section>
 
 
@@ -126,7 +134,7 @@
 
     export default {
         name: 'TravelShowList',
-        props: ['travel_id', 'where', 'authUserId'],
+        props: ['travel_id', 'where'],
         data() {
             return {}
         },
@@ -135,7 +143,6 @@
         },
         created() {
             this.getTravelData();
-
             this.getTravelCommentsData();
         },
         computed: {
@@ -151,7 +158,7 @@
             },
             ...mapGetters([
                 'travelComments',
-                'travel'
+                'travel',
             ])
         },
         methods: {
@@ -161,10 +168,10 @@
             getTravelData() {
                 this.$store.dispatch('GET_TRAVEL', {'travel_id': this.travel_id});
             },
-            comment(travel) {
+            comment(travelReply, travelId) {
                 axios.post('/comments', {
-                    comment: travel.reply,
-                    travel_id: travel.id,
+                    comment: travelReply,
+                    travel_id: travelId,
                     users_id: this.authUserId
                 }).then(response => {
                     if (!response.data.error) {

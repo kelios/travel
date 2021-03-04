@@ -111,6 +111,19 @@ class TravelRepository implements TravelRepositoryInterface
     }
 
     /**
+     * @param array $where
+     * @return mixed
+     */
+    public function getPopular($where = [])
+    {
+        return $this->travel
+            ->where('publish', 1)
+            ->where('moderation', 1)
+            ->get()->sortByDesc('countUnicIpView')
+            ->take(6);
+    }
+
+    /**
      * @param $search
      * @param array $where
      * @return mixed
@@ -297,20 +310,22 @@ class TravelRepository implements TravelRepositoryInterface
      */
     public function getById($id)
     {
-        return $this->travel->with([
-            'categories',
-            'transports',
-            'month',
-            'complexity',
-            'overNightStay',
-            'cities',
-            'countries',
-            'travelAddress',
-            'companion',
-            'users',
-            'travelLike',
-            'views'
-        ])->find($id);
+        return $this->travel->find($id);
+        /*   ->load([
+           'categories',
+           'transports',
+           'month',
+           'complexity',
+           'overNightStay',
+           'cities',
+           'countries',
+           'travelAddress',
+           'companion',
+           'users',
+           'travelLike',
+           'views'
+       ])*/
+        //   ->find($id);
     }
 
     /**
@@ -341,22 +356,24 @@ class TravelRepository implements TravelRepositoryInterface
      */
     public function getBySlug($slug)
     {
-        return $this->travel->with([
-            'categories',
-            'transports',
-            'month',
-            'complexity',
-            'overNightStay',
-            'cities',
-            'countries',
-            'travelAddress',
-            'companion',
-            'users',
-            'travelLike',
-            'views'
-        ])
+        return $this->travel
             ->where('slug', '=', $slug)
             ->firstOrFail();
+        /*->with([
+        'categories',
+        'transports',
+        'month',
+        'complexity',
+        'overNightStay',
+        'cities',
+        'countries',
+        'travelAddress',
+        'companion',
+        'users',
+        'travelLike',
+        'views'
+    ])*/
+
     }
 
 }

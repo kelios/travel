@@ -5,6 +5,8 @@ let state = {
     query: '',
     filtersTravel: [],
     lastTravels: {},
+    popularTravels: {},
+    nearTravels: {},
     travelAddress: {
         'address': [],
         'meCoord': [],

@@ -83,6 +83,8 @@ class StoreTravel extends FormRequest
             $data[$key]['id'] = Arr::get($travelAddressIds, $key, '');
             $data[$key]['address'] = $value;
             $data[$key]['coord'] = implode(',', Arr::get($coordsMeTravel, $key, []));
+            $data[$key]['lat'] =  Arr::get(Arr::get($coordsMeTravel, $key, []),'lat');
+            $data[$key]['lng'] = Arr::get(Arr::get($coordsMeTravel, $key, []),'lng');
             $data[$key]['city_id'] = Arr::get($travelAddressCity, $key) != '-1' ? Arr::get($travelAddressCity, $key) : null;
             $data[$key]['country_id'] = $travelAddressCountry[$key];
             $data[$key]['travelAddrMedia'] = Arr::get($travelImageAddress, $key);

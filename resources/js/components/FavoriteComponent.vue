@@ -17,8 +17,8 @@
             this.isFavoritedByMe();
         },
         methods: {
-            isFavoritedByMe() {
-                axios.get('/save/' + this.travel_id + '/isfavoritedbyme')
+            async isFavoritedByMe() {
+                 axios.get('/save/' + this.travel_id + '/isfavoritedbyme')
                     .then(response => {
                         if (response.data.res) {
                             this.labelFavorite = 'Сохранить маршрут';

@@ -14,14 +14,14 @@ let actions = {
             console.log(err)
         })
     },
-    GET_TRAVELS({commit}, data) {
+    async GET_TRAVELS({commit}, data) {
         let params = {
             page: data.page,
             perPage: data.perPage,
             where: data.where,
             query: data.query,
         };
-        axios.get('/api/travels', {params})
+         axios.get('/api/travels', {params})
             .then(res => {
                 {
                     commit('SET_TRAVELS', res.data);
@@ -61,8 +61,8 @@ let actions = {
             console.log(err)
         })
     },
-    GET_LAST_TRAVELS({commit}, data) {
-        axios.get('/api/travelsLast')
+    async GET_LAST_TRAVELS({commit}, data) {
+         axios.get('/api/travelsLast')
             .then(res => {
                 {
                     commit('SET_LAST_TRAVELS', res.data);
@@ -72,11 +72,11 @@ let actions = {
                 console.log(err)
             })
     },
-    GET_TRAVEL_COMMENTS({commit}, data) {
+    async GET_TRAVEL_COMMENTS({commit}, data) {
         let params = {
             where: data.where,
         };
-        axios.get('/api/travelComments', {params})
+         axios.get('/api/travelComments', {params})
             .then(res => {
                 {
                     commit('SET_COMMENTS', res.data);
@@ -130,7 +130,7 @@ let actions = {
                 console.log(err)
             })
     },
-    GET_TRAVEL({commit}, data) {
+    async GET_TRAVEL({commit}, data) {
         let params = {
             id: data.travel_id,
         };
@@ -171,7 +171,7 @@ let actions = {
                 console.log(err)
             })
     },
-    AUTO_SAVE_TRAVEL({commit}, dataTravel) {
+    async AUTO_SAVE_TRAVEL({commit}, dataTravel) {
         axios.post('/api/travels/save', dataTravel
         ).then(response => {
             if (!response.data.error) {
@@ -179,7 +179,32 @@ let actions = {
                 commit('SET_TRAVEL_ADDRESS_IDS', response.data.travelAddressIds);
             }
         });
-    }
+    },
+    async GET_POPULAR_TRAVELS({commit}, data) {
+        axios.get('/api/travelsPopular')
+            .then(res => {
+                {
+                    commit('SET_POPULAR_TRAVELS', res.data);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    },
+    async GET_NEAR_TRAVELS({commit}, data) {
+        let params = {
+            travel_id: data.travel_id,
+        };
+         axios.get('/api/travelsNear', {params})
+            .then(res => {
+                {
+                    commit('SET_NEAR_TRAVELS', res.data);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    },
 }
 
 export default actions

@@ -8,6 +8,12 @@ let mutations = {
     SET_LAST_TRAVELS(state, travels) {
         state.lastTravels = travels
     },
+    SET_POPULAR_TRAVELS(state, popularTravels) {
+        state.popularTravels = popularTravels
+    },
+    SET_NEAR_TRAVELS(state, nearTravels) {
+        state.nearTravels = nearTravels
+    },
     SET_OPTIONS_CITIES(state, optionsCities) {
         state.optionsCities = optionsCities
     },

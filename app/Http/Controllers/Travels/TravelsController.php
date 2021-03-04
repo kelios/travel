@@ -12,6 +12,7 @@ use App\Repositories\OverNightStayRepository;
 use App\Repositories\TransportRepository;
 use App\Repositories\ComplexityRepository;
 use App\Repositories\TravelRepository;
+use App\Repositories\TravelAddressRepository;
 use App\Repositories\CityRepository;
 use App\Repositories\CountryRepository;
 use App\Repositories\CompanionRepository;
@@ -24,7 +25,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Requests\Travel\IndexTravel;
 use App\Http\Requests\Travel\StoreTravel;
@@ -40,6 +41,11 @@ class TravelsController extends Controller
      * @var TravelRepository
      */
     private $travelRepository;
+
+    /**
+     * @var TravelRepository
+     */
+    public $travelAddressRepository;
 
     /**
      * @var CategoryRepository
@@ -93,7 +99,8 @@ class TravelsController extends Controller
                                 cityRepository $cityRepository,
                                 countryRepository $countryRepository,
                                 CompanionRepository $companionRepository,
-                                TravelViewRepository $travelViewRepository
+                                TravelViewRepository $travelViewRepository,
+                                TravelAddressRepository $travelAddressRepository
     )
     {
         $this->travelRepository = $travelRepository;
@@ -106,6 +113,7 @@ class TravelsController extends Controller
         $this->countryRepository = $countryRepository;
         $this->companionRepository = $companionRepository;
         $this->travelViewRepository = $travelViewRepository;
+        $this->travelAddressRepository = $travelAddressRepository;
 
     }
 
@@ -213,6 +221,51 @@ class TravelsController extends Controller
             ]);
         });
         return response()->json($travels);
+    }
+
+    public function getTravelsPopular(Request $request)
+    {
+        $travels = $this->travelRepository->getPopular();
+        $travels->transform(function ($value) {
+            return $value->only([
+                'name',
+                'url',
+                'publish',
+                'moderation',
+                'countryName',
+                'travel_image_thumb_url',
+                'slug',
+                'id'
+            ]);
+        });
+        return response()->json($travels);
+    }
+
+    public function getTravelsNear(Request $request)
+    {
+        $travel = $this->travelRepository->getById($request->travel_id);
+        $coord = $travel->travelAddress->pluck('coords')->toArray();
+        if (array_get($coord, 0)) {
+            $travelsIds = $this->travelAddressRepository->getNear('60', array_get($coord, 0));
+            unset($travelsIds[array_search($request->travel_id, $travelsIds)]);
+            $travels = $this->travelRepository->getById($travelsIds);
+
+            $travels->transform(function ($value) {
+                return $value->only([
+                    'name',
+                    'url',
+                    'publish',
+                    'moderation',
+                    'countryName',
+                    'travel_image_thumb_url',
+                    'slug',
+                    'id'
+                ]);
+            });
+            return response()->json($travels);
+        } else {
+            return response()->json();
+        }
     }
 
     public function search(IndexTravel $request)
@@ -348,9 +401,11 @@ class TravelsController extends Controller
     public function show($slug)
     {
         $travel = $this->travelRepository->getBySlug($slug);
+
         $travel['comments'] = $travel->getThreadedComments();
         $travel['reply'] = '';
         $travel['isFriend'] = true;
+
         if (auth()->user()) {
             $travel['isFriend'] = auth()->user()->isFriendWith(Arr::get($travel->users, 0)) ||
                 auth()->user()->hasSentFriendRequestTo(Arr::get($travel->users, 0));
@@ -359,6 +414,7 @@ class TravelsController extends Controller
         $where = ['id' => $travel->id];
 
         $this->travelViewRepository->map($travel);
+
         SEOMeta::setTitle($travel->name);
         SEOMeta::setDescription($travel->meta_description);
         SEOMeta::addMeta('travel:published_time', $travel->created_at->toW3CString(), 'property');
@@ -373,6 +429,23 @@ class TravelsController extends Controller
             'travelRoad' => (boolean)$travel['travelRoad'],
             'travelAddressAdress' => (boolean)$travel['travelAddressAdress'],
         ];
+        $travel = (object)$travel->only(
+            'id',
+            'totalLikes',
+            'userIds',
+            'userName',
+            'countUnicIpView',
+            'url',
+            'travel_image_thumb_url',
+            'isFriend',
+            'year',
+            'monthName',
+            'countryName',
+            'cityName',
+            'number_days',
+            'name'
+        );
+
         return view('travels.show', [
             'travel' => $travel,
             'travelMenu' => $travelMenu,
@@ -387,6 +460,38 @@ class TravelsController extends Controller
     public function findById(\Illuminate\Http\Request $request)
     {
         $travel = $this->travelRepository->getById($request->id);
+        $travel = (object)$travel->only(
+            'id',
+            'totalLikes',
+            'userIds',
+            'userName',
+            'countUnicIpView',
+            'url',
+            'travel_image_thumb_url',
+            'isFriend',
+            'year',
+            'monthName',
+            'countryName',
+            'cityName',
+            'number_days',
+            'name',
+            'gallery',
+            'description',
+            'categoryName',
+            'complexityName',
+            'transportName',
+            'overNightStayName',
+            'budget',
+            'number_peoples',
+            'plus',
+            'minus',
+            'recommendation',
+            'travelRoad',
+            'travelAddressAdress',
+            'reply',
+            'imageMeTravelArr',
+            'coordsMeTravelArr'
+        );
         return response()->json($travel);
     }
 
@@ -627,7 +732,7 @@ class TravelsController extends Controller
         $travel->fill($sanitized);
         $travel->save();
         $ids = Arr::pluck($travelAddr, 'id');
-        if($travel->travelAddress()->exists()) {
+        if ($travel->travelAddress()->exists()) {
             foreach ($travel->travelAddress as $oldAddr) {
                 if (!in_array($oldAddr->id, $ids)) {
                     $currentTravelAddr = $travel->travelAddress()->findOrFail($oldAddr->id);

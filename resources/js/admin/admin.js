@@ -54,6 +54,8 @@ Vue.use(ResponsiveImage);
 Vue.component('search-me-travel', require('../components/SearchMeTravel.vue').default);
 Vue.component('search-extended-travel', require('../components/SearchExtendedTravel.vue').default);
 Vue.component('travel-last', require('../components/TravelLast.vue').default);
+Vue.component('travel-popular', require('../components/TravelPopular.vue').default);
+Vue.component('travel-near', require('../components/TravelNear.vue').default);
 Vue.component('travel-list', require('../components/TravelList.vue').default);
 Vue.component('travel-card', require('../components/TravelCard.vue').default);
 Vue.component('travel-show-section', require('../components/TravelShowSection.vue').default);

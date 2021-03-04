@@ -308,8 +308,6 @@ class Travel extends Model implements HasMedia
         return $this->views()->distinct('ip')->count();
     }
 
-
-
     public function comments()
     {
         return $this->hasMany(Comment::class);

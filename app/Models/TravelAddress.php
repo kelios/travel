@@ -7,11 +7,12 @@ use Brackets\Media\HasMedia\HasMediaThumbsTrait;
 use Brackets\Media\HasMedia\ProcessMediaTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
 
 class TravelAddress extends Model implements HasMedia
 {
@@ -27,7 +28,9 @@ class TravelAddress extends Model implements HasMedia
         'country_id',
         'city_id',
         'coord',
-        'address'
+        'address',
+        'lat',
+        'lng'
     ];
 
 
@@ -38,8 +41,8 @@ class TravelAddress extends Model implements HasMedia
     ];
 
     protected $appends = [
-        'lat',
-        'lng',
+        // 'lat',
+        //   'lng',
         'coords',
         'travelImageAddress',
         'travelImageThumbUrl',
@@ -48,10 +51,10 @@ class TravelAddress extends Model implements HasMedia
     ];
 
     /* ************************ ACCESSOR ************************* */
-    public function getLatAttribute()
-    {
-        return Arr::get($this->coords, 'lat');
-    }
+    /*   public function getLatAttribute()
+       {
+           return Arr::get($this->coords, 'lat');
+       }*/
 
     public function getCoordsAttribute()
     {
@@ -67,7 +70,8 @@ class TravelAddress extends Model implements HasMedia
         }
     }
 
-    public function getImagesAddressAttribute(){
+    public function getImagesAddressAttribute()
+    {
         if ($this->travelImageThumbUrl) {
             return [
                 $this->travelImageThumbUrl
@@ -77,10 +81,10 @@ class TravelAddress extends Model implements HasMedia
         }
     }
 
-    public function getlngAttribute()
-    {
-        return Arr::get($this->coords, 'lng');
-    }
+    /* public function getlngAttribute()
+     {
+         return Arr::get($this->coords, 'lng');
+     }*/
 
 
     public function travels()
@@ -163,4 +167,25 @@ class TravelAddress extends Model implements HasMedia
     {
         return $this->getThumbs200ForCollection('travelImageAddress');
     }
+
+    public function сloseTo($radius = 60, $location = [])
+    {
+        $travelAddress = $this
+            ->selectRaw("travel_id,
+            ( 6371 * acos( cos( radians(" . $location['lat'] . ") ) *
+            cos( radians(lat) ) *
+            cos( radians(lng) - radians(" . $location['lng'] . ") ) +
+            sin( radians(" . $location['lat'] . ") ) *
+            sin( radians(lat) ) ) )
+            AS distance")
+            ->having("distance", "<", $radius)
+            ->orderBy("distance")
+            ->limit(20)
+            ->get();
+        foreach ($travelAddress as $travelAdd) {
+            $ids[] = $travelAdd->travel_id;
+        }
+        return array_unique($ids);
+    }
+
 }
