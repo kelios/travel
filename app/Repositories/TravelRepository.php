@@ -357,6 +357,20 @@ class TravelRepository implements TravelRepositoryInterface
     public function getBySlug($slug)
     {
         return $this->travel
+            ->with([
+                'categories',
+                'transports',
+                'month',
+                'complexity',
+                'overNightStay',
+                'cities',
+                'countries',
+                'travelAddress',
+                'companion',
+                'users',
+                'travelLike',
+                'views'
+            ])
             ->where('slug', '=', $slug)
             ->firstOrFail();
         /*->with([
