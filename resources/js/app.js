@@ -1,6 +1,4 @@
-require('./bootstrap');
-
-window.Vue = require('vue');
+import './bootstrap';
 
 import 'vue-multiselect/dist/vue-multiselect.min.css';
 import flatPickr from 'vue-flatpickr-component';
@@ -10,20 +8,19 @@ import Multiselect from 'vue-multiselect';
 import VeeValidate from 'vee-validate';
 import 'flatpickr/dist/flatpickr.css';
 import VueCookie from 'vue-cookie';
-import {Admin} from 'craftable';
 import VModal from 'vue-js-modal';
 import Vue from 'vue';
 import VueAgile from 'vue-agile'
 import BootstrapVue from 'bootstrap-vue';
 import {ToggleButton} from 'vue-js-toggle-button'
-import './admin/app-components/bootstrap';
-import './admin/index';
+
+import './app-components/bootstrap';
+import './index';
 import VueResource from "vue-resource";
-import ResponsiveImage from 'vue-media-library-image';
+//import ResponsiveImage from 'vue-media-library-image';
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 import VueSocialSharing from 'vue-social-sharing'
-
 import 'craftable/dist/ui';
 
 import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
@@ -51,11 +48,13 @@ Vue.component('ToggleButton', ToggleButton);
 Vue.use(VueAwesomeSwiper);
 Vue.use(VueSocialSharing);
 
-Vue.use(ResponsiveImage);
+//Vue.use(ResponsiveImage);
 
 Vue.component('search-me-travel', require('./components/SearchMeTravel.vue').default);
 Vue.component('search-extended-travel', require('./components/SearchExtendedTravel.vue').default);
 Vue.component('travel-last', require('./components/TravelLast.vue').default);
+Vue.component('travel-popular', require('./components/TravelPopular.vue').default);
+Vue.component('travel-near', require('./components/TravelNear.vue').default);
 Vue.component('travel-list', require('./components/TravelList.vue').default);
 Vue.component('travel-card', require('./components/TravelCard.vue').default);
 Vue.component('travel-show-section', require('./components/TravelShowSection.vue').default);
@@ -88,8 +87,8 @@ Vue.component('select-per-page', require('./components/SelectPerPage.vue').defau
 Vue.component('passport-clients', require('./components/passport/Clients.vue'));
 Vue.component('passport-authorized-clients', require('./components/passport/AuthorizedClients.vue'));
 Vue.component('passport-personal-access-tokens', require('./components/passport/PersonalAccessTokens.vue'));
-
 Vue.prototype.translate = require('./VueTranslation/Translation').default.translate;
+
 if (document.head.querySelector("meta[name='user-id']")) {
     Vue.prototype.authUserId = document.head.querySelector("meta[name='user-id']").content || '';
     Vue.prototype.authUserName = document.head.querySelector("meta[name='user-name']").content;
@@ -97,7 +96,6 @@ if (document.head.querySelector("meta[name='user-id']")) {
 }
 
 new Vue({
-    mixins: [Admin],
     el: '#app',
     store
 });

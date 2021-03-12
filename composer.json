@@ -10,7 +10,7 @@
     "require": {
         "php": "^7.3.0",
         "artesaos/seotools": "^0.19.1",
-        "brackets/craftable": "^6.0",
+        "brackets/craftable": "^7.0",
         "clevyr/laravel-feedback-form": "^0.1.3",
         "cmgmyr/messenger": "^2.21",
         "cviebrock/eloquent-sluggable": "^8.0",

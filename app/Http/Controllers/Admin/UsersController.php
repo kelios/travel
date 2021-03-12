@@ -55,7 +55,6 @@ class UsersController extends Controller
             }
             return ['data' => $data];
         }
-
         return view('admin.user.index', ['data' => $data]);
     }
 

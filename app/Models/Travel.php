@@ -16,6 +16,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Arr;
 use TravelSave;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Image\Manipulations;
 
 /**
  * Class Travel
@@ -117,19 +118,22 @@ class Travel extends Model implements HasMedia
     public function getTravelImageThumbUrlAttribute(): ?string
     {
         $travelImageThumbUrl = '';
-        $image = $this->getMedia('travelMainImage');
+        $image = $this->getMedia('travelMainImage')->first();
 
-        if (Arr::get($image, 0)) {
-            if (Storage::disk(env('APP_STORAGE_DISK', 'public'))->exists($image[0]->getPath())) {
-                Storage::disk(env('APP_STORAGE_DISK', 'public'))->delete($image[0]->getPath());
+        if ($image) {
+            if (Storage::disk(env('APP_STORAGE_DISK', 'public'))->exists($image->getPath())) {
+                Storage::disk(env('APP_STORAGE_DISK', 'public'))->delete($image->getPath());
             }
-            $travelImageThumbUrl = $image[0]->getUrl('thumb_200');
+            if (file_exists($image->getPath('webpTravelMainImage'))) {
+                $travelImageThumbUrl = $image->getUrl('webpTravelMainImage');
+            } else {
+                $travelImageThumbUrl = $image->getUrl('thumb_200');
+            }
         }
         return $travelImageThumbUrl
             ?: Config::get('constants.image.defaultCatImage');
 
     }
-
 
 
     public function getGalleryAttribute()
@@ -486,11 +490,25 @@ class Travel extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->autoRegisterThumb200();
+
+        $this->addMediaConversion('webpTravelMainImage')
+            ->width(914)
+            ->height(538)
+            ->fit('crop', 914, 914)
+            ->watermark(public_path('/media/slider/watermark.png'))
+            ->watermarkOpacity(50)
+            ->format(Manipulations::FORMAT_WEBP)
+            ->optimize()
+            ->performOnCollections('travelMainImage')
+            ->nonQueued();
+
         $this->addMediaConversion('detail_hd')
             ->quality(80)
             ->width(1080)
             ->height(1080)
             ->fit('crop', 1080, 1080)
+            ->watermark(public_path('/media/slider/watermark.png'))
+            ->watermarkOpacity(50)
             ->optimize()
             ->withResponsiveImages()
             ->performOnCollections('gallery')
@@ -507,6 +525,8 @@ class Travel extends Model implements HasMedia
                 ->width(914)
                 ->height(538)
                 ->fit('crop', 914, 914)
+                ->watermark(public_path('/media/slider/watermark.png'))
+                ->watermarkOpacity(50)
                 ->optimize()
                 ->performOnCollections($mediaCollection->getName())
                 ->nonQueued();
