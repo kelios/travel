@@ -14,7 +14,7 @@ class Mediaupdate8v9 extends Migration
     public function up()
     {
         Schema::table('media', function (Blueprint $table) {
-            $table->json('generated_conversions')->default('[]');
+            $table->json('generated_conversions')->nullable();
         });
 
     }
