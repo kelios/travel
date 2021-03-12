@@ -132,6 +132,7 @@
     import CommentList from './CommentList.vue';
     import {mapGetters} from "vuex";
 
+
     export default {
         name: 'TravelShowList',
         props: ['travel_id', 'where'],
@@ -168,7 +169,7 @@
             getTravelData() {
                 this.$store.dispatch('GET_TRAVEL', {'travel_id': this.travel_id});
             },
-            comment(travelReply, travelId) {
+            async comment(travelReply, travelId) {
                 axios.post('/comments', {
                     comment: travelReply,
                     travel_id: travelId,

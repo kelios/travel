@@ -152,7 +152,7 @@ Vue.component('travel-form', {
             this.getPostData();
             this.$store.dispatch('AUTO_SAVE_TRAVEL', this.form)
         },
-        getCountries() {
+        async getCountries() {
             let vm = this;
             axios.get('/location/countries')
                 .then(function (response) {
@@ -163,7 +163,7 @@ Vue.component('travel-form', {
                 });
 
         },
-        getUsers() {
+        async getUsers() {
             let vm = this;
             axios.get('/api/users')
                 .then(function (response) {

@@ -32,7 +32,7 @@
             }
         },
         methods: {
-            replyTo(comment) {
+            async replyTo(comment) {
                 axios.post('/comments', {
                     comment: this.content,
                     travel_id: comment.travel_id,

@@ -23,6 +23,12 @@ mix.styles(
     'public/css/showmetravel.min.css'
 );
 
+mix.webpackConfig({
+    output:{
+        chunkFilename:'js/vuejs_code_split/[name].js',
+    }
+});
+
 mix.js('resources/js/app.js', 'public/js');
     //.extract(['vue']);
 

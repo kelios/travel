@@ -14,18 +14,16 @@ import VueAgile from 'vue-agile'
 import BootstrapVue from 'bootstrap-vue';
 import {ToggleButton} from 'vue-js-toggle-button'
 
-import './app-components/bootstrap';
-import './index';
 import VueResource from "vue-resource";
-//import ResponsiveImage from 'vue-media-library-image';
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/css/swiper.css'
 import VueSocialSharing from 'vue-social-sharing'
-import 'craftable/dist/ui';
 
 import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css';
+
 import store from './store/index'
+import 'craftable/dist/ui';
+import './app-components/bootstrap';
+import './index';
 
 
 Vue.component('l-map', LMap);
@@ -45,44 +43,42 @@ Vue.use(BootstrapVue);
 Vue.use(VueAgile);
 Vue.component('ToggleButton', ToggleButton);
 
-Vue.use(VueAwesomeSwiper);
 Vue.use(VueSocialSharing);
 
-//Vue.use(ResponsiveImage);
 
-Vue.component('search-me-travel', require('./components/SearchMeTravel.vue').default);
-Vue.component('search-extended-travel', require('./components/SearchExtendedTravel.vue').default);
-Vue.component('travel-last', require('./components/TravelLast.vue').default);
-Vue.component('travel-popular', require('./components/TravelPopular.vue').default);
-Vue.component('travel-near', require('./components/TravelNear.vue').default);
-Vue.component('travel-list', require('./components/TravelList.vue').default);
-Vue.component('travel-card', require('./components/TravelCard.vue').default);
-Vue.component('travel-show-section', require('./components/TravelShowSection.vue').default);
-Vue.component('travel-show-list', require('./components/TravelShowList.vue').default);
-Vue.component('travel-show-menu', require('./components/TravelShowMenu.vue').default);
-Vue.component('travel-show-filter', require('./components/TravelShowFilter.vue').default);
-Vue.component('travel-card-last', require('./components/TravelCardLast.vue').default);
-Vue.component('map-me-travel', require('./components/mapMeTravel.vue').default);
-Vue.component('slider', require('./components/Slider.vue').default);
-Vue.component('pagination', require('laravel-vue-pagination'));
-Vue.component('feedback-form', require('./components/FeedbackForm.vue').default);
-Vue.component('comments', require('./components/Comments.vue').default);
-Vue.component('comment', require('./components/Comment.vue').default);
-Vue.component('comment-list', require('./components/CommentList.vue').default);
-Vue.component('comment-form', require('./components/CommentForm.vue').default);
-Vue.component('like-component', require('./components/LikeComponent.vue').default);
-Vue.component('favorite-component', require('./components/FavoriteComponent.vue').default);
-Vue.component('friend-list', require('./components/FriendList.vue').default);
-Vue.component('friend-card', require('./components/FriendCard.vue').default);
-Vue.component('add-friend', require('./components/AddFriend.vue').default);
-Vue.component('message-component', require('./components/MessageComponent.vue').default);
-Vue.component('message-modal', require('./components/MessageModal.vue').default);
-Vue.component('modal', require('./components/Modal.vue').default);
-Vue.component('message-list', require('./components/MessageList.vue').default);
-Vue.component('message-between-list', require('./components/MessageBetweenList.vue').default);
-Vue.component('message-send', require('./components/MessageSend.vue').default);
-Vue.component('upload-image-drag', require('./components/UploadImageDrag.vue').default);
-Vue.component('select-per-page', require('./components/SelectPerPage.vue').default);
+Vue.component('search-me-travel', () => import('./components/SearchMeTravel.vue'));
+Vue.component('search-extended-travel', () => import('./components/SearchExtendedTravel.vue'));
+Vue.component('travel-last', () => import('./components/TravelLast.vue'));
+Vue.component('travel-popular', () => import('./components/TravelPopular.vue'));
+Vue.component('travel-near', () => import('./components/TravelNear.vue'));
+Vue.component('travel-list', () => import('./components/TravelList.vue'));
+Vue.component('travel-card', () => import('./components/TravelCard.vue'));
+Vue.component('travel-show-section', () => import('./components/TravelShowSection.vue'));
+Vue.component('travel-show-list', () => import('./components/TravelShowList.vue'));
+Vue.component('travel-show-menu', () => import('./components/TravelShowMenu.vue'));
+Vue.component('travel-show-filter', () => import('./components/TravelShowFilter.vue'));
+Vue.component('travel-card-last', () => import('./components/TravelCardLast.vue'));
+Vue.component('map-me-travel', () => import('./components/mapMeTravel.vue'));
+Vue.component('slider', () => import('./components/Slider.vue'));
+Vue.component('pagination', () => import('laravel-vue-pagination'));
+Vue.component('feedback-form', () => import('./components/FeedbackForm.vue'));
+Vue.component('comments', () => import('./components/Comments.vue'));
+Vue.component('comment', () => import('./components/Comment.vue'));
+Vue.component('comment-list', () => import('./components/CommentList.vue'));
+Vue.component('comment-form', () => import('./components/CommentForm.vue'));
+Vue.component('like-component', () => import('./components/LikeComponent.vue'));
+Vue.component('favorite-component', () => import('./components/FavoriteComponent.vue'));
+Vue.component('friend-list', () => import('./components/FriendList.vue'));
+Vue.component('friend-card', () => import('./components/FriendCard.vue'));
+Vue.component('add-friend', () => import('./components/AddFriend.vue'));
+Vue.component('message-component', () => import('./components/MessageComponent.vue'));
+Vue.component('message-modal', () => import('./components/MessageModal.vue'));
+Vue.component('modal', () => import('./components/Modal.vue'));
+Vue.component('message-list', () => import('./components/MessageList.vue'));
+Vue.component('message-between-list', () => import('./components/MessageBetweenList.vue'));
+Vue.component('message-send', () => import('./components/MessageSend.vue'));
+Vue.component('upload-image-drag', () => import('./components/UploadImageDrag.vue'));
+Vue.component('select-per-page', () => import('./components/SelectPerPage.vue'));
 
 Vue.component('passport-clients', require('./components/passport/Clients.vue'));
 Vue.component('passport-authorized-clients', require('./components/passport/AuthorizedClients.vue'));

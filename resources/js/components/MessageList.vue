@@ -106,7 +106,7 @@
                     this.markUsRead(threadId);
                 }
             },
-            markUsRead(threadId) {
+            async  markUsRead(threadId) {
                 axios.put('/api/messages/markUsRead/' + threadId).then(response => {
                 });
             }

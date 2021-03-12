@@ -34,7 +34,7 @@
             }
         },
         methods: {
-            sendTo() {
+            async sendTo() {
                 axios.post('/api/messages', {
                     message: this.content,
                     travel_id: this.travel_id,

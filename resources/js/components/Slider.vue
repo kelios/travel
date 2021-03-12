@@ -30,6 +30,9 @@
 </template>
 
 <script>
+    import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+    import 'swiper/css/swiper.css';
+
     export default {
         data() {
             return {
@@ -47,7 +50,13 @@
                 }
             }
         },
-
+        components: {
+            Swiper,
+            SwiperSlide
+        },
+        directives: {
+            swiper: directive
+        },
         props: ['slides'],
     }
 </script>

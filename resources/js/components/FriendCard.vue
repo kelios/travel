@@ -40,7 +40,7 @@
 
         },
         methods: {
-            acceptFriendRequest(id) {
+            async  acceptFriendRequest(id) {
                 let vm = this;
                 axios.post('/api/acceptFriendRequest', {
                     friend_id: this.friend.id

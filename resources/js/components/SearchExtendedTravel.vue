@@ -177,7 +177,7 @@
         },
 
         methods: {
-            getCountries() {
+            async  getCountries() {
                 let vm = this;
                 axios.get('/location/countriesforsearch')
                     .then(function (response) {

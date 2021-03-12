@@ -169,7 +169,7 @@
             }
         },
         methods: {
-            fetchComments() {
+            async fetchComments() {
                 axios.get('/comments/' + this.travelId).then(res => {
                     this.commentsData = res.data.data;
                     this.comments = 1;
@@ -204,7 +204,7 @@
                     }
                 }
             },
-            saveComment() {
+            async saveComment() {
                 if (this.message !== null && this.message != ' ') {
                     this.errorComment = null;
                     axios.post('/comments', {
@@ -227,7 +227,7 @@
                     this.errorComment = "Please enter a comment before saving";
                 }
             },
-            replyComment(commentId, index) {
+            async replyComment(commentId, index) {
                 if (this.message != null && this.message != ' ') {
                     this.errorReply = null;
                     axios.post('/comments', {

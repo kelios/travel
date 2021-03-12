@@ -18,7 +18,7 @@
 
         },
         methods: {
-            sendReqFriend() {
+            async sendReqFriend() {
                 axios.post('/api/sendreqfriends', {
                     friend_id: this.travel.users[0].id
                 })

@@ -91,7 +91,7 @@
             getResults(page = 1) {
                 this.$store.dispatch('GET_FRIENDS', {'page': page, 'where': this.where});
             },
-            getPendingFriends() {
+            async getPendingFriends() {
                 axios.get('/api/friendsPending')
                     .then(response => {
                         this.friendsPending = response.data;

@@ -30,7 +30,7 @@
                     })
                     .catch()
             },
-            likePost() {
+            async likePost() {
                 axios.post('/like/' + this.travel_id)
                     .then(response => {
                         if (response.data.count > 0) {
