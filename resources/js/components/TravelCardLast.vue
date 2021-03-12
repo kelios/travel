@@ -1,8 +1,13 @@
 <template>
 
     <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-        <a v-bind:href="travel.url"> <img :src="getCover(travel)" class="img-fluid rounded-circle mb-3"
-                                                  :alt="travel.name">
+        <a v-bind:href="travel.url">
+            <img :src="getCover(travel)"
+                 class="img-fluid rounded-circle mb-3"
+                 :alt="travel.name"
+                 width="192"
+                 height="192"
+            >
             <h5>{{ travel.name }}</h5>
         </a>
         <p class="font-weight-light mb-0">

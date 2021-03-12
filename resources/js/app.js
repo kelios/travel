@@ -42,7 +42,6 @@ Vue.use(VueCookie);
 Vue.use(BootstrapVue);
 Vue.use(VueAgile);
 Vue.component('ToggleButton', ToggleButton);
-
 Vue.use(VueSocialSharing);
 
 
@@ -80,9 +79,11 @@ Vue.component('message-send', () => import('./components/MessageSend.vue'));
 Vue.component('upload-image-drag', () => import('./components/UploadImageDrag.vue'));
 Vue.component('select-per-page', () => import('./components/SelectPerPage.vue'));
 
-Vue.component('passport-clients', require('./components/passport/Clients.vue'));
-Vue.component('passport-authorized-clients', require('./components/passport/AuthorizedClients.vue'));
-Vue.component('passport-personal-access-tokens', require('./components/passport/PersonalAccessTokens.vue'));
+Vue.component('passport-clients', () => import('./components/passport/Clients.vue'));
+Vue.component('passport-authorized-clients', () => import('./components/passport/AuthorizedClients.vue'));
+Vue.component('passport-personal-access-tokens', () => import('./components/passport/PersonalAccessTokens.vue'));
+
+
 Vue.prototype.translate = require('./VueTranslation/Translation').default.translate;
 
 if (document.head.querySelector("meta[name='user-id']")) {

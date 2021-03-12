@@ -153,5 +153,5 @@
 
 @include('brackets/admin-ui::admin.partials.wysiwyg-svgs')
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
-<script src="/js/app.js" defer></script>
+<script rel="preload" src="/js/app.js" defer  as="script"></script>
 </html>
