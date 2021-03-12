@@ -124,7 +124,8 @@ class Travel extends Model implements HasMedia
             if (Storage::disk(env('APP_STORAGE_DISK', 'public'))->exists($image->getPath())) {
                 Storage::disk(env('APP_STORAGE_DISK', 'public'))->delete($image->getPath());
             }
-            if (file_exists($image->getPath('webpTravelMainImage'))) {
+
+            if (Storage::disk(env('APP_STORAGE_DISK', 'public'))->exists($image->getPath('webpTravelMainImage'))) {
                 $travelImageThumbUrl = $image->getUrl('webpTravelMainImage');
             } else {
                 $travelImageThumbUrl = $image->getUrl('thumb_200');
