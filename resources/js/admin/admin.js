@@ -14,6 +14,7 @@ import Vue from 'vue';
 
 import './app-components/bootstrap';
 import './index';
+import store from './../store/index'
 
 import 'craftable/dist/ui';
 
@@ -27,4 +28,5 @@ Vue.use(VueCookie);
 
 new Vue({
     mixins: [Admin],
+    store
 });
