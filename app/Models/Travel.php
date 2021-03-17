@@ -133,7 +133,7 @@ class Travel extends Model implements HasMedia
             }
         }
 
-        if (app()->environment('production') && $travelImageThumbUrl) {
+        /*if (app()->environment('production') && $travelImageThumbUrl) {
             $pattern = 'https://'.config('filesystems.disks.s3.bucket') .
                 '.' . config('filesystems.disks.s3.driver') .
                 '.' . config('filesystems.disks.s3.region')
@@ -143,8 +143,9 @@ class Travel extends Model implements HasMedia
         } else {
             return $travelImageThumbUrl
                 ?: config('constants.image.defaultCatImage');
-        }
-
+        }*/
+        return $travelImageThumbUrl
+            ?: config('constants.image.defaultCatImage');
     }
 
     /**
