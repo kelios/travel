@@ -36,12 +36,14 @@
     import {mapGetters} from 'vuex'
     import pagination from 'laravel-vue-pagination'
 
+
     export default {
         name: 'TravelList',
         props: ['readonly', 'filter'],
         components: {
             travel,
-            pagination
+            pagination,
+
         },
         mounted() {
             this.getResults();

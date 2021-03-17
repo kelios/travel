@@ -1,5 +1,8 @@
 import AppForm from '../app-components/Form/AppForm';
+import VeeValidate from 'vee-validate';
 import L from "leaflet";
+import 'leaflet/dist/leaflet.css';
+import {ToggleButton} from 'vue-js-toggle-button'
 import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue2-leaflet";
 import {mapGetters} from "vuex";
 
@@ -9,6 +12,8 @@ import Multiselect from 'vue-multiselect';
 const ENDPOINTREVERSE = 'https://nominatim.openstreetmap.org/reverse';
 const ENDPOINTSEARCH = 'https://nominatim.openstreetmap.org/search?';
 const FORMAT = 'jsonv2';
+
+Vue.use(VeeValidate, {strict: true})
 
 Vue.component('travel-form', {
     mixins: [AppForm],
@@ -340,5 +345,6 @@ Vue.component('travel-form', {
         LTooltip,
         LIcon,
         Multiselect,
+        'toggle-button':ToggleButton
     }
 });

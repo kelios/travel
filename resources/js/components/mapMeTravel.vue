@@ -29,6 +29,7 @@
 
 <script>
     import L from "leaflet";
+    import 'leaflet/dist/leaflet.css';
     import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue2-leaflet";
     import {mapGetters} from "vuex";
 
@@ -99,9 +100,9 @@
 
         },
         components: {
-            LMap,
-            LTileLayer,
-            LMarker,
+            'l-map':LMap,
+            'l-tile-layer':LTileLayer,
+            'l-marker':LMarker,
             LPopup,
             LTooltip,
             LIcon

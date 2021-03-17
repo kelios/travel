@@ -25,9 +25,16 @@
 </template>
 
 <script>
+    import {BButton, BFormGroup, BForm} from 'bootstrap-vue';
+
     export default {
         name: "MessageSend",
         props: ['recipient_id'],
+        components: {
+            'b-button': BButton,
+            'b-form-group': BFormGroup,
+            'b-form': BForm,
+        },
         data() {
             return {
                 content: ''

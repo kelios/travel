@@ -13,6 +13,7 @@
 </template>
 
 <script>
+    import Multiselect from 'vue-multiselect'
     import {mapGetters} from "vuex";
 
     export default {
@@ -41,7 +42,8 @@
                 this.$store.commit('SET_PERPAGE', count);
                 this.$emit("getRes");
             }
-        }
+        },
+        components: {Multiselect}
 
     }
 </script>
@@ -57,7 +59,8 @@
         font-size: 14px;
 
     }
-    .multiselect__input, .multiselect__single{
+
+    .multiselect__input, .multiselect__single {
         border-top-right-radius: 0.2rem;
         border-bottom-right-radius: 0.2rem;
     }

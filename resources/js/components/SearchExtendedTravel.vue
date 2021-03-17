@@ -1,4 +1,3 @@
-import {LMap} from "vue2-leaflet";import {LTileLayer} from "vue2-leaflet";import {LMarker} from "vue2-leaflet";import {LPopup} from "vue2-leaflet";import {LTooltip} from "vue2-leaflet";import {LIcon} from "vue2-leaflet";
 <template>
     <div class="container">
         <div class="input-group-append mb-4">
@@ -138,12 +137,18 @@ import {LMap} from "vue2-leaflet";import {LTileLayer} from "vue2-leaflet";import
 
 <script>
     import 'vue-multiselect/dist/vue-multiselect.min.css';
-    import Multiselect from 'vue-multiselect';
+    import Multiselect from 'vue-multiselect'
+    import VeeValidate from 'vee-validate';
     import {mapGetters} from "vuex";
-    Vue.component('multiselect', Multiselect)
+
+    Vue.use(VeeValidate, {strict: true})
+
     export default {
         name: "SearchExtendedTravel",
         props: ['travels', 'where', 'filter_hide'],
+        components: {
+            Multiselect
+        },
         data: function () {
             return {
                 countries: [],

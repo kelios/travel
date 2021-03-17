@@ -4,38 +4,27 @@ import flatPickr from 'vue-flatpickr-component';
 import VueQuillEditor from 'vue-quill-editor';
 import Notifications from 'vue-notification';
 
-import VeeValidate from 'vee-validate';
 import 'flatpickr/dist/flatpickr.css';
 
 import VModal from 'vue-js-modal';
 import Vue from 'vue';
-import {ToggleButton} from 'vue-js-toggle-button'
 
 import VueResource from "vue-resource";
 import VueSocialSharing from 'vue-social-sharing'
 
-import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
-import 'leaflet/dist/leaflet.css';
 
 import store from './store/index'
 import 'craftable/dist/ui';
 import './app-components/bootstrap';
 import './index';
 
-
-Vue.component('l-map', LMap);
-Vue.component('l-tile-layer', LTileLayer);
-Vue.component('l-marker', LMarker);
-
 Vue.use(VueResource);
 
-Vue.use(VeeValidate, {strict: true});
 Vue.component('datetime', flatPickr);
 Vue.use(VModal, {dialog: true, dynamic: true, injectModalsContainer: true});
 Vue.use(VueQuillEditor);
 Vue.use(Notifications);
 
-Vue.component('ToggleButton', ToggleButton);
 Vue.use(VueSocialSharing);
 
 

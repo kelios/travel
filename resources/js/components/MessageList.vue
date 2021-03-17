@@ -6,7 +6,7 @@
                            sidebar-class="topmetravel">
                     <div class="px-3 py-2">
                         <b-list-group class="paddingtop3">
-                            <b-button class="showForMenu" v-b-toggle.sidebar-no-header>
+                            <b-button class="showForMenu" b-toggle.sidebar-no-header>
                                 {{translate('user.toogle_user_mes')}}
                             </b-button>
                             <div v-if="usersMessages" v-for="thread in usersMessages">
@@ -33,7 +33,7 @@
                         <div class="card-title"> {{translate('travels.messageWith')}}
                             {{userName}}
                         </div>
-                        <b-button v-b-toggle.sidebar-no-header>{{translate('user.toogle_user_mes')}}</b-button>
+                        <b-button b-toggle.sidebar-no-header>{{translate('user.toogle_user_mes')}}</b-button>
                     </div>
                     <message-send v-if="usersMessages.length" v-bind:recipient_id="showMessageUser"></message-send>
                     <div class="card-body scroll">
@@ -47,13 +47,25 @@
 </template>
 
 <script>
-
+    import {
+        BSidebar, BRow, BCol, BListGroup, BListGroupItem,
+        VBToggle, BButton
+    } from 'bootstrap-vue';
     import {mapGetters} from "vuex";
 
 
     export default {
         name: "MessageList",
         props: [],
+        components: {
+            'b-row': BRow,
+            'b-col': BCol,
+            'b-sidebar': BSidebar,
+            'b-list-group': BListGroup,
+            'b-list-group-item': BListGroupItem,
+            'b-toggle': VBToggle,
+            'b-button': BButton,
+        },
         data() {
             return {
                 showMessageUser: '',
@@ -106,7 +118,7 @@
                     this.markUsRead(threadId);
                 }
             },
-            async  markUsRead(threadId) {
+            async markUsRead(threadId) {
                 axios.put('/api/messages/markUsRead/' + threadId).then(response => {
                 });
             }
