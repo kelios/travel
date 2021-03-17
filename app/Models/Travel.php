@@ -132,7 +132,7 @@ class Travel extends Model implements HasMedia
             }
         }
 
-        if (app()->environment('prod') && $travelImageThumbUrl) {
+        if (app()->environment('production') && $travelImageThumbUrl) {
             $pattern = config('filesystems.disks.s3.bucket') .
                 '.' . config('filesystems.disks.s3.driver') .
                 '.' . config('filesystems.disks.s3.region')
