@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-nav class="navbar-nav" v-b-scrollspy:nav-scroller>
+        <b-nav class="navbar-nav" b-scrollspy:nav-scroller>
             <b-nav-item class="nav-item" href="#gallery" v-if="travel_menu.gallery">
                 {{ translate('travels.gallery') }}
             </b-nav-item>
@@ -22,10 +22,10 @@
             <b-nav-item class="nav-item" href="#map" v-if="travel_menu.travelAddressAdress">
                 {{ translate('travels.map') }}
             </b-nav-item>
-            <b-nav-item class="nav-item" href="#comment" >
+            <b-nav-item class="nav-item" href="#comment">
                 {{ translate('travels.comment') }}
             </b-nav-item>
-            <b-nav-item class="nav-item" href="#nearTravels" >
+            <b-nav-item class="nav-item" href="#nearTravels">
                 {{translate('travels.nearTravels')}}
             </b-nav-item>
         </b-nav>
@@ -33,10 +33,17 @@
 </template>
 
 <script>
+    import {BNav , BNavItem, VBScrollspy } from 'bootstrap-vue';
 
     export default {
         name: 'TravelShowMenu',
         props: ['travel_menu'],
+        //components: {BNavbar, VBScrollspyPlugin},
+        components: {
+            'b-nav': BNav,
+            'b-nav-item': BNavItem,
+            'b-scrollspy': VBScrollspy,
+        },
         methods: {}
     }
 </script>

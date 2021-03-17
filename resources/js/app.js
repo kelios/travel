@@ -1,17 +1,14 @@
 import './bootstrap';
 
-import 'vue-multiselect/dist/vue-multiselect.min.css';
 import flatPickr from 'vue-flatpickr-component';
 import VueQuillEditor from 'vue-quill-editor';
 import Notifications from 'vue-notification';
-import Multiselect from 'vue-multiselect';
+
 import VeeValidate from 'vee-validate';
 import 'flatpickr/dist/flatpickr.css';
-import VueCookie from 'vue-cookie';
+
 import VModal from 'vue-js-modal';
 import Vue from 'vue';
-import VueAgile from 'vue-agile'
-import BootstrapVue from 'bootstrap-vue';
 import {ToggleButton} from 'vue-js-toggle-button'
 
 import VueResource from "vue-resource";
@@ -32,15 +29,12 @@ Vue.component('l-marker', LMarker);
 
 Vue.use(VueResource);
 
-Vue.component('multiselect', Multiselect);
 Vue.use(VeeValidate, {strict: true});
 Vue.component('datetime', flatPickr);
 Vue.use(VModal, {dialog: true, dynamic: true, injectModalsContainer: true});
 Vue.use(VueQuillEditor);
 Vue.use(Notifications);
-Vue.use(VueCookie);
-Vue.use(BootstrapVue);
-Vue.use(VueAgile);
+
 Vue.component('ToggleButton', ToggleButton);
 Vue.use(VueSocialSharing);
 
@@ -48,11 +42,10 @@ Vue.use(VueSocialSharing);
 Vue.component('search-me-travel', () => import('./components/SearchMeTravel.vue'));
 Vue.component('search-extended-travel', () => import('./components/SearchExtendedTravel.vue'));
 Vue.component('travel-last', () => import('./components/TravelLast.vue'));
-Vue.component('travel-popular', () => import('./components/TravelPopular.vue'));
-Vue.component('travel-near', () => import('./components/TravelNear.vue'));
+
 Vue.component('travel-list', () => import('./components/TravelList.vue'));
 Vue.component('travel-card', () => import('./components/TravelCard.vue'));
-Vue.component('travel-show-section', () => import('./components/TravelShowSection.vue'));
+
 Vue.component('travel-show-list', () => import('./components/TravelShowList.vue'));
 Vue.component('travel-show-menu', () => import('./components/TravelShowMenu.vue'));
 Vue.component('travel-show-filter', () => import('./components/TravelShowFilter.vue'));

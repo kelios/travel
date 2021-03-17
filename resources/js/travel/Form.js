@@ -3,12 +3,16 @@ import L from "leaflet";
 import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue2-leaflet";
 import {mapGetters} from "vuex";
 
+import 'vue-multiselect/dist/vue-multiselect.min.css';
+import Multiselect from 'vue-multiselect';
+
 const ENDPOINTREVERSE = 'https://nominatim.openstreetmap.org/reverse';
 const ENDPOINTSEARCH = 'https://nominatim.openstreetmap.org/search?';
 const FORMAT = 'jsonv2';
 
 Vue.component('travel-form', {
     mixins: [AppForm],
+
     mounted() {
         this.init();
         this.getCountries();
@@ -146,7 +150,7 @@ Vue.component('travel-form', {
         autoSave() {
             setInterval(() => {
                 this.save();
-                  }, 300000)
+            }, 300000)
         },
         save(event) {
             this.getPostData();
@@ -163,7 +167,7 @@ Vue.component('travel-form', {
                 });
 
         },
-        async  getUsers() {
+        async getUsers() {
             let vm = this;
             axios.get('/api/users')
                 .then(function (response) {
@@ -334,6 +338,7 @@ Vue.component('travel-form', {
         LMarker,
         LPopup,
         LTooltip,
-        LIcon
+        LIcon,
+        Multiselect,
     }
 });

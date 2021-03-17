@@ -131,7 +131,13 @@
 </template>
 
 <script>
+
     import CommentList from './CommentList.vue';
+    import TravelNear from './TravelNear.vue';
+    import TravelPopular from './TravelPopular.vue';
+    import TravelShowSection from './TravelShowSection.vue';
+    import {BCard} from 'bootstrap-vue';
+
     import {mapGetters} from "vuex";
 
 
@@ -142,7 +148,11 @@
             return {}
         },
         components: {
-            'comment-list': CommentList
+            'comment-list': CommentList,
+            'travel-near': TravelNear,
+            'travel-popular': TravelPopular,
+            'travel-show-section': TravelShowSection,
+            'b-card-body': BCard,
         },
         created() {
             this.getTravelData();
