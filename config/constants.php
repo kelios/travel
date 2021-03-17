@@ -21,6 +21,7 @@ return [
     ],
     'resize'=>
         [
-            'previewMainTravel'=>'image-server/192'
+            'previewSamllMainTravel'=>'image-server/192',
+            'previewMainTravel'=>'image-server/400'
         ]
 ];
