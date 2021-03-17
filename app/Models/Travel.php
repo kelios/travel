@@ -137,7 +137,7 @@ class Travel extends Model implements HasMedia
                 '.' . config('filesystems.disks.s3.driver') .
                 '.' . config('filesystems.disks.s3.region')
                 . '.amazonaws.com';
-            $newUrl = config('constants.resize.previewMainTravel');
+            $newUrl = config('app.url').'/'.config('constants.resize.previewMainTravel');
             return str_replace($pattern, $newUrl, $travelImageThumbUrl);
         } else {
             return $travelImageThumbUrl
