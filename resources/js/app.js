@@ -1,30 +1,14 @@
 import './bootstrap';
-
-import flatPickr from 'vue-flatpickr-component';
-import VueQuillEditor from 'vue-quill-editor';
-import Notifications from 'vue-notification';
-
-import 'flatpickr/dist/flatpickr.css';
-
-import VModal from 'vue-js-modal';
-import Vue from 'vue';
-
-import VueResource from "vue-resource";
-import VueSocialSharing from 'vue-social-sharing'
-
-
 import store from './store/index'
 import 'craftable/dist/ui';
 import './app-components/bootstrap';
 import './index';
 
-Vue.use(VueResource);
+import VModal from 'vue-js-modal';
+import Vue from 'vue';
+import VueSocialSharing from 'vue-social-sharing'
 
-Vue.component('datetime', flatPickr);
 Vue.use(VModal, {dialog: true, dynamic: true, injectModalsContainer: true});
-Vue.use(VueQuillEditor);
-Vue.use(Notifications);
-
 Vue.use(VueSocialSharing);
 
 
