@@ -4,7 +4,11 @@
             <img
                 lazy="loading"
                 :src="travel.travel_image_thumb_url"
-                class="img-fluid" :alt="travel.name">
+                class="img-fluid"
+                :alt="travel.name"
+                width="400"
+                height="400"
+            >
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <p class="text-truncate">{{ travel.name }}</p>
