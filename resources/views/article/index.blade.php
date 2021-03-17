@@ -15,6 +15,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="card col-11 shadow-sm">
                                     <img
+                                        lazy="loading"
                                         src="{{$article->article_image_thumb_url}}"
                                         class="img-fluid" alt="{{$article->name}}">
                                     <div class="card-body">

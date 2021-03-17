@@ -6,7 +6,7 @@
         <div class="comment-form" v-if="user">
             <!-- Comment Avatar -->
             <div class="comment-avatar">
-                <img :src="user.user_avatar_thumb_url">
+                <img lazy="loading" :src="user.user_avatar_thumb_url">
             </div>
             <form class="form" name="form">
                 <div class="form-row">
@@ -29,7 +29,7 @@
                 <div class="comment">
                     <!-- Comment Avatar -->
                     <div class="comment-avatar">
-                        <img :src="comment.user.user_avatar_thumb_url">
+                        <img lazy="loading" :src="comment.user.user_avatar_thumb_url">
                     </div>
                     <!-- Comment Box -->
                     <div class="comment-box">
@@ -57,7 +57,7 @@
                     <div class="comment-form comment-v" v-if="commentBoxs[index]">
                         <!-- Comment Avatar -->
                         <div class="comment-avatar">
-                            <img :src="user.user_avatar_thumb_url">
+                            <img lazy="loading" :src="user.user_avatar_thumb_url">
                         </div>
                         <form class="form" name="form">
                             <div class="form-row">
@@ -84,7 +84,7 @@
                             <div class="comment reply">
                                 <!-- Comment Avatar -->
                                 <div class="comment-avatar">
-                                    <img :src="replies.user.user_avatar_thumb_url">
+                                    <img lazy="loading" :src="replies.user.user_avatar_thumb_url">
                                 </div>
                                 <!-- Comment Box -->
                                 <div class="comment-box" style="background: grey;">
@@ -109,7 +109,7 @@
                                 <div class="comment-form reply" v-if="replyCommentBoxs[index2]">
                                     <!-- Comment Avatar -->
                                     <div class="comment-avatar">
-                                        <img :src="user.user_avatar_thumb_url">
+                                        <img lazy="loading" :src="user.user_avatar_thumb_url">
                                     </div>
                                     <form class="form" name="form">
                                         <div class="form-row">

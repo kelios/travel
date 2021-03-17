@@ -76,7 +76,9 @@
                 <ul class="list-group">
                     <li class="list-group-item" v-for="(address,index) in travel.travelAddressAdress" :key="index">
 
-                        <img v-if="travel.imageMeTravelArr[index]" class="mapPreview img-responsive img-thumbnail"
+                        <img
+                            lazy="loading"
+                            v-if="travel.imageMeTravelArr[index]" class="mapPreview img-responsive img-thumbnail"
                              :src="travel.imageMeTravelArr[index]">
                         {{index+1}}) {{address}}-
                         {{travel.coordsMeTravelArr[index]}}
@@ -89,7 +91,7 @@
             <h1>{{translate('travels.comment')}}</h1>
             <div class="comment-form" v-if="authUserId">
                 <div class="comment-avatar">
-                    <img :src="authUserAvatar">
+                    <img lazy="loading" :src="authUserAvatar">
                 </div>
                 <div class="form">
                     <div class="form-row">

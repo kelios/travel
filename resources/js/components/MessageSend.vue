@@ -2,7 +2,7 @@
     <div class="padding30">
         <b-form>
             <b-form-group>
-                <img class=avatar-photo :src="authUserAvatar">
+                <img lazy="loading" class=avatar-photo :src="authUserAvatar">
                 <input class="input" placeholder="Name" type="text" disabled :value="authUserName">
             </b-form-group>
 

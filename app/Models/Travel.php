@@ -131,8 +131,18 @@ class Travel extends Model implements HasMedia
                 $travelImageThumbUrl = $image->getUrl('thumb_200');
             }
         }
-        return $travelImageThumbUrl
-            ?: Config::get('constants.image.defaultCatImage');
+
+        if (app()->environment('prod') && $travelImageThumbUrl) {
+            $pattern = config('filesystems.disks.s3.bucket') .
+                '.' . config('filesystems.disks.s3.driver') .
+                '.' . config('filesystems.disks.s3.region')
+                . '.amazonaws.com';
+            $newUrl = config('constants.resize.previewMainTravel');
+            return str_replace($pattern, $newUrl, $travelImageThumbUrl);
+        } else {
+            return $travelImageThumbUrl
+                ?: config('constants.image.defaultCatImage');
+        }
 
     }
 

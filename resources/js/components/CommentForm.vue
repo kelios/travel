@@ -1,7 +1,7 @@
 <template>
     <div class="comment-form">
         <div class="comment-avatar">
-            <img :src="authUserAvatar">
+            <img lazy="loading" :src="authUserAvatar">
         </div>
         <div class="form">
             <div class="form-row">

@@ -19,4 +19,8 @@ return [
         '36' => 36,
         '72' => 72,
     ],
+    'resize'=>
+        [
+            'previewMainTravel'=>'image-server/192'
+        ]
 ];

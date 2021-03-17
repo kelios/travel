@@ -22,7 +22,7 @@
         </my-upload>
         <div class="mt-3">
             <div class="single_image last_padding">
-                <img class="rounded-circle" :src="imgDataUrl" style="max-width:200px">
+                <img lazy="loading" class="rounded-circle" :src="imgDataUrl" style="max-width:200px">
                 <div class="image_overlay">
                     <a v-on:click="onFileDelete()">{{ translate('travels.removeCover') }}</a>
                 </div>

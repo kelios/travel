@@ -2,6 +2,7 @@
     <div class="row justify-content-center">
         <div class="card col-11 shadow-sm">
             <img
+                lazy="loading"
                 :src="travel.travel_image_thumb_url"
                 class="img-fluid" :alt="travel.name">
             <div class="card-body">

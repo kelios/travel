@@ -3,6 +3,7 @@
         <div class="input-group mb-3">
 
             <img
+                lazy="loading"
                 :src="friend.user_avatar_thumb_url"
                 class="avatar-photo" :alt="friend.name">
             <span class="form-control-plaintext">{{ friend.name }}</span>

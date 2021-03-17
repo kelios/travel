@@ -2,7 +2,9 @@
 
     <div class="testimonial-item mx-auto mb-5 mb-lg-0">
         <a v-bind:href="travel.url">
-            <img :src="getCover(travel)"
+            <img
+                lazy="loading"
+                :src="getCover(travel)"
                  class="img-fluid rounded-circle mb-3"
                  :alt="travel.name"
                  width="192"

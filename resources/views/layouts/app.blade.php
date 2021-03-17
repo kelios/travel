@@ -32,7 +32,7 @@
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Me Travel') }}
-                <img width="27"  height ="30" class="logoimg" src="/media/slider/logo_yellow.png">
+                <img lazy="loading" width="27"  height ="30" class="logoimg" src="/media/slider/logo_yellow.png">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -82,7 +82,7 @@
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 @if(Auth::user()->user_avatar_thumb_url)
-                                    <img src="{{ Auth::user()->user_avatar_thumb_url }}" class="avatar-photo">
+                                    <img lazy="loading" src="{{ Auth::user()->user_avatar_thumb_url }}" class="avatar-photo">
                                 @endif
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>

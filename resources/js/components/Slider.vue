@@ -8,6 +8,7 @@
         <swiper-slide v-for="(slide, index) in slides" :key="index">
 
             <img
+                lazy="loading"
                 :srcset="slide.srcset "
                 :src="slide.url"
                 :class="slide-index"

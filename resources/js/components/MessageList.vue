@@ -15,7 +15,7 @@
                                                        v-on:click="setUser(user.id,user.name,
                                                        thread.unreadMessageForAuthUser,
                                                        thread.id)">
-                                        <img class="avatar-photo" :src="user.user_avatar_thumb_url">
+                                        <img lazy="loading" class="avatar-photo" :src="user.user_avatar_thumb_url">
                                         {{ user.name }}
                                         <span v-if="thread.unreadMessageForAuthUser" class="badge badge-secondary">
                                         {{thread.unreadMessageForAuthUser }}
