@@ -86,6 +86,7 @@ class Travel extends Model implements HasMedia
         'countryIds',
         'countriesCode',
         'travel_image_thumb_url',
+        'travel_image_thumb_small_url',
         'gallery',
         'travelMainImage',
         'coordMeTravel',
@@ -116,6 +117,40 @@ class Travel extends Model implements HasMedia
      * @return string|null
      */
     public function getTravelImageThumbUrlAttribute(): ?string
+    {
+        $travelImageThumbUrl = '';
+        $image = $this->getMedia('travelMainImage')->first();
+
+        if ($image) {
+            if (Storage::disk(env('APP_STORAGE_DISK', 'public'))->exists($image->getPath())) {
+                Storage::disk(env('APP_STORAGE_DISK', 'public'))->delete($image->getPath());
+            }
+
+            if (Storage::disk(env('APP_STORAGE_DISK', 'public'))->exists($image->getPath('webpTravelMainImage'))) {
+                $travelImageThumbUrl = $image->getUrl('webpTravelMainImage');
+            } else {
+                $travelImageThumbUrl = $image->getUrl('thumb_200');
+            }
+        }
+
+        if (app()->environment('production') && $travelImageThumbUrl) {
+            $pattern = 'https://'.config('filesystems.disks.s3.bucket') .
+                '.' . config('filesystems.disks.s3.driver') .
+                '.' . config('filesystems.disks.s3.region')
+                . '.amazonaws.com';
+            $newUrl = config('app.url').'/'.config('constants.resize.previewMainTravel');
+            return str_replace($pattern, $newUrl, $travelImageThumbUrl);
+        } else {
+            return $travelImageThumbUrl
+                ?: config('constants.image.defaultCatImage');
+        }
+
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTravelImageThumbSmallUrlAttribute(): ?string
     {
         $travelImageThumbUrl = '';
         $image = $this->getMedia('travelMainImage')->first();

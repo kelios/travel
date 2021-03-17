@@ -183,6 +183,7 @@ class TravelsController extends Controller
                 'countryName',
                 'cityName',
                 'travel_image_thumb_url',
+                'travel_image_thumb_small_url',
                 'travelAddressAdress',
                 'coordsMeTravelArr',
                 'slug',
@@ -216,6 +217,7 @@ class TravelsController extends Controller
                 'moderation',
                 'countryName',
                 'travel_image_thumb_url',
+                'travel_image_thumb_small_url',
                 'slug',
                 'id'
             ]);
@@ -234,6 +236,7 @@ class TravelsController extends Controller
                 'moderation',
                 'countryName',
                 'travel_image_thumb_url',
+                'travel_image_thumb_small_url',
                 'slug',
                 'id'
             ]);
@@ -258,6 +261,7 @@ class TravelsController extends Controller
                     'moderation',
                     'countryName',
                     'travel_image_thumb_url',
+                    'travel_image_thumb_small_url',
                     'slug',
                     'id'
                 ]);
@@ -437,6 +441,7 @@ class TravelsController extends Controller
             'countUnicIpView',
             'url',
             'travel_image_thumb_url',
+            'travel_image_thumb_small_url',
             'isFriend',
             'year',
             'monthName',
@@ -468,6 +473,7 @@ class TravelsController extends Controller
             'countUnicIpView',
             'url',
             'travel_image_thumb_url',
+            'travel_image_thumb_small_url',
             'isFriend',
             'year',
             'monthName',

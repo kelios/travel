@@ -30,6 +30,7 @@ class TravelCollection extends ResourceCollection
                 'slug' => $item->slug,
                 'cityName' => $item->cityName,
                 'travel_image_thumb_url' => $item->travel_image_thumb_url,
+                'travel_image_thumb_small_url' => $item->travel_image_thumb_small_url,
                 //'travelAddressAdress' => $item->travelAddressAdress,
                // 'coordsMeTravelArr' => $item->coordsMeTravelArr,
                 'id' => $item->id,

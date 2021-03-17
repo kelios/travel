@@ -32,7 +32,7 @@
                     return travel.categories ?
                         travel.categories[0].category_image_thumb_url : this.defImageTravel
                 }
-                return travel.travel_image_thumb_url
+                return travel.travel_image_thumb_small_url
             }
         },
     }

@@ -27,6 +27,7 @@ class CityCollection extends ResourceCollection
                 'title_'.$locale => 'title_'.$locale,
                 'url' => $item->url,
                 'travel_image_thumb_url' => $item->travel_image_thumb_url,
+                'travel_image_thumb_small_url' => $item->travel_image_thumb_small_url,
                 'cityName' => $item->cityName,
                 'countryName' => $item->countryName,
                 'countries' => new Country($item->country),
