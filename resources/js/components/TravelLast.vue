@@ -7,13 +7,14 @@
 </template>
 
 <script>
-    import travel from '../components/TravelCardLast'
+    import TravelCardLast from '../components/TravelCardLast';
+
     import {mapGetters} from 'vuex'
 
     export default {
         name: 'TravelLast',
         components: {
-            travel
+            TravelCardLast
         },
         mounted() {
             this.getResults();

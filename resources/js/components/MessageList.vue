@@ -51,6 +51,8 @@
         BSidebar, BRow, BCol, BListGroup, BListGroupItem,
         VBToggle, BButton
     } from 'bootstrap-vue';
+    import MessageSend from "./MessageSend";
+    import MessageBetweenList from "./MessageBetweenList";
     import {mapGetters} from "vuex";
 
 
@@ -58,6 +60,8 @@
         name: "MessageList",
         props: [],
         components: {
+            MessageBetweenList,
+            MessageSend,
             'b-row': BRow,
             'b-col': BCol,
             'b-sidebar': BSidebar,

@@ -48,7 +48,7 @@
 </template>
 
 <script>
-    import friend from "./FriendCard";
+    import FriendCard from "./FriendCard";
     import pagination from "laravel-vue-pagination";
     import {mapGetters} from "vuex";
 
@@ -61,7 +61,7 @@
             }
         },
         components: {
-            friend,
+            'friend-card':FriendCard,
             pagination
         },
         http: {

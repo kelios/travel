@@ -10,10 +10,16 @@
 </template>
 
 <script>
+
+    import Comment from './Comment.vue';
+
     export default {
         name: "CommentList",
         props: ['collection', 'comments', 'where'],
         computed: {},
+        components: {
+            'comment': Comment,
+        }
     }
 </script>
 

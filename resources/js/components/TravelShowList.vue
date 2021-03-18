@@ -79,7 +79,7 @@
                         <img
                             lazy="loading"
                             v-if="travel.imageMeTravelArr[index]" class="mapPreview img-responsive img-thumbnail"
-                             :src="travel.imageMeTravelArr[index]">
+                            :src="travel.imageMeTravelArr[index]">
                         {{index+1}}) {{address}}-
                         {{travel.coordsMeTravelArr[index]}}
                     </li>
@@ -121,7 +121,7 @@
             <travel-near></travel-near>
         </section>
 
-        <section class="travel-section" >
+        <section class="travel-section">
             <h1>{{translate('travels.popularTravels')}}</h1>
             <travel-popular></travel-popular>
         </section>
@@ -132,12 +132,14 @@
 
 <script>
 
-    import CommentList from './CommentList.vue';
     import TravelNear from './TravelNear.vue';
     import TravelPopular from './TravelPopular.vue';
     import TravelShowSection from './TravelShowSection.vue';
-    import {BCard} from 'bootstrap-vue';
+    import Slider from './Slider.vue';
+    import CommentList from './CommentList.vue';
 
+
+    import {BCard} from 'bootstrap-vue';
     import {mapGetters} from "vuex";
 
 
@@ -152,6 +154,8 @@
             'travel-near': TravelNear,
             'travel-popular': TravelPopular,
             'travel-show-section': TravelShowSection,
+            'slider': Slider,
+
             'b-card-body': BCard,
         },
         created() {

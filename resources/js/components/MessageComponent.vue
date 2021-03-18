@@ -14,9 +14,14 @@
 
 <script>
 
+    import MessageModal from "./MessageModal";
+
     export default {
         name: "MessageComponent",
         props: ['travel_id', 'recipient_id', 'travel_user_name'],
+        components: {
+            MessageModal,
+        },
         data() {
             return {
                 activeModal: 0,

@@ -31,6 +31,8 @@
 <script>
     import Modal from './Modal'
     import MessageSend from "./MessageSend";
+    import MessageBetweenList from "./MessageBetweenList";
+
 
     export default {
         props: ['show', 'travel_id', 'recipient_id', 'travel_user_name'],
@@ -40,7 +42,7 @@
             }
         },
         name: "MessageModal",
-        components: {MessageSend, Modal},
+        components: {MessageSend, Modal,MessageBetweenList},
         methods: {
 
             close: function () {

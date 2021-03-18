@@ -22,7 +22,7 @@
             <div class="col-2">
                 <select-per-page @getRes="getResults"></select-per-page>
             </div>
-            <div class="col-10" >
+            <div class="col-10">
                 <pagination :data="travels" :limit="6" align="right" size="small"
                             @pagination-change-page="getResults"></pagination>
 
@@ -32,7 +32,8 @@
 </template>
 
 <script>
-    import travel from '../components/TravelCard'
+    import SelectPerPage from '../components/SelectPerPage'
+    import TravelCard from '../components/TravelCard'
     import {mapGetters} from 'vuex'
     import pagination from 'laravel-vue-pagination'
 
@@ -41,9 +42,9 @@
         name: 'TravelList',
         props: ['readonly', 'filter'],
         components: {
-            travel,
+            TravelCard,
             pagination,
-
+            'select-per-page': SelectPerPage,
         },
         mounted() {
             this.getResults();
@@ -73,7 +74,7 @@
                     'page': page,
                     'query': this.query,
                     'where': Object.assign(this.filter, this.where),
-                    'perPage':this.perPage
+                    'perPage': this.perPage
                 });
             }
         },
