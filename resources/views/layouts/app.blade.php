@@ -21,7 +21,7 @@
         <script data-ad-client="ca-pub-9752617241777308" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     @endif
     <!-- Styles -->
-    <link href="{{ mix('/css/metravel.min.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ mix('/css/metravel.min.css') }}" rel="stylesheet">
 </head>
 <body>
 <!-- Fonts -->
@@ -151,7 +151,7 @@
 </div>
 </body>
 
-@include('brackets/admin-ui::admin.partials.wysiwyg-svgs')
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 <script rel="preload" src="/js/app.js" defer  as="script"></script>
+<script rel="preload" src="/js/travelform.js" defer  as="script"></script>
 </html>

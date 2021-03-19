@@ -138,10 +138,8 @@
 <script>
     import 'vue-multiselect/dist/vue-multiselect.min.css';
     import Multiselect from 'vue-multiselect'
-    import VeeValidate from 'vee-validate';
-    import {mapGetters} from "vuex";
 
-    Vue.use(VeeValidate, {strict: true})
+    import {mapGetters} from "vuex";
 
     export default {
         name: "SearchExtendedTravel",
