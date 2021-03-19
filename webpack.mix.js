@@ -29,10 +29,12 @@ mix.webpackConfig({
     }
 });
 
-mix.js('resources/js/app.js', 'public/js');
+mix.js('resources/js/app.js', 'public/js')
+    .vue();
     //.extract(['vue']);
 
 mix.js(["resources/js/admin/admin.js"], "public/js")
+    .vue()
     .sass("resources/sass/admin/admin.scss", "public/css");
 
 

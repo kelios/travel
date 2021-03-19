@@ -23,7 +23,6 @@
 </template>
 
 <script>
-    import CommentList from './CommentList.vue';
     import CommentForm from './CommentForm.vue';
 
     export default {
@@ -37,7 +36,6 @@
         mounted() {
         },
         components: {
-            'comment-list': CommentList,
             'comment-form': CommentForm
         }
     }
