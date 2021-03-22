@@ -13,7 +13,6 @@
     const ENDPOINTREVERSE = 'https://nominatim.openstreetmap.org/reverse';
     const ENDPOINTSEARCH = 'https://nominatim.openstreetmap.org/search?';
     const FORMAT = 'jsonv2';
-    Vue.use(Notifications);
 
     export default {
         mixins: [BaseForm],
