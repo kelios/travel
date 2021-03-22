@@ -1,11 +1,11 @@
 <script>
     import {BaseForm} from 'craftable';
-    import VeeValidate from 'vee-validate';
     import L from "leaflet";
     import 'leaflet/dist/leaflet.css';
     import {ToggleButton} from 'vue-js-toggle-button'
     import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue2-leaflet";
     import {mapGetters} from "vuex";
+    import Notifications from 'vue-notification';
 
     import 'vue-multiselect/dist/vue-multiselect.min.css';
     import Multiselect from 'vue-multiselect';
@@ -13,7 +13,7 @@
     const ENDPOINTREVERSE = 'https://nominatim.openstreetmap.org/reverse';
     const ENDPOINTSEARCH = 'https://nominatim.openstreetmap.org/search?';
     const FORMAT = 'jsonv2';
-    Vue.use(VeeValidate, {strict: true});
+    Vue.use(Notifications);
 
     export default {
         mixins: [BaseForm],
@@ -345,6 +345,7 @@
             LTooltip,
             LIcon,
             Multiselect,
+            Notifications,
             'toggle-button': ToggleButton
         }
     }

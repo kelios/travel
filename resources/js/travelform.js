@@ -1,4 +1,3 @@
-
 import store from './store/index'
 import VeeValidate from 'vee-validate';
 import Vue from 'vue';
