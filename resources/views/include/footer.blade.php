@@ -18,6 +18,11 @@
                 </ul>
                 <ul class="col text-right list-inline mb-2">
                     <li class="list-inline-item mr-3">
+                        <a href="https://www.youtube.com/channel/UCODmtfoWQLfTyYGRPb0gfug" target="_blank">
+                            <i class="fa fa-youtube fa-2x fa-fw"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item mr-3">
                         <a href="https://www.facebook.com/metravelby" target="_blank">
                             <i class="fa fa-facebook fa-2x fa-fw"></i>
                         </a>
