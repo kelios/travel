@@ -122,11 +122,11 @@ class Travel extends Model implements HasMedia
         $image = $this->getMedia('travelMainImage')->first();
 
         if ($image) {
-            if (Storage::disk(env('APP_STORAGE_DISK', 'public'))->exists($image->getPath())) {
-                Storage::disk(env('APP_STORAGE_DISK', 'public'))->delete($image->getPath());
+            if (Storage::disk(config('filesystems.storageDisk'))->exists($image->getPath())) {
+                Storage::disk(config('filesystems.storageDisk'))->delete($image->getPath());
             }
 
-            if (Storage::disk(env('APP_STORAGE_DISK', 'public'))->exists($image->getPath('webpTravelMainImage'))) {
+            if (Storage::disk(config('filesystems.storageDisk'))->exists($image->getPath('webpTravelMainImage'))) {
                 $travelImageThumbUrl = $image->getUrl('webpTravelMainImage');
             } else {
                 $travelImageThumbUrl = $image->getUrl('thumb_200');
@@ -157,11 +157,11 @@ class Travel extends Model implements HasMedia
         $image = $this->getMedia('travelMainImage')->first();
 
         if ($image) {
-            if (Storage::disk(env('APP_STORAGE_DISK', 'public'))->exists($image->getPath())) {
-                Storage::disk(env('APP_STORAGE_DISK', 'public'))->delete($image->getPath());
+            if (Storage::disk(config('filesystems.storageDisk'))->exists($image->getPath())) {
+                Storage::disk(config('filesystems.storageDisk'))->delete($image->getPath());
             }
 
-            if (Storage::disk(env('APP_STORAGE_DISK', 'public'))->exists($image->getPath('webpTravelMainImage'))) {
+            if (Storage::disk(config('filesystems.storageDisk'))->exists($image->getPath('webpTravelMainImage'))) {
                 $travelImageThumbUrl = $image->getUrl('webpTravelMainImage');
             } else {
                 $travelImageThumbUrl = $image->getUrl('thumb_200');
@@ -189,8 +189,8 @@ class Travel extends Model implements HasMedia
     {
         $images = $this->getMedia('gallery');
         foreach ($images as $key => $image) {
-            if (Storage::disk(env('APP_STORAGE_DISK', 'public'))->exists($image->getPath())) {
-                Storage::disk(env('APP_STORAGE_DISK', 'public'))->delete($image->getPath());
+            if (Storage::disk(config('filesystems.storageDisk'))->exists($image->getPath())) {
+                Storage::disk(config('filesystems.storageDisk'))->delete($image->getPath());
             }
             $res[$key]['srcset'] = $image->getSrcset('detail_hd');
             $res[$key]['url'] = $image->getUrl('detail_hd');
@@ -514,18 +514,18 @@ class Travel extends Model implements HasMedia
     {
         $this->addMediaCollection('travelMainImage')
             ->maxFilesize(20 * 1024 * 1024)
-            ->useDisk(env('APP_STORAGE_DISK', 'public'))
+            ->useDisk(config('filesystems.storageDisk'))
             ->accepts('image/*')
             ->singleFile();
 
         $this->addMediaCollection('travelRoad')
-            ->useDisk(env('APP_STORAGE_DISK', 'public'))
+            ->useDisk(config('filesystems.storageDisk'))
             ->singleFile();
 
         $this->addMediaCollection('gallery')
             ->maxNumberOfFiles(10)
             ->maxFilesize(20 * 1024 * 1024)
-            ->useDisk(env('APP_STORAGE_DISK', 'public'))
+            ->useDisk(config('filesystems.storageDisk'))
             ->accepts('image/*')
             ->onlyKeepLatest(10);
     }

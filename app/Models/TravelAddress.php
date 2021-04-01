@@ -101,8 +101,8 @@ class TravelAddress extends Model implements HasMedia
         $image = $this->getMedia('travelImageAddress');
 
         if (Arr::get($image, 0)) {
-            if (Storage::disk(env('APP_STORAGE_DISK', 'public'))->exists($image[0]->getPath())) {
-                Storage::disk(env('APP_STORAGE_DISK', 'public'))->delete($image[0]->getPath());
+            if (Storage::disk(config('filesystems.storageDisk'))->exists($image[0]->getPath())) {
+                Storage::disk(config('filesystems.storageDisk'))->delete($image[0]->getPath());
             }
             $travelImageThumbUrl = $image[0]->getUrl('thumb_200');
         }
@@ -131,7 +131,7 @@ class TravelAddress extends Model implements HasMedia
     {
         $this->addMediaCollection('travelImageAddress')
             ->maxFilesize(20 * 1024 * 1024)
-            ->useDisk(env('APP_STORAGE_DISK', 'public'))
+            ->useDisk(config('filesystems.storageDisk'))
             ->accepts('image/*')
             ->singleFile();
     }

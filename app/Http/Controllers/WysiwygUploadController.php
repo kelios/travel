@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Config;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Spatie\ImageOptimizer\OptimizerChainFactory;
+use Cache;
+
 
 class WysiwygUploadController extends Controller
 {
@@ -82,7 +85,7 @@ class WysiwygUploadController extends Controller
         // generate path that it will be saved to
         $name = $temporaryFile->getClientOriginalName();
         $savedPath = Config::get('wysiwyg-media.media_folder') . '/' . time() . $name;
-        $s3 = Storage::disk(env('APP_STORAGE_DISK', 'public'));
+        $s3 = Storage::disk(config('filesystems.storageDisk'));
 
         // create directory in which we will be uploading into
         if (!File::isDirectory(Config::get('wysiwyg-media.media_folder'))) {
@@ -98,15 +101,17 @@ class WysiwygUploadController extends Controller
             ->orientate()
             ->stream();
 
-        $s3->put($savedPath, $image, 'public');
         // optimize image
-        // OptimizerChainFactory::create()->optimize(Storage::disk('s3')->url($savedPath));
+        OptimizerChainFactory::create()->optimize($temporaryFile->path());
+        $s3->put($savedPath, $image, 'public');
+
+
         // create related model
         $wysiwygMedia = WysiwygMedia::create(['file_path' => $savedPath]);
 
         // return image's path to use in wysiwyg
         return response()->json([
-            'file' => Storage::disk(env('APP_STORAGE_DISK', 'public'))->url($savedPath),
+            'file' => Storage::disk(config('filesystems.storageDisk'))->url($savedPath),
             'mediaId' => $wysiwygMedia->id,
             'success' => true
         ]);

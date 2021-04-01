@@ -86,6 +86,16 @@ return [
             'endpoint' => env('DYNAMODB_ENDPOINT'),
         ],
 
+        's3' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET'),
+            'url' => env('AWS_URL'),
+            'path' => env('AWS_PATH', 'cache'), // cache root directory, you can change it to suit your need
+        ],
+
     ],
 
     /*

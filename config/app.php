@@ -182,6 +182,7 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
         EloquentFilter\ServiceProvider::class,
         Tohidplus\Translation\TranslationServiceProvider::class,
+        App\Providers\CachedS3ServiceProvider::class
 
 
     ],
