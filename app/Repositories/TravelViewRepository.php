@@ -35,6 +35,15 @@ class TravelViewRepository implements TravelRelationRepositoryInterface
     }
 
     /**
+     * @param array $param
+     * @return mixed
+     */
+    public function get($param = [])
+    {
+        return $this->travelView->get($param);
+    }
+
+    /**
      * @return Article[]|\Illuminate\Database\Eloquent\Collection
      */
     public function getList()
@@ -60,7 +69,8 @@ class TravelViewRepository implements TravelRelationRepositoryInterface
         return $this->travelView->save();
     }
 
-    public function map($travel){
+    public function map($travel)
+    {
         $this->travelView->travel_id = $travel->id;
         $this->travelView->titleslug = $travel->slug;
         $this->travelView->url = \Request::url();

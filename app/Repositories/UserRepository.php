@@ -35,6 +35,15 @@ class UserRepository implements TravelRelationRepositoryInterface
     }
 
     /**
+     * @param array $param
+     * @return mixed
+     */
+    public function get($param = [])
+    {
+        return $this->user->get($param);
+    }
+
+    /**
      * @param $id
      * @return mixed
      */

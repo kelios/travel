@@ -157,6 +157,27 @@
 
                 </div>
 
+                <div class="form-group"
+                     :class="{'has-danger': errors.has('youtube_link'), 'has-success': fields.youtube_link && fields.youtube_link.valid }">
+                    <label for="youtube_link">{{ trans('travels.youtubeLink') }}</label>
+
+                    <div>
+                        <textarea
+                            v-model="form.youtube_link"
+                            v-validate="''"
+                            id="youtubelink"
+                            name="youtube_link"
+                            class="form-control"
+                            :class="{'form-control-danger': errors.has('youtube_link'), 'form-control-success': fields.youtube_link && fields.youtube_link.valid}"
+                            placeholder="{{ trans('travels.youtubeLink') }}"
+                        ></textarea>
+                    </div>
+                    <div v-if="errors.has('youtube_link')" class="form-control-feedback form-text" v-cloak>@{{
+                        errors.first('youtube_link') }}
+                    </div>
+
+                </div>
+
                 @include('include.media-uploader', [
                            'mediaCollection' => app(App\Models\Travel::class)->getMediaCollection('gallery'),
                            'media' => isset($travel) ? $travel->getThumbs200ForCollection('gallery') : null,
@@ -234,8 +255,34 @@
                                         >
                                         </upload-image-drag>
                                     </div>
+
                                     <hr class="mb-4">
+
+                                    <div v-if="form.countryIds" class="form-group "
+                                         :class="{'has-danger': errors.has('cities'), 'has-success': fields.cities && fields.cities.valid }">
+                                        <label for="cities">{{ trans('travels.traveladdresscategory') }}</label>
+
+                                        <multiselect
+                                            :options="{{$categoryTravelAddress->toJson()}}"
+                                            :multiple="true"
+                                            v-model = "travelAddress.categoriesIds[index]"
+                                            track-by="id"
+                                            label="name"
+                                            :show-labels="false"
+                                            tag-placeholder="{{ trans('travels.traveladdresscategory') }}"
+                                            placeholder="{{ trans('travels.traveladdresscategory') }}"
+                                            >
+                                        </multiselect>
+
+                                        <div v-if="errors.has('cities')" class="form-control-feedback form-text"
+                                             v-cloak>@{{
+                                            errors.first('cities') }}
+                                        </div>
+                                    </div>
+
                                     @{{ travelAddress.address[index] }}-@{{meCoords}}
+
+
                                     <input type="hidden" v-model="travelAddress.address">
                                     <a class="btn btn-sm btn-danger"
                                        v-on:click="removeMarker(travelAddress.address[index],index)">

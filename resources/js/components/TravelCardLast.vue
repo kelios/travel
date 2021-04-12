@@ -28,7 +28,7 @@
                 window.location.href = data.url;
             },
             getCover: function (travel) {
-                if (!travel.travel_image_thumb_url) {
+                if (!travel.travel_image_thumb_small_url) {
                     return travel.categories ?
                         travel.categories[0].category_image_thumb_url : this.defImageTravel
                 }

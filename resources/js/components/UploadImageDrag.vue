@@ -90,7 +90,6 @@
             },
             cropUploadSuccess(jsonData, field) {
                 if (jsonData.path) {
-                    this.pathToFile = jsonData.path;
                     this.mutableDragUploadedImages = this.uploadedImages;
                     if (this.mutableDragUploadedImages[0]) {
                         this.mutableDragUploadedImages[0]['action'] = 'delete';

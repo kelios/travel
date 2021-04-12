@@ -380,3 +380,19 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
+        Route::prefix('category-travel-addresses')->name('category-travel-addresses/')->group(static function() {
+            Route::get('/',                                             'CategoryTravelAddressController@index')->name('index');
+            Route::get('/create',                                       'CategoryTravelAddressController@create')->name('create');
+            Route::post('/',                                            'CategoryTravelAddressController@store')->name('store');
+            Route::get('/{categoryTravelAddress}/edit',                 'CategoryTravelAddressController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'CategoryTravelAddressController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{categoryTravelAddress}',                     'CategoryTravelAddressController@update')->name('update');
+            Route::delete('/{categoryTravelAddress}',                   'CategoryTravelAddressController@destroy')->name('destroy');
+        });
+    });
+});

@@ -5,7 +5,7 @@
     import {ToggleButton} from 'vue-js-toggle-button'
     import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue2-leaflet";
     import {mapGetters} from "vuex";
-    import Notifications from 'vue-notification';
+
 
     import 'vue-multiselect/dist/vue-multiselect.min.css';
     import Multiselect from 'vue-multiselect';
@@ -48,6 +48,7 @@
                     'country': [],
                     'travelImageThumbUrl': [],
                     'thumbs200Collection': [],
+                    'categoriesIds': [],
                 },
                 where: [],
                 query: '',
@@ -93,7 +94,8 @@
                     travelAddressAdress: [],
                     thumbs200ForCollectionArr: [],
                     travelImageThumbUrlArr: [],
-                    travelImageAddress: []
+                    travelImageAddress: [],
+                    categoryTravelAddressArr: []
                 }
             }
         },
@@ -110,6 +112,7 @@
                 this.travelAddress.country = this.form.travelAddressCountry;
                 this.travelAddress.thumbs200Collection = this.form.thumbs200ForCollectionArr;
                 this.travelAddress.travelImageThumbUrl = this.form.travelImageThumbUrlArr;
+                this.travelAddress.categoriesIds = this.form.categoryTravelAddressArr;
 
                 this.selectedCountiesIds = this.form.countryIds;
                 this.selectedCountriesCode = this.form.countriesCode ?? [];
@@ -149,12 +152,15 @@
                     this.form['travelAddressIds'] = this.travelAddressIds;
                     this.travelAddress.id = this.travelAddressIds;
                 }
+                console.log(this.travelAddress.categoriesIds);
+                this.form['travelAddresscategoriesIds'] = this.travelAddress.categoriesIds;
                 return this.form;
             },
             autoSave() {
                 setInterval(() => {
                     this.save();
                 }, 300000)
+                //     }, 10000)
             },
             save(event) {
                 this.getPostData();
@@ -324,6 +330,9 @@
                 this.$delete(this.travelAddress.address, index);
                 this.$delete(this.travelAddress.city, index);
                 this.$delete(this.travelAddress.country, index);
+                this.$delete(this.travelAddress.categoriesIds, index);
+                this.$delete(this.travelAddress.thumbs200Collection, index);
+                this.$delete(this.travelAddress.travelImageThumbUrl, index);
             },
             zoomUpdate(zoom) {
                 this.zoom = zoom;
@@ -344,7 +353,6 @@
             LTooltip,
             LIcon,
             Multiselect,
-            Notifications,
             'toggle-button': ToggleButton
         }
     }

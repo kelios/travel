@@ -17,7 +17,10 @@
                                     <img
                                         lazy="loading"
                                         src="{{$article->article_image_thumb_url}}"
-                                        class="img-fluid" alt="{{$article->name}}">
+                                        class="img-fluid" alt="{{$article->name}}"
+                                        alt= "MeTravelBy"
+                                    >
+
                                     <div class="card-body">
                                         <h2>
                                             {{$article->name}}

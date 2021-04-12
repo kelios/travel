@@ -10,8 +10,10 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Image\Exceptions\InvalidManipulation;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use App\Models\CategoryTravelAddress as Category;
 
 
 class TravelAddress extends Model implements HasMedia
@@ -86,6 +88,14 @@ class TravelAddress extends Model implements HasMedia
          return Arr::get($this->coords, 'lng');
      }*/
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'travel_address_category')->withTimestamps();
+    }
+
 
     public function travels()
     {
@@ -98,13 +108,17 @@ class TravelAddress extends Model implements HasMedia
     public function getTravelImageThumbUrlAttribute(): ?string
     {
         $travelImageThumbUrl = '';
-        $image = $this->getMedia('travelImageAddress');
+        $image = $this->getMedia('travelImageAddress')->first();
 
-        if (Arr::get($image, 0)) {
-            if (Storage::disk(config('filesystems.storageDisk'))->exists($image[0]->getPath())) {
-                Storage::disk(config('filesystems.storageDisk'))->delete($image[0]->getPath());
+        if ($image) {
+            if (Storage::disk(config('filesystems.storageDisk'))->exists($image->getPath())) {
+                Storage::disk(config('filesystems.storageDisk'))->delete($image->getPath());
             }
-            $travelImageThumbUrl = $image[0]->getUrl('thumb_200');
+            if ($image->hasGeneratedConversion('thumb_200_wp')) {
+                $travelImageThumbUrl = $image->getUrl('thumb_200_wp');
+            } else {
+                $travelImageThumbUrl = $image->getUrl('thumb_200');
+            }
         }
         return $travelImageThumbUrl
             ?: '';
@@ -137,14 +151,47 @@ class TravelAddress extends Model implements HasMedia
     }
 
     /**
-     * Register media conversions
-     *
      * @param Media|null $media
      * @throws InvalidManipulation
+     * @throws \League\Flysystem\FileNotFoundException
      */
     public function registerMediaConversions(Media $media = null): void
     {
         $this->autoRegisterThumb200();
+
+        $this->addMediaConversion('thumb_200_wp')
+            ->width(200)
+            ->height(200)
+            ->watermark(public_path('/media/slider/watermark.png'))
+            ->watermarkOpacity(50)
+            ->format(Manipulations::FORMAT_WEBP)
+            ->quality(80)
+            ->optimize()
+            ->performOnCollections('travelImageAddress')
+            ->nonQueued();
+
+        $this->addMediaConversion('thumb_400_wp')
+            ->width(400)
+            ->height(400)
+            ->watermark(public_path('/media/slider/watermark.png'))
+            ->watermarkOpacity(50)
+            ->format(Manipulations::FORMAT_WEBP)
+            ->quality(80)
+            ->optimize()
+            ->performOnCollections('travelImageAddress')
+            ->nonQueued();
+
+        $this->getMediaCollections()->filter->isImage()->each(function ($mediaCollection) {
+            $this->addMediaConversion('thumb_400')
+                ->width(400)
+                ->height(400)
+                ->watermark(public_path('/media/slider/watermark.png'))
+                ->watermarkOpacity(50)
+                ->quality(80)
+                ->optimize()
+                ->performOnCollections('travelImageAddress')
+                ->nonQueued();
+        });
     }
 
     /**
@@ -154,9 +201,11 @@ class TravelAddress extends Model implements HasMedia
     {
         $this->getMediaCollections()->filter->isImage()->each(function ($mediaCollection) {
             $this->addMediaConversion('thumb_200')
-                ->width(914)
-                ->height(538)
-                ->fit('crop', 914, 914)
+                ->width(200)
+                ->height(200)
+                ->watermark(public_path('/media/slider/watermark.png'))
+                ->watermarkOpacity(50)
+                ->quality(80)
                 ->optimize()
                 ->performOnCollections($mediaCollection->getName())
                 ->nonQueued();

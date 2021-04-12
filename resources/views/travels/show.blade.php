@@ -11,9 +11,11 @@
                 </div>
                 <a class="navbar-brand js-scroll-trigger" href="#page-top"
                 >            <span class="d-none d-lg-block">
-                <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{$travel->travel_image_thumb_url}}"
+                <img class="img-fluid img-profile rounded-circle mx-auto mb-2"  src="{{$travel->travel_image_thumb_small_url}}"
                      alt="{{$travel->name}}"
                      lazy="loading"
+                     width="200"
+                     height="200"
                 />
                 </span></a>
                 @if (auth()->user())

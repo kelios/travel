@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -38,6 +39,9 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        SEOMeta::setTitle(trans('home.metaRegisterTitle'));
+        SEOMeta::setDescription(trans('home.metaRegisterDescription'));
+        SEOMeta::setCanonical('https://metravel.by/');
         $this->middleware('guest');
     }
 

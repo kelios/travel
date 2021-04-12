@@ -35,6 +35,15 @@ class MonthRepository implements TravelRelationRepositoryInterface
     }
 
     /**
+     * @param array $param
+     * @return mixed
+     */
+    public function get($param = [])
+    {
+        return $this->month->get($param);
+    }
+
+    /**
      * @param $attr
      * @return Month
      */

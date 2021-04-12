@@ -30,6 +30,15 @@ class CommentRepository implements CommentRepositoryInterface
     }
 
     /**
+     * @param array $param
+     * @return mixed
+     */
+    public function get($param = [])
+    {
+        return $this->comment->get($param);
+    }
+
+    /**
      * @param $attr
      * @return Comment
      */
@@ -72,7 +81,7 @@ class CommentRepository implements CommentRepositoryInterface
         $comments = $this->comment;
 
         return $comments
-            ->with('user','replies')
+            ->with('user', 'replies')
             ->where($where)
             ->orderBy('created_at', 'desc')
             ->paginate(60);

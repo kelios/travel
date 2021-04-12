@@ -9,7 +9,7 @@
                 <div class="row justify-content-center label-white">
                     <div class="col-md-8">
                         <div class="">
-                            <div class="reg-header">{{ trans('home.register')}}</div>
+                            <div class="reg-header"><h1>{{ trans('home.register')}}</h1></div>
 
                             <div class="card-body">
                                 <form method="POST" action="{{ route('register') }}">

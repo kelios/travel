@@ -13,6 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([TravelModerationSeeder::class, MediaConversionModerationSeeder::class]);
+        $this->call([
+          //  TravelModerationSeeder::class,
+          //  MediaConversionModerationSeeder::class,
+            TravelAddressCategorisSeeder::class
+        ]);
     }
 }

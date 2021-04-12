@@ -35,6 +35,15 @@ class TransportRepository implements TravelRelationRepositoryInterface
     }
 
     /**
+     * @param array $param
+     * @return mixed
+     */
+    public function get($param = [])
+    {
+        return $this->transport->get($param);
+    }
+
+    /**
      * @param $attr
      * @return Transport\
      */

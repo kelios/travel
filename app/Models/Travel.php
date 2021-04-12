@@ -57,6 +57,7 @@ class Travel extends Model implements HasMedia
         'meta_description',
         'sitemap',
         'moderation',
+        'youtube_link'
     ];
 
     protected $casts = [
@@ -103,7 +104,9 @@ class Travel extends Model implements HasMedia
         'userName',
         'totalLikes',
         'travelRoad',
-        'countUnicIpView'
+        'countUnicIpView',
+        'travelRoadFilename',
+        'travelRoadUrl'
     ];
 
     public function modelFilter()
@@ -124,26 +127,32 @@ class Travel extends Model implements HasMedia
         if ($image) {
             if (Storage::disk(config('filesystems.storageDisk'))->exists($image->getPath())) {
                 Storage::disk(config('filesystems.storageDisk'))->delete($image->getPath());
-            }
 
-            if (Storage::disk(config('filesystems.storageDisk'))->exists($image->getPath('webpTravelMainImage'))) {
+            }
+            //dd($image->hasGeneratedConversion('webpTravelMainImage_400'));
+            if ($image->hasGeneratedConversion('webpTravelMainImage_400')) {
+                $travelImageThumbUrl = $image->getUrl('webpTravelMainImage_400');
+            } elseif ($image->hasGeneratedConversion('thumb_400')) {
+                $travelImageThumbUrl = $image->getUrl('thumb_400');
+            } elseif ($image->hasGeneratedConversion('webpTravelMainImage')) {
                 $travelImageThumbUrl = $image->getUrl('webpTravelMainImage');
             } else {
                 $travelImageThumbUrl = $image->getUrl('thumb_200');
             }
         }
+        //    dd($image->getPath('webpTravelMainImage_400'));
 
-     /*   if (app()->environment('production') && $travelImageThumbUrl) {
-            $pattern = 'https://'.config('filesystems.disks.s3.bucket') .
-                '.' . config('filesystems.disks.s3.driver') .
-                '.' . config('filesystems.disks.s3.region')
-                . '.amazonaws.com';
-            $newUrl = config('app.url').'/'.config('constants.resize.previewMainTravel');
-            return str_replace($pattern, $newUrl, $travelImageThumbUrl);
-        } else {
-            return $travelImageThumbUrl
-                ?: config('constants.image.defaultCatImage');
-        }*/
+        /*   if (app()->environment('production') && $travelImageThumbUrl) {
+               $pattern = 'https://'.config('filesystems.disks.s3.bucket') .
+                   '.' . config('filesystems.disks.s3.driver') .
+                   '.' . config('filesystems.disks.s3.region')
+                   . '.amazonaws.com';
+               $newUrl = config('app.url').'/'.config('constants.resize.previewMainTravel');
+               return str_replace($pattern, $newUrl, $travelImageThumbUrl);
+           } else {
+               return $travelImageThumbUrl
+                   ?: config('constants.image.defaultCatImage');
+           }*/
         return $travelImageThumbUrl
             ?: config('constants.image.defaultCatImage');
     }
@@ -161,7 +170,7 @@ class Travel extends Model implements HasMedia
                 Storage::disk(config('filesystems.storageDisk'))->delete($image->getPath());
             }
 
-            if (Storage::disk(config('filesystems.storageDisk'))->exists($image->getPath('webpTravelMainImage'))) {
+            if ($image->hasGeneratedConversion('webpTravelMainImage')) {
                 $travelImageThumbUrl = $image->getUrl('webpTravelMainImage');
             } else {
                 $travelImageThumbUrl = $image->getUrl('thumb_200');
@@ -169,19 +178,6 @@ class Travel extends Model implements HasMedia
         }
         return $travelImageThumbUrl
             ?: config('constants.image.defaultCatImage');
-
-       /* if (app()->environment('production') && $travelImageThumbUrl) {
-            $pattern = 'https://'.config('filesystems.disks.s3.bucket') .
-                '.' . config('filesystems.disks.s3.driver') .
-                '.' . config('filesystems.disks.s3.region')
-                . '.amazonaws.com';
-            $newUrl = config('app.url').'/'.config('constants.resize.previewSamllMainTravel');
-            return str_replace($pattern, $newUrl, $travelImageThumbUrl);
-        } else {
-            return $travelImageThumbUrl
-                ?: config('constants.image.defaultCatImage');
-        }*/
-
     }
 
 
@@ -202,12 +198,26 @@ class Travel extends Model implements HasMedia
     public function getTravelRoadAttribute()
     {
         $travelRoad = $this->getMedia('travelRoad');
+
         if (Arr::get($travelRoad, 0)) {
             $travelRoad['url'] = $travelRoad[0]->getUrl();
             $travelRoad['file_name'] = $travelRoad[0]->getCustomProperty('name');
         } else return null;
         return $travelRoad ?? null;
 
+    }
+
+    public function getTravelRoadFilenameAttribute()
+    {
+        $travelRoad = $this->getMedia('travelRoad')->first();
+        return isset($travelRoad) ? $travelRoad->getCustomProperty('name') : '';
+
+    }
+
+    public function getTravelRoadUrlAttribute()
+    {
+        $travelRoad = $this->getMedia('travelRoad')->first();
+        return  isset($travelRoad) ? $travelRoad->getUrl() : '';
     }
 
     public function getTravelMainImageAttribute()
@@ -531,33 +541,53 @@ class Travel extends Model implements HasMedia
     }
 
     /**
-     * Register media conversions
-     *
      * @param Media|null $media
      * @throws InvalidManipulation
+     * @throws \League\Flysystem\FileNotFoundException
      */
     public function registerMediaConversions(Media $media = null): void
     {
         $this->autoRegisterThumb200();
 
         $this->addMediaConversion('webpTravelMainImage')
-            ->width(914)
-            ->height(538)
-            ->fit('crop', 914, 914)
+            ->width(200)
+            ->height(200)
             ->watermark(public_path('/media/slider/watermark.png'))
             ->watermarkOpacity(50)
             ->format(Manipulations::FORMAT_WEBP)
+            ->quality(80)
             ->optimize()
             ->performOnCollections('travelMainImage')
             ->nonQueued();
 
-        $this->addMediaConversion('detail_hd')
+        $this->addMediaConversion('webpTravelMainImage_400')
+            ->width(400)
+            ->height(400)
+            ->watermark(public_path('/media/slider/watermark.png'))
+            ->watermarkOpacity(50)
+            ->format(Manipulations::FORMAT_WEBP)
             ->quality(80)
-            ->width(1080)
-            ->height(1080)
+            ->optimize()
+            ->performOnCollections('travelMainImage')
+            ->nonQueued();
+
+        $this->getMediaCollections()->filter->isImage()->each(function ($mediaCollection) {
+            $this->addMediaConversion('thumb_400')
+                ->width(400)
+                ->height(400)
+                ->watermark(public_path('/media/slider/watermark.png'))
+                ->watermarkOpacity(50)
+                ->quality(80)
+                ->optimize()
+                ->performOnCollections('travelMainImage')
+                ->nonQueued();
+        });
+
+        $this->addMediaConversion('detail_hd')
             ->fit('crop', 1080, 1080)
             ->watermark(public_path('/media/slider/watermark.png'))
             ->watermarkOpacity(50)
+            ->quality(80)
             ->optimize()
             ->withResponsiveImages()
             ->performOnCollections('gallery')
@@ -571,11 +601,11 @@ class Travel extends Model implements HasMedia
     {
         $this->getMediaCollections()->filter->isImage()->each(function ($mediaCollection) {
             $this->addMediaConversion('thumb_200')
-                ->width(914)
-                ->height(538)
-                ->fit('crop', 914, 914)
+                ->width(200)
+                ->height(200)
                 ->watermark(public_path('/media/slider/watermark.png'))
                 ->watermarkOpacity(50)
+                ->quality(80)
                 ->optimize()
                 ->performOnCollections($mediaCollection->getName())
                 ->nonQueued();

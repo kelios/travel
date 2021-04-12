@@ -34,6 +34,15 @@ class ComplexityRepository implements TravelRelationRepositoryInterface
     }
 
     /**
+     * @param array $param
+     * @return mixed
+     */
+    public function get($param = [])
+    {
+        return $this->complexity->get($param);
+    }
+
+    /**
      * @param $attr
      * @return Complexity
      */

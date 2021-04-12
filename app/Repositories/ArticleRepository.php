@@ -33,6 +33,15 @@ class ArticleRepository implements TravelRelationRepositoryInterface
     }
 
     /**
+     * @param array $param
+     * @return mixed
+     */
+    public function get($param = [])
+    {
+        return $this->article->get($param);
+    }
+
+    /**
      * @return Article[]|\Illuminate\Database\Eloquent\Collection
      */
     public function getList()

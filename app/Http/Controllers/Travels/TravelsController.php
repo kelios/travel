@@ -17,6 +17,7 @@ use App\Repositories\CityRepository;
 use App\Repositories\CountryRepository;
 use App\Repositories\CompanionRepository;
 use App\Repositories\TravelViewRepository;
+use App\Repositories\CategoryTravelAddressRepository;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -86,6 +87,8 @@ class TravelsController extends Controller
      */
     private $companionRepository;
 
+    private $categoryTravelAddressRepository;
+
     /**
      * TravelsController constructor.
      * @param TravelRepository $travelRepository
@@ -100,7 +103,8 @@ class TravelsController extends Controller
                                 countryRepository $countryRepository,
                                 CompanionRepository $companionRepository,
                                 TravelViewRepository $travelViewRepository,
-                                TravelAddressRepository $travelAddressRepository
+                                TravelAddressRepository $travelAddressRepository,
+                                CategoryTravelAddressRepository $categoryTravelAddressRepository
     )
     {
         $this->travelRepository = $travelRepository;
@@ -114,6 +118,7 @@ class TravelsController extends Controller
         $this->companionRepository = $companionRepository;
         $this->travelViewRepository = $travelViewRepository;
         $this->travelAddressRepository = $travelAddressRepository;
+        $this->categoryTravelAddressRepository = $categoryTravelAddressRepository;
 
     }
 
@@ -131,7 +136,9 @@ class TravelsController extends Controller
         $whereSearch = $request->all();
         $where = array_merge($whereSearch, ['publish' => 1, 'moderation' => 1]);
         $filter_hide = ['countries' => true];
-        return view('travels.index', ['where' => $where,
+        return view('travels.index', [
+                'where' => $where,
+                'isBy' => false,
                 'filter_hide' => $filter_hide]
         );
     }
@@ -149,8 +156,11 @@ class TravelsController extends Controller
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['publish' => 1, 'countries' => [3], 'moderation' => 1];
         $filter_hide = ['countries' => false];
-        return view('travels.index', ['where' => $where,
-            'filter_hide' => $filter_hide]);
+        return view('travels.index', [
+            'where' => $where,
+            'isBy' => true,
+            'filter_hide' => $filter_hide
+        ]);
     }
 
     public function get(IndexTravel $request)
@@ -189,7 +199,8 @@ class TravelsController extends Controller
                 'slug',
                 'id',
                 'userName',
-                'countUnicIpView'
+                'countUnicIpView',
+                'youtube_link'
             ]);
         });
         return response()->json($travels);
@@ -382,6 +393,7 @@ class TravelsController extends Controller
 
         $travel->travelImageThumbUrlArr = $travel->travelAddress->pluck('travelImageThumbUrl')->toArray();
         $travel->thumbs200ForCollectionArr = $travel->travelAddress->pluck('thumbs200Collection')->toArray();
+        $travel->categoryTravelAddressArr= $travel->travelAddress->pluck('categories')->toArray();
 
         SEOMeta::setTitle($travel->name);
         SEOMeta::setDescription($travel->meta_description);
@@ -389,12 +401,13 @@ class TravelsController extends Controller
         SEOMeta::addKeyword($travel->meta_keywords);
         return view('travels.edit', [
             'travel' => $travel,
-            'categories' => $this->categoryRepository->all(),
-            'transports' => $this->transportRepository->all(),
-            'month' => $this->monthRepository->all(),
-            'complexity' => $this->complexityRepository->all(),
-            'companion' => $this->companionRepository->all(),
-            'overNightStay' => $this->overNightStayRepository->all(),
+            'categories' => $this->categoryRepository->get(['id','name']),
+            'transports' => $this->transportRepository->get(['id','name']),
+            'month' => $this->monthRepository->get(['id','name']),
+            'complexity' => $this->complexityRepository->get(['id','name']),
+            'companion' => $this->companionRepository->get(['id','name']),
+            'overNightStay' => $this->overNightStayRepository->get(['id','name']),
+            'categoryTravelAddress' => $this->categoryTravelAddressRepository->get(['id','name']),
         ]);
     }
 
@@ -432,6 +445,7 @@ class TravelsController extends Controller
             'recommendation' => (boolean)$travel['recommendation'],
             'travelRoad' => (boolean)$travel['travelRoad'],
             'travelAddressAdress' => (boolean)$travel['travelAddressAdress'],
+            'youtube_link' => (boolean)$travel['youtube_link'],
         ];
         $travel = (object)$travel->only(
             'id',
@@ -465,6 +479,7 @@ class TravelsController extends Controller
     public function findById(\Illuminate\Http\Request $request)
     {
         $travel = $this->travelRepository->getById($request->id);
+
         $travel = (object)$travel->only(
             'id',
             'totalLikes',
@@ -492,12 +507,15 @@ class TravelsController extends Controller
             'plus',
             'minus',
             'recommendation',
-            'travelRoad',
+            'travelRoadFilename',
+            'travelRoadUrl',
             'travelAddressAdress',
             'reply',
             'imageMeTravelArr',
-            'coordsMeTravelArr'
+            'coordsMeTravelArr',
+            'youtube_link'
         );
+
         return response()->json($travel);
     }
 
@@ -596,7 +614,8 @@ class TravelsController extends Controller
             'month' => $this->monthRepository->all(),
             'complexity' => $this->complexityRepository->all(),
             'overNightStay' => $this->overNightStayRepository->all(),
-            'companion' => $this->companionRepository->all()
+            'companion' => $this->companionRepository->all(),
+            'categoryTravelAddress' => $this->categoryTravelAddressRepository->all(),
         ];
         if ($request->ajax()) {
             return response()->json($filtersTravel);
@@ -750,11 +769,13 @@ class TravelsController extends Controller
         foreach ($travelAddr as $addr) {
             if (!array_get($addr, 'id')) {
                 $travelAddrNew = $travel->travelAddress()->create($addr);
+                $travelAddrNew->categories()->sync($addr['categoriesIds']);
                 $addr['id'] = $travelAddrNew->id;
                 $travelAddrNew->processMedia(collect(['travelImageAddress' => $addr['travelAddrMedia']]));
             } else {
                 $currentTravelAddr = $travel->travelAddress()->findOrFail(array_get($addr, 'id'));
                 $currentTravelAddr->save();
+                $currentTravelAddr->categories()->sync($addr['categoriesIds']);
                 $currentTravelAddr->processMedia(collect(['travelImageAddress' => $addr['travelAddrMedia']]));
             }
         }

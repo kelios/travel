@@ -15,7 +15,7 @@ return [
 
     'default' => env('FILESYSTEM_DRIVER', 'local'),
 
-    'storageDisk' =>  env('APP_STORAGE_DISK','public'),
+    'storageDisk' => env('APP_STORAGE_DISK', 'public'),
 
     /*
     |--------------------------------------------------------------------------

@@ -34,6 +34,15 @@ class OverNightStayRepository implements TravelRelationRepositoryInterface
     }
 
     /**
+     * @param array $param
+     * @return mixed
+     */
+    public function get($param = [])
+    {
+        return $this->overNightStay->get($param);
+    }
+
+    /**
      * @param $attr
      * @return OverNightStay
      */

@@ -397,5 +397,24 @@ return [
         ],
     ],
 
+    'category-travel-address' => [
+        'title' => 'Категория обьекта',
+        'select'=> 'Выберите категорию',
+
+        'actions' => [
+            'index' => 'Добавить',
+            'create' => 'Создать',
+            'edit' => 'Редактировать :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Название',
+            'status' => 'Статус',
+
+        ],
+    ],
+
+
     // Do not delete me :) I'm used for auto-generation
 ];

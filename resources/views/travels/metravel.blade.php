@@ -2,7 +2,9 @@
 @section('content')
     <div id="app">
         <div class="container">
-
+            <div class="card-header">
+                <h1>{{trans('main.listmytravel')}}</h1>
+            </div>
             <div class="album py-5">
                 <search-me-travel :where='@json($where)'></search-me-travel>
                 <travel-list :readonly="false" :filter='@json($where)'></travel-list>

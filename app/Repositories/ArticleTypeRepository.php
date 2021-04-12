@@ -32,6 +32,15 @@ class ArticleTypeRepository implements TravelRelationRepositoryInterface
     }
 
     /**
+     * @param array $param
+     * @return mixed
+     */
+    public function get($param = [])
+    {
+        return $this->articleType->get($param);
+    }
+
+    /**
      * @param $attr
      * @return ArticleType
      */

@@ -35,6 +35,15 @@ class CategoryRepository implements TravelRelationRepositoryInterface
     }
 
     /**
+     * @param array $param
+     * @return mixed
+     */
+    public function get($param = [])
+    {
+        return $this->category->get($param);
+    }
+
+    /**
      * @param $attr
      * @return Travel
      *

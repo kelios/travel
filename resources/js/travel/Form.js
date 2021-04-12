@@ -94,7 +94,8 @@ Vue.component('travel-form', {
                 travelAddressAdress: [],
                 thumbs200ForCollectionArr: [],
                 travelImageThumbUrlArr: [],
-                travelImageAddress: []
+                travelImageAddress: [],
+                categoriesIds:[]
             }
         }
     },

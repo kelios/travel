@@ -11,6 +11,13 @@
 
         </section>
 
+        <section class="travel-section video section--demo-2" id="video" v-if="travel.youtube_link">
+            <div>
+                <video-embed :src="travel.youtube_link"></video-embed>
+            </div>
+
+        </section>
+
         <section class="travel-section description" id="description" v-if="travel.description">
             <div class="travel-section-content">
                 <h2 class="mb-5">{{travel.name}}</h2>
@@ -56,13 +63,13 @@
             <travel-show-section :data="travel.recommendation"
                                  :title="translate('travels.recommendation')"></travel-show-section>
         </section>
-        <section class="travel-section" id="travelRoad" v-if="travel.travelRoad">
+        <section class="travel-section" id="travelRoad" v-if="travel.travelRoadFilename">
             <div class="container-fluid">
-                <h2 class="mb-5">{{translate('travels.travelRoad') }} - {{travel.travelRoad.file_name}}</h2>
+                <h2 class="mb-5">{{translate('travels.travelRoad') }} - {{travel.travelRoadFilename}}</h2>
                 <div class="row">
                     <div class="col-xs-12">
-                        <a :href="travel.travelRoad.url" download depressed small color="primary">
-                            {{translate('travels.travelRoad') }} - {{travel.travelRoad.file_name}}
+                        <a :href="travel.travelRoadUrl" download depressed small color="primary">
+                            {{translate('travels.travelRoad') }} - {{travel.travelRoadFilename}}
                         </a>
                     </div>
                 </div>
@@ -121,7 +128,7 @@
             <travel-near></travel-near>
         </section>
 
-        <section class="travel-section">
+        <section class="travel-section" id="popular">
             <h1>{{translate('travels.popularTravels')}}</h1>
             <travel-popular></travel-popular>
         </section>
@@ -137,7 +144,6 @@
     import TravelShowSection from './TravelShowSection.vue';
     import Slider from './Slider.vue';
     import CommentList from './CommentList.vue';
-
 
     import {BCard} from 'bootstrap-vue';
     import {mapGetters} from "vuex";
@@ -155,7 +161,6 @@
             'travel-popular': TravelPopular,
             'travel-show-section': TravelShowSection,
             'slider': Slider,
-
             'b-card-body': BCard,
         },
         created() {

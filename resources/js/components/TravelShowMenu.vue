@@ -4,6 +4,9 @@
             <b-nav-item class="nav-item" href="#gallery" v-if="travel_menu.gallery">
                 {{ translate('travels.gallery') }}
             </b-nav-item>
+            <b-nav-item class="nav-item" href="#description" v-if="travel_menu.youtube_link">
+                {{ translate('travels.video') }}
+            </b-nav-item>
             <b-nav-item class="nav-item" href="#description" v-if="travel_menu.description">
                 {{ translate('travels.description') }}
             </b-nav-item>
@@ -27,6 +30,9 @@
             </b-nav-item>
             <b-nav-item class="nav-item" href="#nearTravels">
                 {{translate('travels.nearTravels')}}
+            </b-nav-item>
+            <b-nav-item class="nav-item" href="#popular">
+                {{translate('travels.popularTravels')}}
             </b-nav-item>
         </b-nav>
     </div>

@@ -33,6 +33,15 @@ class TravelAddressRepository implements TravelRelationRepositoryInterface
         return $this->travelAddress->orderBy('title_' . $this->getLocale(), 'asc')->get();
     }
 
+    /**
+     * @param array $param
+     * @return mixed
+     */
+    public function get($param = [])
+    {
+        return $this->travelAddress->get($param);
+    }
+
 
     /**
      * @param $attr
@@ -42,6 +51,7 @@ class TravelAddressRepository implements TravelRelationRepositoryInterface
     {
         return $this->travelAddress->fill($attr);
     }
+
 
     /**
      * @return bool

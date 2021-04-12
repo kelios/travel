@@ -30,6 +30,15 @@ class MessageRepository implements CommentRepositoryInterface
     }
 
     /**
+     * @param array $param
+     * @return mixed
+     */
+    public function get($param = [])
+    {
+        return $this->message->get($param);
+    }
+
+    /**
      * @param $attr
      * @return Comment
      */

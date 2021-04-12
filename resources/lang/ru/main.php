@@ -59,5 +59,8 @@ return [
     'newandaction' => 'Новости/Розыгрыши',
     'moderation' => 'Одобрено',
     'moderationhide' => 'Ожидает модерации',
-    'read'=>'Прочитано'
+    'read' => 'Прочитано',
+    'listmytravel' => 'Мои путешествия',
+    'listalltravel' => 'Все путешествия',
+    'listbytravel' => 'Путешествуем по Беларуси',
 ];

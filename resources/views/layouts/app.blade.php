@@ -12,7 +12,6 @@
     {!! SEO::generate(true) !!}
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="preload" as="font" href="/fonts/bad-script-v9-latin/BadScript-Regular.ttf" type="font/ttf" crossorigin="anonymous">
     <link rel="preload" as="font" href="/fonts/vendor/font-awesome/fontawesome-webfont.woff2" type="font/woff2" crossorigin="anonymous">
     <!-- Scripts -->
@@ -32,7 +31,7 @@
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Me Travel') }}
-                <img lazy="loading" width="27"  height ="30" class="logoimg" src="/media/slider/logo_yellow.png">
+                <img lazy="loading" width="27"  height ="30" class="logoimg" alt= "MeTravelBy" src="/media/slider/logo_yellow.png">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -82,7 +81,7 @@
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 @if(Auth::user()->user_avatar_thumb_url)
-                                    <img lazy="loading" src="{{ Auth::user()->user_avatar_thumb_url }}" class="avatar-photo">
+                                    <img lazy="loading" alt= "MeTravelBy" src="{{ Auth::user()->user_avatar_thumb_url }}" class="avatar-photo">
                                 @endif
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
@@ -153,5 +152,4 @@
 
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 <script rel="preload" src="/js/app.js" defer  as="script"></script>
-<script rel="preload" src="/js/travelform.js" defer  as="script"></script>
 </html>

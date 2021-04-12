@@ -33,6 +33,11 @@ class CountryRepository implements TravelRelationRepositoryInterface
         return $this->country->orderBy('title_' . $this->getLocale(), 'asc')->get();
     }
 
+    public function get($param = [])
+    {
+        return $this->country->get($param);
+    }
+
     /**
      * @return Country[]|\Illuminate\Database\Eloquent\Collection
      */
@@ -40,7 +45,6 @@ class CountryRepository implements TravelRelationRepositoryInterface
     {
         return $this->country->has('travels')->orderBy('title_' . $this->getLocale(), 'asc')->get();
     }
-
 
 
     /**

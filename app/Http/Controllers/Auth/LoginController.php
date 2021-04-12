@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -35,6 +36,9 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        SEOMeta::setTitle(trans('home.metaLoginTitle'));
+        SEOMeta::setDescription(trans('home.metaLoginDescription'));
+        SEOMeta::setCanonical('https://metravel.by/');
         $this->middleware('guest')->except('logout');
     }
 }

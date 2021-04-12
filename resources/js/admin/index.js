@@ -16,3 +16,4 @@ import './message';
 import './article';
 import './article-type';
 import './travel-like';
+import './category-travel-address';

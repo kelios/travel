@@ -36,6 +36,7 @@ class TravelRepository implements TravelRepositoryInterface
         return $this->travel->all();
     }
 
+
     /**
      * @param array $where
      * @return mixed
@@ -366,6 +367,7 @@ class TravelRepository implements TravelRepositoryInterface
                 'cities',
                 'countries',
                 'travelAddress',
+                'travelAddress.categories',
                 'companion',
                 'users',
                 'travelLike',

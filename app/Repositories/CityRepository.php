@@ -34,6 +34,15 @@ class CityRepository implements TravelRelationRepositoryInterface
     }
 
     /**
+     * @param array $param
+     * @return mixed
+     */
+    public function get($param = [])
+    {
+        return $this->city->get($param);
+    }
+
+    /**
      * @param $whereIn
      * @return mixed
      */

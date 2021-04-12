@@ -62,7 +62,7 @@ return [
 
     'popularTravels' => 'Можно еще почитать...',
     'nearTravels' => 'Рядом (~60км) можно еще посмотреть...',
-    '' => '',
-    '' => '',
-
+    'youtubeLink' => 'Ссылка на видео с YouTube',
+    'video' => 'Видео',
+    'traveladdresscategory'=>'Категория объекта'
 ];

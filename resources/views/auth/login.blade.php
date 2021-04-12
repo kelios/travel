@@ -11,7 +11,7 @@
                 <div class="row justify-content-center p-3 label-white">
                     <div class="col-md-8">
                         <div class="">
-                            <div class="reg-header">{{ trans('home.login')}}</div>
+                            <div class="reg-header"><h1>{{ trans('home.login')}}</h1></div>
 
                             <div class="card-body">
                                 <form method="POST" action="{{ route('login') }}">

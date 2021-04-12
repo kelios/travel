@@ -5,6 +5,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md">
+                    <div class="card-header">
+                        @if ($isBy)
+                            <h1>{{trans('main.listbytravel')}}</h1>
+                        @else
+                            <h1>{{trans('main.listalltravel')}}</h1>
+                        @endif
+                    </div>
                     <div class="album py-5 ">
                         <search-extended-travel :filter_hide='@json($filter_hide)'
                                                 :where='@json($where)'></search-extended-travel>

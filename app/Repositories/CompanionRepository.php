@@ -34,6 +34,15 @@ class CompanionRepository implements TravelRelationRepositoryInterface
     }
 
     /**
+     * @param array $param
+     * @return mixed
+     */
+    public function get($param = [])
+    {
+        return $this->companion->get($param);
+    }
+
+    /**
      * @param $attr
      * @return Companion
      */

@@ -33,8 +33,7 @@ class StoreTravel extends FormRequest
             'slug' => ['nullable', 'string'],
             'meta_keywords' => ['nullable', 'string'],
             'meta_description' => ['nullable', 'string'],
-            //images
-            'pathToFile' => ['nullable', 'string']
+            'youtube_link' => ['nullable', 'string'],
         ];
     }
 
@@ -78,6 +77,7 @@ class StoreTravel extends FormRequest
         $coordsMeTravel = $this->get('coordsMeTravel', []);
         $travelAddressIds = $this->get('travelAddressIds');
         $travelImageAddress = $this->get('travelImageAddress');
+        $travelAddressCategoriesIds = $this->get('travelAddresscategoriesIds');
 
         foreach ($travelAddress as $key => $value) {
             $data[$key]['id'] = Arr::get($travelAddressIds, $key, '');
@@ -88,6 +88,7 @@ class StoreTravel extends FormRequest
             $data[$key]['city_id'] = Arr::get($travelAddressCity, $key) != '-1' ? Arr::get($travelAddressCity, $key) : null;
             $data[$key]['country_id'] = $travelAddressCountry[$key];
             $data[$key]['travelAddrMedia'] = Arr::get($travelImageAddress, $key);
+            $data[$key]['categoriesIds'] = Arr::pluck(Arr::get($travelAddressCategoriesIds, $key,[]),'id');
         }
         return $data;
     }
