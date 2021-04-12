@@ -127,7 +127,6 @@ class Travel extends Model implements HasMedia
         if ($image) {
             if (Storage::disk(config('filesystems.storageDisk'))->exists($image->getPath())) {
                 Storage::disk(config('filesystems.storageDisk'))->delete($image->getPath());
-
             }
             //dd($image->hasGeneratedConversion('webpTravelMainImage_400'));
             if ($image->hasGeneratedConversion('webpTravelMainImage_400')) {

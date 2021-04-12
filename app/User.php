@@ -89,16 +89,15 @@ class User extends Authenticatable implements HasMedia
     public function getUserAvatarThumbUrlAttribute(): ?string
     {
 
-        $image = $this->getMedia('userAvatar');
-        if (Arr::get($image, 0)) {
-            if (Storage::disk(config('filesystems.storageDisk'))->exists($image[0]->getPath())) {
-                Storage::disk(config('filesystems.storageDisk'))->delete($image[0]->getPath());
+        $image = $this->getMedia('userAvatar')->first();
+        if ($image) {
+            if (Storage::disk(config('filesystems.storageDisk'))->exists($image->getPath())) {
+                Storage::disk(config('filesystems.storageDisk'))->delete($image->getPath());
             }
+            $userImageThumbUrl = $image->getUrl('thumb_150');
         }
-
-        return $this->getFirstMediaUrl('userAvatar', 'thumb_150') ?
-            $this->getFirstMediaUrl('userAvatar', 'thumb_150')
-            : Config::get('constants.image.defaultCatImage');
+        return $userImageThumbUrl
+            ?? Config::get('constants.image.defaultCatImage');
     }
 
     public function registerMediaCollections(): void
