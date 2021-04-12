@@ -139,7 +139,9 @@ class TravelsController extends Controller
         return view('travels.index', [
                 'where' => $where,
                 'isBy' => false,
-                'filter_hide' => $filter_hide]
+                'isFavorite' => false,
+                'filter_hide' => $filter_hide,
+            ]
         );
     }
 
@@ -159,6 +161,7 @@ class TravelsController extends Controller
         return view('travels.index', [
             'where' => $where,
             'isBy' => true,
+            'isFavorite' => false,
             'filter_hide' => $filter_hide
         ]);
     }
@@ -329,7 +332,11 @@ class TravelsController extends Controller
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['user_id' => Auth::user()->id];
-        return view('travels.metravel', ['where' => $where]);
+        $filter_hide = ['countries' => false];
+        return view('travels.metravel', [
+            'where' => $where,
+            'filter_hide' => $filter_hide
+        ]);
     }
 
     /**
@@ -348,8 +355,11 @@ class TravelsController extends Controller
         $filter_hide = ['countries' => true];
         return view('travels.index', [
             'where' => $where,
+
             'filter_hide' => $filter_hide,
-            'isFavorite' => true]);
+            'isBy' => false,
+            'isFavorite' => true
+        ]);
     }
 
     public function friendTravel(MeTravel $request)
@@ -362,7 +372,9 @@ class TravelsController extends Controller
         $filter_hide = ['countries' => true];
         return view('travels.index', [
             'where' => $where,
-            'filter_hide' => $filter_hide
+            'filter_hide' => $filter_hide,
+            'isBy' => false,
+            'isFavorite' => false
         ]);
 
     }
@@ -393,7 +405,7 @@ class TravelsController extends Controller
 
         $travel->travelImageThumbUrlArr = $travel->travelAddress->pluck('travelImageThumbUrl')->toArray();
         $travel->thumbs200ForCollectionArr = $travel->travelAddress->pluck('thumbs200Collection')->toArray();
-        $travel->categoryTravelAddressArr= $travel->travelAddress->pluck('categories')->toArray();
+        $travel->categoryTravelAddressArr = $travel->travelAddress->pluck('categories')->toArray();
 
         SEOMeta::setTitle($travel->name);
         SEOMeta::setDescription($travel->meta_description);
@@ -401,13 +413,13 @@ class TravelsController extends Controller
         SEOMeta::addKeyword($travel->meta_keywords);
         return view('travels.edit', [
             'travel' => $travel,
-            'categories' => $this->categoryRepository->get(['id','name']),
-            'transports' => $this->transportRepository->get(['id','name']),
-            'month' => $this->monthRepository->get(['id','name']),
-            'complexity' => $this->complexityRepository->get(['id','name']),
-            'companion' => $this->companionRepository->get(['id','name']),
-            'overNightStay' => $this->overNightStayRepository->get(['id','name']),
-            'categoryTravelAddress' => $this->categoryTravelAddressRepository->get(['id','name']),
+            'categories' => $this->categoryRepository->get(['id', 'name']),
+            'transports' => $this->transportRepository->get(['id', 'name']),
+            'month' => $this->monthRepository->get(['id', 'name']),
+            'complexity' => $this->complexityRepository->get(['id', 'name']),
+            'companion' => $this->companionRepository->get(['id', 'name']),
+            'overNightStay' => $this->overNightStayRepository->get(['id', 'name']),
+            'categoryTravelAddress' => $this->categoryTravelAddressRepository->get(['id', 'name']),
         ]);
     }
 

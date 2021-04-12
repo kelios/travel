@@ -5,9 +5,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md">
-                    <div class="card-header">
+                    <div class="card-header titleindex">
                         @if ($isBy)
                             <h1>{{trans('main.listbytravel')}}</h1>
+                        @elseif ($isFavorite)
+                            <h1>{{trans('home.saveTravel')}}</h1>
                         @else
                             <h1>{{trans('main.listalltravel')}}</h1>
                         @endif
