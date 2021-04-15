@@ -4,7 +4,7 @@
             <b-nav-item class="nav-item" href="#gallery" v-if="travel_menu.gallery">
                 {{ translate('travels.gallery') }}
             </b-nav-item>
-            <b-nav-item class="nav-item" href="#description" v-if="travel_menu.youtube_link">
+            <b-nav-item class="nav-item" href="#video" v-if="travel_menu.youtube_link">
                 {{ translate('travels.video') }}
             </b-nav-item>
             <b-nav-item class="nav-item" href="#description" v-if="travel_menu.description">

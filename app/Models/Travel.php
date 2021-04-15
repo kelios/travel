@@ -549,23 +549,23 @@ class Travel extends Model implements HasMedia
         $this->autoRegisterThumb200();
 
         $this->addMediaConversion('webpTravelMainImage')
-            ->width(200)
-            ->height(200)
+            ->width(300)
+            ->height(300)
             ->watermark(public_path('/media/slider/watermark.png'))
             ->watermarkOpacity(50)
             ->format(Manipulations::FORMAT_WEBP)
-            ->quality(80)
+            ->quality(96)
             ->optimize()
             ->performOnCollections('travelMainImage')
             ->nonQueued();
 
         $this->addMediaConversion('webpTravelMainImage_400')
-            ->width(400)
-            ->height(400)
+            ->width(800)
+          //  ->height(400)
             ->watermark(public_path('/media/slider/watermark.png'))
             ->watermarkOpacity(50)
             ->format(Manipulations::FORMAT_WEBP)
-            ->quality(80)
+            ->quality(96)
             ->optimize()
             ->performOnCollections('travelMainImage')
             ->nonQueued();
@@ -586,7 +586,7 @@ class Travel extends Model implements HasMedia
             ->fit('crop', 1080, 1080)
             ->watermark(public_path('/media/slider/watermark.png'))
             ->watermarkOpacity(50)
-            ->quality(80)
+            ->quality(96)
             ->optimize()
             ->withResponsiveImages()
             ->performOnCollections('gallery')

@@ -13,7 +13,7 @@ return [
    |
    */
 
-    'maximum_image_width' => env('WYSIWYG_MAXIMUM_IMAGE_WIDTH', 1000),
+    'maximum_image_width' => env('WYSIWYG_MAXIMUM_IMAGE_WIDTH', 800),
 
     /*
     |--------------------------------------------------------------------------
