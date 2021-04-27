@@ -138,8 +138,10 @@ class TravelAddress extends Model implements HasMedia
             }
             if ($image->hasGeneratedConversion('thumb_400_wp')) {
                 $travelImageThumbUrl = $image->getUrl('thumb_400_wp');
-            } else {
+            } else if ($image->hasGeneratedConversion('thumb_400')){
                 $travelImageThumbUrl = $image->getUrl('thumb_400');
+            }else{
+                $travelImageThumbUrl = $image->getUrl('thumb_200');
             }
         }
         return $travelImageThumbUrl

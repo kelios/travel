@@ -14,27 +14,19 @@
                     :lat-lng="getLatLng(place.coord)"
                     :icon="iconMe"
                 >
-                    <l-popup
-                        :content="
+                    <l-popup>
+                        <a :href="place.urlTravel" target="_blank">
+                            <img
+                                lazy="loading"
+                                v-if="place.travelImageThumbUrl"
+                                class="mapPreview img-responsive img-thumbnail"
+                                :src="place.travelImageThumbUrl"
+                                width="200"
+                                height="200"
+                            >
+                            <div class="badge-light">{{place.address}}</div>
+                        </a>
 
-                    '<a href='+place.urlTravel+' target=\'_blank\'>'+
-                    '<img '+
-                    ' lazy=\'loading\''+
-                    ' v-if='+place.travelImageThumbUrl+
-                    ' class=\'mapPreview img-responsive img-thumbnail align-items-center\''+
-                    ' src='+place.travelImageThumbUrl+
-                    ' width=\'200\''+
-                    ' height=\'200\''+
-                    '>'+
-                    '<div'+
-                    ' class=\'badge-light\''+
-                    '>'+
-                         place.address +
-                     '</div>'+
-
-                    '</a>'
-                    "
-                    >
                     </l-popup>
                 </l-marker>
             </div>
@@ -57,7 +49,7 @@
                 zoom: 8,
                 center: L.latLng(50.5403576, 19.3672883),
                 where: {},
-                radius: {'id':60,'name':60},
+                radius: {'id': 60, 'name': 60},
 
                 url: 'https://{s}.tile.osm.org/{z}/{x}/{y}.png',
                 attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
