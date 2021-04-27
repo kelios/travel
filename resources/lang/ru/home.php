@@ -26,21 +26,23 @@ return [
     'meTravels' => 'Мои путешествия',
     'name' => 'Имя',
     'confirmPassword' => 'Повторить пароль',
-    'metaMainTitle' => 'MeTravel - сайт о путешествиях',
+    'metaMainTitle' => 'MeTravel.by - сайт о путешествиях',
     'editProfile' => 'Мой профиль',
-    'metaMainDescription' => 'Travels. Сайт о путешествиях.
+    'metaMainDescription' => 'Сайт о путешествиях.
         Оставляй здесь свои воспоминания, о самых ярких моментах в жизни.
-        Планируешь маршрут, ищешь куда поехать - путешествуй вместе с meTravel.',
+        Планируешь маршрут, ищешь куда поехать - путешествуй вместе с MeTravel.by.',
     'allFriends' => 'Мои авторы',
     'saveTravel' => 'Сохраненные маршруты',
     'follower' => 'Маршруты моих авторов',
     'allMessages' => 'Все сообщения',
-    'metaRegisterTitle' => 'MeTravel - регистрация нового пользователя',
-    'metaLoginTitle' => 'MeTravel - станица аутентификации пользователя',
-    'metaRegisterDescription' => 'Travels. Сайт о путешествиях.
+    'metaRegisterTitle' => 'MeTravel.by - регистрация нового пользователя',
+    'metaLoginTitle' => 'MeTravel.by - станица аутентификации пользователя',
+    'metaRegisterDescription' => 'MeTravel.by. Сайт о путешествиях.
         Регистрируйся на сайте и получи возможность добавлять новые путешествия',
-    'metaLoginDescription' => 'Travels. Сайт о путешествиях.
+    'metaLoginDescription' => 'MeTravel.by. Сайт о путешествиях.
        Пройди аутентификация и получи возможность оставлять комментарии, сохранять и добавлять новые путешествия',
-    '' => '',
-
+    'metaMapTitle' => 'MeTravel.by - найди на карте куда отправиться в путешествие',
+    'metaMapDescription' => 'MeTravel.by - найди на карте куда отправиться в путешествие и спланируй свой маршрут',
+    'metaContactTitle' => 'MeTravel.by - обратная связь',
+    'metaContactDescription' => 'Ждем ваши предложения по улучшению проекта на почту',
 ];

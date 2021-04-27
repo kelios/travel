@@ -35,8 +35,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        SEOMeta::setTitle(trans('home.metaMainTitle'));
-        SEOMeta::setDescription(trans('home.metaMainDescription'));
+        SEOMeta::setTitle(trans('home.metaMapTitle'));
+        SEOMeta::setDescription(trans('home.metaMapDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
         return view('map');
     }
@@ -52,8 +52,8 @@ class HomeController extends Controller
 
     public function contact()
     {
-        SEOMeta::setTitle(trans('home.metaMainTitle'));
-        SEOMeta::setDescription(trans('home.metaMainDescription'));
+        SEOMeta::setTitle(trans('home.metaContactTitle'));
+        SEOMeta::setDescription(trans('home.metaContactDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['publish' => 1, 'moderation' => 1];
         return view('feedback', ['where' => $where]);
@@ -64,6 +64,7 @@ class HomeController extends Controller
      */
     public function feedback(Request $request)
     {
+
         Notification::route('mail', config('feedback.email'))
             ->notify(new Feedback($request->input()));
     }
