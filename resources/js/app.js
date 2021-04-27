@@ -27,7 +27,6 @@ Vue.component('upload-image-drag', () => import('./components/UploadImageDrag.vu
 Vue.component('add-friend', () => import('./components/AddFriend.vue'));
 Vue.component('friend-list', () => import('./components/FriendList.vue'));
 
-
 Vue.component('search-me-travel', () => import('./components/SearchMeTravel.vue'));
 Vue.component('search-extended-travel', () => import('./components/SearchExtendedTravel.vue'));
 Vue.component('travel-last', () => import('./components/TravelLast.vue'));
@@ -39,6 +38,8 @@ Vue.component('map-me-travel', () => import('./components/mapMeTravel.vue'));
 Vue.component('media-upload', () => import('./components/MediaUpload.vue'));
 Vue.component('travel-form', () => import('./components/TravelForm.vue'));
 Vue.component('user-form', () => import('./components/UserForm.vue'));
+
+Vue.component('form-search', () => import('./components/mapSearch/FormSearch.vue'));
 
 ////
 

@@ -75,7 +75,21 @@ class TravelAddressRepository implements TravelRelationRepositoryInterface
      */
     public function getNear($radius, $coord)
     {
-        return $this->travelAddress->сloseTo($radius, $coord);
+        $travelAddress = $this->travelAddress->сloseTo($radius, $coord);
+        foreach ($travelAddress as $travelAdd) {
+            $ids[] = $travelAdd->travel_id;
+        }
+        return array_unique($ids);
+        // return $this->travelAddress->сloseTo($radius, $coord);
+    }
+
+    /**
+     * @param array $where
+     * @return mixed
+     */
+    public function getNearAddress($radius, $coord, $categories_ids=[],$address='')
+    {
+        return $this->travelAddress->сloseTo($radius, $coord,$categories_ids,$address);
     }
 
 }

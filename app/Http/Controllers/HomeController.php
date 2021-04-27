@@ -24,13 +24,21 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+   /* public function index()
     {
         SEOMeta::setTitle(trans('home.metaMainTitle'));
         SEOMeta::setDescription(trans('home.metaMainDescription'));
         SEOMeta::setCanonical('https://metravel.by/');
         $where = ['publish' => 1, 'moderation' => 1];
         return view('welcome', ['where' => $where]);
+    }*/
+
+    public function index()
+    {
+        SEOMeta::setTitle(trans('home.metaMainTitle'));
+        SEOMeta::setDescription(trans('home.metaMainDescription'));
+        SEOMeta::setCanonical('https://metravel.by/');
+        return view('map');
     }
 
     public function about()

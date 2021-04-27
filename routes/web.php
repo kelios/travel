@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'Travels\TravelsController@index')->name('home');
+Route::get('/map', 'HomeController@index')->name('home');
 Route::get('/mysitemap', 'SiteMapController@setSiteMap')->name('mysitemap');
 
 Route::get('/about', 'HomeController@about')->name('about');

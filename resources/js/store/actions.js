@@ -21,11 +21,41 @@ let actions = {
             where: data.where,
             query: data.query,
         };
-         axios.get('/api/travels', {params})
+        axios.get('/api/travels', {params})
             .then(res => {
                 {
                     commit('SET_TRAVELS', res.data);
                     commit('SET_MAP_DATA', res.data);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    },
+    async GET_FILTERS_MAP({commit}, data) {
+        axios.get('/api/getFilterForMap')
+            .then(res => {
+                {
+                    commit('SET_FILTER_FOR_MAP', res.data);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    },
+
+    async SEARCH_TRAVELS_ADDRESS({commit}, data) {
+        let params = {
+            page: data.page,
+            perPage: data.perPage,
+            where: data.where,
+            query: data.query,
+        };
+        axios.get('/api/searchTravelsForMap', {params})
+            .then(res => {
+                {
+                    commit('SET_TRAVELS', res.data);
+                    commit('SET_MAP_DATA_ADDRESS', res.data);
                 }
             })
             .catch(err => {
@@ -62,7 +92,7 @@ let actions = {
         })
     },
     async GET_LAST_TRAVELS({commit}, data) {
-         axios.get('/api/travelsLast')
+        axios.get('/api/travelsLast')
             .then(res => {
                 {
                     commit('SET_LAST_TRAVELS', res.data);
@@ -76,7 +106,7 @@ let actions = {
         let params = {
             where: data.where,
         };
-         axios.get('/api/travelComments', {params})
+        axios.get('/api/travelComments', {params})
             .then(res => {
                 {
                     commit('SET_COMMENTS', res.data);
@@ -195,7 +225,7 @@ let actions = {
         let params = {
             travel_id: data.travel_id,
         };
-         axios.get('/api/travelsNear', {params})
+        axios.get('/api/travelsNear', {params})
             .then(res => {
                 {
                     commit('SET_NEAR_TRAVELS', res.data);

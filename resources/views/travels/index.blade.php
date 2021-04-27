@@ -29,11 +29,6 @@
 
                 </div>
             </div>
-
-            <section class="text-center">
-                <map-me-travel :data="false" :where='@json($where)'></map-me-travel>
-            </section>
-
         </div>
 @endsection
 @section('footer')

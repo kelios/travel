@@ -24,6 +24,8 @@ let state = {
     messagesBetweenNew: {},
     travelId: '',
     travelAddressIds: [],
-    perPage: 6
+    perPage: 6,
+    lat: 50.5403576,
+    lng: 19.3672883
 }
 export default state

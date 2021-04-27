@@ -408,7 +408,7 @@ class Travel extends Model implements HasMedia
 
     public function getImageMeTravelArrAttribute()
     {
-        return $this->travelAddress()->get()->pluck('TravelImageThumbUrl')->toArray();
+        return $this->travelAddress()->get()->pluck('travelImageThumbUrl')->toArray();
     }
 
     /**

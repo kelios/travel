@@ -37324,3 +37324,8 @@ input:checked + .sumblavam:before {
     background: none !important;
     border-bottom-color: #ff9f5a !important;
 }
+
+.sidetravelmap{
+    max-height: 500px;
+    overflow-y: scroll;
+}

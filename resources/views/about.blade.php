@@ -37,11 +37,6 @@
         </div>
     </section>
 
-    <section class="text-center">
-        <map-me-travel :where='@json($where ?? '')' :data="true"></map-me-travel>
-    </section>
-
-
 @endsection
 @section('footer')
     @include('include.footer')

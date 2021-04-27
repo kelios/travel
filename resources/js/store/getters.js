@@ -53,6 +53,12 @@ let getters = {
     nearTravels: state => {
         return state.nearTravels
     },
+    lat: state => {
+        return state.lat
+    },
+    lng: state => {
+        return state.lng
+    },
 }
 
 export default getters

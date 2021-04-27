@@ -791,8 +791,6 @@ class TravelsController extends Controller
                 $currentTravelAddr->processMedia(collect(['travelImageAddress' => $addr['travelAddrMedia']]));
             }
         }
-//dd($travel->travelAddress()->exists());
-
 
         $travel->users()->sync(auth()->user()->id);
         foreach ($relations as $relation => $publickey) {
@@ -800,4 +798,56 @@ class TravelsController extends Controller
             $travel->$relationFormat()->sync($sanitized[$relation . 'Ids']);
         }
     }
+
+
+    public function searchTravelsForMap(Request $request)
+    {
+        if ($request->query('where')) {
+            $where = json_decode($request->query('where'), true);
+            $lat = array_get($where, 'lat');
+            $lng = array_get($where, 'lng');
+            $radius = array_get($where, 'radius.id');
+            $address = array_get($where, 'address');
+            $categories_ids = Arr::pluck(array_get($where, 'categories', []), 'id');
+           // dd($radius);
+        }
+
+        if ($lat) {
+            $coords = [
+                'lat' => $lat,
+                'lng' => $lng,
+            ];
+            $travelsAddress = $this->travelAddressRepository->getNearAddress($radius, $coords, $categories_ids, $address);
+            $travelsAddress->transform(function ($value) {
+                return $value->only([
+                    'lat',
+                    'lng',
+                    'coord',
+                    'address',
+                    'urlTravel',
+                    'travelImageThumbUrl',
+                    'categoryName',
+                    'coord'
+
+                ]);
+            });
+            return response()->json($travelsAddress);
+        } else {
+            return response()->json();
+        }
+    }
+
+    public function getFilterForMap(Request $request)
+    {
+        $filtersForMap = [
+            'categories' => $this->categoryTravelAddressRepository->get(['id', 'name']),
+            'radius' => Config::get('constants.radius')
+        ];
+        if ($request->ajax()) {
+            return response()->json($filtersForMap);
+        } else {
+            return $filtersForMap;
+        }
+    }
+
 }

@@ -64,5 +64,9 @@ return [
     'nearTravels' => 'Рядом (~60км) можно еще посмотреть...',
     'youtubeLink' => 'Ссылка на видео с YouTube',
     'video' => 'Видео',
-    'traveladdresscategory'=>'Категория объекта'
+    'traveladdresscategory'=>'Категория объекта',
+    'traveladdresscoord' =>'Координаты места',
+
+    'searchRadius' => 'Искать в радиусе (км)',
+    'searchAddress' =>  'Адрес места'
 ];

@@ -43,20 +43,16 @@ class TravelAddress extends Model implements HasMedia
     ];
 
     protected $appends = [
-        // 'lat',
-        //   'lng',
         'coords',
-        'travelImageAddress',
         'travelImageThumbUrl',
         'thumbs200Collection',
-        'ImagesAddress'
+        'categoryName',
+        'nameTravel',
+        'travelMainThumbUrl',
+        'urlTravel',
     ];
 
     /* ************************ ACCESSOR ************************* */
-    /*   public function getLatAttribute()
-       {
-           return Arr::get($this->coords, 'lat');
-       }*/
 
     public function getCoordsAttribute()
     {
@@ -72,21 +68,20 @@ class TravelAddress extends Model implements HasMedia
         }
     }
 
-    public function getImagesAddressAttribute()
+    public function getUrlTravelAttribute()
     {
-        if ($this->travelImageThumbUrl) {
-            return [
-                $this->travelImageThumbUrl
-            ];
-        } else {
-            return [];
-        }
+        return $this->travels->url;
     }
 
-    /* public function getlngAttribute()
-     {
-         return Arr::get($this->coords, 'lng');
-     }*/
+    public function getNameTravelAttribute()
+    {
+        return $this->travels->name;
+    }
+
+    public function getCategoryNameAttribute()
+    {
+        return $this->categories->collect()->implode('name', ',');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -99,7 +94,35 @@ class TravelAddress extends Model implements HasMedia
 
     public function travels()
     {
-        return $this->belongsTo(Travel::class);
+        return $this->belongsTo(Travel::class, 'travel_id');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTravelMainThumbUrlAttribute(): ?string
+    {
+        $travelMainThumbUrl = '';
+        $image = $this->travels->getMedia('travelMainImage')->first();
+
+        if ($image) {
+            if (Storage::disk(config('filesystems.storageDisk'))->exists($image->getPath())) {
+                Storage::disk(config('filesystems.storageDisk'))->delete($image->getPath());
+            }
+
+            if ($image->hasGeneratedConversion('webpTravelMainImage_400')) {
+                $travelMainThumbUrl = $image->getUrl('webpTravelMainImage_400');
+            } elseif ($image->hasGeneratedConversion('thumb_400')) {
+                $travelMainThumbUrl = $image->getUrl('thumb_400');
+            } elseif ($image->hasGeneratedConversion('webpTravelMainImage')) {
+                $travelMainThumbUrl = $image->getUrl('webpTravelMainImage');
+            } else {
+                $travelMainThumbUrl = $image->getUrl('thumb_200');
+            }
+        }
+
+        return $travelMainThumbUrl
+            ?: config('constants.image.defaultCatImage');
     }
 
     /**
@@ -109,33 +132,32 @@ class TravelAddress extends Model implements HasMedia
     {
         $travelImageThumbUrl = '';
         $image = $this->getMedia('travelImageAddress')->first();
-
         if ($image) {
             if (Storage::disk(config('filesystems.storageDisk'))->exists($image->getPath())) {
                 Storage::disk(config('filesystems.storageDisk'))->delete($image->getPath());
             }
-            if ($image->hasGeneratedConversion('thumb_200_wp')) {
-                $travelImageThumbUrl = $image->getUrl('thumb_200_wp');
+            if ($image->hasGeneratedConversion('thumb_400_wp')) {
+                $travelImageThumbUrl = $image->getUrl('thumb_400_wp');
             } else {
-                $travelImageThumbUrl = $image->getUrl('thumb_200');
+                $travelImageThumbUrl = $image->getUrl('thumb_400');
             }
         }
         return $travelImageThumbUrl
             ?: '';
 
     }
+    /*
+        public function getTravelImageAddressAttribute()
+        {
+            $travelImageAddress = $this->getMedia('travelImageAddress');
 
-    public function getTravelImageAddressAttribute()
-    {
-        $travelImageAddress = $this->getMedia('travelImageAddress');
+            if (Arr::get($travelImageAddress, 0)) {
+                $travelImageAddress['url'] = $travelImageAddress[0]->getUrl();
+                $travelImageAddress['file_name'] = $travelImageAddress[0]->getCustomProperty('name');
+            } else return null;
+            return $travelImageAddress ?? null;
 
-        if (Arr::get($travelImageAddress, 0)) {
-            $travelImageAddress['url'] = $travelImageAddress[0]->getUrl();
-            $travelImageAddress['file_name'] = $travelImageAddress[0]->getCustomProperty('name');
-        } else return null;
-        return $travelImageAddress ?? null;
-
-    }
+        }*/
 
     /* ************************ MEDIA ************************ */
     /**
@@ -217,24 +239,62 @@ class TravelAddress extends Model implements HasMedia
         return $this->getThumbs200ForCollection('travelImageAddress');
     }
 
-    public function сloseTo($radius = 60, $location = [])
+    /*   public function сloseTo($radius = 60, $location = [])
+       {
+           $travelAddress = $this
+               ->selectRaw("travel_id,
+               ( 6371 * acos( cos( radians(" . $location['lat'] . ") ) *
+               cos( radians(lat) ) *
+               cos( radians(lng) - radians(" . $location['lng'] . ") ) +
+               sin( radians(" . $location['lat'] . ") ) *
+               sin( radians(lat) ) ) )
+               AS distance")
+               ->having("distance", "<", $radius)
+               ->orderBy("distance")
+               ->limit(20)
+               ->get();
+           foreach ($travelAddress as $travelAdd) {
+               $ids[] = $travelAdd->travel_id;
+           }
+           return array_unique($ids);
+       }*/
+
+    public function сloseTo($radius = 60, $location = [], $categories_ids = [], $address = '')
     {
-        $travelAddress = $this
-            ->selectRaw("travel_id,
+        //   dd($radius);
+
+        if ($radius > 0) {
+            $traveladdress = $this
+                ->selectRaw("
+           *,
             ( 6371 * acos( cos( radians(" . $location['lat'] . ") ) *
             cos( radians(lat) ) *
             cos( radians(lng) - radians(" . $location['lng'] . ") ) +
             sin( radians(" . $location['lat'] . ") ) *
             sin( radians(lat) ) ) )
-            AS distance")
-            ->having("distance", "<", $radius)
-            ->orderBy("distance")
-            ->limit(20)
-            ->get();
-        foreach ($travelAddress as $travelAdd) {
-            $ids[] = $travelAdd->travel_id;
+            AS distance");
+        } else {
+            $traveladdress = $this
+                ->selectRaw(" * ");
         }
-        return array_unique($ids);
+
+        if ($address) {
+            $traveladdress->where('address', 'like', '%' . $address . '%');
+        }
+
+        if ($categories_ids) {
+            $traveladdress->whereHas('categories', function ($query) use ($categories_ids) {
+                return $query->whereIn('category_travel_address.id', $categories_ids);
+            });
+        }
+
+        if ($radius > 0) {
+            $traveladdress->having("distance", "<", $radius)->orderBy("distance");
+        }
+
+        return $traveladdress
+            //  ->limit(20)
+            ->get();
     }
 
 }

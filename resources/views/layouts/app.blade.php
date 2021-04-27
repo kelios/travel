@@ -42,8 +42,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <a class="nav-link" href="{{ url('travels') }}">
-                        {{ trans('main.alltravel') }}
+                    <a class="nav-link" href="{{ url('map') }}">
+                        {{ trans('main.searchMap') }}
                     </a>
                     <a class="nav-link" href="{{ url('travelsby') }}">
                         {{ trans('main.beltravel') }}

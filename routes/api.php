@@ -28,6 +28,9 @@ Route::get('travelsPopular', 'Travels\TravelsController@getTravelsPopular');
 Route::get('travelsNear', 'Travels\TravelsController@getTravelsNear');
 Route::get('searchCities', 'LocationController@searchCities');
 Route::get('getFiltersTravel', 'Travels\TravelsController@getFiltersTravel');
+Route::get('searchTravelsForMap', 'Travels\TravelsController@searchTravelsForMap');
+Route::get('getFilterForMap', 'Travels\TravelsController@getFilterForMap');
+
 Route::middleware('auth:api')->post('travels/save', 'Travels\TravelsController@save');
 Route::middleware('auth:api')->get('messages/{id}', 'MessageController@get');
 Route::middleware('auth:api')->get('messagesUsers', 'MessageController@getUsers');
