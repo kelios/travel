@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="{{ mix('css/showmetravel.min.css') }}">
 
 @section('content')
-    <div class="showtravel">
+
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light" id="sideNav">
                 <div class="collapse navbar-collapse p-t-3" id="navbarSupportedContent">
@@ -104,7 +104,7 @@
             <travel-show-list :where='@json($where)' :travel_id='@json($travel->id)'></travel-show-list>
 
         </div>
-    </div>
+
 @endsection
 
 
