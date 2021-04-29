@@ -3,13 +3,13 @@
 
         <div class="row">
 
-            <div class="col-3">
+            <div class="col-md-3">
                 <div class="card-header titleindex">
                     <h1>{{translate('main.mapTravel')}}</h1>
                 </div>
             </div>
 
-            <div class="col-3 p-3">
+            <div class="col-md-3 p-3">
                 <label>{{translate('travels.traveladdresscategory')}}</label>
                 <multiselect
                     v-if="filtersTravel.categories"
@@ -25,7 +25,7 @@
                 </multiselect>
             </div>
 
-            <div class="col-3 p-3">
+            <div class="col-md-3 p-3">
                 <label>{{translate('travels.searchRadius')}}</label>
                 <multiselect
                     v-if="filtersTravel.radius"
@@ -41,7 +41,7 @@
                 </multiselect>
             </div>
 
-            <div class="col-3 p-3">
+            <div class="col-md-3 p-3">
                 <label>{{translate('travels.searchAddress')}}</label>
                 <input v-model="address"
                        type="text"

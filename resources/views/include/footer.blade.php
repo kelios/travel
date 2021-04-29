@@ -1,4 +1,4 @@
-<footer class="navbar-fixed-bottom row-fluid p-1">
+<footer class="navbar-fixed-bottom row-fluid p-t25">
     <div class="navbar-inner">
         <div class="container">
             <div class="row">

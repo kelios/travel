@@ -2,6 +2,7 @@ body {
     color: #6c757d;
     margin: auto;
     align-items: center;
+    overflow:hidden !important;
 }
 
 .travelshowlist {

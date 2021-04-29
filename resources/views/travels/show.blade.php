@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 <link rel="stylesheet" type="text/css" href="{{ mix('css/showmetravel.min.css') }}">
 
 @section('content')
@@ -11,7 +10,8 @@
                 </div>
                 <a class="navbar-brand js-scroll-trigger" href="#page-top"
                 >            <span class="d-none d-lg-block">
-                <img class="img-fluid img-profile rounded-circle mx-auto mb-2"  src="{{$travel->travel_image_thumb_small_url}}"
+                <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
+                     src="{{$travel->travel_image_thumb_small_url}}"
                      alt="{{$travel->name}}"
                      lazy="loading"
                      width="200"
@@ -46,11 +46,13 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav textmenu ">
-                        <li><i title="{{trans('main.read')}}" class="fa fa-book"></i>({{$travel->countUnicIpView}})</li>
+                        <li><i title="{{trans('main.read')}}" class="fa fa-book"></i>({{$travel->countUnicIpView}})
+                        </li>
                         @auth
                             <li>
                                 @if (in_array(auth()->user()->id,$travel->userIds))
-                                    <a target="_blank" href="{{url($travel->url.'/edit')}}">{{trans('main.edit')}}</a>
+                                    <a target="_blank"
+                                       href="{{url($travel->url.'/edit')}}">{{trans('main.edit')}}</a>
                                 @endif
                             </li>
                         @endauth
@@ -99,11 +101,10 @@
                 </div>
             </nav>
 
-                <travel-show-list :where='@json($where)' :travel_id='@json($travel->id)'></travel-show-list>
+            <travel-show-list :where='@json($where)' :travel_id='@json($travel->id)'></travel-show-list>
 
         </div>
     </div>
-
 
 @endsection
 
