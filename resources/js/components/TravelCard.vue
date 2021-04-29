@@ -4,7 +4,7 @@
         <div class="card col-mb-11 box-shadow">
         <img
             lazy="loading"
-            :data-src="travel.travel_image_thumb_url"
+            :src="travel.travel_image_thumb_url"
             class="card-img-top"
             :alt="travel.name"
             width="400px"
