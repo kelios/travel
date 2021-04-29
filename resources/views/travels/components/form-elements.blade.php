@@ -228,8 +228,8 @@
                     >
                     </upload-image-drag>
                 </div>
-                <div class="form-group row ">
-                    <label for="cities"> {{ trans('travels.selectedAddress') }}</label>
+                <div class="">
+                    <label for="selectedAddress"> {{ trans('travels.selectedAddress') }}</label>
                     <ul class="list-group">
 
                         <li class="list-group-item" v-for="(meCoords,index) in travelAddress.meCoord" :key="index">
