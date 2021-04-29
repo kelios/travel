@@ -10,16 +10,19 @@
     @endif
     <link rel="icon" href="{{ URL::to('/favicon.ico')}}" type="image/x-icon">
     {!! SEO::generate(true) !!}
-    <!-- CSRF Token -->
+<!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="preload" as="font" href="/fonts/bad-script-v9-latin/BadScript-Regular.ttf" type="font/ttf" crossorigin="anonymous">
-    <link rel="preload" as="font" href="/fonts/vendor/font-awesome/fontawesome-webfont.woff2" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="/fonts/bad-script-v9-latin/BadScript-Regular.ttf" type="font/ttf"
+          crossorigin="anonymous">
+    <link rel="preload" as="font" href="/fonts/vendor/font-awesome/fontawesome-webfont.woff2" type="font/woff2"
+          crossorigin="anonymous">
     <!-- Scripts -->
     @if (App::environment('production'))
         @include('include.analytics')
-        <script data-ad-client="ca-pub-9752617241777308" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    @endif
-    <!-- Styles -->
+        <script data-ad-client="ca-pub-9752617241777308" async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+@endif
+<!-- Styles -->
     <link type="text/css" href="{{ mix('/css/metravel.min.css') }}" defer rel="stylesheet">
 </head>
 <body>
@@ -31,7 +34,8 @@
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Me Travel') }}
-                <img lazy="loading" width="27"  height ="30" class="logoimg" alt= "MeTravelBy" src="/media/slider/logo_yellow.png">
+                <img lazy="loading" width="27" height="30" class="logoimg" alt="MeTravelBy"
+                     src="/media/slider/logo_yellow.png">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -42,12 +46,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <a class="nav-link" href="{{ url('map') }}">
-                        {{ trans('main.searchMap') }}
-                    </a>
                     <a class="nav-link" href="{{ url('travelsby') }}">
                         {{ trans('main.beltravel') }}
                     </a>
+                    <a class="nav-link" href="{{ url('map') }}">
+                        {{ trans('main.searchMap') }}
+                    </a>
+
 
                 </ul>
 
@@ -81,7 +86,8 @@
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 @if(Auth::user()->user_avatar_thumb_url)
-                                    <img lazy="loading" alt= "MeTravelBy" src="{{ Auth::user()->user_avatar_thumb_url }}" class="avatar-photo">
+                                    <img lazy="loading" alt="MeTravelBy" src="{{ Auth::user()->user_avatar_thumb_url }}"
+                                         class="avatar-photo">
                                 @endif
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
@@ -151,5 +157,5 @@
 </body>
 
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
-<script rel="preload" src="/js/app.js" defer  as="script"></script>
+<script rel="preload" src="/js/app.js" defer as="script"></script>
 </html>
