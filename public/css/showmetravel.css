@@ -6,8 +6,8 @@ body {
 }
 
 .travelshowlist {
-    position: relative;
-    height: 88%;
+    position: relative !important;
+    height: 90%;
     overflow-y: scroll;
 }
 

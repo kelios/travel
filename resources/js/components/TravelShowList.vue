@@ -1,5 +1,5 @@
 <template>
-    <b-card-body
+    <div
         id="nav-scroller"
         ref="content"
         class="travelshowlist"
@@ -134,7 +134,7 @@
         </section>
 
 
-    </b-card-body>
+    </div>
 </template>
 
 <script>
