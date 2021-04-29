@@ -19,6 +19,10 @@
                                 <span class="coord">{{place.coord}}</span>
                                 <hr>
                             </div>
+                            <div v-if="!place.travelImageThumbUrl">
+                                <span class="badge badge-info">{{ translate('travels.searchAddress')}} :</span>
+                                <span class="coord">{{ place.address }}</span>
+                            </div>
                             <a :href="place.urlTravel" target="_blank">
                                 {{translate('main.readMore')}}
                                 <i class="fa fa-book" :title="translate('main.read')"></i>
