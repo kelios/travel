@@ -87,7 +87,7 @@ class UpdateTravel extends FormRequest
             $data[$key]['city_id'] = Arr::get($travelAddressCity, $key) != '-1' ? Arr::get($travelAddressCity, $key) : null;
             $data[$key]['country_id'] = Arr::get($travelAddressCountry, $key);
             $data[$key]['travelAddrMedia'] = Arr::get($travelImageAddress, $key);
-            $data[$key]['categoriesIds'] = Arr::pluck(Arr::get($travelAddressCategoriesIds, $key),'id');
+            $data[$key]['categoriesIds'] = Arr::pluck(Arr::get($travelAddressCategoriesIds, $key,[]),'id');
         }
         return $data;
     }
