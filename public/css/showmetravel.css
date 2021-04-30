@@ -2,11 +2,10 @@ body {
     color: #6c757d;
     margin: auto;
     align-items: center;
-    overflow:hidden !important;
+    overflow: hidden !important;
 }
 
 .travelshowlist {
-    position: relative !important;
     height: 90%;
     overflow-y: scroll;
 }
@@ -516,4 +515,26 @@ section.travel-section .travel-section-content {
 
 .swiper-slide-active {
     background: black;
+}
+
+.fixedmenu{
+    position: fixed !important;
+    display:flex!important;
+    top: 0!important;
+    width: 100%;
+    width: -moz-available;          /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    width: fill-available;
+    z-index: 10000000!IMPORTANT;
+    margin-bottom: 50PX !IMPORTANT;
+}
+
+.pd-t30{
+   padding-top: 30px !important;
+}
+.pd-t80{
+    padding-top: 80px !important;
+}
+.travelshowlist section{
+    padding-top: 80px !important;
 }

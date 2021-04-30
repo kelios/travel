@@ -30,7 +30,7 @@
 @include('cookieConsent::index')
 <div id="app">
 
-    <nav class="navbar bg-white navbar-expand-md navbar-light shadow-sm zindex2">
+    <nav class="navbar bg-white navbar-expand-md navbar-light shadow-sm fixedmenu">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Me Travel') }}

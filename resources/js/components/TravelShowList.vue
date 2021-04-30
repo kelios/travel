@@ -2,7 +2,7 @@
     <div
         id="nav-scroller"
         ref="content"
-        class="travelshowlist"
+        class="travelshowlist pd-t120"
     >
         <section class="travel-section gallery section--demo-2" id="gallery" v-if="travel.gallery">
             <div>
