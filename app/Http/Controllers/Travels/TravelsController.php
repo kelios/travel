@@ -521,10 +521,11 @@ class TravelsController extends Controller
             'recommendation',
             'travelRoadFilename',
             'travelRoadUrl',
-            'travelAddressAdress',
+           'travelAddress',
+           // 'travelAddressAdress',
             'reply',
-            'imageMeTravelArr',
-            'coordsMeTravelArr',
+        //    'imageMeTravelArr',
+        //    'coordsMeTravelArr',
             'youtube_link'
         );
 

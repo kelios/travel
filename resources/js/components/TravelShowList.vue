@@ -2,7 +2,7 @@
     <div
         id="nav-scroller"
         ref="content"
-        class="travelshowlist pd-t120"
+        class="travelshowlist"
     >
         <section class="travel-section gallery section--demo-2" id="gallery" v-if="travel.gallery">
             <div>
@@ -76,19 +76,32 @@
             </div>
         </section>
 
-        <section class="travel-section ul map" id="map" v-if="travel.travelAddressAdress">
+        <section class="travel-section ul map" id="map" v-if="travel.travelAddress">
             <div class="travel-section-content">
                 <h2>{{translate('travels.map')}}</h2>
                 <map-me-travel :data="true" :where="where"></map-me-travel>
                 <ul class="list-group">
-                    <li class="list-group-item" v-for="(address,index) in travel.travelAddressAdress" :key="index">
-
+                    <li class="list-group-item" v-for="place in travel.travelAddress">
                         <img
                             lazy="loading"
-                            v-if="travel.imageMeTravelArr[index]" class="mapPreview img-responsive img-thumbnail"
-                            :src="travel.imageMeTravelArr[index]">
-                        {{index+1}}) {{address}}-
-                        {{travel.coordsMeTravelArr[index]}}
+                            v-if="place.travelImageThumbUrl"
+                            class="mapPreview img-responsive img-thumbnail"
+                            :src="place.travelImageThumbUrl"
+                        >
+                        <div v-if="place.coord" class="textmenu">
+                                    <span
+                                        class="badge badge-warning">{{ translate('travels.traveladdresscoord')}} :</span>
+                            <span class="coord">{{place.coord}}</span>
+                        </div>
+                        <div>
+                            <span class="badge badge-success">{{ translate('travels.searchAddress')}} :</span>
+                            <span class="coord">{{ place.address }}</span>
+                        </div>
+                        <div>
+                            <span class="badge badge-success">{{ translate('travels.traveladdresscategory')}} :</span>
+                            <span class="coord">{{place.categoryName}}</span>
+                        </div>
+
                     </li>
                 </ul>
             </div>

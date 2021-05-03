@@ -2,9 +2,9 @@
 <link rel="stylesheet" type="text/css" href="{{ mix('css/showmetravel.min.css') }}">
 
 @section('content')
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light pd-t30" id="sideNav">
-            <div class="collapse navbar-collapse p-t-3" id="navbarSupportedContent">
+    <div class="container pd-t60">
+        <nav class="navbar navbar-expand-lg navbar-light" id="sideNav">
+            <div class="collapse navbar-collapse p-t-1" id="navbarSupportedContent">
                 <travel-show-menu :travel_menu='@json($travelMenu)'></travel-show-menu>
             </div>
             <a class="navbar-brand js-scroll-trigger" href="#page-top"

@@ -2,7 +2,7 @@
 
 
     <swiper class="swiper" :options="swiperOption" style="
-                            max-height: 650px;
+                            max-height: 600px;
                             ">
 
         <swiper-slide v-for="(slide, index) in slides" :key="index">

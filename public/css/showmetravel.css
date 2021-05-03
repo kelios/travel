@@ -6,8 +6,8 @@ body {
 }
 
 .travelshowlist {
-    height: 90%;
     overflow-y: scroll;
+    height: 90%;
 }
 
 @media (min-width: 992px) {
@@ -130,7 +130,11 @@ section.travel-section .mapPreview {
     float: left;
 }
 
-section.travel-section.description img {
+section.travel-section.description img,
+section.travel-section.recommendation img,
+section.travel-section.minus img,
+section.travel-section.plus img
+{
     padding: 0.25rem;
     background-color: #fff;
     border: 1px solid #dee2e6;
@@ -529,12 +533,25 @@ section.travel-section .travel-section-content {
     margin-bottom: 50PX !IMPORTANT;
 }
 
+.pd-t120{
+    padding-top: 120px !important;
+}
 .pd-t30{
    padding-top: 30px !important;
+}
+.pd-t60{
+    padding-top: 60px !important;
 }
 .pd-t80{
     padding-top: 80px !important;
 }
 .travelshowlist section{
-    padding-top: 80px !important;
+    padding-top: 20px !important;
 }
+
+.p-t-1 {
+    padding-top: 1.2rem !important;
+    padding-bottom: 0 !important;
+}
+
+
