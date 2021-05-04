@@ -1,5 +1,15 @@
 User-agent: *
-Disallow:
+Disallow: /admin/*
+Disallow: /travels/create
+Disallow: /travels/*/edit
+Disallow: /login
+Disallow: /register
+Disallow: /users/*
+Disallow: /allMessages/*
+Disallow: /travels/favoriteTravel
+Disallow: /travels/friendtravel
+Disallow: /allFriends/*
+Disallow: /travels/metravel
+Disallow: /allMessages/*
 
-Host: www.metravel.by
 Sitemap: https://metravel.by/sitemap.xml
