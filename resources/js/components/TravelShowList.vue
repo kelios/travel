@@ -6,9 +6,8 @@
     >
         <section class="travel-section gallery section--demo-2" id="gallery" v-if="travel.gallery">
             <div>
-                <slider :slides='travel.gallery'></slider>
+                <slider></slider>
             </div>
-
         </section>
 
         <section class="travel-section video section--demo-2" id="video" v-if="travel.youtube_link">
@@ -17,10 +16,9 @@
             </div>
 
         </section>
-
         <section class="travel-section description" id="description" v-if="travel.description">
             <div class="travel-section-content">
-                <h2 class="mb-5">{{travel.name}}</h2>
+                <h2 class="mb-5">{{ travel.name }}</h2>
                 <ul class="list-group list-group-flush textmenu">
                     <li class="small" v-if="travel.categoryName">
                         {{ translate('travels.categories') }} - {{ travel.categoryName }}
@@ -49,27 +47,37 @@
                 <p class="lead mb-0" v-html="travel.description"></p>
             </div>
         </section>
+
         <section class="travel-section plus" id="plus" v-if="travel.plus">
-            <travel-show-section :data="travel.plus"
-                                 :title="translate('travels.plus')"></travel-show-section>
+            <div class="travel-section-content">
+                <h2 class="mb-5">{{ translate('travels.plus') }}</h2>
+                <p class="lead mb-0" v-html="travel.plus"></p>
+            </div>
         </section>
 
         <section class="travel-section minus" id="minus" v-if="travel.minus">
-            <travel-show-section :data="travel.minus"
-                                 :title="translate('travels.minus')"></travel-show-section>
+
+            <div class="travel-section-content">
+                <h2 class="mb-5">{{ translate('travels.minus') }}</h2>
+                <p class="lead mb-0" v-html="travel.minus"></p>
+            </div>
+
         </section>
 
         <section class="travel-section" id="recommendation" v-if="travel.recommendation">
-            <travel-show-section :data="travel.recommendation"
-                                 :title="translate('travels.recommendation')"></travel-show-section>
+            <div class="travel-section-content">
+                <h2 class="mb-5">{{ translate('travels.recommendation') }}</h2>
+                <p class="lead mb-0" v-html="travel.recommendation"></p>
+            </div>
         </section>
+
         <section class="travel-section" id="travelRoad" v-if="travel.travelRoadFilename">
             <div class="container-fluid">
-                <h2 class="mb-5">{{translate('travels.travelRoad') }} - {{travel.travelRoadFilename}}</h2>
+                <h2 class="mb-5">{{ translate('travels.travelRoad') }} - {{ travel.travelRoadFilename }}</h2>
                 <div class="row">
                     <div class="col-xs-12">
                         <a :href="travel.travelRoadUrl" download depressed small color="primary">
-                            {{translate('travels.travelRoad') }} - {{travel.travelRoadFilename}}
+                            {{ translate('travels.travelRoad') }} - {{ travel.travelRoadFilename }}
                         </a>
                     </div>
                 </div>
@@ -78,8 +86,8 @@
 
         <section class="travel-section ul map" id="map" v-if="travel.travelAddress">
             <div class="travel-section-content">
-                <h2>{{translate('travels.map')}}</h2>
-                <map-me-travel :data="true" :where="where"></map-me-travel>
+                <h2>{{ translate('travels.map') }}</h2>
+                <map-me-travel :dots="travel.travelAddress"></map-me-travel>
                 <ul class="list-group">
                     <li class="list-group-item" v-for="place in travel.travelAddress">
                         <img
@@ -90,16 +98,18 @@
                         >
                         <div v-if="place.coord" class="textmenu">
                                     <span
-                                        class="badge badge-warning">{{ translate('travels.traveladdresscoord')}} :</span>
-                            <span class="coord">{{place.coord}}</span>
+                                        class="badge badge-warning">{{
+                                            translate('travels.traveladdresscoord')
+                                        }} :</span>
+                            <span class="coord">{{ place.coord }}</span>
                         </div>
                         <div>
-                            <span class="badge badge-success">{{ translate('travels.searchAddress')}} :</span>
+                            <span class="badge badge-success">{{ translate('travels.searchAddress') }} :</span>
                             <span class="coord">{{ place.address }}</span>
                         </div>
                         <div>
-                            <span class="badge badge-success">{{ translate('travels.traveladdresscategory')}} :</span>
-                            <span class="coord">{{place.categoryName}}</span>
+                            <span class="badge badge-success">{{ translate('travels.traveladdresscategory') }} :</span>
+                            <span class="coord">{{ place.categoryName }}</span>
                         </div>
 
                     </li>
@@ -107,8 +117,8 @@
             </div>
         </section>
 
-        <section class="travel-section comments-app comment" id="comment">
-            <h1>{{translate('travels.comment')}}</h1>
+        <section class="travel-section comments-app comment" id="comment" v-if="travel.description">
+            <h1>{{ translate('travels.comment') }}</h1>
             <div class="comment-form" v-if="authUserId">
                 <div class="comment-avatar">
                     <img lazy="loading" :src="authUserAvatar">
@@ -137,12 +147,12 @@
             ></comment-list>
         </section>
 
-        <section class="travel-section" id="nearTravels">
+        <section class="travel-section" id="nearTravels" v-if="travel.description">
             <travel-near></travel-near>
         </section>
 
-        <section class="travel-section" id="popular">
-            <h1>{{translate('travels.popularTravels')}}</h1>
+        <section class="travel-section" id="popular" v-if="travel.description">
+            <h1>{{ translate('travels.popularTravels') }}</h1>
             <travel-popular></travel-popular>
         </section>
 
@@ -152,82 +162,82 @@
 
 <script>
 
-    import TravelNear from './TravelNear.vue';
-    import TravelPopular from './TravelPopular.vue';
-    import TravelShowSection from './TravelShowSection.vue';
-    import Slider from './Slider.vue';
-    import CommentList from './CommentList.vue';
+import TravelNear from './TravelNear.vue';
+import TravelPopular from './TravelPopular.vue';
+import TravelShowSection from './TravelShowSection.vue';
+import Slider from './Slider.vue';
+import CommentList from './CommentList.vue';
 
-    import {BCard} from 'bootstrap-vue';
-    import {mapGetters} from "vuex";
+import {BCard} from 'bootstrap-vue';
+import {mapGetters} from "vuex";
 
 
-    export default {
-        name: 'TravelShowList',
-        props: ['travel_id', 'where'],
-        data() {
-            return {}
-        },
-        components: {
-            'comment-list': CommentList,
-            'travel-near': TravelNear,
-            'travel-popular': TravelPopular,
-            'travel-show-section': TravelShowSection,
-            'slider': Slider,
-            'b-card-body': BCard,
-        },
-        created() {
-            this.getTravelData();
-            this.getTravelCommentsData();
-        },
-        computed: {
-            getData() {
-                if (Array.isArray(this.data)) {
-                    return this.data.join(',');
-                } else {
-                    return this.data;
-                }
-            },
-            groupedComments() {
-                return _.chunk(this.travelComments, 15);
-            },
-            ...mapGetters([
-                'travelComments',
-                'travel',
-            ])
-        },
-        methods: {
-            getTravelCommentsData() {
-                this.$store.dispatch('GET_TRAVEL_COMMENTS', {'where': this.where});
-            },
-            getTravelData() {
-                this.$store.dispatch('GET_TRAVEL', {'travel_id': this.travel_id});
-            },
-            async comment(travelReply, travelId) {
-                axios.post('/comments', {
-                    comment: travelReply,
-                    travel_id: travelId,
-                    users_id: this.authUserId
-                }).then(response => {
-                    if (!response.data.error) {
-                        this.travel.reply = '';
-                        this.getTravelCommentsData();
-                    }
-                });
+export default {
+    name: 'TravelShowList',
+    props: ['travel_id', 'where'],
+    data() {
+        return {}
+    },
+    components: {
+        'comment-list': CommentList,
+        'travel-near': TravelNear,
+        'travel-popular': TravelPopular,
+        'travel-show-section': TravelShowSection,
+        'slider': Slider,
+        'b-card-body': BCard,
+    },
+    created() {
+        this.getTravelData();
+        this.getTravelCommentsData();
+    },
+    computed: {
+     /*   getData() {
+            if (Array.isArray(this.data)) {
+                return this.data.join(',');
+            } else {
+                return this.data;
             }
+        },*/
+        groupedComments() {
+            return _.chunk(this.travelComments, 15);
+        },
+        ...mapGetters([
+            'travelComments',
+            'travel',
+        ])
+    },
+    methods: {
+        getTravelCommentsData() {
+            this.$store.dispatch('GET_TRAVEL_COMMENTS', {'where': this.where});
+        },
+        getTravelData() {
+            this.$store.dispatch('GET_TRAVEL', {'travel_id': this.travel_id});
+        },
+        async comment(travelReply, travelId) {
+            axios.post('/comments', {
+                comment: travelReply,
+                travel_id: travelId,
+                users_id: this.authUserId
+            }).then(response => {
+                if (!response.data.error) {
+                    this.travel.reply = '';
+                    this.getTravelCommentsData();
+                }
+            });
         }
     }
+}
 </script>
 
 <style scoped>
-    img {
-        object-fit: contain;
-        height: 100% !important;
-        width: 100%;
-    }
+img {
+    object-fit: contain;
+    height: 100% !important;
+    width: 100%;
+}
 
-    carousel-3d {
-        margin-top: 10px;
-        margin-bottom: 0px;
-    }
+carousel-3d {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
 </style>

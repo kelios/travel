@@ -490,9 +490,15 @@ class TravelsController extends Controller
      */
     public function findById(\Illuminate\Http\Request $request)
     {
-        $travel = $this->travelRepository->getById($request->id);
+        $traveldata = $this->travelRepository->getById($request->id);
 
-        $travel = (object)$travel->only(
+        $addr=$traveldata->travelAddress->map(function($addr)
+        {
+            return $addr->only('id','travelImageThumbUrl','address','coord','categoryName');
+        });
+
+        $traveldata->travelAddress=$addr;
+        $travel = (object)$traveldata->only(
             'id',
             'totalLikes',
             'userIds',
@@ -521,14 +527,14 @@ class TravelsController extends Controller
             'recommendation',
             'travelRoadFilename',
             'travelRoadUrl',
-           'travelAddress',
-           // 'travelAddressAdress',
+            'travelAddress',
             'reply',
-        //    'imageMeTravelArr',
-        //    'coordsMeTravelArr',
             'youtube_link'
         );
 
+//dd( collect($travel->travelAddress->all()));
+      //  $travel->travelAddress = Arr::only($travel->travelAddress->all(),['address','coord']);
+    //    dd((object)$traveldata->only(['travelAddress']));
         return response()->json($travel);
     }
 
@@ -810,7 +816,7 @@ class TravelsController extends Controller
             $radius = array_get($where, 'radius.id');
             $address = array_get($where, 'address');
             $categories_ids = Arr::pluck(array_get($where, 'categories', []), 'id');
-           // dd($radius);
+            // dd($radius);
         }
 
         if ($lat) {

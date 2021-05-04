@@ -5,7 +5,7 @@
                             max-height: 600px;
                             ">
 
-        <swiper-slide v-for="(slide, index) in slides" :key="index">
+        <swiper-slide v-for="(slide, index) in travel.gallery" :key="index">
 
             <img
                 lazy="loading"
@@ -33,6 +33,7 @@
 <script>
     import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
     import 'swiper/css/swiper.css';
+    import {mapGetters} from "vuex";
 
     export default {
         data() {
@@ -51,6 +52,11 @@
                 }
             }
         },
+        computed: {
+            ...mapGetters([
+                'travel',
+            ])
+        },
         components: {
             Swiper,
             SwiperSlide
@@ -58,7 +64,7 @@
         directives: {
             swiper: directive
         },
-        props: ['slides'],
+
     }
 </script>
 

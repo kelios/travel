@@ -7,6 +7,7 @@ let state = {
     lastTravels: {},
     popularTravels: {},
     nearTravels: {},
+    travelAddressArr: [],
     travelAddress: {
         'address': [],
         'meCoord': [],

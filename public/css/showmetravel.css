@@ -554,4 +554,8 @@ section.travel-section .travel-section-content {
     padding-bottom: 0 !important;
 }
 
+.leaflet-popup-content {
+    width: auto !important;
+}
+
 

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<link rel="stylesheet" type="text/css" href="{{ mix('css/showmetravel.min.css') }}">
+<link rel="stylesheet" defer type="text/css" href="{{ mix('css/showmetravel.min.css') }}">
 
 @section('content')
     <div class="container pd-t60">

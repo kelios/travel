@@ -26,7 +26,7 @@ let mutations = {
         })
     },
     SET_MAP_DATA_ADDRESS(state, travelsaddress) {
-        state.travelAddress = travelsaddress;
+        state.travelAddressArr = travelsaddress;
       /*  travels.data.forEach((travel, indexMe) => {
             state.travelAddress.address.push(travel.travelAddressAdress);
             state.travelAddress.meCoord.push(travel.coordsMeTravelArr);

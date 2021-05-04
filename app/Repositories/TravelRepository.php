@@ -307,26 +307,11 @@ class TravelRepository implements TravelRepositoryInterface
 
     /**
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     * @return mixed
      */
     public function getById($id)
     {
         return $this->travel->find($id);
-        /*   ->load([
-           'categories',
-           'transports',
-           'month',
-           'complexity',
-           'overNightStay',
-           'cities',
-           'countries',
-           'travelAddress',
-           'companion',
-           'users',
-           'travelLike',
-           'views'
-       ])*/
-        //   ->find($id);
     }
 
     /**

@@ -1,8 +1,8 @@
 <template>
 
     <div class="container sidetravelmap">
-        <div v-if="travelAddress.length>0">
-            <div class="row" v-for="place in travelAddress">
+        <div v-if="travelAddressArr.length>0">
+            <div class="row" v-for="place in travelAddressArr">
                 <div class="col-12">
                     <div class="card col-mb-12">
 
@@ -53,7 +53,7 @@
         computed: {
             ...
                 mapGetters([
-                    'travelAddress'
+                    'travelAddressArr'
                 ])
         },
         methods: {},
