@@ -7,8 +7,7 @@
             :src="travel.travel_image_thumb_url"
             class="card-img-top"
             :alt="travel.name"
-            width="400px"
-            height="400px"
+
         >
             <div class="card-body">
 
