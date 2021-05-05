@@ -64,6 +64,7 @@
                     iconAnchor: [16, 37]
                 }),
                 isLoading: false,
+                isSaveAction: false,
                 selectedCountriesCode: [],
                 selectedCountiesIds: [],
                 form: {
@@ -117,6 +118,7 @@
                 this.selectedCountiesIds = this.form.countryIds;
                 this.selectedCountriesCode = this.form.countriesCode ?? [];
             },
+
             getPostData: function getPostData() {
                 var _this3 = this;
                 if (this.mediaCollections) {
@@ -152,15 +154,18 @@
                     this.form['travelAddressIds'] = this.travelAddressIds;
                     this.travelAddress.id = this.travelAddressIds;
                 }
-                console.log(this.travelAddress.categoriesIds);
                 this.form['travelAddresscategoriesIds'] = this.travelAddress.categoriesIds;
                 return this.form;
             },
+            handleSave: function(){
+                this.isSaveAction=true;
+            },
             autoSave() {
                 setInterval(() => {
-                    this.save();
+                    if(!this.isSaveAction) {
+                        this.save();
+                    }
                 }, 300000)
-                //     }, 10000)
             },
             save(event) {
                 this.getPostData();

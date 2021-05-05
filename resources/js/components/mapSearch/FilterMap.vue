@@ -101,8 +101,6 @@
         },
         methods: {
             getResults(page = 1) {
-                console.log('getResults-filter');
-                console.log(this.lat);
                 this.where.lat = this.lat;
                 this.where.lng = this.lng;
                 this.where.radius = this.radius;
