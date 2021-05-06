@@ -64,7 +64,7 @@
 
         </section>
 
-        <section class="travel-section" id="recommendation" v-if="travel.recommendation">
+        <section class="travel-section recommendation" id="recommendation" v-if="travel.recommendation">
             <div class="travel-section-content">
                 <h2 class="mb-5">{{ translate('travels.recommendation') }}</h2>
                 <p class="lead mb-0" v-html="travel.recommendation"></p>
