@@ -93,7 +93,7 @@ class TravelsController extends Controller
         }
 
         if($request['showModeration']){
-            $request['search'] = false;
+            $request['search'] = 0;
         }
 
         //    dd($request['orderBy']);
