@@ -169,8 +169,8 @@
                     if(!this.submitingForm) {
                         this.save();
                     }
-             //   }, 300000)
-                }, 90000)
+                }, 300000)
+             //   }, 90000)
             },
             save(event) {
                 this.$store.commit('SET_SUBMITING_FORM', true);
