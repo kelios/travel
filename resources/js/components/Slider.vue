@@ -32,7 +32,7 @@
 
 <script>
     import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
-    import 'swiper/css/swiper.css';
+    import 'swiper/swiper-bundle.css'
     import {mapGetters} from "vuex";
 
     export default {

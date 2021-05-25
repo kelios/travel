@@ -37,7 +37,7 @@
 
                     <li class="small" v-if="travel.budget">
                         {{ __('travels.budget') }} - {{ travel.budget }}
-
+                    </li>
 
                     <li class="small" v-if="travel.number_peoples">
                         {{ __('travels.number_peoples') }} - {{ travel.number_peoples }}
