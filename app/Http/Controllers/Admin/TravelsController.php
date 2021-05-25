@@ -94,7 +94,6 @@ class TravelsController extends Controller
 
         if($request['showModeration']){
             $request['search'] = false;
-            //   $request['moderation'] = 'true';
         }
 
         //    dd($request['orderBy']);

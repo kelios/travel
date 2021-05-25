@@ -551,36 +551,30 @@ class Travel extends Model implements HasMedia
             ->width(300)
             ->height(300)
             ->watermark(public_path('/media/slider/watermark.png'))
-            ->watermarkOpacity(50)
+        //    ->watermarkOpacity(50)
             ->format(Manipulations::FORMAT_WEBP)
             ->quality(96)
             ->optimize()
             ->performOnCollections('travelMainImage')
             ->nonQueued();
-
-      /*  if (app()->environment('production')) {
-            $this->watermarkOpacity(50);
-        }*/
 
         $this->addMediaConversion('webpTravelMainImage_400')
             ->width(800)
           //  ->height(400)
             ->watermark(public_path('/media/slider/watermark.png'))
-            ->watermarkOpacity(50)
+          //  ->watermarkOpacity(50)
             ->format(Manipulations::FORMAT_WEBP)
             ->quality(96)
             ->optimize()
             ->performOnCollections('travelMainImage')
             ->nonQueued();
-       /* if (app()->environment('production')) {
-            $this->watermarkOpacity(50);
-        }*/
+
         $this->getMediaCollections()->filter->isImage()->each(function ($mediaCollection) {
             $this->addMediaConversion('thumb_400')
                 ->width(400)
                 ->height(400)
                 ->watermark(public_path('/media/slider/watermark.png'))
-                ->watermarkOpacity(50)
+                //->watermarkOpacity(50)
                 ->quality(80)
                 ->optimize()
                 ->performOnCollections('travelMainImage')
@@ -592,7 +586,7 @@ class Travel extends Model implements HasMedia
         $this->addMediaConversion('detail_hd')
             ->fit('crop', 1080, 1080)
             ->watermark(public_path('/media/slider/watermark.png'))
-            ->watermarkOpacity(50)
+          //  ->watermarkOpacity(50)
             ->quality(96)
             ->optimize()
             ->withResponsiveImages()
@@ -615,7 +609,7 @@ class Travel extends Model implements HasMedia
                 ->height(200)
                 ->watermark(public_path('/media/slider/watermark.png'))
                 ->quality(80)
-                ->watermarkOpacity(50)
+          //      ->watermarkOpacity(50)
                 ->optimize()
                 ->performOnCollections($mediaCollection->getName())
                 ->nonQueued();
