@@ -21,19 +21,19 @@
                         <span v-if="travel.cityName"> - {{travel.cityName}}</span>
                     </p>
                     <p v-if="!readonly">
-                        <span class="badge badge-success" v-if="travel.publish && travel.moderation">{{translate('main.puplish')}}</span>
-                        <span class="badge badge-dark" v-else-if="travel.publish && !travel.moderation">{{translate('main.moderationhide')}}</span>
-                        <span class="badge badge-dark" v-else>{{translate('main.hide')}}</span>
+                        <span class="badge badge-success" v-if="travel.publish && travel.moderation">{{__('main.puplish')}}</span>
+                        <span class="badge badge-dark" v-else-if="travel.publish && !travel.moderation">{{__('main.moderationhide')}}</span>
+                        <span class="badge badge-dark" v-else>{{__('main.hide')}}</span>
                     </p>
                 </div>
-                <div class="small text-right"> {{translate('main.author')}} - {{travel.userName}}
+                <div class="small text-right"> {{__('main.author')}} - {{travel.userName}}
 
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <p>
                         <a :href="'/travels/'+travel.slug" target="_blank">
-                            {{translate('main.readMore')}}
-                            <i class="fa fa-book" :title="translate('main.read')"></i>({{travel.countUnicIpView}})
+                            {{__('main.readMore')}}
+                            <i class="fa fa-book" :title="__('main.read')"></i>({{travel.countUnicIpView}})
                         </a>
                     </p>
 
@@ -41,12 +41,12 @@
                     <div class="btn-group-sm">
                         <button v-if="!readonly" type="button" class="btn btn-sm btn-warning"
                                 v-on:click="goAction({url: travel.url+'/edit' })">
-                            {{translate('main.edit')}}
+                            {{__('main.edit')}}
                         </button>
 
                         <button v-if="!readonly" type="button" class="btn btn-sm btn-danger"
                                 v-on:click="remove(travel.url)">
-                            {{translate('main.delete')}}
+                            {{__('main.delete')}}
                         </button>
                     </div>
                 </div>

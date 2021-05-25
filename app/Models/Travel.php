@@ -8,7 +8,6 @@ use Brackets\Media\HasMedia\HasMediaThumbsTrait;
 use Brackets\Media\HasMedia\ProcessMediaTrait;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia;
@@ -552,45 +551,56 @@ class Travel extends Model implements HasMedia
             ->width(300)
             ->height(300)
             ->watermark(public_path('/media/slider/watermark.png'))
-            ->watermarkOpacity(50)
+           // ->watermarkOpacity(50)
             ->format(Manipulations::FORMAT_WEBP)
             ->quality(96)
             ->optimize()
             ->performOnCollections('travelMainImage')
             ->nonQueued();
+
+        if (app()->environment('production')) {
+            $this->watermarkOpacity(50);
+        }
 
         $this->addMediaConversion('webpTravelMainImage_400')
             ->width(800)
           //  ->height(400)
             ->watermark(public_path('/media/slider/watermark.png'))
-            ->watermarkOpacity(50)
+          //  ->watermarkOpacity(50)
             ->format(Manipulations::FORMAT_WEBP)
             ->quality(96)
             ->optimize()
             ->performOnCollections('travelMainImage')
             ->nonQueued();
-
+        if (app()->environment('production')) {
+            $this->watermarkOpacity(50);
+        }
         $this->getMediaCollections()->filter->isImage()->each(function ($mediaCollection) {
             $this->addMediaConversion('thumb_400')
                 ->width(400)
                 ->height(400)
                 ->watermark(public_path('/media/slider/watermark.png'))
-                ->watermarkOpacity(50)
+             //   ->watermarkOpacity(50)
                 ->quality(80)
                 ->optimize()
                 ->performOnCollections('travelMainImage')
                 ->nonQueued();
         });
-
+        if (app()->environment('production')) {
+            $this->watermarkOpacity(50);
+        }
         $this->addMediaConversion('detail_hd')
             ->fit('crop', 1080, 1080)
             ->watermark(public_path('/media/slider/watermark.png'))
-            ->watermarkOpacity(50)
+         //   ->watermarkOpacity(50)
             ->quality(96)
             ->optimize()
             ->withResponsiveImages()
             ->performOnCollections('gallery')
             ->nonQueued();
+        if (app()->environment('production')) {
+            $this->watermarkOpacity(50);
+        }
     }
 
     /**
@@ -598,20 +608,24 @@ class Travel extends Model implements HasMedia
      */
     public function autoRegisterThumb200()
     {
+
         $this->getMediaCollections()->filter->isImage()->each(function ($mediaCollection) {
             $this->addMediaConversion('thumb_200')
                 ->width(200)
                 ->height(200)
                 ->watermark(public_path('/media/slider/watermark.png'))
-                ->watermarkOpacity(50)
                 ->quality(80)
                 ->optimize()
                 ->performOnCollections($mediaCollection->getName())
                 ->nonQueued();
+
+            if (app()->environment('production')) {
+                $this->watermarkOpacity(50);
+            }
         });
     }
 
-    public function sluggable()
+    public function sluggable(): array
     {
         return ['slug' => ['source' => 'name']];
     }

@@ -401,26 +401,30 @@ class TravelsController extends Controller
     {
 
         $travel = $this->travelRepository->getBySlug($slug);
-        $travel->coordsMeTravel = $travel->travelAddress->pluck('coords')->toArray();
+        if (Auth::id() == $travel->users[0]->id || Auth::id() == 1) {
+            $travel->coordsMeTravel = $travel->travelAddress->pluck('coords')->toArray();
 
-        $travel->travelImageThumbUrlArr = $travel->travelAddress->pluck('travelImageThumbUrl')->toArray();
-        $travel->thumbs200ForCollectionArr = $travel->travelAddress->pluck('thumbs200Collection')->toArray();
-        $travel->categoryTravelAddressArr = $travel->travelAddress->pluck('categories')->toArray();
+            $travel->travelImageThumbUrlArr = $travel->travelAddress->pluck('travelImageThumbUrl')->toArray();
+            $travel->thumbs200ForCollectionArr = $travel->travelAddress->pluck('thumbs200Collection')->toArray();
+            $travel->categoryTravelAddressArr = $travel->travelAddress->pluck('categories')->toArray();
 
-        SEOMeta::setTitle($travel->name);
-        SEOMeta::setDescription($travel->meta_description);
-        SEOMeta::addMeta('travel:published_time', $travel->created_at->toW3CString(), 'property');
-        SEOMeta::addKeyword($travel->meta_keywords);
-        return view('travels.edit', [
-            'travel' => $travel,
-            'categories' => $this->categoryRepository->get(['id', 'name']),
-            'transports' => $this->transportRepository->get(['id', 'name']),
-            'month' => $this->monthRepository->get(['id', 'name']),
-            'complexity' => $this->complexityRepository->get(['id', 'name']),
-            'companion' => $this->companionRepository->get(['id', 'name']),
-            'overNightStay' => $this->overNightStayRepository->get(['id', 'name']),
-            'categoryTravelAddress' => $this->categoryTravelAddressRepository->get(['id', 'name']),
-        ]);
+            SEOMeta::setTitle($travel->name);
+            SEOMeta::setDescription($travel->meta_description);
+            SEOMeta::addMeta('travel:published_time', $travel->created_at->toW3CString(), 'property');
+            SEOMeta::addKeyword($travel->meta_keywords);
+            return view('travels.edit', [
+                'travel' => $travel,
+                'categories' => $this->categoryRepository->get(['id', 'name']),
+                'transports' => $this->transportRepository->get(['id', 'name']),
+                'month' => $this->monthRepository->get(['id', 'name']),
+                'complexity' => $this->complexityRepository->get(['id', 'name']),
+                'companion' => $this->companionRepository->get(['id', 'name']),
+                'overNightStay' => $this->overNightStayRepository->get(['id', 'name']),
+                'categoryTravelAddress' => $this->categoryTravelAddressRepository->get(['id', 'name']),
+            ]);
+        }else{
+            return redirect()->back();
+        }
     }
 
     /**
@@ -492,12 +496,11 @@ class TravelsController extends Controller
     {
         $traveldata = $this->travelRepository->getById($request->id);
 
-        $addr=$traveldata->travelAddress->map(function($addr)
-        {
-            return $addr->only('id','travelImageThumbUrl','address','coord','categoryName');
+        $addr = $traveldata->travelAddress->map(function ($addr) {
+            return $addr->only('id', 'travelImageThumbUrl', 'address', 'coord', 'categoryName');
         });
 
-        $traveldata->travelAddress=$addr;
+        $traveldata->travelAddress = $addr;
         $travel = (object)$traveldata->only(
             'id',
             'totalLikes',
@@ -533,8 +536,8 @@ class TravelsController extends Controller
         );
 
 //dd( collect($travel->travelAddress->all()));
-      //  $travel->travelAddress = Arr::only($travel->travelAddress->all(),['address','coord']);
-    //    dd((object)$traveldata->only(['travelAddress']));
+        //  $travel->travelAddress = Arr::only($travel->travelAddress->all(),['address','coord']);
+        //    dd((object)$traveldata->only(['travelAddress']));
         return response()->json($travel);
     }
 

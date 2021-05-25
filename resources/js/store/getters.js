@@ -14,6 +14,9 @@ let getters = {
     travelAddressArr: state => {
         return state.travelAddressArr
     },
+    submitingForm: state => {
+        return state.submitingForm
+    },
     optionsCities: state => {
         return state.optionsCities
     },

@@ -41,10 +41,19 @@ class TravelsController extends Controller
      */
     public function index(IndexTravel $request)
     {
+
+
         if (!$request['orderBy']) {
             $request['orderBy'] = 'id';
             $request['orderDirection'] = 'desc';
         }
+
+        if($request['showModeration']){
+            $request['search'] = true;
+         //   $request['moderation'] = 'true';
+        }
+
+    //    dd($request['orderBy']);
         // create and AdminListing instance for a specific model and
         $data = AdminListing::create(Travel::class)->processRequestAndGet(
         // pass the request with params
@@ -54,7 +63,7 @@ class TravelsController extends Controller
             ['id', 'name', 'publish', 'moderation','sitemap','slug'],
 
             // set columns to searchIn
-            ['id', 'name', 'minus', 'plus', 'recommendation', 'description']
+            ['id', 'name', 'minus', 'plus', 'recommendation', 'description', 'moderation']
         );
         if ($request->ajax()) {
             if ($request->has('bulk')) {
@@ -67,6 +76,51 @@ class TravelsController extends Controller
 
         return view('admin.travel.index', ['data' => $data]);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param IndexTravel $request
+     * @return array|Factory|View
+     */
+    public function showModearation(IndexTravel $request)
+    {
+
+
+        if (!$request['orderBy']) {
+            $request['orderBy'] = 'id';
+            $request['orderDirection'] = 'desc';
+        }
+
+        if($request['showModeration']){
+            $request['search'] = false;
+            //   $request['moderation'] = 'true';
+        }
+
+        //    dd($request['orderBy']);
+        // create and AdminListing instance for a specific model and
+        $data = AdminListing::create(Travel::class)->processRequestAndGet(
+        // pass the request with params
+            $request,
+
+            // set columns to query
+            ['id', 'name', 'publish', 'moderation','sitemap','slug'],
+
+            // set columns to searchIn
+            [ 'moderation']
+        );
+        if ($request->ajax()) {
+            if ($request->has('bulk')) {
+                return [
+                    'bulkItems' => $data->pluck('id')
+                ];
+            }
+            return ['data' => $data];
+        }
+
+        return view('admin.travel.index', ['data' => $data]);
+    }
+
 
     /**
      * Show the form for creating a new resource.

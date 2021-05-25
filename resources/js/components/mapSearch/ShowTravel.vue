@@ -14,20 +14,20 @@
                         >
                         <div v-if="place.coord" class="textmenu">
                                     <span
-                                        class="badge badge-warning">{{ translate('travels.traveladdresscoord')}} :</span>
+                                        class="badge badge-warning">{{ __('travels.traveladdresscoord')}} :</span>
                             <span class="coord">{{place.coord}}</span>
                         </div>
                         <div>
-                            <span class="badge badge-success">{{ translate('travels.searchAddress')}} :</span>
+                            <span class="badge badge-success">{{ __('travels.searchAddress')}} :</span>
                             <span class="coord">{{ place.address }}</span>
                         </div>
                         <div>
-                            <span class="badge badge-success">{{ translate('travels.traveladdresscategory')}} :</span>
+                            <span class="badge badge-success">{{ __('travels.traveladdresscategory')}} :</span>
                             <span class="coord">{{place.categoryName}}</span>
                         </div>
                         <a :href="place.urlTravel" target="_blank">
-                            {{translate('main.readMore')}}
-                            <i class="fa fa-book" :title="translate('main.read')"></i>
+                            {{__('main.readMore')}}
+                            <i class="fa fa-book" :title="__('main.read')"></i>
                         </a>
 
 
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" v-else>{{ translate('main.searchNothing')}}</div>
+        <div class="row" v-else>{{ __('main.searchNothing')}}</div>
     </div>
 
 </template>

@@ -54,7 +54,7 @@ return [
     'uploadRoad' => 'Загрузить маршрут (.kml,.kmz или .gpx)',
     'removeCover' => 'Удалить фотографию',
     'travelRoad' => 'Скачать маршрут',
-    'Search countries' => 'Выберите страны',
+    'Searchcountries' => 'Выберите страны',
 
     'sendMessage' => 'Отправить сообщение',
     'addMessage' => 'Написать сообщение',
@@ -68,5 +68,6 @@ return [
     'traveladdresscoord' =>'Координаты места',
 
     'searchRadius' => 'Искать в радиусе (км)',
-    'searchAddress' =>  'Адрес места'
+    'searchAddress' =>  'Адрес места',
+    'autosave' => 'Выполняется автосохранение'
 ];

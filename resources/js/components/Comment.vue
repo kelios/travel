@@ -12,7 +12,7 @@
                            </span>
                     <span class="comment-date">{{ comment.created_at}}</span>
                 </div>
-                <a v-if="authUserId" @click="replyToComment = comment">{{translate('travels.reply')}}</a>
+                <a v-if="authUserId" @click="replyToComment = comment">{{__('travels.reply')}}</a>
                 <comment-form :where="where" v-if="replyToComment == comment"
                               :comment="comment"></comment-form>
                 <comment-list v-if="collection[comment.id]" v-bind:comments="collection[comment.id]"

@@ -1,6 +1,6 @@
 <template>
     <div class="col-md">
-        <i :title="translate('travels.sendMessage')" @click.prevent="toggleModal(travel_id)"
+        <i :title="__('travels.sendMessage')" @click.prevent="toggleModal(travel_id)"
            class="fa fa-envelope"
            aria-hidden="true"></i>
         <message-modal

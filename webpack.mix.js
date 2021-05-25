@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+require('laravel-vue-lang/mix');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -36,6 +37,7 @@ mix.js(["resources/js/admin/admin.js"], "public/js")
     .vue()
     .sass("resources/sass/admin/admin.scss", "public/css");
 
+mix.lang();
 
 if (mix.inProduction()) {
     mix.version();

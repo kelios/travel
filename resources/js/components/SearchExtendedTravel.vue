@@ -2,7 +2,7 @@
     <div class="container">
         <div class="input-group-append mb-4">
             <button class="btn btn-primary" @click="searchTravels" @keyup.enter="searchTravels" type="button">
-                {{translate('main.search')}}
+                {{__('main.search')}}
             </button>
 
         </div>
@@ -15,8 +15,8 @@
                 v-model="countries"
                 track-by="country_id"
                 label="local_name"
-                :tag-placeholder=" translate('travels.countries')"
-                :placeholder="translate('travels.Search countries') "
+                :tag-placeholder=" __('travels.countries')"
+                :placeholder="__('travels.Searchcountries') "
                 selectLabel=""
             >
             </multiselect>
@@ -30,8 +30,8 @@
                 v-model="categories"
                 track-by="id"
                 label="name"
-                :tag-placeholder=" translate('travels.categories')"
-                :placeholder="translate('travels.categories') "
+                :tag-placeholder=" __('travels.categories')"
+                :placeholder="__('travels.categories') "
                 selectLabel=""
             >
             </multiselect>
@@ -46,8 +46,8 @@
                 track-by="id"
                 label="name"
                 selectLabel=""
-                :tag-placeholder=" translate('travels.transports')"
-                :placeholder="translate('travels.transports') "
+                :tag-placeholder=" __('travels.transports')"
+                :placeholder="__('travels.transports') "
             >
             </multiselect>
         </div>
@@ -62,8 +62,8 @@
                 track-by="id"
                 label="name"
                 selectLabel=""
-                :tag-placeholder=" translate('travels.complexity')"
-                :placeholder="translate('travels.complexity') "
+                :tag-placeholder=" __('travels.complexity')"
+                :placeholder="__('travels.complexity') "
             >
             </multiselect>
         </div>
@@ -78,8 +78,8 @@
                 track-by="id"
                 label="name"
                 selectLabel=""
-                :tag-placeholder=" translate('travels.searchcompanion')"
-                :placeholder="translate('travels.searchcompanion') "
+                :tag-placeholder=" __('travels.searchcompanion')"
+                :placeholder="__('travels.searchcompanion') "
             >
             </multiselect>
         </div>
@@ -93,8 +93,8 @@
                 track-by="id"
                 label="name"
                 selectLabel=""
-                :tag-placeholder=" translate('travels.searchoverNightStay')"
-                :placeholder="translate('travels.searchoverNightStay') "
+                :tag-placeholder=" __('travels.searchoverNightStay')"
+                :placeholder="__('travels.searchoverNightStay') "
             >
             </multiselect>
         </div>
@@ -108,8 +108,8 @@
                 track-by="id"
                 label="name"
                 selectLabel=""
-                :tag-placeholder=" translate('travels.month')"
-                :placeholder="translate('travels.month') "
+                :tag-placeholder=" __('travels.month')"
+                :placeholder="__('travels.month') "
             >
             </multiselect>
         </div>
@@ -122,13 +122,13 @@
                    class="form-control"
                    id="year"
                    name="year"
-                   :placeholder="translate('travels.year') "
+                   :placeholder="__('travels.year') "
             >
         </div>
 
         <div class="input-group-append mb-4">
             <button class="btn btn-primary" @click="searchTravels" @keyup.enter="searchTravels" type="button">
-                {{translate('main.search')}}
+                {{__('main.search')}}
             </button>
 
         </div>

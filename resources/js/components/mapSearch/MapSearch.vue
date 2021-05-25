@@ -25,12 +25,12 @@
                                 height="200"
                             >
                             <div v-if="place.address">
-                                <span class="badge badge-success">{{ translate('travels.searchAddress') }} :</span>
+                                <span class="badge badge-success">{{ __('travels.searchAddress') }} :</span>
                                 <span class="coord">{{ place.address }}</span>
                             </div>
                             <div v-if="place.categoryName">
                                 <span class="badge badge-success">{{
-                                        translate('travels.traveladdresscategory')
+                                        __('travels.traveladdresscategory')
                                     }} :</span>
                                 <span class="coord">{{ place.categoryName }}</span>
                             </div>
@@ -120,7 +120,9 @@ export default {
             this.travelAddressArr.forEach((place) => {
                 arrayOfLatLngs.push(this.getLatLng(place.coord))
             });
-            map.fitBounds([arrayOfLatLngs]);
+            if (arrayOfLatLngs.length > 0) {
+                map.fitBounds([arrayOfLatLngs]);
+            }
         },
         geo_success(position) {
             console.log("geo_success");

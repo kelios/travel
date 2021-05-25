@@ -30800,3 +30800,10 @@ footer {
     width: auto !important;
 }
 
+@media (max-width: 600px) {
+    .vue-image-crop-upload .vicp-wrap {
+        width: auto !important;
+        height: 500px !important;
+    }
+}
+

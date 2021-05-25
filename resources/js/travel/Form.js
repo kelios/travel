@@ -31,7 +31,8 @@ Vue.component('travel-form', {
     computed: {
         ...mapGetters([
             'travelId',
-            'travelAddressIds'
+            'travelAddressIds',
+            'submitingForm'
         ]),
     },
 
@@ -159,8 +160,10 @@ Vue.component('travel-form', {
             }, 300000)
         },
         save(event) {
+            this.$store.commit('SET_SUBMITING_FORM', true);
             this.getPostData();
-            this.$store.dispatch('AUTO_SAVE_TRAVEL', this.form)
+            this.$store.dispatch('AUTO_SAVE_TRAVEL', this.form);
+
         },
         async getCountries() {
             let vm = this;

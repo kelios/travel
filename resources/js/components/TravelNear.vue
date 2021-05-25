@@ -1,7 +1,7 @@
 <template>
 
     <div class="row" v-if="nearTravels.length">
-        <h1>{{translate('travels.nearTravels')}}</h1>
+        <h1>{{__('travels.nearTravels')}}</h1>
         <div class="col-lg-4" v-for="travelsEvent in nearTravels">
             <travel-card-last :travel="travelsEvent"></travel-card-last>
         </div>

@@ -4,7 +4,7 @@
             id="modalTitle"
             class="modal-header"
         >
-            {{ translate('travels.messageWith',travel_user_name)}} {{travel_user_name}}
+            {{ __('travels.messageWith',travel_user_name)}} {{travel_user_name}}
             <button
                 type="button"
                 class="btn-close"

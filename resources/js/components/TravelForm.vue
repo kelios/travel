@@ -26,11 +26,13 @@
                 .listen('.searchResultsCity', (e) => {
                     this.optionsCities = e.cities;
                 })
+            console.log(this.submitingForm);
         },
         computed: {
             ...mapGetters([
                 'travelId',
-                'travelAddressIds'
+                'travelAddressIds',
+                'submitingForm'
             ]),
         },
 
@@ -64,7 +66,7 @@
                     iconAnchor: [16, 37]
                 }),
                 isLoading: false,
-                isSaveAction: false,
+              //  isSaveAction: false,
                 selectedCountriesCode: [],
                 selectedCountiesIds: [],
                 form: {
@@ -128,6 +130,7 @@
                         }
                         if (_this3.$refs[collection + '_uploader']) {
                             _this3.form[collection] = _this3.$refs[collection + '_uploader'].getFiles();
+                            _this3.$refs[collection + '_uploader'] = '';
                         }
 
                         if (Array.isArray(_this3.$refs[collection + '_uploadercropArr'])) {
@@ -147,6 +150,7 @@
                     });
                 }
                 this.form['wysiwygMedia'] = this.wysiwygMedia;
+
                 if (this.travelId && !this.form['id']) {
                     this.form['id'] = this.travelId;
                 }
@@ -158,18 +162,25 @@
                 return this.form;
             },
             handleSave: function(){
-                this.isSaveAction=true;
+                //this.isSaveAction=true;
             },
             autoSave() {
                 setInterval(() => {
-                    if(!this.isSaveAction) {
+                    if(!this.submitingForm) {
                         this.save();
                     }
-                }, 300000)
+             //   }, 300000)
+                }, 90000)
             },
             save(event) {
+                this.$store.commit('SET_SUBMITING_FORM', true);
                 this.getPostData();
-                this.$store.dispatch('AUTO_SAVE_TRAVEL', this.form)
+                this.$store.dispatch('AUTO_SAVE_TRAVEL', this.form);
+                let locform =  this.form
+                this.mediaCollections.forEach((mediaCollection) => {
+                    locform[mediaCollection] = [];
+                   // this.selectedCountriesCode.push(item.country_code);
+                });
             },
             async getCountries() {
                 let vm = this;

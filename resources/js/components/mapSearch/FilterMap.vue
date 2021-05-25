@@ -5,12 +5,12 @@
 
             <div class="col-md-3">
                 <div class="card-header titleindex">
-                    <h1>{{translate('main.mapTravel')}}</h1>
+                    <h1>{{__('main.mapTravel')}}</h1>
                 </div>
             </div>
 
             <div class="col-md-3 p-3">
-                <label>{{translate('travels.traveladdresscategory')}}</label>
+                <label>{{__('travels.traveladdresscategory')}}</label>
                 <multiselect
                     v-if="filtersTravel.categories"
                     :options="filtersTravel.categories"
@@ -18,15 +18,15 @@
                     v-model="categories"
                     track-by="id"
                     label="name"
-                    :tag-placeholder=" translate('travels.traveladdresscategory')"
-                    :placeholder="translate('travels.traveladdresscategory') "
+                    :tag-placeholder="__('travels.traveladdresscategory')"
+                    :placeholder="__('travels.traveladdresscategory') "
                     selectLabel=""
                 >
                 </multiselect>
             </div>
 
             <div class="col-md-3 p-3">
-                <label>{{translate('travels.searchRadius')}}</label>
+                <label>{{__('travels.searchRadius')}}</label>
                 <multiselect
                     v-if="filtersTravel.radius"
                     :options="filtersTravel.radius"
@@ -34,20 +34,20 @@
                     v-model="radius"
                     track-by="id"
                     label="name"
-                    :tag-placeholder=" translate('travels.searchRadius')"
-                    :placeholder="translate('travels.searchRadius') "
+                    :tag-placeholder=" __('travels.searchRadius')"
+                    :placeholder="__('travels.searchRadius') "
                     selectLabel=""
                 >
                 </multiselect>
             </div>
 
             <div class="col-md-3 p-3">
-                <label>{{translate('travels.searchAddress')}}</label>
+                <label>{{__('travels.searchAddress')}}</label>
                 <input v-model="address"
                        type="text"
                        class="form-control"
-                       :placeholder="translate('travels.searchAddress')"
-                       aria-label="translate('travels.searchAddress')"
+                       :placeholder="__('travels.searchAddress')"
+                       aria-label="__('travels.searchAddress')"
                        aria-describedby="basic-addon2">
             </div>
 

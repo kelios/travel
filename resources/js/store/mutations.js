@@ -27,11 +27,11 @@ let mutations = {
     },
     SET_MAP_DATA_ADDRESS(state, travelsaddress) {
         state.travelAddressArr = travelsaddress;
-      /*  travels.data.forEach((travel, indexMe) => {
-            state.travelAddress.address.push(travel.travelAddressAdress);
-            state.travelAddress.meCoord.push(travel.coordsMeTravelArr);
-            state.travelAddress.url.push(travel.url);
-        })*/
+        /*  travels.data.forEach((travel, indexMe) => {
+              state.travelAddress.address.push(travel.travelAddressAdress);
+              state.travelAddress.meCoord.push(travel.coordsMeTravelArr);
+              state.travelAddress.url.push(travel.url);
+          })*/
     },
     UPDATE_COMMENTS(state, payLoad) {
         state.travelComments.push(payLoad['comments']);
@@ -69,6 +69,9 @@ let mutations = {
     },
     SET_TRAVEL_ID(state, travelId) {
         state.travelId = travelId
+    },
+    SET_SUBMITING_FORM(state, status) {
+        state.submitingForm = status;
     },
     SET_TRAVEL_ADDRESS_IDS(state, travelAddressIds) {
         state.travelAddressIds = travelAddressIds

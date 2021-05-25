@@ -1,7 +1,7 @@
 <template>
 
     <div class="comments-app">
-        <h1>{{translate('travels.comment')}}</h1>
+        <h1>{{__('travels.comment')}}</h1>
         <!-- From -->
         <div class="comment-form" v-if="user">
             <!-- Comment Avatar -->
@@ -10,7 +10,7 @@
             </div>
             <form class="form" name="form">
                 <div class="form-row">
-                    <textarea class="input" :placeholder="translate('travels.addcomment')" required
+                    <textarea class="input" :placeholder="__('travels.addcomment')" required
                               v-model="message"></textarea>
                     <span class="input" v-if="errorComment" style="color:red">{{errorComment}}</span>
                 </div>
@@ -18,7 +18,7 @@
                     <input class="input" placeholder="Name" type="text" disabled :value="user.name">
                 </div>
                 <div class="form-row">
-                    <input type="button" class="btn btn-success" @click="saveComment" :value="translate('travels.addcomment')">
+                    <input type="button" class="btn btn-success" @click="saveComment" :value="__('travels.addcomment')">
                 </div>
             </form>
         </div>
@@ -45,7 +45,7 @@
 
                                 <ul class="list">
                                     <li>
-                                        <a v-on:click="openComment(index)">{{translate('travels.reply')}}</a>
+                                        <a v-on:click="openComment(index)">{{__('travels.reply')}}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -61,7 +61,7 @@
                         </div>
                         <form class="form" name="form">
                             <div class="form-row">
-                                <textarea class="input" :placeholder="translate('travels.addcomment')" required
+                                <textarea class="input" :placeholder="__('travels.addcomment')" required
                                           v-model="message"></textarea>
                                 <span class="input" v-if="errorReply" style="color:red">{{errorReply}}</span>
                             </div>
@@ -71,7 +71,7 @@
                             <div class="form-row">
                                 <input type="button" class="btn btn-success"
                                        v-on:click="replyComment(comment.id,index)"
-                                       :value="translate('travels.addcomment')">
+                                       :value="__('travels.addcomment')">
                             </div>
 
                         </form>
@@ -99,7 +99,7 @@
                                         <div class="comment-actions">
                                             <ul class="list">
                                                 <li>
-                                                    <a v-on:click="replyCommentBox(index2)">{{translate('travels.reply')}}</a>
+                                                    <a v-on:click="replyCommentBox(index2)">{{__('travels.reply')}}</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -113,7 +113,7 @@
                                     </div>
                                     <form class="form" name="form">
                                         <div class="form-row">
-                                            <textarea class="input" :placeholder="translate('travels.addcomment')" required
+                                            <textarea class="input" :placeholder="__('travels.addcomment')" required
                                                       v-model="message"></textarea>
                                             <span class="input" v-if="errorReply"
                                                   style="color:red">{{errorReply}}</span>
@@ -126,7 +126,7 @@
                                         <div class="form-row">
                                             <input type="button" class="btn btn-success"
                                                    v-on:click="replyComment(replies.id,index)"
-                                                   :value="translate('travels.addcomment')">
+                                                   :value="__('travels.addcomment')">
                                         </div>
                                     </form>
                                 </div>

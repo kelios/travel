@@ -223,6 +223,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {
         Route::prefix('travels')->name('travels/')->group(static function () {
             Route::get('/', 'TravelsController@index')->name('index');
+            Route::get('/showModearation', 'TravelsController@showModearation')->name('showModearation');
             Route::get('/create', 'TravelsController@create')->name('create');
             Route::post('/', 'TravelsController@store')->name('store');
             Route::get('/{slug}/edit', 'TravelsController@edit')->name('edit');

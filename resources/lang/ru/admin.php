@@ -415,6 +415,10 @@ return [
         ],
     ],
 
+    'adminFilter'=>[
+      'showNonModeration' => 'Провалидировать'
+    ],
+
 
     // Do not delete me :) I'm used for auto-generation
 ];

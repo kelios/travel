@@ -205,6 +205,7 @@ let actions = {
         axios.post('/api/travels/save', dataTravel
         ).then(response => {
             if (!response.data.error) {
+                commit('SET_SUBMITING_FORM', false);
                 commit('SET_TRAVEL_ID', response.data.id);
                 commit('SET_TRAVEL_ADDRESS_IDS', response.data.travelAddressIds);
             }

@@ -25,9 +25,10 @@
                                 {{trans('main.preShow')}}
                             </a>
 
-                            <button type="submit" class="btn btn-primary"  @click="handleSave" :disabled="submiting">
+                            <button type="submit" class="btn btn-primary"  @click="handleSave" :disabled="submitingForm">
                                 <i class="fa" :class="submiting ? 'fa-spinner' : 'fa-download'"></i>
-                                {{ trans('main.save') }}
+                                <span v-if="submitingForm">{{trans('travels.autosave')}} </span>
+                                <span v-else>{{ trans('main.save') }}   </span>
                             </button>
 
                         </div>
@@ -41,9 +42,10 @@
                     </div>
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary"  @click="handleSave" :disabled="submiting">
+                        <button type="submit" class="btn btn-primary"  @click="handleSave" :disabled="submitingForm">
                             <i class="fa" :class="submiting ? 'fa-spinner' : 'fa-download'"></i>
-                            {{ trans('main.save') }}
+                            <span v-if="submitingForm">{{trans('travels.autosave')}} </span>
+                            <span v-else>{{ trans('main.save') }}   </span>
                         </button>
                     </div>
 

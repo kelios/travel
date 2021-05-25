@@ -7,7 +7,7 @@
                     <div class="px-3 py-2">
                         <b-list-group class="paddingtop3">
                             <b-button class="showForMenu" b-toggle.sidebar-no-header>
-                                {{translate('user.toogle_user_mes')}}
+                                {{__('user.toogle_user_mes')}}
                             </b-button>
                             <div v-if="usersMessages" v-for="thread in usersMessages">
                                 <div v-for="user in thread.users">
@@ -30,14 +30,14 @@
             <b-col cols="9">
                 <div class="card">
                     <div class="card-header text-align">
-                        <div class="card-title"> {{translate('travels.messageWith')}}
+                        <div class="card-title"> {{__('travels.messageWith')}}
                             {{userName}}
                         </div>
-                        <b-button b-toggle.sidebar-no-header>{{translate('user.toogle_user_mes')}}</b-button>
+                        <b-button b-toggle.sidebar-no-header>{{__('user.toogle_user_mes')}}</b-button>
                     </div>
                     <message-send v-if="usersMessages.length" v-bind:recipient_id="showMessageUser"></message-send>
                     <div class="card-body scroll">
-                        <div v-if="usersMessages.length==0">{{translate('user.nomessage')}}</div>
+                        <div v-if="usersMessages.length==0">{{__('user.nomessage')}}</div>
                         <message-between-list v-bind:recipient_id="showMessageUser"></message-between-list>
                     </div>
                 </div>

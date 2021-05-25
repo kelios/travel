@@ -24,7 +24,7 @@
             <div class="single_image last_padding">
                 <img lazy="loading" class="rounded-circle" :src="imgDataUrl" style="max-width:200px">
                 <div class="image_overlay">
-                    <a v-on:click="onFileDelete()">{{ translate('travels.removeCover') }}</a>
+                    <a v-on:click="onFileDelete()">{{ __('travels.removeCover') }}</a>
                 </div>
 
             </div>

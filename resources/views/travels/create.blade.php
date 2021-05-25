@@ -12,9 +12,10 @@
                     <div class="card-header">
                         {{ trans('travels.addTravels') }}
                         <div class="float-right">
-                            <button type="submit" class="btn btn-primary" @click="handleSave" :disabled="submiting">
+                            <button type="submit" class="btn btn-primary"  @click="handleSave" :disabled="submitingForm">
                                 <i class="fa" :class="submiting ? 'fa-spinner' : 'fa-download'"></i>
-                                {{ trans('main.save') }}
+                                <span v-if="submitingForm">{{trans('travels.autosave')}} </span>
+                                <span v-else>{{ trans('main.save') }}   </span>
                             </button>
                         </div>
 
@@ -23,10 +24,10 @@
                         @include('travels.components.form-elements')
                     </div>
                     <div class="card-footer">
-
-                        <button type="submit" class="btn btn-primary" @click="handleSave" :disabled="submiting">
+                        <button type="submit" class="btn btn-primary"  @click="handleSave" :disabled="submitingForm">
                             <i class="fa" :class="submiting ? 'fa-spinner' : 'fa-download'"></i>
-                            {{ trans('main.save') }}
+                            <span v-if="submitingForm">{{trans('travels.autosave')}} </span>
+                            <span v-else>{{ trans('main.save') }}   </span>
                         </button>
 
                     </div>

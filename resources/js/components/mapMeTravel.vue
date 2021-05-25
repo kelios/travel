@@ -27,11 +27,11 @@
                                 height="200"
                             >
                             <div v-if="place.address">
-                                <span class="badge badge-success">{{ translate('travels.searchAddress') }} :</span>
+                                <span class="badge badge-success">{{ __('travels.searchAddress') }} :</span>
                                 <span class="coord">{{ place.address }}</span>
                             </div>
                             <div v-if="place.categoryName">
-                                <span class="badge badge-success">{{ translate('travels.traveladdresscategory') }} :</span>
+                                <span class="badge badge-success">{{ __('travels.traveladdresscategory') }} :</span>
                                 <span class="coord">{{ place.categoryName }}</span>
                             </div>
                         </a>
@@ -107,7 +107,9 @@ export default {
             this.dots.forEach((place) => {
                 arrayOfLatLngs.push(this.getLatLng(place.coord))
             });
-            map.fitBounds([arrayOfLatLngs]);
+            if (arrayOfLatLngs.length > 0) {
+                map.fitBounds([arrayOfLatLngs]);
+            }
         },
         zoomUpdate(zoom) {
             this.currentZoom = zoom;

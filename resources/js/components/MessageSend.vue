@@ -9,7 +9,7 @@
             <b-form-group>
                     <textarea type="text" class="form-control"
                               v-model="content"
-                              :placeholder="translate('travels.addMessage')"
+                              :placeholder="__('travels.addMessage')"
                     ></textarea>
             </b-form-group>
 
@@ -17,7 +17,7 @@
             <b-button class="btn btn-success"
                       v-on:click="sendTo()"
             >
-                {{translate('travels.sendMessage')}}
+                {{__('travels.sendMessage')}}
             </b-button>
 
         </b-form>

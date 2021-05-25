@@ -21,26 +21,26 @@
                 <h2 class="mb-5">{{ travel.name }}</h2>
                 <ul class="list-group list-group-flush textmenu">
                     <li class="small" v-if="travel.categoryName">
-                        {{ translate('travels.categories') }} - {{ travel.categoryName }}
+                        {{ __('travels.categories') }} - {{ travel.categoryName }}
                     </li>
 
                     <li class="small" v-if="travel.complexityName">
-                        {{ translate('travels.complexity') }} - {{ travel.complexityName }}
+                        {{ __('travels.complexity') }} - {{ travel.complexityName }}
                     </li>
 
                     <li class="small" v-if="travel.transportName">
-                        {{ translate('travels.transports') }} - {{ travel.transportName }}
+                        {{ __('travels.transports') }} - {{ travel.transportName }}
                     </li>
                     <li class="small" v-if="travel.overNightStayName">
-                        {{ translate('travels.overNightStay') }} - {{ travel.overNightStayName }}
+                        {{ __('travels.overNightStay') }} - {{ travel.overNightStayName }}
                     </li>
 
                     <li class="small" v-if="travel.budget">
-                        {{ translate('travels.budget') }} - {{ travel.budget }}
+                        {{ __('travels.budget') }} - {{ travel.budget }}
 
 
                     <li class="small" v-if="travel.number_peoples">
-                        {{ translate('travels.number_peoples') }} - {{ travel.number_peoples }}
+                        {{ __('travels.number_peoples') }} - {{ travel.number_peoples }}
                     </li>
                 </ul>
                 <hr>
@@ -50,7 +50,7 @@
 
         <section class="travel-section plus" id="plus" v-if="travel.plus">
             <div class="travel-section-content">
-                <h2 class="mb-5">{{ translate('travels.plus') }}</h2>
+                <h2 class="mb-5">{{ __('travels.plus') }}</h2>
                 <p class="lead mb-0" v-html="travel.plus"></p>
             </div>
         </section>
@@ -58,7 +58,7 @@
         <section class="travel-section minus" id="minus" v-if="travel.minus">
 
             <div class="travel-section-content">
-                <h2 class="mb-5">{{ translate('travels.minus') }}</h2>
+                <h2 class="mb-5">{{ __('travels.minus') }}</h2>
                 <p class="lead mb-0" v-html="travel.minus"></p>
             </div>
 
@@ -66,18 +66,18 @@
 
         <section class="travel-section recommendation" id="recommendation" v-if="travel.recommendation">
             <div class="travel-section-content">
-                <h2 class="mb-5">{{ translate('travels.recommendation') }}</h2>
+                <h2 class="mb-5">{{ __('travels.recommendation') }}</h2>
                 <p class="lead mb-0" v-html="travel.recommendation"></p>
             </div>
         </section>
 
         <section class="travel-section" id="travelRoad" v-if="travel.travelRoadFilename">
             <div class="container-fluid">
-                <h2 class="mb-5">{{ translate('travels.travelRoad') }} - {{ travel.travelRoadFilename }}</h2>
+                <h2 class="mb-5">{{ __('travels.travelRoad') }} - {{ travel.travelRoadFilename }}</h2>
                 <div class="row">
                     <div class="col-xs-12">
                         <a :href="travel.travelRoadUrl" download depressed small color="primary">
-                            {{ translate('travels.travelRoad') }} - {{ travel.travelRoadFilename }}
+                            {{ __('travels.travelRoad') }} - {{ travel.travelRoadFilename }}
                         </a>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
 
         <section class="travel-section ul map" id="map" v-if="travel.travelAddress">
             <div class="travel-section-content">
-                <h2>{{ translate('travels.map') }}</h2>
+                <h2>{{ __('travels.map') }}</h2>
                 <map-me-travel :dots="travel.travelAddress"></map-me-travel>
                 <ul class="list-group">
                     <li class="list-group-item" v-for="place in travel.travelAddress">
@@ -99,16 +99,16 @@
                         <div v-if="place.coord" class="textmenu">
                                     <span
                                         class="badge badge-warning">{{
-                                            translate('travels.traveladdresscoord')
+                                            __('travels.traveladdresscoord')
                                         }} :</span>
                             <span class="coord">{{ place.coord }}</span>
                         </div>
                         <div>
-                            <span class="badge badge-success">{{ translate('travels.searchAddress') }} :</span>
+                            <span class="badge badge-success">{{ __('travels.searchAddress') }} :</span>
                             <span class="coord">{{ place.address }}</span>
                         </div>
                         <div>
-                            <span class="badge badge-success">{{ translate('travels.traveladdresscategory') }} :</span>
+                            <span class="badge badge-success">{{ __('travels.traveladdresscategory') }} :</span>
                             <span class="coord">{{ place.categoryName }}</span>
                         </div>
 
@@ -118,7 +118,7 @@
         </section>
 
         <section class="travel-section comments-app comment" id="comment" v-if="travel.description">
-            <h1>{{ translate('travels.comment') }}</h1>
+            <h1>{{ __('travels.comment') }}</h1>
             <div class="comment-form" v-if="authUserId">
                 <div class="comment-avatar">
                     <img lazy="loading" :src="authUserAvatar">
@@ -127,7 +127,7 @@
                     <div class="form-row">
                     <textarea type="text" class="form-control"
                               v-model="travel.reply"
-                              :placeholder="translate('travels.addcomment')"
+                              :placeholder="__('travels.addcomment')"
                     ></textarea>
                     </div>
                     <div class="form-row">
@@ -136,7 +136,7 @@
                     <div class="form-row">
                         <input type="button" class="btn btn-success"
                                v-on:click="comment(travel.reply,travel.id)"
-                               :value="translate('travels.addcomment')">
+                               :value="__('travels.addcomment')">
                     </div>
                 </div>
             </div>
@@ -152,7 +152,7 @@
         </section>
 
         <section class="travel-section" id="popular" v-if="travel.description">
-            <h1>{{ translate('travels.popularTravels') }}</h1>
+            <h1>{{ __('travels.popularTravels') }}</h1>
             <travel-popular></travel-popular>
         </section>
 

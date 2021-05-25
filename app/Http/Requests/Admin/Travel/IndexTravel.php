@@ -28,6 +28,7 @@ class IndexTravel extends FormRequest
             'orderBy' => 'in:id,name,budget,number_peoples,number_days,publish,visa,moderation,sitemap|nullable',
             'orderDirection' => 'in:asc,desc|nullable',
             'search' => 'string|nullable',
+            'showModeration' => 'integer|nullable',
             'page' => 'integer|nullable',
             'per_page' => 'integer|nullable',
 

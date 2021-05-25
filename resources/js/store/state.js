@@ -8,6 +8,7 @@ let state = {
     popularTravels: {},
     nearTravels: {},
     travelAddressArr: [],
+    submitingForm:false,
     travelAddress: {
         'address': [],
         'meCoord': [],
