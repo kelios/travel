@@ -158,7 +158,7 @@ return [
         Illuminate\Redis\RedisServiceProvider::class,
         Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
-       // Illuminate\Translation\TranslationServiceProvider::class,
+        Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Khsing\World\WorldServiceProvider::class,
@@ -181,7 +181,6 @@ return [
         App\Providers\RepositoryServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         EloquentFilter\ServiceProvider::class,
-       // Tohidplus\Translation\TranslationServiceProvider::class,
         App\Providers\CachedS3ServiceProvider::class
 
 
