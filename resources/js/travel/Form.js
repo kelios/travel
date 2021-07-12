@@ -157,7 +157,8 @@ Vue.component('travel-form', {
         autoSave() {
             setInterval(() => {
                 this.save();
-            }, 300000)
+            //}, 300000)
+            }, 30000)
         },
         save(event) {
             this.$store.commit('SET_SUBMITING_FORM', true);
