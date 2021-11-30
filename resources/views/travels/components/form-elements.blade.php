@@ -178,12 +178,13 @@
 
                 </div>
 
-                @include('include.media-uploader', [
-                           'mediaCollection' => app(App\Models\Travel::class)->getMediaCollection('gallery'),
-                           'media' => isset($travel) ? $travel->getThumbs200ForCollection('gallery') : null,
-                           'label' => trans('main.gallery')
-                         ])
-
+                @if(isset($travel))
+                    @include('include.media-uploader', [
+                               'mediaCollection' => app(App\Models\Travel::class)->getMediaCollection('gallery'),
+                               'media' => isset($travel) ? $travel->getThumbs200ForCollection('gallery') : null,
+                               'label' => trans('main.gallery')
+                             ])
+                @endif
 
             </div>
         </div>
@@ -265,13 +266,13 @@
                                         <multiselect
                                             :options="{{$categoryTravelAddress->toJson()}}"
                                             :multiple="true"
-                                            v-model = "travelAddress.categoriesIds[index]"
+                                            v-model="travelAddress.categoriesIds[index]"
                                             track-by="id"
                                             label="name"
                                             :show-labels="false"
                                             tag-placeholder="{{ trans('travels.traveladdresscategory') }}"
                                             placeholder="{{ trans('travels.traveladdresscategory') }}"
-                                            >
+                                        >
                                         </multiselect>
 
                                         <div v-if="errors.has('cities')" class="form-control-feedback form-text"
