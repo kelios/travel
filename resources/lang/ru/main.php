@@ -22,6 +22,7 @@ return [
     'alltravel' => 'Все путешествия',
     'searchMap' => 'Карта путешествий',
     'beltravel' => 'Путешествуем по Беларуси',
+    'listInstagram' => 'Аккаунты в instagram о путешествиях по Беларуси',
     'search' => 'Поиск',
     'TravelPlaceholder' => 'Название путешествия или описание',
     'about' => 'О сайте',

@@ -52,6 +52,9 @@
                     <a class="nav-link" href="{{ url('map') }}">
                         {{ trans('main.searchMap') }}
                     </a>
+                    <a class="nav-link" href="{{ url('travels/akkaunty-v-instagram-o-puteshestviyah-po-belarusi') }}">
+                        {{ trans('main.listInstagram') }}
+                    </a>
 
 
                 </ul>
