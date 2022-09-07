@@ -4,20 +4,20 @@ return [
         'defaultCatImage' => '/media/metravel.jpg'
     ],
     'showListTravel' => [
-        'count' => 6
+        'count' => 20
     ],
     'showListMessage' => [
         'count' => 1000
     ],
     'showListArticle' => [
-        'count' => 6
+        'count' => 20
     ],
     'showListPerPage' => [
-        '6' => 6,
-        '12' => 12,
-        '24' => 24,
-        '36' => 36,
-        '72' => 72,
+        '20' => 20,
+        '40' => 40,
+        '60' => 60,
+        '80' => 80,
+        '100' => 100,
     ],
     'radius' => [
      /*   [

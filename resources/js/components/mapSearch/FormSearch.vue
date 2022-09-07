@@ -6,11 +6,11 @@
 
 
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <map-search></map-search>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <show-travel></show-travel>
             </div>
         </div>
