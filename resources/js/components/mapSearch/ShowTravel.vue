@@ -1,10 +1,8 @@
 <template>
 
-    <div class="container sidetravelmap">
-        <div v-if="travelAddressArr.length>0">
-            <div class="row" v-for="place in travelAddressArr">
-                <div class="col-12">
-                    <div class="card col-mb-12">
+
+        <div class="row" v-if="travelAddressArr.length>0">
+            <div class="col-md-6 col-sm-6" v-for="place in travelAddressArr">
 
                         <img
                             lazy="loading"
@@ -32,11 +30,11 @@
 
 
                     </div>
-                </div>
+
             </div>
         </div>
         <div class="row" v-else>{{ __('main.searchNothing')}}</div>
-    </div>
+
 
 </template>
 

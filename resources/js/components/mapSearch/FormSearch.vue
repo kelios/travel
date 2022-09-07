@@ -9,11 +9,10 @@
             <div class="col-md-12">
                 <map-search></map-search>
             </div>
-
-            <div class="col-md-12">
-                <show-travel></show-travel>
-            </div>
         </div>
+
+                <show-travel></show-travel>
+
     </div>
 </template>
 
