@@ -2,7 +2,7 @@
 
 
         <div class="row" v-if="travelAddressArr.length>0">
-            <div class="col-md-6 col-sm-6" v-for="place in travelAddressArr">
+            <div class=" col-md-4 col-sm-4" v-for="place in travelAddressArr">
 
                         <img
                             lazy="loading"
