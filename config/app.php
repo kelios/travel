@@ -181,7 +181,8 @@ return [
         App\Providers\RepositoryServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         EloquentFilter\ServiceProvider::class,
-        App\Providers\CachedS3ServiceProvider::class
+        App\Providers\CachedS3ServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
 
 
     ],
