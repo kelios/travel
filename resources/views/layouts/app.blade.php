@@ -22,7 +22,6 @@
         <script data-ad-client="ca-pub-9752617241777308" async
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 @endif
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     {!! NoCaptcha::renderJs() !!}
 <!-- Styles -->
     <link type="text/css" href="{{ mix('/css/metravel.min.css') }}" defer rel="stylesheet">

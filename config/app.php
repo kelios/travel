@@ -240,6 +240,7 @@ return [
         'OpenGraph' => Artesaos\SEOTools\Facades\OpenGraph::class,
         'Twitter' => Artesaos\SEOTools\Facades\TwitterCard::class,
         'JsonLd' => Artesaos\SEOTools\Facades\JsonLd::class,
+        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
 
     ],
 

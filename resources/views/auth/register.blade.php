@@ -76,16 +76,9 @@
                                                    name="password_confirmation" required autocomplete="new-password">
                                         </div>
                                     </div>
-
-                                    <div class="form-group row {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }} ">
-                                        <div class="col-md-4"></div>
-                                        <div class="col-md-6" style="">
-                                            {!! app('captcha')->display() !!}
-                                            @if ($errors->has('g-recaptcha-response'))
-                                                <span class="help-block">
-                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
-                                    </span>
-                                            @endif
+                                    <div class="form-group row">
+                                        <div class="col-md-4 col-form-label text-md-right"></div>
+                                        <div class="col-md-6">{!! NoCaptcha::display() !!}
                                         </div>
                                     </div>
 
