@@ -77,13 +77,14 @@
                                 {{ trans('home.login') }}
                             </a>
                         </li>
-                        @if (Route::has('register'))
+                 <!--       @if (Route::has('register'))
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('register') }}">
                                     {{ trans('home.register') }}
                                 </a>
                             </li>
                         @endif
+                        -->
                     @else
 
                         <li class="nav-item dropdown">
