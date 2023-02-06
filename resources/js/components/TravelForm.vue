@@ -22,17 +22,18 @@
             this.getCountries();
             this.getUsers();
             this.autoSave();
-            window.Echo.channel('searchCity')
+           /* window.Echo.channel('searchCity')
                 .listen('.searchResultsCity', (e) => {
                     this.optionsCities = e.cities;
-                })
-            console.log(this.submitingForm);
+                })*/
         },
         computed: {
+
             ...mapGetters([
                 'travelId',
                 'travelAddressIds',
-                'submitingForm'
+                'submitingForm',
+                'optionsCities',
             ]),
         },
 
@@ -41,7 +42,6 @@
                 mediaCollections: ['travelMainImage', 'gallery', 'travelRoad', 'travelImageAddress'],
                 optionsCountries: [],
                 optionsUsers: [],
-                optionsCities: [],
                 travelAddress: {
                     'id': [],
                     'address': [],

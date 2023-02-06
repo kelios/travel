@@ -70,9 +70,10 @@ class LocationController extends BaseController
             'region_local_name',
             'area_local_name'
         ]);
+        return response()->json($cities);
         //broadcast search results with Pusher channels
-        event(new SearchCityEvent($cities));
-        return response()->json("ok");
+      //  event(new SearchCityEvent($cities));
+       // return response()->json("ok");
     }
 
 }

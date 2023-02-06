@@ -298,9 +298,23 @@ class TravelsController extends Controller
             $perPage = json_decode($request->query('perPage'), true);
         }
         $travels = $this->travelRepository->search($perPage, $query, $where);
+        $travels->transform(function ($value) {
+            return $value->only([
+                'name',
+                'url',
+                'publish',
+                'moderation',
+                'countryName',
+                'travel_image_thumb_url',
+                'travel_image_thumb_small_url',
+                'slug',
+                'id'
+            ]);
+        });
+        return response()->json($travels);
         //broadcast search results with Pusher channels
-        event(new SearchEvent($travels, [], $query));
-        return response()->json("ok");
+       // event(new SearchEvent($travels, [], $query));
+        //return response()->json("ok");
     }
 
     /**
@@ -321,9 +335,24 @@ class TravelsController extends Controller
 
         $travels = $this->travelRepository->searchExtended($perPage, $query, $where);
         $travels->appends($where)->links();
-        //broadcast search results with Pusher channels
-        event(new SearchEvent($travels, $where));
-        return response()->json("ok");
+
+        //broadcast search results with Pusher channels (was removed)
+       // event(new SearchEvent($travels, $where));
+      //  return response()->json("ok");
+        $travels->transform(function ($value) {
+            return $value->only([
+                'name',
+                'url',
+                'publish',
+                'moderation',
+                'countryName',
+                'travel_image_thumb_url',
+                'travel_image_thumb_small_url',
+                'slug',
+                'id'
+            ]);
+        });
+        return response()->json($travels);
     }
 
     public function metravel(MeTravel $request)

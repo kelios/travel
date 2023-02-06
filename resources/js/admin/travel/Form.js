@@ -14,15 +14,16 @@ Vue.component('travel-form', {
         this.getCountries();
         this.getUsers();
         this.autoSave();
-        window.Echo.channel('searchCity')
+       /* window.Echo.channel('searchCity')
             .listen('.searchResultsCity', (e) => {
                 this.optionsCities = e.cities;
-            })
+            })*/
     },
     computed: {
         ...mapGetters([
             'travelId',
-            'travelAddressIds'
+            'travelAddressIds',
+            'optionsCities',
         ]),
     },
 
@@ -31,7 +32,6 @@ Vue.component('travel-form', {
             mediaCollections: ['travelMainImage', 'gallery', 'travelRoad', 'travelImageAddress'],
             optionsCountries: [],
             optionsUsers: [],
-            optionsCities: [],
             travelAddress: {
                 'id': [],
                 'address': [],

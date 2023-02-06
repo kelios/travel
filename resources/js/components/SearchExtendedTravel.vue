@@ -170,15 +170,16 @@
         mounted() {
             this.getCountries();
             this.fetchFilters();
-            window.Echo.channel('searchCity')
+       /*     window.Echo.channel('searchCity')
                 .listen('.searchResultsCity', (e) => {
                     this.optionsCities = e.cities;
-                })
+                })*/
         },
         computed: {
             ...mapGetters([
                 'filtersTravel',
-                'perPage'
+                'perPage',
+                'optionsCities',
             ])
         },
 

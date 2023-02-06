@@ -34,7 +34,7 @@
 
 body {
     margin: 0;
-    font-family: 'Bad Script', cursive !important;
+    font-family: 'Roboto', cursive !important;
     font-size: 1rem;
     font-weight: 600 !important;
 
@@ -50,10 +50,18 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Bad Script', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 700 !important;
 }
+.navbar{
+    font-family: 'Bad Script', cursive !important;
+}
+.album{
+    font-family: 'Bad Script', cursive !important;
+}
 
+.card-header{
+    font-family: 'Bad Script', cursive !important;
+}
 /*START ADMIN*/
 
 [tabindex="-1"]:focus:not(:focus-visible) {

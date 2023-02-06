@@ -7,9 +7,7 @@ let actions = {
         };
         axios.get(`/api/search`, {params})
             .then(res => {
-                if (res.data === 'ok')
-                    console.log('request sent successfully')
-
+                commit('SET_TRAVELS', res.data);
             }).catch(err => {
             console.log(err)
         })
@@ -62,7 +60,7 @@ let actions = {
                 console.log(err)
             })
     },
-    SEARCH_EXTENDED_TRAVELS({commit}, data) {
+    async SEARCH_EXTENDED_TRAVELS({commit}, data) {
         let params = {
             query: data.query,
             where: data.where,
@@ -70,23 +68,19 @@ let actions = {
         };
         axios.get(`/api/searchextended`, {params})
             .then(res => {
-                if (res.data === 'ok')
-                    console.log('request sent successfully')
-
+                    commit('SET_TRAVELS', res.data);
             }).catch(err => {
             console.log(err)
         })
     },
-    SEARCH_CITIES({commit}, data) {
+    async SEARCH_CITIES({commit}, data) {
         let params = {
             query: data.query,
             countryIds: data.countryIds,
         };
         axios.get(`/api/searchCities`, {params})
             .then(res => {
-                if (res.data === 'ok')
-                    console.log('request sent successfully')
-
+                commit('SET_OPTIONS_CITIES', res.data);
             }).catch(err => {
             console.log(err)
         })
