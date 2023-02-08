@@ -34,7 +34,7 @@
 
 body {
     margin: 0;
-    font-family: 'Roboto', cursive !important;
+    font-family: 'Roboto' !important;
     font-size: 1rem;
     font-weight: 600 !important;
 
@@ -50,6 +50,7 @@ h3,
 h4,
 h5,
 h6 {
+    font-family: 'Bad Script', cursive !important;
     font-weight: 700 !important;
 }
 .navbar{
