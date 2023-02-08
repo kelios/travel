@@ -33,7 +33,10 @@
                     <p>
                         <a :href="'/travels/'+travel.slug" target="_blank">
                             {{__('main.readMore')}}
-                            <i class="fa fa-book" :title="__('main.read')"></i>({{travel.countUnicIpView}})
+                            <i class="fa fa-book" :title="__('main.read')"></i>
+                            <span v-if="travel.countUnicIpView">
+                            ({{travel.countUnicIpView}})
+                            </span>
                         </a>
                     </p>
 
