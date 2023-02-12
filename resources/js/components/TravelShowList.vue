@@ -5,6 +5,7 @@
         class="travelshowlist"
     >
         <section class="travel-section gallery section--demo-2" id="gallery" v-if="travel.gallery">
+            <h2 class="mb-5 galleryTitle">{{ __('travels.gallery') }}</h2>
             <div>
                 <slider></slider>
             </div>

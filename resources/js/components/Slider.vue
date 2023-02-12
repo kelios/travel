@@ -2,7 +2,7 @@
 
 
     <swiper class="swiper" :options="swiperOption" style="
-                            max-height: 600px;
+                            max-height: 700px;
                             ">
 
         <swiper-slide v-for="(slide, index) in travel.gallery" :key="index">
@@ -12,7 +12,7 @@
                 :srcset="slide.srcset "
                 :src="slide.url"
                 :class="slide-index"
-                style=" max-height: 650px;
+                style=" max-height: 700px;
                             display:block;
                             margin:auto;
                             "
