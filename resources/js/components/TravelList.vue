@@ -47,6 +47,7 @@
             'select-per-page': SelectPerPage,
         },
         mounted() {
+            console.log('getrefresh');
             this.getResults();
             /*window.Echo.channel('search')
                 .listen('.searchResults', (e) => {
