@@ -122,7 +122,6 @@ export default {
             }
         },
         init(){
-            console.log('init');
             navigator.geolocation.getCurrentPosition(this.geo_success, this.geo_error, this.geo_options);
             this.initCoordinate = true;
             var that = this;
@@ -131,14 +130,12 @@ export default {
             }, 500);
         },
         geo_success(position) {
-            console.log('geo_success');
             this.center = L.latLng(position.coords.latitude, position.coords.longitude);
             this.$store.commit('SET_LAT', position.coords.latitude);
             this.$store.commit('SET_LNG', position.coords.longitude);
             this.getResults();
         },
         geo_error() {
-            console.log('geo_error');
             // for default set Minsk Belarus
             this.zoom = 8;
             this.$store.commit('SET_LAT', 53.8828449);
@@ -149,7 +146,6 @@ export default {
 
         },
         getResults(page = 1) {
-            console.log('it me');
             this.where.lat = this.lat;
             this.where.lng = this.lng;
             this.where.radius = this.radius;
