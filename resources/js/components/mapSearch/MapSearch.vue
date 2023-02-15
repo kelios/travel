@@ -146,6 +146,7 @@ export default {
 
         },
         getResults(page = 1) {
+            console.log('it me');
             this.where.lat = this.lat;
             this.where.lng = this.lng;
             this.where.radius = this.radius;

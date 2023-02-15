@@ -83,20 +83,17 @@
             this.getFilters();
         },
         watch: {
-            radius: {
-                handler: _.debounce(function () {
-                    this.getResults()
-                }, 100)
+            radius(newVal) {
+                    this.radius=newVal;
+                    this.getResults();
             },
-            categories: {
-                handler: _.debounce(function () {
-                    this.getResults()
-                }, 100)
-            },
-            address: {
-                handler: _.debounce(function () {
-                    this.getResults()
-                }, 100)
+            categories(newVal) {
+                    this.categories=newVal;
+                    this.getResults();
+               },
+            address(newVal) {
+                    this.address=newVal;
+                    this.getResults();
             }
         },
         methods: {
