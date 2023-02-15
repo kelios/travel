@@ -69,6 +69,7 @@ export default {
                 iconAnchor: [16, 37]
             }),
             isLoading: false,
+            initCoordinate: false,
             userLocation: [],
             geo_options: {
                 enableHighAccuracy: true,
@@ -78,7 +79,8 @@ export default {
         }
     },
     mounted() {
-        if(!this.lat)
+        console.log(this.initCoordinate);
+        if(!this.initCoordinate)
             this.init();
 
     },
@@ -122,6 +124,7 @@ export default {
         },
         init(){
             navigator.geolocation.watchPosition(this.geo_success, this.geo_error, this.geo_options);
+            this.initCoordinate = true;
             var that = this;
             setTimeout(function () {
                 that.initialZoom();
