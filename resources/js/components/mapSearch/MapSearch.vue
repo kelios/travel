@@ -17,12 +17,12 @@
                     <l-popup>
                         <a :href="place.urlTravel" target="_blank">
                             <img
-                                lazy="loading"
                                 v-if="place.travelImageThumbUrl"
                                 class="mapPreview img-responsive img-thumbnail"
                                 :src="place.travelImageThumbUrl"
                                 width="200"
                                 height="200"
+                                alt = place.travelImageThumbUrl"
                             >
                             <div v-if="place.address">
                                 <span class="badge badge-success">{{ __('travels.searchAddress') }} :</span>
@@ -78,11 +78,8 @@ export default {
         }
     },
     mounted() {
-        var wpid = navigator.geolocation.watchPosition(this.geo_success, this.geo_error, this.geo_options);
-        var that = this;
-        setTimeout(function () {
-            that.initialZoom();
-        }, 500);
+        if(!this.lat)
+            this.init();
 
     },
     computed: {
@@ -116,7 +113,6 @@ export default {
         initialZoom() {
             const map = this.$refs.myMap.mapObject;
             let arrayOfLatLngs = [];
-
             this.travelAddressArr.forEach((place) => {
                 arrayOfLatLngs.push(this.getLatLng(place.coord))
             });
@@ -124,8 +120,14 @@ export default {
                 map.fitBounds([arrayOfLatLngs]);
             }
         },
+        init(){
+            navigator.geolocation.watchPosition(this.geo_success, this.geo_error, this.geo_options);
+            var that = this;
+            setTimeout(function () {
+                that.initialZoom();
+            }, 500);
+        },
         geo_success(position) {
-            console.log("geo_success");
             this.center = L.latLng(position.coords.latitude, position.coords.longitude);
             this.$store.commit('SET_LAT', position.coords.latitude);
             this.$store.commit('SET_LNG', position.coords.longitude);
@@ -133,7 +135,6 @@ export default {
         },
         geo_error() {
             // for default set Minsk Belarus
-            console.log("not found position");
             this.zoom = 8;
             this.$store.commit('SET_LAT', 53.8828449);
             this.$store.commit('SET_LNG', 27.7273595);
