@@ -3,13 +3,14 @@
 
         <div class="row" v-if="travelAddressArr.length>0">
             <div class=" col-md-4 col-sm-4" v-for="place in travelAddressArr">
-
+                <a :href="place.urlTravel" target="_blank">
                         <img
-                            lazy="loading"
+                            :alt="place.categoryName"
                             v-if="place.travelImageThumbUrl"
                             class="card-img-top"
                             :src="place.travelImageThumbUrl"
                         >
+                </a>
                         <div v-if="place.coord" class="textmenu">
                                     <span
                                         class="badge badge-warning">{{ __('travels.traveladdresscoord')}} :</span>
@@ -32,7 +33,6 @@
                     </div>
 
             </div>
-        </div>
         <div class="row" v-else>{{ __('main.searchNothing')}}</div>
 
 
