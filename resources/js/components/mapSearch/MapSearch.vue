@@ -123,7 +123,7 @@ export default {
         },
         init(){
             console.log('init');
-            navigator.geolocation.watchPosition(this.geo_success, this.geo_error, this.geo_options);
+            navigator.geolocation.getCurrentPosition(this.geo_success, this.geo_error, this.geo_options);
             this.initCoordinate = true;
             var that = this;
             setTimeout(function () {
