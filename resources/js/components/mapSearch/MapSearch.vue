@@ -127,7 +127,7 @@ export default {
             var that = this;
             setTimeout(function () {
                 that.initialZoom();
-            }, 500);
+            }, 300);
         },
         geo_success(position) {
             this.center = L.latLng(position.coords.latitude, position.coords.longitude);
