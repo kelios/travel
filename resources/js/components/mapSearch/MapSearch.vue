@@ -79,7 +79,6 @@ export default {
         }
     },
     mounted() {
-        console.log(this.initCoordinate);
         if(!this.initCoordinate)
             this.init();
 
@@ -147,7 +146,6 @@ export default {
 
         },
         getResults(page = 1) {
-            console.log('getResults');
             this.where.lat = this.lat;
             this.where.lng = this.lng;
             this.where.radius = this.radius;

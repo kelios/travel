@@ -5,7 +5,7 @@
                 <select-per-page @getRes="getResults"></select-per-page>
             </div>
             <div class="col-10">
-                <pagination :data="travels" :limit="5" align="right" size="small"
+                <pagination :data="travels" :limit="5" size="small"
                             @pagination-change-page="getResults"></pagination>
             </div>
 
@@ -23,7 +23,7 @@
                 <select-per-page @getRes="getResults"></select-per-page>
             </div>
             <div class="col-10">
-                <pagination :data="travels" :limit="6" align="right" size="small"
+                <pagination :data="travels" :limit="6" size="small"
                             @pagination-change-page="getResults"></pagination>
 
             </div>
@@ -48,11 +48,11 @@
         },
         mounted() {
             this.getResults();
-            window.Echo.channel('search')
+            /*window.Echo.channel('search')
                 .listen('.searchResults', (e) => {
                     this.$store.commit('SET_TRAVELS', e.travels);
                     this.$store.commit('SET_WHERE', e.where)
-                })
+                })*/
         },
         computed: {
             groupedTravels() {
