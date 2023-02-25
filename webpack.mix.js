@@ -1,6 +1,5 @@
 const mix = require('laravel-mix');
 require('laravel-vue-lang/mix');
-require('laravel-mix-purgecss');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,6 +10,19 @@ require('laravel-mix-purgecss');
  | file for the application as well as bundling up all the JS files.
  |
  */
+mix.styles(
+    [
+        'public/css/metravel.css',
+    ],
+    'public/css/metravel.min.css'
+);
+
+mix.styles(
+    [
+        'public/css/showmetravel.css',
+    ],
+    'public/css/showmetravel.min.css'
+);
 
 mix.webpackConfig({
     output:{
@@ -19,15 +31,11 @@ mix.webpackConfig({
 });
 
 mix.js('resources/js/app.js', 'public/js')
-    .js(["resources/js/admin/admin.js"], "public/js")
-    .vue({ version: 2 })
-    .postCss('public/css/metravel.css',  'public/css/metravel.min.css')
-    .postCss('public/css/showmetravel.css', 'public/css/showmetravel.min.css')
-    .sass("resources/sass/admin/admin.scss", "public/css")
-    .purgeCss({
-        enabled: true,
-    });
+    .vue();
 
+mix.js(["resources/js/admin/admin.js"], "public/js")
+    .vue()
+    .sass("resources/sass/admin/admin.scss", "public/css");
 
 mix.lang();
 
