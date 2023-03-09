@@ -1,13 +1,13 @@
-import AppForm from '../app-components/Form/AppForm';
 import VeeValidate from 'vee-validate';
 import L from "leaflet";
 import 'leaflet/dist/leaflet.css';
-import {ToggleButton} from 'vue-js-toggle-button'
-import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue2-leaflet";
+import {Vue3ToggleButton} from 'vue3-toggle-button'
+import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue3-leaflet";
 import {mapGetters} from "vuex";
 
 import 'vue-multiselect/dist/vue-multiselect.min.css';
 import Multiselect from 'vue-multiselect';
+import '../node_modules/vue3-toggle-button/dist/style.css'
 
 const ENDPOINTREVERSE = 'https://nominatim.openstreetmap.org/reverse';
 const ENDPOINTSEARCH = 'https://nominatim.openstreetmap.org/search?';
@@ -16,17 +16,12 @@ const FORMAT = 'jsonv2';
 Vue.use(VeeValidate, {strict: true})
 
 Vue.component('travel-form', {
-    mixins: [AppForm],
 
     mounted() {
         this.init();
         this.getCountries();
         this.getUsers();
         this.autoSave();
-       /* window.Echo.channel('searchCity')
-            .listen('.searchResultsCity', (e) => {
-                this.optionsCities = e.cities;
-            })*/
     },
     computed: {
         ...mapGetters([
@@ -350,6 +345,6 @@ Vue.component('travel-form', {
         LTooltip,
         LIcon,
         Multiselect,
-        'toggle-button':ToggleButton
+        'toggle-button':Vue3ToggleButton
     }
 });

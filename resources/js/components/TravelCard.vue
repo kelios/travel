@@ -106,7 +106,7 @@ export default {
             axios.delete(url).then(function (response) {
                 vm.$emit('remove', vm.travel.id);
             }, function (error) {
-                console.log(error.response.data.messag);
+                console.log(error.response.data.message);
             });
         },
 

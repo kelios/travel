@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import TravelCardLast from '../components/TravelCardLast'
+    import TravelCardLast from '@/components/TravelCardLast.vue'
     import {mapGetters} from 'vuex'
 
     export default {

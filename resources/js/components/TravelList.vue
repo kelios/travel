@@ -5,8 +5,8 @@
                 <select-per-page @getRes="getResults"></select-per-page>
             </div>
             <div class="col-10">
-                <pagination :data="travels" :limit="5" size="small"
-                            @pagination-change-page="getResults"></pagination>
+                <TailwindPagination :data="travels" :limit="5" size="small"
+                            @pagination-change-page="getResults"></TailwindPagination>
             </div>
 
         </div>
@@ -23,8 +23,8 @@
                 <select-per-page @getRes="getResults"></select-per-page>
             </div>
             <div class="col-10">
-                <pagination :data="travels" :limit="6" size="small"
-                            @pagination-change-page="getResults"></pagination>
+                <TailwindPagination :data="travels" :limit="6" size="small"
+                            @pagination-change-page="getResults"></TailwindPagination>
 
             </div>
         </div>
@@ -32,10 +32,10 @@
 </template>
 
 <script>
-    import SelectPerPage from '../components/SelectPerPage'
-    import TravelCard from '../components/TravelCard'
+    import SelectPerPage from './SelectPerPage.vue'
+    import TravelCard from './TravelCard.vue'
     import {mapGetters} from 'vuex'
-    import pagination from 'laravel-vue-pagination'
+    import { TailwindPagination } from 'laravel-vue-pagination';
 
 
     export default {
@@ -43,16 +43,12 @@
         props: ['readonly', 'filter'],
         components: {
             TravelCard,
-            pagination,
+            TailwindPagination,
             'select-per-page': SelectPerPage,
         },
         mounted() {
+            console.log('123');
             this.getResults();
-            /*window.Echo.channel('search')
-                .listen('.searchResults', (e) => {
-                    this.$store.commit('SET_TRAVELS', e.travels);
-                    this.$store.commit('SET_WHERE', e.where)
-                })*/
         },
         computed: {
             groupedTravels() {
@@ -62,7 +58,7 @@
                 'travels',
                 'where',
                 'query',
-                'perPage'
+                'perPage',
             ])
         },
         methods: {
@@ -70,10 +66,12 @@
                 this.travels.data = this.travels.data.filter(travel => travel.id !== id)
             },
             getResults(page = 1) {
+              //  console.log(this.filter);
+               // console.log(this.where);
                 this.$store.dispatch('GET_TRAVELS', {
                     'page': page,
                     'query': this.query,
-                    'where': Object.assign(this.filter, this.where),
+                    'where': this.filter,
                     'perPage': this.perPage
                 });
             }
@@ -81,6 +79,3 @@
     }
 </script>
 
-<style scoped>
-
-</style>

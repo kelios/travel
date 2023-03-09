@@ -174,6 +174,9 @@ import {mapGetters} from "vuex";
 
 
 export default {
+    compatConfig: {
+        MODE: 3,
+    },
     name: 'TravelShowList',
     props: ['travel_id', 'where'],
     data() {

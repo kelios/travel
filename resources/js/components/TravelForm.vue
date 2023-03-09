@@ -2,13 +2,16 @@
     import {BaseForm} from 'craftable';
     import L from "leaflet";
     import 'leaflet/dist/leaflet.css';
-    import {ToggleButton} from 'vue-js-toggle-button'
-    import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue2-leaflet";
+
+    import {Vue3ToggleButton} from "vue3-toggle-button";
+    //import 'vue3-toggle-button/dist/style.css';
+    import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue3-leaflet";
     import {mapGetters} from "vuex";
 
 
     import 'vue-multiselect/dist/vue-multiselect.min.css';
     import Multiselect from 'vue-multiselect';
+
 
     const ENDPOINTREVERSE = 'https://nominatim.openstreetmap.org/reverse';
     const ENDPOINTSEARCH = 'https://nominatim.openstreetmap.org/search?';
@@ -22,10 +25,6 @@
             this.getCountries();
             this.getUsers();
             this.autoSave();
-           /* window.Echo.channel('searchCity')
-                .listen('.searchResultsCity', (e) => {
-                    this.optionsCities = e.cities;
-                })*/
         },
         computed: {
 
@@ -369,7 +368,7 @@
             LTooltip,
             LIcon,
             Multiselect,
-            'toggle-button': ToggleButton
+            'toggle-button': Vue3ToggleButton
         }
     }
 </script>

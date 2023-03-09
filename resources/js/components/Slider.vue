@@ -8,8 +8,8 @@
         <swiper-slide v-for="(slide, index) in travel.gallery" :key="index">
 
             <img
-                lazy="loading"
-                :srcset="slide.srcset "
+                alt = "image"
+                :srcset="slide.srcset"
                 :src="slide.url"
                 :class="slide-index"
                 style=" max-height: 700px;
@@ -31,8 +31,8 @@
 </template>
 
 <script>
-    import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
-    import 'swiper/css/swiper.css'
+    import { Swiper, SwiperSlide } from 'swiper/vue'
+    import 'swiper/css'
     import {mapGetters} from "vuex";
 
     export default {

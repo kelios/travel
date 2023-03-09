@@ -22,7 +22,7 @@
                                 :src="place.travelImageThumbUrl"
                                 width="200"
                                 height="200"
-                                alt = place.travelImageThumbUrl"
+                                alt = "place.travelImageThumbUrl"
                             >
                             <div v-if="place.address">
                                 <span class="badge badge-success">{{ __('travels.searchAddress') }} :</span>
@@ -47,7 +47,7 @@
 <script>
 import L from "leaflet";
 import 'leaflet/dist/leaflet.css';
-import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue2-leaflet";
+import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue3-leaflet";
 import {mapGetters} from "vuex";
 
 export default {

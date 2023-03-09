@@ -31,7 +31,7 @@
             <div class="card-header blue">
                 {{__('user.friend')}}
             </div>
-            <pagination :data="friends" :limit="5" align="center" @pagination-change-page="getResults"></pagination>
+            <TailwindPagination :data="friends" :limit="5" align="center" @pagination-change-page="getResults"></TailwindPagination>
             <div class="" v-for="friendEvent in groupedFriends">
                 <div class="col-md-12 col-sm-12" v-for="friend in friendEvent">
                     <friend-card class="animated fadeIn"
@@ -42,14 +42,14 @@
                 </div>
                 <div class="col w-100"></div>
             </div>
-            <pagination :data="friends" :limit="5" align="center" @pagination-change-page="getResults"></pagination>
+            <TailwindPagination :data="friends" :limit="5" align="center" @pagination-change-page="getResults"></TailwindPagination>
         </div>
     </div>
 </template>
 
 <script>
-    import FriendCard from "./FriendCard";
-    import pagination from "laravel-vue-pagination";
+    import FriendCard from "@/components/FriendCard.vue";
+    import {TailwindPagination} from "laravel-vue-pagination";
     import {mapGetters} from "vuex";
 
     export default {
@@ -62,7 +62,7 @@
         },
         components: {
             'friend-card':FriendCard,
-            pagination
+            TailwindPagination
         },
         http: {
             headers: {

@@ -1,18 +1,16 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import TravelIndex from './components/TravelIndex.vue'
+import { createWebHistory, createRouter } from "vue-router";
+import TravelList from "./components/TravelList.vue";
 
-Vue.use(VueRouter)
+const routes = [
+    {
+        path: "/api/travels",
+        component: TravelList,
+    },
+];
 
-const router = new VueRouter({
-    mode: 'history',
-    routes: [
-        {
-            path: '/api/travels',
-            name: 'TravelIndex',
-            component: TravelIndex
-        }
-    ]
-})
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+});
 
-export default router
+export default router;

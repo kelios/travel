@@ -14,7 +14,7 @@
 
 <script>
 
-    import MessageModal from "./MessageModal";
+    import MessageModal from "@/components/MessageModal.vue";
 
     export default {
         name: "MessageComponent",

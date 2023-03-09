@@ -1,6 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Travels\TravelsController;
+
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SiteMapController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\WysiwygUploadController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\TravelAddressController;
+use App\Http\Controllers\LocationController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -12,15 +23,62 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'Travels\TravelsController@index')->name('travels');
-Route::get('/map', 'HomeController@index')->name('map');
-Route::get('/mysitemap', 'SiteMapController@setSiteMap')->name('mysitemap');
 
+Route::get('/', [TravelsController::class, 'index']);
+Route::get('/map', [HomeController::class, 'index'])->name('map');;
+Route::get('/mysitemap', [SiteMapController::class, 'setSiteMap'])->name('mysitemap');;
+
+
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/articles', [ArticleController::class, 'articles'])->name('articles');
+Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articleshow');
+
+Route::post('/admin/wysiwyg-media', [WysiwygUploadController::class, 'uploads3'])->name('brackets/admin-ui::wysiwyg-upload');
+Route::post('upload', [WysiwygUploadController::class, 'upload'])->name('brackets/media::upload');
+Route::post('upload-crop', [WysiwygUploadController::class, 'uploadCrop'])->name('brackets/media::upload-crop');
+Route::post('feedback', [HomeController::class, 'feedback'])->name('feedback');
+
+Route::get('users/{user}', [UserController::class, 'edit'])->name('users.edit');
+Route::get('allFriends/{user}', [UserController::class, 'allFriends'])->name('users.allFriends');
+Route::get('allMessages/{user}', [UserController::class, 'allMessages'])->name('users.allMessages');
+Route::post('users/{user}', [UserController::class, 'update'])->name('users.update');
+Auth::routes();
+
+Route::get('comments/{travelId}', [CommentController::class, 'index'])->name('comments');
+Route::post('comments', [CommentController::class, 'store'])->name('commentssave');
+
+Route::get('/like/{id}/islikedbyme', [TravelsController::class, 'isLikedByMe'])->name('isLikedByMe');
+Route::post('/like/{travelId}', [TravelsController::class, 'like'])->name('like');
+Route::get('/save/{id}/isfavoritedbyme', [TravelsController::class, 'isFavoritedByMe'])->name('isFavoritedByMe');
+Route::post('/save/{travelId}', [TravelsController::class, 'addFavorite'])->name('addFavorite');
+
+Route::get('/location/cities', [LocationController::class, 'getCities'])->name('cities');
+Route::get('/location/countries',  [LocationController::class, 'getCountries'])->name('countries');
+Route::get('/location/countriesforsearch',  [LocationController::class, 'getCountriesForSearch'])->name('countriesforsearch');
+Route::get('/location/countriesCities',  [LocationController::class, 'getCitiesByCountries'])->name('countriesCities');
+Route::get('/travels/markers', [TravelAddressController::class, 'getMarkers'])->name('markers');
+Route::get('/travels', [TravelsController::class, 'index'])->name('travels');
+Route::get('/travelsby', [TravelsController::class, 'indexby'])->name('travelsby');
+Route::get('/travels/{slug}', [TravelsController::class, 'show'])->name('show');
+
+/* Sitemap */
+Route::get('/sitemap', [SitemapController::class, 'index']);
+Route::get('/sitemap/travels', [SitemapController::class, 'travels']);
+Route::get('/sitemap/cities', [SitemapController::class, 'cities']);
+Route::get('/sitemap/countries',[SitemapController::class, 'countries']);
+Route::get('/sitemap/categories', [SitemapController::class, 'categories']);
+
+/*
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/articles', 'ArticleController@index')->name('articles');
 Route::get('/articles/{id}', 'ArticleController@show')->name('articleshow');
-
+Route::get('/map', 'HomeController@index')->name('map');
+Route::get('/mysitemap', 'SiteMapController@setSiteMap')->name('mysitemap');
+Route::get('/travels', 'Travels\TravelsController@index')->name('index');
+Route::get('/travelsby', 'Travels\TravelsController@indexby')->name('indexby');
+Route::get('/travels/{slug}', 'Travels\TravelsController@show')->name('show');
 Route::post('/admin/wysiwyg-media', 'WysiwygUploadController@uploads3')->name('brackets/admin-ui::wysiwyg-upload');
 Route::post('upload', 'WysiwygUploadController@upload')->name('brackets/media::upload');
 Route::post('upload-crop', 'WysiwygUploadController@uploadCrop')->name('brackets/media::upload-crop');
@@ -32,7 +90,6 @@ Route::get('allFriends/{user}', 'UserController@allFriends')->name('users.allFri
 Route::get('allMessages/{user}', 'UserController@allMessages')->name('users.allMessages');
 Route::post('users/{user}', ['as' => 'users.update', 'uses' => 'UserController@update']);
 Auth::routes();
-
 Route::get('comments/{travelId}', 'CommentController@index')->name('comments');
 Route::post('comments', 'CommentController@store')->name('commentssave');
 
@@ -48,14 +105,12 @@ Route::get('/location/countriesforsearch', 'LocationController@getCountriesForSe
 Route::get('/location/countriesCities', 'LocationController@getCitiesByCountries')->name('countriesCities');
 Route::get('/travels/markers', 'TravelAddressController@getMarkers')->name('markers');
 
-/* Sitemap */
 Route::get('/sitemap', 'SitemapController@index');
 Route::get('/sitemap/travels', 'SitemapController@travels');
 Route::get('/sitemap/cities', 'SitemapController@cities');
 Route::get('/sitemap/countries', 'SitemapController@countries');
 Route::get('/sitemap/categories', 'SitemapController@categories');
-
-
+*/
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {
@@ -270,9 +325,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
     });
 });
 
-Route::get('/travels', 'Travels\TravelsController@index')->name('index');
-Route::get('/travelsby', 'Travels\TravelsController@indexby')->name('indexby');
-Route::get('/travels/{slug}', 'Travels\TravelsController@show')->name('show');
+
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
@@ -292,15 +345,15 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
-        Route::prefix('comments')->name('comments/')->group(static function() {
-            Route::get('/',                                             'CommentsController@index')->name('index');
-            Route::get('/create',                                       'CommentsController@create')->name('create');
-            Route::post('/',                                            'CommentsController@store')->name('store');
-            Route::get('/{comment}/edit',                               'CommentsController@edit')->name('edit');
-            Route::post('/bulk-destroy',                                'CommentsController@bulkDestroy')->name('bulk-destroy');
-            Route::post('/{comment}',                                   'CommentsController@update')->name('update');
-            Route::delete('/{comment}',                                 'CommentsController@destroy')->name('destroy');
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {
+        Route::prefix('comments')->name('comments/')->group(static function () {
+            Route::get('/', 'CommentsController@index')->name('index');
+            Route::get('/create', 'CommentsController@create')->name('create');
+            Route::post('/', 'CommentsController@store')->name('store');
+            Route::get('/{comment}/edit', 'CommentsController@edit')->name('edit');
+            Route::post('/bulk-destroy', 'CommentsController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{comment}', 'CommentsController@update')->name('update');
+            Route::delete('/{comment}', 'CommentsController@destroy')->name('destroy');
         });
     });
 });
@@ -308,61 +361,30 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
-        Route::prefix('comments')->name('comments/')->group(static function() {
-            Route::get('/',                                             'CommentsController@index')->name('index');
-            Route::get('/create',                                       'CommentsController@create')->name('create');
-            Route::post('/',                                            'CommentsController@store')->name('store');
-            Route::get('/{comment}/edit',                               'CommentsController@edit')->name('edit');
-            Route::post('/bulk-destroy',                                'CommentsController@bulkDestroy')->name('bulk-destroy');
-            Route::post('/{comment}',                                   'CommentsController@update')->name('update');
-            Route::delete('/{comment}',                                 'CommentsController@destroy')->name('destroy');
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {
+        Route::prefix('comments')->name('comments/')->group(static function () {
+            Route::get('/', 'CommentsController@index')->name('index');
+            Route::get('/create', 'CommentsController@create')->name('create');
+            Route::post('/', 'CommentsController@store')->name('store');
+            Route::get('/{comment}/edit', 'CommentsController@edit')->name('edit');
+            Route::post('/bulk-destroy', 'CommentsController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{comment}', 'CommentsController@update')->name('update');
+            Route::delete('/{comment}', 'CommentsController@destroy')->name('destroy');
         });
     });
 });
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
-        Route::prefix('messages')->name('messages/')->group(static function() {
-            Route::get('/',                                             'MessagesController@index')->name('index');
-            Route::get('/create',                                       'MessagesController@create')->name('create');
-            Route::post('/',                                            'MessagesController@store')->name('store');
-            Route::get('/{message}/edit',                               'MessagesController@edit')->name('edit');
-            Route::post('/bulk-destroy',                                'MessagesController@bulkDestroy')->name('bulk-destroy');
-            Route::post('/{message}',                                   'MessagesController@update')->name('update');
-            Route::delete('/{message}',                                 'MessagesController@destroy')->name('destroy');
-        });
-    });
-});
-
-
-/* Auto-generated admin routes */
-Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
-        Route::prefix('articles')->name('articles/')->group(static function() {
-            Route::get('/',                                             'ArticleController@index')->name('index');
-            Route::get('/create',                                       'ArticleController@create')->name('create');
-            Route::post('/',                                            'ArticleController@store')->name('store');
-            Route::get('/{article}/edit',                               'ArticleController@edit')->name('edit');
-            Route::post('/bulk-destroy',                                'ArticleController@bulkDestroy')->name('bulk-destroy');
-            Route::post('/{article}',                                   'ArticleController@update')->name('update');
-            Route::delete('/{article}',                                 'ArticleController@destroy')->name('destroy');
-        });
-    });
-});
-
-/* Auto-generated admin routes */
-Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
-        Route::prefix('article-types')->name('article-types/')->group(static function() {
-            Route::get('/',                                             'ArticleTypeController@index')->name('index');
-            Route::get('/create',                                       'ArticleTypeController@create')->name('create');
-            Route::post('/',                                            'ArticleTypeController@store')->name('store');
-            Route::get('/{articleType}/edit',                           'ArticleTypeController@edit')->name('edit');
-            Route::post('/bulk-destroy',                                'ArticleTypeController@bulkDestroy')->name('bulk-destroy');
-            Route::post('/{articleType}',                               'ArticleTypeController@update')->name('update');
-            Route::delete('/{articleType}',                             'ArticleTypeController@destroy')->name('destroy');
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {
+        Route::prefix('messages')->name('messages/')->group(static function () {
+            Route::get('/', 'MessagesController@index')->name('index');
+            Route::get('/create', 'MessagesController@create')->name('create');
+            Route::post('/', 'MessagesController@store')->name('store');
+            Route::get('/{message}/edit', 'MessagesController@edit')->name('edit');
+            Route::post('/bulk-destroy', 'MessagesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{message}', 'MessagesController@update')->name('update');
+            Route::delete('/{message}', 'MessagesController@destroy')->name('destroy');
         });
     });
 });
@@ -370,15 +392,30 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
-        Route::prefix('travel-likes')->name('travel-likes/')->group(static function() {
-            Route::get('/',                                             'TravelLikeController@index')->name('index');
-            Route::get('/create',                                       'TravelLikeController@create')->name('create');
-            Route::post('/',                                            'TravelLikeController@store')->name('store');
-            Route::get('/{travelLike}/edit',                            'TravelLikeController@edit')->name('edit');
-            Route::post('/bulk-destroy',                                'TravelLikeController@bulkDestroy')->name('bulk-destroy');
-            Route::post('/{travelLike}',                                'TravelLikeController@update')->name('update');
-            Route::delete('/{travelLike}',                              'TravelLikeController@destroy')->name('destroy');
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {
+        Route::prefix('articles')->name('articles/')->group(static function () {
+            Route::get('/', 'ArticleController@index')->name('index');
+            Route::get('/create', 'ArticleController@create')->name('create');
+            Route::post('/', 'ArticleController@store')->name('store');
+            Route::get('/{article}/edit', 'ArticleController@edit')->name('edit');
+            Route::post('/bulk-destroy', 'ArticleController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{article}', 'ArticleController@update')->name('update');
+            Route::delete('/{article}', 'ArticleController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {
+        Route::prefix('article-types')->name('article-types/')->group(static function () {
+            Route::get('/', 'ArticleTypeController@index')->name('index');
+            Route::get('/create', 'ArticleTypeController@create')->name('create');
+            Route::post('/', 'ArticleTypeController@store')->name('store');
+            Route::get('/{articleType}/edit', 'ArticleTypeController@edit')->name('edit');
+            Route::post('/bulk-destroy', 'ArticleTypeController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{articleType}', 'ArticleTypeController@update')->name('update');
+            Route::delete('/{articleType}', 'ArticleTypeController@destroy')->name('destroy');
         });
     });
 });
@@ -386,15 +423,31 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
 /* Auto-generated admin routes */
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
-    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function() {
-        Route::prefix('category-travel-addresses')->name('category-travel-addresses/')->group(static function() {
-            Route::get('/',                                             'CategoryTravelAddressController@index')->name('index');
-            Route::get('/create',                                       'CategoryTravelAddressController@create')->name('create');
-            Route::post('/',                                            'CategoryTravelAddressController@store')->name('store');
-            Route::get('/{categoryTravelAddress}/edit',                 'CategoryTravelAddressController@edit')->name('edit');
-            Route::post('/bulk-destroy',                                'CategoryTravelAddressController@bulkDestroy')->name('bulk-destroy');
-            Route::post('/{categoryTravelAddress}',                     'CategoryTravelAddressController@update')->name('update');
-            Route::delete('/{categoryTravelAddress}',                   'CategoryTravelAddressController@destroy')->name('destroy');
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {
+        Route::prefix('travel-likes')->name('travel-likes/')->group(static function () {
+            Route::get('/', 'TravelLikeController@index')->name('index');
+            Route::get('/create', 'TravelLikeController@create')->name('create');
+            Route::post('/', 'TravelLikeController@store')->name('store');
+            Route::get('/{travelLike}/edit', 'TravelLikeController@edit')->name('edit');
+            Route::post('/bulk-destroy', 'TravelLikeController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{travelLike}', 'TravelLikeController@update')->name('update');
+            Route::delete('/{travelLike}', 'TravelLikeController@destroy')->name('destroy');
+        });
+    });
+});
+
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {
+        Route::prefix('category-travel-addresses')->name('category-travel-addresses/')->group(static function () {
+            Route::get('/', 'CategoryTravelAddressController@index')->name('index');
+            Route::get('/create', 'CategoryTravelAddressController@create')->name('create');
+            Route::post('/', 'CategoryTravelAddressController@store')->name('store');
+            Route::get('/{categoryTravelAddress}/edit', 'CategoryTravelAddressController@edit')->name('edit');
+            Route::post('/bulk-destroy', 'CategoryTravelAddressController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{categoryTravelAddress}', 'CategoryTravelAddressController@update')->name('update');
+            Route::delete('/{categoryTravelAddress}', 'CategoryTravelAddressController@destroy')->name('destroy');
         });
     });
 });

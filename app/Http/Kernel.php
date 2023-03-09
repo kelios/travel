@@ -15,21 +15,21 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \App\Http\Middleware\TrustProxies::class,
-        \Fruitcake\Cors\HandleCors::class,
-        \App\Http\Middleware\CheckForMaintenanceMode::class,
+        \Illuminate\Http\Middleware\HandleCors::class,
+        \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
 
         // Laravel Page speed
        // \RenatoMarinho\LaravelPageSpeed\Middleware\InlineCss::class,
-        \RenatoMarinho\LaravelPageSpeed\Middleware\ElideAttributes::class,
-        \RenatoMarinho\LaravelPageSpeed\Middleware\InsertDNSPrefetch::class,
-        \RenatoMarinho\LaravelPageSpeed\Middleware\RemoveComments::class,
+     //   \RenatoMarinho\LaravelPageSpeed\Middleware\ElideAttributes::class,
+      //  \RenatoMarinho\LaravelPageSpeed\Middleware\InsertDNSPrefetch::class,
+     //   \RenatoMarinho\LaravelPageSpeed\Middleware\RemoveComments::class,
         //\RenatoMarinho\LaravelPageSpeed\Middleware\TrimUrls::class,
-       \RenatoMarinho\LaravelPageSpeed\Middleware\RemoveQuotes::class,
-        \RenatoMarinho\LaravelPageSpeed\Middleware\CollapseWhitespace::class, // Note: This middleware invokes "RemoveComments::class" before it runs.
-        \RenatoMarinho\LaravelPageSpeed\Middleware\DeferJavascript::class,
+    //   \RenatoMarinho\LaravelPageSpeed\Middleware\RemoveQuotes::class,
+     //   \RenatoMarinho\LaravelPageSpeed\Middleware\CollapseWhitespace::class, // Note: This middleware invokes "RemoveComments::class" before it runs.
+     //   \RenatoMarinho\LaravelPageSpeed\Middleware\DeferJavascript::class,
 
     ];
 
@@ -51,7 +51,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            'throttle:60,1',
+            'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
@@ -66,12 +66,12 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
-        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
+        'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];

@@ -51,12 +51,15 @@
         BSidebar, BRow, BCol, BListGroup, BListGroupItem,
         VBToggle, BButton
     } from 'bootstrap-vue';
-    import MessageSend from "./MessageSend";
-    import MessageBetweenList from "./MessageBetweenList";
+    import MessageSend from "@/components/MessageSend.vue";
+    import MessageBetweenList from "@/components/MessageBetweenList.vue";
     import {mapGetters} from "vuex";
 
 
     export default {
+        compatConfig: {
+            MODE: 3,
+        },
         name: "MessageList",
         props: [],
         components: {

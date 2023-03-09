@@ -22,11 +22,10 @@
 @endif
     {!! NoCaptcha::renderJs() !!}
 <!-- Styles -->
-    <link type="text/css" href="{{ mix('/css/metravel.min.css') }}" defer rel="stylesheet">
+    @vite(['resources/js/app.js', 'public/css/metravel.css'])
 </head>
 <body>
 <!-- Fonts -->
-@include('cookieConsent::index')
 <div id="app">
 
     <nav class="navbar bg-white navbar-expand-md navbar-light shadow-sm fixedmenu">
@@ -160,5 +159,4 @@
 </body>
 
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
-<script rel="preload" src="/js/app.js" defer as="script"></script>
 </html>

@@ -29,9 +29,9 @@
 </template>
 
 <script>
-    import Modal from './Modal'
-    import MessageSend from "./MessageSend";
-    import MessageBetweenList from "./MessageBetweenList";
+    import Modal from './Modal.vue'
+    import MessageSend from "./MessageSend.vue";
+    import MessageBetweenList from "./MessageBetweenList.vue";
 
 
     export default {

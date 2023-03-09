@@ -28,6 +28,9 @@
     import {BButton, BFormGroup, BForm} from 'bootstrap-vue';
 
     export default {
+        compatConfig: {
+            MODE: 3,
+        },
         name: "MessageSend",
         props: ['recipient_id'],
         components: {
