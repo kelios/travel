@@ -39,15 +39,14 @@
 </template>
 
 <script>
-    import { BNav , BNavItem, VBScrollspy } from 'bootstrap-vue';
+    import { BNav , BNavItem } from 'bootstrap-vue-next';
 
     export default {
         name: 'TravelShowMenu',
         props: ['travel_menu'],
         components: {
             'b-nav': BNav,
-            'b-nav-item': BNavItem,
-            'b-scrollspy': VBScrollspy,
+            'b-nav-item': BNavItem
         },
         methods: {}
     }

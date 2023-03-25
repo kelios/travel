@@ -169,14 +169,12 @@ import TravelShowSection from './TravelShowSection.vue';
 import Slider from './Slider.vue';
 import CommentList from './CommentList.vue';
 
-import {BCard} from 'bootstrap-vue';
+import {BCard} from 'bootstrap-vue-next';
+import _ from 'lodash';
 import {mapGetters} from "vuex";
 
 
 export default {
-    compatConfig: {
-        MODE: 3,
-    },
     name: 'TravelShowList',
     props: ['travel_id', 'where'],
     data() {

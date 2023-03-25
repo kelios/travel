@@ -2,12 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Travels\TravelsController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\TravelAddressController;
-use App\Http\Controllers\LocationController;
-use App\Http\Controllers\Admin\UsersController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ use App\Http\Controllers\Admin\UsersController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::middleware('auth:api')->get('/user', [UsersController::class, 'AuthRouteAPI']);
+Route::middleware('auth:api')->get('/user', 'Admin/UsersController@AuthRouteAPI');
 Route::get('search', [TravelsController::class, 'search']);
 Route::get('searchextended', [TravelsController::class, 'searchExtended']);
 Route::get('travels', [TravelsController::class, 'get']);
@@ -32,53 +33,24 @@ Route::get('travelComments', [TravelsController::class, 'getTravelComment']);
 Route::get('travelsLast', [TravelsController::class, 'getLast']);
 Route::get('travelsPopular', [TravelsController::class, 'getTravelsPopular']);
 Route::get('travelsNear', [TravelsController::class, 'getTravelsNear']);
-Route::get('searchCities',  [LocationController::class, 'searchCities']);
-Route::get('getFiltersTravel',  [TravelsController::class, 'getFiltersTravel']);
-Route::get('searchTravelsForMap',  [TravelsController::class, 'searchTravelsForMap']);
+Route::get('searchCities', [LocationController::class, 'searchCities']);
+Route::get('getFiltersTravel', [TravelsController::class, 'getFiltersTravel']);
+Route::get('searchTravelsForMap', [TravelsController::class, 'searchTravelsForMap']);
 Route::get('getFilterForMap', [TravelsController::class, 'getFilterForMap']);
-
 Route::middleware('auth:api')->post('travels/save', [TravelsController::class, 'save']);
+
 Route::middleware('auth:api')->get('messages/{id}', [MessageController::class, 'get']);
 Route::middleware('auth:api')->get('messagesUsers', [MessageController::class, 'getUsers']);
 Route::middleware('auth:api')->post('messages', [MessageController::class, 'store']);
 Route::middleware('auth:api')->put('messages/markUsRead/{id}', [MessageController::class, 'markUsRead']);
 Route::middleware('auth:api')->get('messages', [MessageController::class, 'list']);
+
 Route::middleware('auth:api')->get('friends', [FriendController::class, 'getAllFriends']);
-Route::middleware('auth:api')->get('friendsPending',[FriendController::class, 'getPendingFriendships']);
+Route::middleware('auth:api')->get('friendsPending', [FriendController::class, 'getPendingFriendships']);
 Route::middleware('auth:api')->post('sendreqfriends', [FriendController::class, 'sendReqFriends']);
 Route::middleware('auth:api')->post('unfriend', [FriendController::class, 'unfriend']);
-Route::middleware('auth:api')->post('acceptFriendRequest',[FriendController::class, 'acceptFriendRequest']);
+Route::middleware('auth:api')->post('acceptFriendRequest', [FriendController::class, 'acceptFriendRequest']);
 Route::middleware('auth:api')->post('denyFriendRequest', [FriendController::class, 'denyFriendRequest']);
-Route::middleware('auth:api')->get('users',[UserController::class, 'getAllUsers']);
 
-/*Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-Route::middleware('auth:api')->get('/user', 'Admin/UsersController@AuthRouteAPI');
-Route::get('search', 'Travels\TravelsController@search');
-Route::get('searchextended', 'Travels\TravelsController@searchExtended');
-Route::get('travels', 'Travels\TravelsController@get');
-Route::get('travel', 'Travels\TravelsController@findById');
-Route::get('travelComments', 'Travels\TravelsController@getTravelComment');
-Route::get('travelsLast', 'Travels\TravelsController@getLast');
-Route::get('travelsPopular', 'Travels\TravelsController@getTravelsPopular');
-Route::get('travelsNear', 'Travels\TravelsController@getTravelsNear');
-Route::get('searchCities', 'LocationController@searchCities');
-Route::get('getFiltersTravel', 'Travels\TravelsController@getFiltersTravel');
-Route::get('searchTravelsForMap', 'Travels\TravelsController@searchTravelsForMap');
-Route::get('getFilterForMap', 'Travels\TravelsController@getFilterForMap');
-
-Route::middleware('auth:api')->post('travels/save', 'Travels\TravelsController@save');
-Route::middleware('auth:api')->get('messages/{id}', 'MessageController@get');
-Route::middleware('auth:api')->get('messagesUsers', 'MessageController@getUsers');
-Route::middleware('auth:api')->post('messages', 'MessageController@store');
-Route::middleware('auth:api')->put('messages/markUsRead/{id}', 'MessageController@markUsRead');
-Route::middleware('auth:api')->get('messages', 'MessageController@list');
-Route::middleware('auth:api')->get('friends', 'FriendController@getAllFriends');
-Route::middleware('auth:api')->get('friendsPending', 'FriendController@getPendingFriendships');
-Route::middleware('auth:api')->post('sendreqfriends', 'FriendController@sendReqFriends');
-Route::middleware('auth:api')->post('unfriend', 'FriendController@unfriend');
-Route::middleware('auth:api')->post('acceptFriendRequest', 'FriendController@acceptFriendRequest');
-Route::middleware('auth:api')->post('denyFriendRequest', 'FriendController@denyFriendRequest');
-Route::middleware('auth:api')->get('users', 'UserController@getAllUsers');*/
+Route::middleware('auth:api')->get('users', [UserController::class, 'getAllUsers']);
 

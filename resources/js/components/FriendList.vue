@@ -48,7 +48,9 @@
 </template>
 
 <script>
-    import FriendCard from "@/components/FriendCard.vue";
+    import $ from 'jquery'
+    import _ from 'lodash'
+    import FriendCard from "../components/FriendCard.vue";
     import {TailwindPagination} from "laravel-vue-pagination";
     import {mapGetters} from "vuex";
 

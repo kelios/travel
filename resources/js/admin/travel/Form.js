@@ -1,6 +1,6 @@
 import AppForm from '../app-components/Form/AppForm';
 import L from "leaflet";
-import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue2-leaflet";
+import {LMap, LTileLayer, LMarker, LPopup, LTooltip} from "vue3-leaflet";
 import {mapGetters} from "vuex";
 
 const ENDPOINTREVERSE = 'https://nominatim.openstreetmap.org/reverse';
@@ -334,7 +334,7 @@ Vue.component('travel-form', {
         LTileLayer,
         LMarker,
         LPopup,
-        LTooltip,
-        LIcon
+        LTooltip
+
     }
 });

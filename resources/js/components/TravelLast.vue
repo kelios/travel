@@ -8,7 +8,7 @@
 
 <script>
     import TravelCardLast from './TravelCardLast.vue';
-
+    import _ from 'lodash';
     import {mapGetters} from 'vuex'
 
     export default {

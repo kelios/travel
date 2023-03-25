@@ -1,9 +1,14 @@
 <template>
 
 
-    <swiper class="swiper" :options="swiperOption" style="
-                            max-height: 700px;
-                            ">
+    <swiper  :slides-per-view="3"
+             :space-between="30"
+             navigation
+             :pagination="{ clickable: true }"
+             :scrollbar="{ draggable: true }"
+             @swiper="onSwiper"
+             @slideChange="onSlideChange"
+             style="max-height: 700px;">
 
         <swiper-slide v-for="(slide, index) in travel.gallery" :key="index">
 
@@ -19,52 +24,44 @@
             >
 
         </swiper-slide>
-
-
-        <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
-        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
-
     </swiper>
 
 
 </template>
 
 <script>
+    import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
     import { Swiper, SwiperSlide } from 'swiper/vue'
-    import 'swiper/css'
+    import 'swiper/css';
+    import 'swiper/css/navigation';
+    import 'swiper/css/pagination';
+    import 'swiper/css/scrollbar';
+
     import {mapGetters} from "vuex";
 
     export default {
-        data() {
+        components: {
+            Swiper,
+            SwiperSlide,
+        },
+        setup() {
+            const onSwiper = (swiper) => {
+                console.log(swiper);
+            };
+            const onSlideChange = () => {
+                console.log('slide change');
+            };
             return {
-                swiperOption: {
-                    spaceBetween: 30,
-                    effect: 'fade',
-                    pagination: {
-                        el: '.swiper-pagination',
-                        clickable: true
-                    },
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev'
-                    }
-                }
-            }
+                onSwiper,
+                onSlideChange,
+                modules: [Navigation, Pagination, Scrollbar, A11y],
+            };
         },
         computed: {
             ...mapGetters([
                 'travel',
             ])
-        },
-        components: {
-            Swiper,
-            SwiperSlide
-        },
-        directives: {
-            swiper: directive
-        },
-
+        }
     }
 </script>
 

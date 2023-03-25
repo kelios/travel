@@ -168,9 +168,13 @@ class TravelsController extends Controller
 
     public function get(IndexTravel $request)
     {
+
         $where = [];
+
         if ($request->query('where')) {
-            $where = json_decode($request->query('where'), true);
+            $where = $request->query('where');
+           // dd(json_decode($request->query('where'), true));
+          //  $where = json_decode($request->query('where'), true);
         }
         $query = '';
         if ($request->query('query')) {
@@ -178,8 +182,10 @@ class TravelsController extends Controller
         }
         $perPage = Config::get('constants.showListTravel.count');
         if ($request->query('perPage')) {
-            $perPage = json_decode($request->query('perPage'), true);
+            $perPage = $request->query('perPage');
+            //$perPage = json_decode($request->query('perPage'), true);
         }
+
         if (Arr::get($where, 'belTravels')) {
             unset($where['belTravels']);
             $travels = $this->travelRepository->getListBy($perPage, $where, $query);
@@ -187,6 +193,7 @@ class TravelsController extends Controller
         } else {
             $travels = $this->travelRepository->getList($perPage, $where, $query);
         }
+
         $travels->getCollection()->transform(function ($value) {
             return $value->only([
                 'name',

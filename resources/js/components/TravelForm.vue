@@ -5,7 +5,7 @@
 
     import {Vue3ToggleButton} from "vue3-toggle-button";
     //import 'vue3-toggle-button/dist/style.css';
-    import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue3-leaflet";
+    import {LMap, LTileLayer, LMarker, LPopup, LTooltip} from "vue3-leaflet";
     import {mapGetters} from "vuex";
 
 
@@ -366,7 +366,6 @@
             LMarker,
             LPopup,
             LTooltip,
-            LIcon,
             Multiselect,
             'toggle-button': Vue3ToggleButton
         }

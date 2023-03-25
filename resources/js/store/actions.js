@@ -13,13 +13,20 @@ let actions = {
         })
     },
     async GET_TRAVELS({commit}, data) {
-        let params = {
-            page: data.page,
-            perPage: data.perPage,
-            where: data.where,
-            query: data.query,
-        };
-        axios.get('/api/travels', {params})
+         let params = {
+             'page' : data.page,
+             'perPage': data.perPage,
+             'where': data.where,
+             'query': data.query
+         };
+        axios.get('/api/travels', {
+            params:{
+                'page' : data.page,
+                'perPage': data.perPage,
+                'where': data.where,
+                'query': data.query
+            }
+        })
             .then(res => {
                 {
                     commit('SET_TRAVELS', res.data);
@@ -40,7 +47,8 @@ let actions = {
             .catch(err => {
                 console.log(err)
             })
-    },
+    }
+    ,
 
     async SEARCH_TRAVELS_ADDRESS({commit}, data) {
         let params = {
@@ -59,7 +67,8 @@ let actions = {
             .catch(err => {
                 console.log(err)
             })
-    },
+    }
+    ,
     async SEARCH_EXTENDED_TRAVELS({commit}, data) {
         let params = {
             query: data.query,
@@ -68,11 +77,12 @@ let actions = {
         };
         axios.get(`/api/searchextended`, {params})
             .then(res => {
-                    commit('SET_TRAVELS', res.data);
+                commit('SET_TRAVELS', res.data);
             }).catch(err => {
             console.log(err)
         })
-    },
+    }
+    ,
     async SEARCH_CITIES({commit}, data) {
         let params = {
             query: data.query,
@@ -84,7 +94,8 @@ let actions = {
             }).catch(err => {
             console.log(err)
         })
-    },
+    }
+    ,
     async GET_LAST_TRAVELS({commit}, data) {
         axios.get('/api/travelsLast')
             .then(res => {
@@ -95,7 +106,8 @@ let actions = {
             .catch(err => {
                 console.log(err)
             })
-    },
+    }
+    ,
     async GET_TRAVEL_COMMENTS({commit}, data) {
         let params = {
             where: data.where,
@@ -109,7 +121,8 @@ let actions = {
             .catch(err => {
                 console.log(err)
             })
-    },
+    }
+    ,
     GET_FRIENDS({commit}, data) {
         let params = {
             page: data.page,
@@ -124,7 +137,8 @@ let actions = {
             .catch(err => {
                 console.log(err)
             })
-    },
+    }
+    ,
     GET_MESSAGES({commit}, data) {
         let params = {
             page: data.page,
@@ -139,7 +153,8 @@ let actions = {
             .catch(err => {
                 console.log(err)
             })
-    },
+    }
+    ,
     GET_MESSAGES_BETWEEN({commit}, data) {
         let params = {
             page: data.page,
@@ -153,7 +168,8 @@ let actions = {
             .catch(err => {
                 console.log(err)
             })
-    },
+    }
+    ,
     async GET_TRAVEL({commit}, data) {
         let params = {
             id: data.travel_id,
@@ -167,7 +183,8 @@ let actions = {
             .catch(err => {
                 console.log(err)
             })
-    },
+    }
+    ,
     GET_FILTER_TRAVEL({commit}, data) {
         let params = {};
         axios.get('/api/getFiltersTravel', {params})
@@ -179,7 +196,8 @@ let actions = {
             .catch(err => {
                 console.log(err)
             })
-    },
+    }
+    ,
     GET_USERS_MESSAGES({commit}, data) {
         let params = {
             page: data.page,
@@ -194,7 +212,8 @@ let actions = {
             .catch(err => {
                 console.log(err)
             })
-    },
+    }
+    ,
     async AUTO_SAVE_TRAVEL({commit}, dataTravel) {
         axios.post('/api/travels/save', dataTravel
         ).then(response => {
@@ -204,7 +223,8 @@ let actions = {
                 commit('SET_TRAVEL_ADDRESS_IDS', response.data.travelAddressIds);
             }
         });
-    },
+    }
+    ,
     async GET_POPULAR_TRAVELS({commit}, data) {
         axios.get('/api/travelsPopular')
             .then(res => {
@@ -215,7 +235,8 @@ let actions = {
             .catch(err => {
                 console.log(err)
             })
-    },
+    }
+    ,
     async GET_NEAR_TRAVELS({commit}, data) {
         let params = {
             travel_id: data.travel_id,
@@ -229,7 +250,8 @@ let actions = {
             .catch(err => {
                 console.log(err)
             })
-    },
+    }
+    ,
 }
 
 export default actions

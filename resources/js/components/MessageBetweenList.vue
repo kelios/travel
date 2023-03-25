@@ -20,8 +20,7 @@
 <script>
 
     import {mapGetters} from "vuex";
-
-
+    import $ from 'jquery'
     export default {
         name: "MessageBetweenList",
         props: ['recipient_id'],

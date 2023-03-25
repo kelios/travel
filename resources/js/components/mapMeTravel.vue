@@ -46,7 +46,7 @@
 <script>
 import L from "leaflet";
 import 'leaflet/dist/leaflet.css';
-import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue3-leaflet";
+import {LMap, LTileLayer, LMarker, LPopup, LTooltip} from "vue3-leaflet";
 import {mapGetters} from "vuex";
 
 export default {
@@ -139,8 +139,7 @@ export default {
         'l-tile-layer': LTileLayer,
         'l-marker': LMarker,
         LPopup,
-        LTooltip,
-        LIcon
+        LTooltip
     }
 }
 

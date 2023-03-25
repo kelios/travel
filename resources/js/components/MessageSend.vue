@@ -25,7 +25,7 @@
 </template>
 
 <script>
-    import {BButton, BFormGroup, BForm} from 'bootstrap-vue';
+    import {BButton, BFormGroup, BForm} from 'bootstrap-vue-next';
 
     export default {
         compatConfig: {

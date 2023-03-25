@@ -1,10 +1,11 @@
 import { createWebHistory, createRouter } from "vue-router";
-import TravelList from "./components/TravelList.vue";
+import TravelIndex from "../components/TravelIndex.vue";
 
 const routes = [
     {
         path: "/api/travels",
-        component: TravelList,
+        component: TravelIndex,
+        name: 'TravelIndex',
     },
 ];
 

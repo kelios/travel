@@ -32,9 +32,10 @@
 </template>
 
 <script>
-    import SelectPerPage from './SelectPerPage.vue'
-    import TravelCard from './TravelCard.vue'
+    import SelectPerPage from '../components/SelectPerPage'
+    import TravelCard from '../components/TravelCard'
     import {mapGetters} from 'vuex'
+    import _ from 'lodash';
     import { TailwindPagination } from 'laravel-vue-pagination';
 
 
@@ -47,7 +48,6 @@
             'select-per-page': SelectPerPage,
         },
         mounted() {
-            console.log('123');
             this.getResults();
         },
         computed: {
@@ -58,7 +58,7 @@
                 'travels',
                 'where',
                 'query',
-                'perPage',
+                'perPage'
             ])
         },
         methods: {
@@ -66,12 +66,10 @@
                 this.travels.data = this.travels.data.filter(travel => travel.id !== id)
             },
             getResults(page = 1) {
-              //  console.log(this.filter);
-               // console.log(this.where);
                 this.$store.dispatch('GET_TRAVELS', {
                     'page': page,
                     'query': this.query,
-                    'where': this.filter,
+                    'where': Object.assign(this.filter, this.where),
                     'perPage': this.perPage
                 });
             }
@@ -79,3 +77,6 @@
     }
 </script>
 
+<style scoped>
+
+</style>

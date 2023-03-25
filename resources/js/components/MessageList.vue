@@ -48,18 +48,16 @@
 
 <script>
     import {
-        BSidebar, BRow, BCol, BListGroup, BListGroupItem,
-        VBToggle, BButton
-    } from 'bootstrap-vue';
-    import MessageSend from "@/components/MessageSend.vue";
-    import MessageBetweenList from "@/components/MessageBetweenList.vue";
+         BRow, BCol, BListGroup, BListGroupItem,
+         BButton
+    } from 'bootstrap-vue-next';
+    import $ from 'jquery'
+    import MessageSend from "./MessageSend";
+    import MessageBetweenList from "./MessageBetweenList";
     import {mapGetters} from "vuex";
 
 
     export default {
-        compatConfig: {
-            MODE: 3,
-        },
         name: "MessageList",
         props: [],
         components: {
@@ -67,10 +65,8 @@
             MessageSend,
             'b-row': BRow,
             'b-col': BCol,
-            'b-sidebar': BSidebar,
             'b-list-group': BListGroup,
             'b-list-group-item': BListGroupItem,
-            'b-toggle': VBToggle,
             'b-button': BButton,
         },
         data() {

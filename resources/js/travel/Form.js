@@ -2,7 +2,7 @@ import VeeValidate from 'vee-validate';
 import L from "leaflet";
 import 'leaflet/dist/leaflet.css';
 import {Vue3ToggleButton} from 'vue3-toggle-button'
-import {LMap, LTileLayer, LMarker, LPopup, LTooltip, LIcon} from "vue3-leaflet";
+import {LMap, LTileLayer, LMarker, LPopup, LTooltip} from "vue3-leaflet";
 import {mapGetters} from "vuex";
 
 import 'vue-multiselect/dist/vue-multiselect.min.css';
@@ -343,7 +343,7 @@ Vue.component('travel-form', {
         LMarker,
         LPopup,
         LTooltip,
-        LIcon,
+
         Multiselect,
         'toggle-button':Vue3ToggleButton
     }

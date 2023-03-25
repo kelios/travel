@@ -34,6 +34,7 @@
 <script>
     import 'babel-polyfill'; // es6 shim
     import myUpload from 'vue-image-crop-upload';
+    import $ from 'jquery'
 
     export default {
         name: 'UploadImageDrag',

@@ -22,7 +22,7 @@
 @endif
     {!! NoCaptcha::renderJs() !!}
 <!-- Styles -->
-    @vite(['resources/js/app.js', 'public/css/metravel.css'])
+    <link type="text/css" href="{{ mix('/css/metravel.min.css') }}" defer rel="stylesheet">
 </head>
 <body>
 <!-- Fonts -->
@@ -159,4 +159,5 @@
 </body>
 
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+<script rel="preload" src="/js/app.js" defer as="script"></script>
 </html>
