@@ -89,29 +89,47 @@
     </div>
 
 </template>
-
 <script>
 export default {
-    name: 'TravelCard',
-    props: ['travel', 'readonly'],
-    created() {
-        // this.data_travel = this.travel;
-    },
-    methods: {
-        goAction: function (data) {
-            window.location.href = data.url;
-        },
-        remove: function (url) {
-            let vm = this;
-            axios.delete(url).then(function (response) {
-                vm.$emit('remove', vm.travel.id);
-            }, function (error) {
-                console.log(error.response.data.message);
-            });
-        },
+    name: "TravelCard",
+};
+</script>
+<script setup>
 
-    },
+import {useStore} from "vuex";
+import {computed} from "vue";
+
+console.log('TRAVELCARD')
+const store = useStore()
+
+const props = defineProps({
+    readonly: Boolean,
+    travel: Array,
+
+});
+
+const travel = computed(() => {
+    return props.travel;
+});
+
+const readonly = computed(() => {
+    return props.readonly;
+});
+
+function goAction(data) {
+    window.location.href = data.url;
 }
+
+function remove(url) {
+    store.dispatch('DELETE_TRAVEL', {url})
+    // Axios.delete(url);
+    // store.dispatch('DELETE_TRAVEL', {'id': travel.id})
+    //axios.delete(url).then(function (response) {
+    //   $emit('remove', travel.id);
+
+}
+
+
 </script>
 
 <style scoped>

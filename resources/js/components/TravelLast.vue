@@ -7,33 +7,31 @@
 </template>
 
 <script>
-    import TravelCardLast from './TravelCardLast.vue';
-    import _ from 'lodash';
-    import {mapGetters} from 'vuex'
 
-    export default {
-        name: 'TravelLast',
-        components: {
-            TravelCardLast
-        },
-        mounted() {
-            this.getResults();
+export default {
+    name: "TravelLast",
+};
+</script>
+<script setup>
+import _ from 'lodash';
+import TravelCardLast from './TravelCardLast.vue';
+import {useStore} from 'vuex'
+import {computed} from "vue";
 
-        },
-        computed: {
-            groupedTravels() {
-                return _.chunk(this.lastTravels, 15);
-            },
-            ...mapGetters([
-                'lastTravels'
-            ])
-        },
-        methods: {
-            getResults() {
-                this.$store.dispatch('GET_LAST_TRAVELS');
-            }
-        },
-    }
+const store = useStore()
+let groupedTravels = computed(() => {
+    return _.chunk(travels.lastTravels, 15);
+});
+let lastTravels = computed(() => {
+    return store.getters.lastTravels;
+});
+
+getResults()
+
+function getResults() {
+    store.dispatch('GET_LAST_TRAVELS');
+}
+
 </script>
 
 <style scoped>

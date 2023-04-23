@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 @section('content')
     <div id="app">
@@ -17,7 +16,7 @@
                     </div>
                     <div class="album py-5 ">
                         <search-extended-travel :filter_hide='@json($filter_hide)'
-                                                :where='@json($where)'></search-extended-travel>
+                                              :where='@json($where)'></search-extended-travel>
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -25,7 +24,7 @@
                         <search-me-travel :where='@json($where)'></search-me-travel>
 
                         <travel-list :readonly="true" :filter='@json($where)'
-                                     :isFavorite='@json($isFavorite ?? '')'></travel-list>
+                                    :isFavorite='@json($isFavorite ?? '')'></travel-list>
                     </div>
 
                 </div>

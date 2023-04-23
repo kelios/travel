@@ -162,7 +162,7 @@
 </template>
 
 <script>
-
+import _ from 'lodash';
 import TravelNear from './TravelNear.vue';
 import TravelPopular from './TravelPopular.vue';
 import TravelShowSection from './TravelShowSection.vue';
@@ -170,7 +170,6 @@ import Slider from './Slider.vue';
 import CommentList from './CommentList.vue';
 
 import {BCard} from 'bootstrap-vue-next';
-import _ from 'lodash';
 import {mapGetters} from "vuex";
 
 

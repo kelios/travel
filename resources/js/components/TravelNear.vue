@@ -9,8 +9,8 @@
 </template>
 
 <script>
-    import TravelCardLast from '../components/TravelCardLast.vue'
     import _ from 'lodash';
+    import TravelCardLast from '../components/TravelCardLast.vue'
     import {mapGetters} from 'vuex'
 
     export default {

@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\SiteMapController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WysiwygUploadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Travels\TravelsController;
 /*
@@ -55,51 +62,43 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+Route::get('/map', [HomeController::class, 'index'])->name('map');
+Route::get('/mysitemap', [SiteMapController::class, 'setSiteMap'])->name('mysitemap');
+
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles');
+Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('articleshow');
+
+Route::post('/admin/wysiwyg-media', [WysiwygUploadController::class, 'uploads3'])->name('brackets/admin-ui::wysiwyg-upload');
+Route::post('upload', [WysiwygUploadController::class, 'upload'])->name('brackets/media::upload');
+Route::post('upload-crop', [WysiwygUploadController::class, 'uploadCrop'])->name('brackets/media::upload-crop');
+
+Route::post('feedback', [HomeController::class, 'feedback'])->name('feedback');
+
+Route::get('users/{user}', [UserController::class, 'edit'])->name('users.edit');
+Route::get('allFriends/{user}', [UserController::class, 'allFriends'])->name('users.allFriends');
+Route::get('allMessages/{user}', [UserController::class, 'allMessages'])->name('users.allMessages');
+Route::post('users/{user}', ['as' => 'users.update', 'uses' => [UserController::class, 'update']]);
+Auth::routes();
+
+Route::get('comments/{travelId}', [CommentController::class, 'index'])->name('comments');
+Route::post('comments', [CommentController::class, 'store'])->name('commentssave');
+
+Route::get('/location/cities', [LocationController::class, 'getCities'])->name('cities');
+Route::get('/location/countries', [LocationController::class, 'getCountries'])->name('countries');
+Route::get('/location/countriesforsearch', [LocationController::class, 'getCountriesForSearch'])->name('countriesforsearch');
+Route::get('/location/countriesCities', [LocationController::class, 'getCitiesByCountries'])->name('countriesCities');
+
+Route::get('/sitemap', [SitemapController::class, 'index']);
+Route::get('/sitemap/travels', [SitemapController::class, 'travels']);
+Route::get('/sitemap/cities', [SitemapController::class, 'cities']);
+Route::get('/sitemap/countries', [SitemapController::class, 'countries']);
+Route::get('/sitemap/categories', [SitemapController::class, 'categories']);
 ///old version
 //
 /*
-Route::get('/', 'Travels\TravelsController@index')->name('travels');
-Route::get('/map', 'HomeController@index')->name('map');
-Route::get('/mysitemap', 'SiteMapController@setSiteMap')->name('mysitemap');
-
-Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/contact', 'HomeController@contact')->name('contact');
-Route::get('/articles', 'ArticleController@index')->name('articles');
-Route::get('/articles/{id}', 'ArticleController@show')->name('articleshow');
-
-Route::post('/admin/wysiwyg-media', 'WysiwygUploadController@uploads3')->name('brackets/admin-ui::wysiwyg-upload');
-Route::post('upload', 'WysiwygUploadController@upload')->name('brackets/media::upload');
-Route::post('upload-crop', 'WysiwygUploadController@uploadCrop')->name('brackets/media::upload-crop');
-
-Route::post('feedback', 'HomeController@feedback')->name('feedback');
-
-Route::get('users/{user}', 'UserController@edit')->name('users.edit');
-Route::get('allFriends/{user}', 'UserController@allFriends')->name('users.allFriends');
-Route::get('allMessages/{user}', 'UserController@allMessages')->name('users.allMessages');
-Route::post('users/{user}', ['as' => 'users.update', 'uses' => 'UserController@update']);
-Auth::routes();
-
-Route::get('comments/{travelId}', 'CommentController@index')->name('comments');
-Route::post('comments', 'CommentController@store')->name('commentssave');
-
-Route::get('/like/{id}/islikedbyme', 'Travels\TravelsController@isLikedByMe')->name('islikedbyme');
-Route::post('/like/{travelId}', 'Travels\TravelsController@like')->name('like');
-
-Route::get('/save/{id}/isfavoritedbyme', 'Travels\TravelsController@isFavoritedByMe')->name('isfavoritedbyme');
-Route::post('/save/{travelId}', 'Travels\TravelsController@addFavorite')->name('addFavorite');
-
-Route::get('/location/cities', 'LocationController@getCities')->name('cities');
-Route::get('/location/countries', 'LocationController@getCountries')->name('countries');
-Route::get('/location/countriesforsearch', 'LocationController@getCountriesForSearch')->name('countriesforsearch');
-Route::get('/location/countriesCities', 'LocationController@getCitiesByCountries')->name('countriesCities');
-Route::get('/travels/markers', 'TravelAddressController@getMarkers')->name('markers');
-
-Route::get('/sitemap', 'SitemapController@index');
-Route::get('/sitemap/travels', 'SitemapController@travels');
-Route::get('/sitemap/cities', 'SitemapController@cities');
-Route::get('/sitemap/countries', 'SitemapController@countries');
-Route::get('/sitemap/categories', 'SitemapController@categories');
-
 
 
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {

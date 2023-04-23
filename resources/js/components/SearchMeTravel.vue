@@ -20,7 +20,7 @@
 
     export default {
         name: "SearchMeTravel",
-        props: ['travels', 'where'],
+        props: ['travels'],
         data: function () {
             return {
                 query: '',
@@ -28,7 +28,8 @@
         },
         computed: {
             ...mapGetters([
-                'perPage'
+                'perPage',
+                'where'
             ])
         },
         watch: {

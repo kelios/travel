@@ -36,13 +36,12 @@ class TravelRepository implements TravelRepositoryInterface
         return $this->travel->all();
     }
 
+
     /**
-     * @param $perPage
      * @param array $where
-     * @param $search
      * @return mixed
      */
-    public function getList($perPage, array $where = [], $search = '')
+    public function getList($perPage, $where = [], $search = '')
     {
         $travels = $this->travel;
         if (Arr::get($where, 'user_id')) {
@@ -65,9 +64,10 @@ class TravelRepository implements TravelRepositoryInterface
                     ->orWhere('minus', 'like', '%' . $search . '%');
             });
         }
+
         return $travels
             ->filter($where)
-            // ->where($where)
+
             ->orderBy('created_at', 'desc')
             ->paginate($perPage);
     }
@@ -96,7 +96,7 @@ class TravelRepository implements TravelRepositoryInterface
             });
         }
         return $travels
-            ->has('countries', '=', '1')
+            ->has('countries', '1')
             ->filter($where)
             ->orderBy('created_at', 'desc')
             ->paginate($perPage);

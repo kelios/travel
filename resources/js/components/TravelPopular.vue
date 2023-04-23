@@ -7,9 +7,10 @@
 </template>
 
 <script>
+    import _ from 'lodash';
     import TravelCardLast from '../components/TravelCardLast.vue'
     import {mapGetters} from 'vuex'
-    import _ from 'lodash';
+
 
     export default {
         name: 'TravelPopular',

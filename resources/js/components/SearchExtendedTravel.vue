@@ -2,133 +2,153 @@
     <div class="container">
         <div class="input-group-append mb-4">
             <button class="btn btn-primary" @click="searchTravels" @keyup.enter="searchTravels" type="button">
-                {{__('main.search')}}
+                {{ __('main.search') }}
             </button>
 
         </div>
+
+
         <div class="active-pink-3 active-pink-4 mb-4">
 
-            <multiselect
+            <Multiselect
                 v-if="filter_hide['countries']"
                 :options="optionsCountries"
-                :multiple="true"
                 v-model="countries"
-                track-by="country_id"
+                valueProp = "country_id"
                 label="local_name"
-                :tag-placeholder=" __('travels.countries')"
+                track-by="country_id"
+                mode="tags"
+                :close-on-select="false"
+                :searchable="true"
                 :placeholder="__('travels.Searchcountries') "
-                selectLabel=""
-            >
-            </multiselect>
+
+            />
         </div>
 
         <div class="active-pink-3 active-pink-4 mb-4">
-            <multiselect
-                v-if="filtersTravel.categories"
-                :options="filtersTravel.categories"
-                :multiple="true"
+            <Multiselect
                 v-model="categories"
+                mode="tags"
+                :options="filtersTravel.categories"
+                :close-on-select="false"
+                :searchable="true"
+                :create-option="true"
+                valueProp = "id"
                 track-by="id"
                 label="name"
                 :tag-placeholder=" __('travels.categories')"
                 :placeholder="__('travels.categories') "
-                selectLabel=""
-            >
-            </multiselect>
+            />
         </div>
 
         <div class="active-pink-3 active-pink-4 mb-4">
-            <multiselect
+            <Multiselect
                 v-if="filtersTravel.transports"
                 :options="filtersTravel.transports"
-                :multiple="true"
+                mode="tags"
+                :close-on-select="false"
+                :searchable="true"
                 v-model="transports"
+                valueProp = "id"
                 track-by="id"
                 label="name"
                 selectLabel=""
                 :tag-placeholder=" __('travels.transports')"
                 :placeholder="__('travels.transports') "
-            >
-            </multiselect>
+            />
+
         </div>
 
 
         <div class="active-pink-3 active-pink-4 mb-4">
-            <multiselect
+            <Multiselect
                 v-if="filtersTravel.complexity"
                 :options="filtersTravel.complexity"
-                :multiple="true"
+                mode="tags"
+                :close-on-select="false"
+                :searchable="true"
+                :create-option="true"
                 v-model="complexity"
+                valueProp = "id"
                 track-by="id"
                 label="name"
                 selectLabel=""
                 :tag-placeholder=" __('travels.complexity')"
                 :placeholder="__('travels.complexity') "
-            >
-            </multiselect>
+            />
+
         </div>
 
 
         <div class="active-pink-3 active-pink-4 mb-4">
-            <multiselect
+            <Multiselect
                 v-if="filtersTravel.companion"
                 :options="filtersTravel.companion"
-                :multiple="true"
+                mode="tags"
+                :close-on-select="false"
+                :searchable="true"
+                :create-option="true"
                 v-model="companion"
+                valueProp = "id"
                 track-by="id"
                 label="name"
                 selectLabel=""
                 :tag-placeholder=" __('travels.searchcompanion')"
                 :placeholder="__('travels.searchcompanion') "
-            >
-            </multiselect>
+            />
         </div>
 
         <div class="active-pink-3 active-pink-4 mb-4">
-            <multiselect
+            <Multiselect
                 v-if="filtersTravel.overNightStay"
                 :options="filtersTravel.overNightStay"
-                :multiple="true"
+                mode="tags"
+                :close-on-select="false"
+                :searchable="true"
+                :create-option="true"
                 v-model="overNightStay"
+                valueProp = "id"
                 track-by="id"
                 label="name"
                 selectLabel=""
                 :tag-placeholder=" __('travels.searchoverNightStay')"
                 :placeholder="__('travels.searchoverNightStay') "
-            >
-            </multiselect>
+            />
         </div>
 
         <div class="active-pink-3 active-pink-4 mb-4">
-            <multiselect
+            <Multiselect
                 v-if="filtersTravel.month"
                 :options="filtersTravel.month"
-                :multiple="true"
+                mode="tags"
+                :close-on-select="false"
+                :searchable="true"
+                :create-option="true"
                 v-model="month"
+                valueProp = "id"
                 track-by="id"
                 label="name"
                 selectLabel=""
                 :tag-placeholder=" __('travels.month')"
                 :placeholder="__('travels.month') "
-            >
-            </multiselect>
+            />
         </div>
 
         <div class="active-pink-3 active-pink-4 mb-4">
             <input type="text"
                    v-model="year"
-                   v-validate="'integer'"
-                   @input="validate($event)"
+                   v-validate="'digits:4'"
                    class="form-control"
                    id="year"
                    name="year"
                    :placeholder="__('travels.year') "
-            >
+            />
+
         </div>
 
         <div class="input-group-append mb-4">
             <button class="btn btn-primary" @click="searchTravels" @keyup.enter="searchTravels" type="button">
-                {{__('main.search')}}
+                {{ __('main.search') }}
             </button>
 
         </div>
@@ -136,110 +156,119 @@
 </template>
 
 <script>
-    import 'vue-multiselect/dist/vue-multiselect.min.css';
-    import Multiselect from 'vue-multiselect'
 
-    import {mapGetters} from "vuex";
+export default {
+    name: "SearchExtendedTravel",
+};
+</script>
+<script setup>
 
-    export default {
-        name: "SearchExtendedTravel",
-        props: ['travels', 'where', 'filter_hide'],
-        components: {
-            Multiselect
-        },
-        data: function () {
-            return {
-                countries: [],
-                optionsCountries: [],
-                categories: [],
-                transports: [],
-                month: [],
-                year: '',
-                complexity: [],
-                companion: [],
-                overNightStay: []
-            }
-        },
-        watch: {
-            query: {
-                handler: _.debounce(function () {
-                    this.searchTravels()
-                }, 100)
-            }
-        },
-        mounted() {
-            this.getCountries();
-            this.fetchFilters();
-       /*     window.Echo.channel('searchCity')
-                .listen('.searchResultsCity', (e) => {
-                    this.optionsCities = e.cities;
-                })*/
-        },
-        computed: {
-            ...mapGetters([
-                'filtersTravel',
-                'perPage',
-                'optionsCities',
-            ])
-        },
+import {
+    computed,
+    watch
+} from "vue";
+import Multiselect from "@vueform/multiselect";
+import {defineRule} from 'vee-validate';
+import {digits} from '@vee-validate/rules';
+import {useStore} from 'vuex'
 
-        methods: {
-            async getCountries() {
-                let vm = this;
-                axios.get('/location/countriesforsearch')
-                    .then(function (response) {
-                        vm.optionsCountries = response.data;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+defineRule('digits', digits);
 
-            },
-            fetchFilters() {
-                this.$store.dispatch('GET_FILTER_TRAVEL');
-            },
-            searchTravels() {
-                this.where['countries'] = this.countries.map(function (value) {
-                    return value.country_id
-                });
+const props = defineProps({
+    travels: Object,
+    where: Object,
+    filter_hide: Object,
+    query: String,
+    countries: Array,
+    optionsCountries: Array,
+    categories: Array,
+    transports: Array,
+    month: Array,
+    year: Array,
+    filtersTravel: Array
 
-                this.where['categories'] = this.categories.map(function (value) {
-                    return value.id
-                });
+});
 
-                this.where['transports'] = this.transports.map(function (value) {
-                    return value.id
-                });
+const store = useStore()
 
-                this.where['month'] = this.month.map(function (value) {
-                    return value.id
-                });
+let countries = [];
+let categories = [];
+let transports = [];
+let month = [];
+let year = '';
+let complexity = [];
+let companion = [];
+let overNightStay = [];
+let query = '';
+let filtersTravel = [];
 
-                this.where['complexity'] = this.complexity.map(function (value) {
-                    return value.id
-                });
+let travels = computed(() => {
+    return props.travels;
+});
 
-                this.where['companion'] = this.companion.map(function (value) {
-                    return value.id
-                });
+let where = computed(() => {
+    return props.where;
+});
 
-                this.where['overNightStay'] = this.overNightStay.map(function (value) {
-                    return value.id
-                });
+let filter_hide = computed(() => {
+    return props.filter_hide;
+});
+/*
+let filtersTravel = computed(() => {
+    console.log('filtersTravel');
+    console.log(filtersTravel);
+    return store.getters.filtersTravel;
+});
+*/
 
+filtersTravel = computed({
+    get: () => store.getters.filtersTravel,
+})
+let perPage = computed({
+    get: () => store.getters.perPage,
+})
 
-                this.where['year'] = this.year;
+const optionsCountries = computed({
+    get: () => store.getters.getCountries,
+})
 
-                this.$store.dispatch('SEARCH_EXTENDED_TRAVELS', {
-                    'query': this.query,
-                    'perPage': this.perPage, 'where': this.where
-                })
-            }
-        }
+fetchData();
 
+watch(query, (value, oldValue, onCleanup) => {
+    console.log(query);
+    if (value != oldValue) {
+        setTimeout(() => {
+            searchTravels()
+        }, 100);
     }
+})
+
+function fetchData() {
+    store.dispatch("GET_COUNTRIES")
+    store.dispatch("GET_FILTER_TRAVEL")
+}
+
+function searchTravels() {
+    let search = where.value
+    console.log('searchTravels');
+    search['countries'] = countries;
+    search['categories'] = categories;
+    search['transports'] = transports;
+    search['month'] = month;
+    search['complexity'] = complexity;
+    search['companion'] = companion;
+    search['overNightStay'] = overNightStay;
+
+    search['year'] = year;
+    store.commit('SET_WHERE', search);
+    store.dispatch("SEARCH_EXTENDED_TRAVELS", {
+        'query': query.value,
+        'perPage': perPage.value,
+        'where': search
+    })
+}
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+@import "@vueform/multiselect/themes/default.scss";
 </style>

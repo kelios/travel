@@ -168,13 +168,10 @@ class TravelsController extends Controller
 
     public function get(IndexTravel $request)
     {
-
         $where = [];
-
         if ($request->query('where')) {
             $where = $request->query('where');
-           // dd(json_decode($request->query('where'), true));
-          //  $where = json_decode($request->query('where'), true);
+           // $where = json_decode($request->query('where'), true);
         }
         $query = '';
         if ($request->query('query')) {
@@ -185,7 +182,6 @@ class TravelsController extends Controller
             $perPage = $request->query('perPage');
             //$perPage = json_decode($request->query('perPage'), true);
         }
-
         if (Arr::get($where, 'belTravels')) {
             unset($where['belTravels']);
             $travels = $this->travelRepository->getListBy($perPage, $where, $query);
@@ -193,8 +189,41 @@ class TravelsController extends Controller
         } else {
             $travels = $this->travelRepository->getList($perPage, $where, $query);
         }
-
         $travels->getCollection()->transform(function ($value) {
+            return $value->only([
+                'name',
+                'url',
+                'publish',
+                'moderation',
+                'countryName',
+                'cityName',
+               'travel_image_thumb_url',
+                'travel_image_thumb_small_url',
+                'travelAddressAdress',
+                'coordsMeTravelArr',
+                'slug',
+                'id',
+                'userName',
+                'countUnicIpView',
+                'youtube_link'
+            ]);
+        });
+        return response()->json($travels);
+    }
+    /*  public function get(IndexTravel $request)
+    {
+        $where = json_decode($request->query('where'), true) ?? [];
+        $query = $request->query('query');
+        $perPage = json_decode($request->query('perPage'), true) ?? Config::get('constants.showListTravel.count');
+
+        if (isset($where['belTravels'])) {
+            unset($where['belTravels']);
+            $travels = $this->travelRepository->getListBy($perPage, $where, $query);
+        } else {
+            $travels = $this->travelRepository->getList($perPage, $where, $query);
+        }
+
+        $travels = $travels->map(function ($value) {
             return $value->only([
                 'name',
                 'url',
@@ -213,8 +242,10 @@ class TravelsController extends Controller
                 'youtube_link'
             ]);
         });
+
         return response()->json($travels);
-    }
+    }*/
+
 
     public function getTravelComment(IndexTravel $request)
     {
@@ -298,11 +329,11 @@ class TravelsController extends Controller
         $query = $request->query('query');
         $where = [];
         if ($request->query('where')) {
-            $where = json_decode($request->query('where'), true);
+            $where = $request->query('where');
         }
         $perPage = Config::get('constants.showListTravel.count');
         if ($request->query('perPage')) {
-            $perPage = json_decode($request->query('perPage'), true);
+            $perPage = $request->query('perPage');
         }
         $travels = $this->travelRepository->search($perPage, $query, $where);
         $travels->transform(function ($value) {
@@ -319,9 +350,6 @@ class TravelsController extends Controller
             ]);
         });
         return response()->json($travels);
-        //broadcast search results with Pusher channels
-       // event(new SearchEvent($travels, [], $query));
-        //return response()->json("ok");
     }
 
     /**
@@ -330,22 +358,21 @@ class TravelsController extends Controller
      */
     public function searchExtended(IndexTravel $request)
     {
+
         $query = $request->query('query');
         $where = [];
         if ($request->query('where')) {
-            $where = json_decode($request->query('where'), true);
+            $where = $request->query('where');
         }
+
         $perPage = Config::get('constants.showListTravel.count');
         if ($request->query('perPage')) {
-            $perPage = json_decode($request->query('perPage'), true);
+            $perPage = $request->query('perPage');
         }
 
         $travels = $this->travelRepository->searchExtended($perPage, $query, $where);
         $travels->appends($where)->links();
 
-        //broadcast search results with Pusher channels (was removed)
-       // event(new SearchEvent($travels, $where));
-      //  return response()->json("ok");
         $travels->transform(function ($value) {
             return $value->only([
                 'name',
@@ -359,6 +386,7 @@ class TravelsController extends Controller
                 'id'
             ]);
         });
+
         return response()->json($travels);
     }
 
