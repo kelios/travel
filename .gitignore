@@ -31,3 +31,4 @@ public/mix-manifest.json
 /public/sitemap.xml
 /composer.lock
 /package-lock.json
+/storage/debugbar/
