@@ -24,7 +24,7 @@ use App\Http\Controllers\UserController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::middleware('auth:api')->get('/user', 'Admin/UsersController@AuthRouteAPI');
+Route::middleware('auth:api')->get('/user', [App\Http\Controllers\Admin\UsersController::class, 'AuthRouteAPI']);
 Route::get('search', [TravelsController::class, 'search']);
 Route::get('searchextended', [TravelsController::class, 'searchExtended']);
 Route::get('travels', [TravelsController::class, 'get']);

@@ -4,10 +4,49 @@
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+import _ from 'lodash';
 import axios from 'axios';
+import jQuery from 'jquery';
+
+window.$ = window.jQuery = jQuery;
+window._ = _;
 window.axios = axios;
+window._ = require('lodash');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+try {
+    window.Popper = require('popper.js').default;
+    window.$ = window.jQuery = require('jquery');
+
+    require('bootstrap');
+
+    $(function () {
+        // spinner buttons
+        $('.btn-spinner').on('click', function (e) {
+            if (!(e.shiftKey || e.ctrlKey || e.metaKey)) {
+                $(this).css({ 'pointer-events': 'none' });
+                $(this).find('i').removeClass().addClass('fa fa-spinner');
+            }
+        });
+
+        // dropdown Menu
+        $('.dropdown-toggle').on('click', function () {
+            $(this).parent().toggleClass('open');
+        });
+        $('.dropdown-item').on('click', function () {
+            $(this).closest('.open').removeClass('open');
+        });
+        $('.dropdown-menu').on('mouseleave', function () {
+            $(this).parent('.dropdown').removeClass('open');
+        });
+
+        // remove empty nav titles when no children there
+        $('.nav-title').filter(function () {
+            return !$(this).next().hasClass('nav-item');
+        }).hide();
+    });
+} catch (e) {}
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

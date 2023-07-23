@@ -19,7 +19,8 @@
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "resolve-url-loader": "^5.0.0",
-        "sass-loader": "^12.6.0"
+        "sass-loader": "^12.6.0",
+        "popper.js": "^1.12"
     },
     "dependencies": {
         "@kyvg/vue3-notification": "^2.9",

@@ -30,8 +30,9 @@ Route::get('/travels', [TravelsController::class, 'index'])->name('index');
 Route::get('/travelsby', [TravelsController::class, 'indexby'])->name('indexby');
 Route::get('/travels/{slug}', [TravelsController::class, 'show'])->name('show');
 
-Route::group(['namespace' => 'Travels', 'prefix' => 'travels', 'as' => 'travels.'], function () {
-    Route::group(['middleware' => ['auth']], function () {
+//Route::group(['namespace' => 'Travels', 'prefix' => 'travels', 'as' => 'travels.'], function () {
+Route::prefix('travels')->namespace('Travels')->name('travels/')->group(static function () {
+   // Route::group(['middleware' => ['auth']], function () {
         Route::get('/metravel', [TravelsController::class, 'metravel'])->name('metravel');
         Route::get('/favoriteTravel', [TravelsController::class, 'favoriteTravel'])->name('favoriteTravel');
         Route::get('/friendtravel', [TravelsController::class, 'friendTravel'])->name('friendtravel');
@@ -46,7 +47,7 @@ Route::group(['namespace' => 'Travels', 'prefix' => 'travels', 'as' => 'travels.
         Route::delete('/{travel}', [TravelsController::class, 'destroy'])->name('destroy');
 
 
-    });
+  //  });
 });
 Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
     Route::prefix('admin')->namespace('Admin')->name('admin/')->group(static function () {

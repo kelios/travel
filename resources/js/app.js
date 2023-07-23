@@ -30,6 +30,7 @@ import PersonalAccessTokens from './components/passport/PersonalAccessTokens';
 
 const app = createApp({});
 
+
 app
     .component('travel-show-menu', TravelShowMenu)
     .component('favorite-component', FavoriteComponent)

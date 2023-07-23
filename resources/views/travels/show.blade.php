@@ -1,5 +1,7 @@
 @extends('layouts.app')
+
 <link rel="stylesheet" defer type="text/css" href="{{ asset('css/showmetravel.css') }}">
+<link rel="stylesheet" defer type="text/css" href="{{ asset('css/bootrstrap.css') }}">
 
 @section('content')
     <div class="container pd-t60">

@@ -5,6 +5,7 @@
             mode="single"
             :value ="currentPerPage"
             @select="setPerPage"
+            :canClear=false
         >
         </Multiselect>
     </div>
@@ -19,7 +20,6 @@ import Multiselect from "@vueform/multiselect";
 import {computed} from "vue";
 import {useStore} from "vuex";
 
-console.log('SelectPerPage');
 const store = useStore()
 const listPerPage = [
     20,

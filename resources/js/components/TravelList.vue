@@ -5,8 +5,9 @@
                 <SelectPerPage @getRes="getResults"></SelectPerPage>
             </div>
             <div class="col-10">
-                <TailwindPagination :data="travels" :limit="5" size="small"
-                                    @pagination-change-page="getResults"></TailwindPagination>
+                <Bootstrap5Pagination :data="travels"
+                                    :limit="5" size="small" align="right"
+                                    @pagination-change-page="getResults"></Bootstrap5Pagination>
             </div>
 
         </div>
@@ -27,8 +28,8 @@
                 <SelectPerPage @getRes="getResults"></SelectPerPage>
             </div>
             <div class="col-10">
-                <TailwindPagination :data="travels" :limit="6" size="small"
-                                    @pagination-change-page="getResults"></TailwindPagination>
+                <Bootstrap5Pagination :data="travels" :limit="6" size="small" align="right"
+                                    @pagination-change-page="getResults"></Bootstrap5Pagination>
 
             </div>
         </div>
@@ -45,7 +46,7 @@ export default {
 
 import SelectPerPage from '../components/SelectPerPage'
 import TravelCard from '../components/TravelCard'
-import {TailwindPagination} from 'laravel-vue-pagination';
+import {Bootstrap5Pagination} from 'laravel-vue-pagination';
 import {ref, computed} from "vue";
 import {useStore} from 'vuex'
 import _ from 'lodash';
