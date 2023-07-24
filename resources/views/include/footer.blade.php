@@ -16,7 +16,7 @@
                     </li>
 
                 </ul>
-                <ul class="col text-right list-inline mb-2">
+              <!--  <ul class="col text-right list-inline mb-2">
                     <li class="list-inline-item mr-3">
                         <a href="https://www.youtube.com/channel/UCODmtfoWQLfTyYGRPb0gfug" target="_blank">
                             <i class="fa fa-youtube fa-2x fa-fw"></i>
@@ -38,6 +38,7 @@
                         </a>
                     </li>
                 </ul>
+                -->
             </div>
             <p class="text-muted small mb-4 mb-lg-0">&copy; MeTravel 2020.</p>
 

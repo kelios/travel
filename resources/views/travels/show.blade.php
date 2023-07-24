@@ -55,7 +55,7 @@
                             @endif
                         </li>
                     @endauth
-                    <li>
+                   <!-- <li>
                         <share-network
                             network="vk"
                             :url='@json($travel->url)'
@@ -74,6 +74,7 @@
                             <i class="fa fa-share fa-facebook fa-x fa-fw"></i>
                         </share-network>
                     </li>
+                    -->
                     <li class="nav-item small">
                         <a href="/travels?user_id={{implode(',',$travel->userIds)}}" target="_blank">
                             {{ trans('user.alltravel')}} {{ $travel->userName }} >

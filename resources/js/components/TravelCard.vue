@@ -60,7 +60,7 @@
 
                 <div class="d-flex justify-content-xl-center">
 
-                    <ShareNetwork
+               <!--     <ShareNetwork
                         network="vk"
                         :url="travel.url"
                         :title="travel.name"
@@ -79,7 +79,7 @@
                     >
                         <i class="fa fa-share fa-facebook fa-x fa-fw"></i>
                     </ShareNetwork>
-
+-->
 
                 </div>
 
